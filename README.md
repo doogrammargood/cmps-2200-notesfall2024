@@ -60,4 +60,3 @@ Many are lectures are prepared using [Jupyter](https://jupyter.org/), an interac
 |[                      **Module 10: Computability**](https://github.com/cmps2200-fall2021/cmps-2200-slides/tree/main/module-10-computability)|
 |&nbsp;&nbsp;Computational Complexity [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-10-computability/01-computability/01-computability.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-10-computability/01-computability/01-computability.ipynb?flush_cache=True)|
 |&nbsp;&nbsp;Final Review [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-10-computability/02-final-review/01-review.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-10-computability/02-final-review/01-review.ipynb?flush_cache=True)|
--{amaus@godel 00-Semesters/2022-02-Fall/CMPS2200/cmps-2200-slides

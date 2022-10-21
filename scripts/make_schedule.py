@@ -32,5 +32,5 @@ for module in sorted(glob.glob("module*")):
 		# except:
 		# 	pass
 
-		print('|%50s %s/%s|' % 
+		print('|%s %s/%s|' % 
 			(lecture_title,  live, ipynb ))

@@ -1,7 +1,7 @@
 import glob
 import re
-github_organization = "CMPS-2200"
-github_repo = "cmps-2200-slides"
+github_organization = "cmps-2200"
+github_repo = "cmps-2200-notes"
 def get_header(fname):
 	try:
 		return re.sub('#', '', open(fname).readlines()[0]).strip()
@@ -13,16 +13,11 @@ for module in sorted(glob.glob("module*")):
 	print('|[%50s](https://github.com/%s/%s/tree/main/%s)|' % (module_title, github_organization, github_repo, module))
 	for lecture in sorted(glob.glob('%s/0*' % module)):
 		lecture_title = '&nbsp;&nbsp;%s' % get_header('%s/README.md' % (lecture))
-		ipynb = 'n/a'
+		slides = 'n/a'
 		try:
-			ipynb = glob.glob('%s/*ipynb' % lecture)[0]
-			ipynb = '[static](https://nbviewer.jupyter.org/github/%s/%s/blob/main/%s?flush_cache=True)' % (github_organization, github_repo, ipynb)
-		except:
-			pass
-		live = ' '
-		try:
-			live = glob.glob('%s/*ipynb' % lecture)[0]
-			live = '[live](https://mybinder.org/v2/gh/%s/%s/main?filepath=%s)' % (github_organization, github_repo, live)
+			slides = glob.glob('%s/*slides.html' % lecture)[0]
+			# https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/01-intro/01-intro.slides.html#/
+			slides = '[%s](https://%s.github.io/%s/%s)' % (lecture_title, github_organization, github_repo, slides)
 		except:
 			pass
 		# pdf = ' '
@@ -32,5 +27,4 @@ for module in sorted(glob.glob("module*")):
 		# except:
 		# 	pass
 
-		print('|%s %s/%s|' % 
-			(lecture_title,  live, ipynb ))
+		print('|%s|' % (slides))

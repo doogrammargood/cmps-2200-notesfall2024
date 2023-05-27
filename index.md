@@ -1,6 +1,6 @@
 ## Slides for CMPS2200: Introduction to Algorithms
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cmps2200-fall2021/cmps-2200-slides/main)
+[CMPS 2200 Slides Repository](https://github.com/CMPS-2200/cmps-2200-notes)
 
 All lecture slides are listed below. These are organized by module, 
 each of which may contain one more more lectures.
@@ -8,7 +8,7 @@ each of which may contain one more more lectures.
 These lectures are prepared using [Jupyter](https://jupyter.org/), an 
 interactive environment for coding and presenting. You can access the 
 github repository containing the lecture notes 
-here: https://github.com/CMPS-2200/cmps-2200-notes
+here: [https://github.com/CMPS-2200/cmps-2200-notes](https://github.com/CMPS-2200/cmps-2200-notes)
 
 Linked below are are all produced slide decks. You may also clone
 the repository and view the jupyter notebooks using [Visual Studio

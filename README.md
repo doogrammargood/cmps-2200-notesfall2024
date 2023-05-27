@@ -2,22 +2,23 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cmps2200-fall2021/cmps-2200-slides/main)
 
-All lecture slides are listed below. These are organized by module, each of which may contain one more more lectures.  
-Many are lectures are prepared using [Jupyter](https://jupyter.org/), an interactive environment for coding and presenting. There are three ways to view these:
+All lecture slides are listed below. These are organized by 
+module, each of which may contain one more more lectures.  
 
-1. live: runs a Jupyter notebook in the cloud so you can interact with the notes directly, using [Binder](https://mybinder.org/v2/gh/cmps2200-fall2021/cmps-2200-slides/main)
-2. static: view a static version of the notebook using [nbviewer](https://nbviewer.jupyter.org)
-3. You can also clone this repo and launch the notebooks locally by running `jupyter notebook` (requires installing  [Jupyter](https://jupyter.org/) and [RISE](https://rise.readthedocs.io/en/stable/index.html)).
+Many are lectures are prepared using [Jupyter](https://jupyter.org/), 
+an interactive environment for coding and presenting. The best way
+to view these jupyter notebooks is to clone this repository and open
+them using [Visual Studio Code](https://code.visualstudio.com/).
 
 |Topic|
 |-----|
-|[**Module 01: Formalizing the cost of an algorithm**](https://github.com/CMPS-2200/cmps-2200-slides/tree/main/module-01-cost)|
-|&nbsp;&nbsp;Overview [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-01-cost/01-intro/01-intro.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-01-cost/01-intro/01-intro.ipynb?flush_cache=True)|
-|&nbsp;&nbsp;name [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-01-cost/02-asymptotic-analysis/01-asymptotic-analysis.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-01-cost/02-asymptotic-analysis/01-asymptotic-analysis.ipynb?flush_cache=True)|
-|&nbsp;&nbsp;Parallelism [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-01-cost/03-parallel/01-parallel.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-01-cost/03-parallel/01-parallel.ipynb?flush_cache=True)|
-|&nbsp;&nbsp;Functional programming [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-01-cost/04-functional/02-supplemental-lambda-calculus.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-01-cost/04-functional/02-supplemental-lambda-calculus.ipynb?flush_cache=True)|
-|&nbsp;&nbsp;SPARC [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-01-cost/05-sparc/01-sparc.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-01-cost/05-sparc/01-sparc.ipynb?flush_cache=True)|
-|&nbsp;&nbsp;Cost models [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-01-cost/06-cost/02-cost-supplemental.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-01-cost/06-cost/02-cost-supplemental.ipynb?flush_cache=True)|
+|[**Module 01: Formalizing the cost of an algorithm**](https://github.com/cmps-2200/cmps-2200-notes/tree/main/module-01-cost)|
+|[&nbsp;&nbsp;Introduction](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/module-01-cost/01-intro/module-01-cost/01-intro/01-intro.slides.html)|
+|[&nbsp;&nbsp;Asymptotic Analysis](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/module-01-cost/02-asymptotic-analysis/module-01-cost/02-asymptotic-analysis/01-asymptotic-analysis.slides.html)|
+|[&nbsp;&nbsp;Parallelism](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/module-01-cost/03-parallel/module-01-cost/03-parallel/01-parallel.slides.html)|
+|[&nbsp;&nbsp;Functional programming](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/module-01-cost/04-functional/module-01-cost/04-functional/01-functional.slides.html)|
+|[&nbsp;&nbsp;SPARC](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/module-01-cost/05-sparc/module-01-cost/05-sparc/01-sparc.slides.html)|
+|[&nbsp;&nbsp;Cost models](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/module-01-cost/06-cost/module-01-cost/06-cost/01-cost.slides.html)|
 |[                        **Module 02: Recurrences**](https://github.com/CMPS-2200/cmps-2200-slides/tree/main/module-02-recurrences)|
 |&nbsp;&nbsp;name [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-02-recurrences/01-tree-method/01-tree-method.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-02-recurrences/01-tree-method/01-tree-method.ipynb?flush_cache=True)|
 |&nbsp;&nbsp;name [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-02-recurrences/02-brick-method/02-brick-method.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-02-recurrences/02-brick-method/02-brick-method.ipynb?flush_cache=True)|

@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Motivate why we are using parallel algorithms</li>
 <li>Overview of how to analyze parallel algorithms</li>
@@ -14281,7 +14281,7 @@ SpiNNaker (Spiking Neural Network Architecture), University of Manchester<br>
 $O(1)$  to combine results</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br>
@@ -14327,7 +14327,7 @@ speedup(P,S) = \frac{T(S)}{T(P)}
 $$</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Parallel-software">Parallel software<a class="anchor-link" href="#Parallel-software">&#182;</a></h2><p>So why isn't all software parallel?</p>
@@ -14535,11 +14535,9 @@ $$</p>
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>work: $O(n)$</li>
-<li>span: $O(n)$</li>
-</ul>
-
+<p><strong>work:</strong></p>
+$$O(n)$$<p><strong>span:</strong></p>
+$$O(n)$$
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14552,18 +14550,28 @@ $$</p>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p><strong>the problem</strong>:</p>
+<ul>
+<li>The combination step happened in serial</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>idea</strong>:</p>
 <ul>
-<li>let threads create threads recursively</li>
 <li>parallelize combination steps</li>
+<li>implement recursive solution where each thread returns the sum of its part of the problem</li>
 </ul>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="divide-and-conquer">divide and conquer<a class="anchor-link" href="#divide-and-conquer">&#182;</a></h2><p><img src="figures/dag-sum.png" alt="dag-sum"><br>
-<a href="https://homes.cs.washington.edu/~djg/teachingMaterials/spac/sophomoricParallelismAndConcurrency.pdf">source</a></p>
+<h2 id="divide-and-conquer">divide and conquer<a class="anchor-link" href="#divide-and-conquer">&#182;</a></h2><p><img src = "figures/dag-sum.png" width = "75%"></p>
+<p><a href="https://homes.cs.washington.edu/~djg/teachingMaterials/spac/sophomoricParallelismAndConcurrency.pdf">source</a></p>
 
 </div>
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">

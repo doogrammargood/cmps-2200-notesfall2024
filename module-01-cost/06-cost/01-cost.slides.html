@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>05-cost slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>01-cost slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Three different ways to model computational cost<ul>
 <li>Random Access Machine</li>
@@ -14317,7 +14317,7 @@ Two drawbacks of this model:</p>
 <td>$1 + S(e_1) + S(e_2)$</td>
 </tr>
 <tr>
-<td>$(e_1 | e_2)$</td>
+<td>$(e_1 || e_2)$</td>
 <td>$1 + W(e_1) + W(e_2)$</td>
 <td>$1 + \max(S(e_1), S(e_2))$</td>
 </tr>
@@ -14367,78 +14367,7 @@ $S(e_1 || e_2) = 1 + \max(S(e_1), S(e_2))$</p>
 </ul>
 
 </div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br>
-$e_1 e_2$</p>
-<p>E.g., if $e_1$ is $f(x)$, we</p>
-<ol>
-<li>evaluate $e_2$ to a value $v$</li>
-<li>substitute $v$ for $x$ in $f(x)$</li>
-<li>run $f(v)$</li>
-</ol>
-<p>We assume $\hbox{Eval}(e_2) = \hbox{lambda} \: x \: . \: e_2$</p>
-<p>$[\hbox{Eval}(e_2)/x]e_1$: all free occurrences of $x$ in $e_1$ are replaced with $\hbox{Eval}(e_2)$</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Defs:</p>
-<p>$W(e_1 e_2) = W(e_1) + W(e_2) + W([\hbox{Eval}(e_2)/x]e_1) + 1$</p>
-<p>$\hbox{Eval}(e_2) = \hbox{lambda} \: x \: . \: e_2$</p>
-<p>$W(\mathtt{lambda}\:p\:.\:e) = 1$</p>
-<p><br></p>
-<p>Example</p>
-<p>$f(x) = \mathtt{lambda} \: x \: . \: x + 1$</p>
-<p><br></p>
-<p>$W(f(x)(1)) =$</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$W(\mathtt{lambda} \: x \: . \: x + 1) + W(1) + W([\hbox{Eval}(1) / x](x + 1)) + 1 =$</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$W(\mathtt{lambda} \: x \: . \: x + 1) + W(1) + ( W(\hbox{lambda} \: x \: . \: 1) + W(x+1) + 1 ) + 1 =$</p>
-<p>$1 + 1 + 1 + 1 + 1 + 1 =$</p>
-<p>$6$</p>
-<p><br>
-$S(f(x)(1)) = 6$</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>serial composition:</strong></p>
-<p>$W(f(x)(1), f(x)(2)) = $</p>
-<p>$W(f(x)(1)) + W(f(x)(2)) + 1 = $</p>
-<p>$6 + 6 + 1 = 12$</p>
-<p><br></p>
-<p>$S(f(x)(1), f(x)(2)) = $</p>
-<p>$S(f(x)(1)) + S(f(x)(2)) + 1 = $</p>
-<p>$6 + 6 + 1 = 12$</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>parallel composition:</strong></p>
-<p>$W(f(x)(1) || f(x)(2)) = $</p>
-<p>$W(f(x)(1)) + W(f(x)(2)) + 1 =$</p>
-<p>$6 + 6 + 1 = 11$</p>
-<p><br></p>
-<p>$S(f(x)(1) ||  f(x)(2)) = $</p>
-<p>$\max(S(f(x)(1)), S(f(x)(2))) + 1 =$</p>
-<p>$\max(6,6) + 1 = 7$</p>
-
-</div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14481,32 +14410,64 @@ $S(f(x)(1)) = 6$</p>
 
 </div>
 
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$e_1 e_2$</p>
+<p>E.g., if $e_1$ is $f(x)$, we</p>
+<ol>
+<li>evaluate $e_2$ to a value $v$</li>
+<li>substitute $v$ for $x$ in $f(x)$</li>
+<li>run $f(v)$</li>
+</ol>
+<p>We assume $\hbox{Eval}(e_2) = \hbox{lambda} \: x \: . \: e_2$</p>
+<p>$[\hbox{Eval}(e_2)/x]e_1$: all free occurrences of $x$ in $e_1$ are replaced with $\hbox{Eval}(e_2)$</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Defs:</p>
+<p>$W(e_1 e_2) = W(e_1) + W(e_2) + W([\hbox{Eval}(e_2)/x]e_1) + 1$</p>
+<p>$\hbox{Eval}(e_2) = \hbox{lambda} \: x \: . \: e_2$</p>
+<p>$W(\mathtt{lambda}\:p\:.\:e) = 1$</p>
+<p><br></p>
+<p>Example</p>
+<p>$f(x) = \mathtt{lambda} \: x \: . \: x + 1$</p>
+<p><br></p>
+<p>$W(f(x)(1)) = O(1)$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$S(f(x)(1)) = O(1)$</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>serial composition:</strong></p>
+<p>$W(f(x)(1), f(x)(2)) = $</p>
+<p>$W(f(x)(1)) + W(f(x)(2)) + 1 = $</p>
+<p>$O(1) + O(1) + 1 = O(1)$</p>
+<p><br></p>
+<p>$S(f(x)(1), f(x)(2)) = $</p>
+<p>$S(f(x)(1)) + S(f(x)(2)) + 1 = $</p>
+<p>$O(1) + O(1) + 1 = O(1)$</p>
+
+</div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="let-...-in">let ... in<a class="anchor-link" href="#let-...-in">&#182;</a></h2><p>$W($ <code>let val</code>$x=e_1$ <code>in</code> $e_2$ <code>end</code>$) = 1 + W(e_1) + W([\hbox{Eval}(e_1)/x]e_2)$</p>
-<p>Expression $e_2$ is applied using the bindings defined inside <strong>let</strong>.</p>
-<ul>
-<li>$[\hbox{Eval}(e_1)/x]e_2$: all free occurrences of $x$ in $e_2$ are replaced with $\hbox{Eval}(e_1)$</li>
-<li>$W([\hbox{Eval}(e_1)/x]e_2)$ accounts for this cost.</li>
-</ul>
-<p>$\texttt{let}$<br>
-$~~~~x = 10*5 ~~~~~ (e_1$)<br>
-$\texttt{in}$<br>
-$~~~~x + 100  ~~~~~~~~~~ (e_2)$<br>
-$\texttt{end}$ 
-<br></p>
-<p>returns 150</p>
-
-</div>
-</div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$W($ <code>let val</code>$x=e_1$ <code>in</code> $e_2$ <code>end</code>$) = $</p>
-<p>$1 + W(e_1) +  W([\hbox{Eval}(e_1)/x]e_2) = $</p>
-<p>$1 + W(e_1) + (W(\hbox{sub in 50 for x}) + W(x+100) + 1)$ (by function application rule)</p>
-<p>$1 + 1 + 1 + 1 + 1 $</p>
-<p>$=5$</p>
+<p><strong>parallel composition:</strong></p>
+<p>$W(f(x)(1) || f(x)(2)) = $</p>
+<p>$W(f(x)(1)) + W(f(x)(2)) + 1 =$</p>
+<p>$O(1) + O(1) + 1 = O(1)$</p>
+<p><br></p>
+<p>$S(f(x)(1) ||  f(x)(2)) = $</p>
+<p>$\max(S(f(x)(1)), S(f(x)(2))) + 1 =$</p>
+<p>$\max(O(1),O(1)) + 1 = O(1)$</p>
 
 </div>
 </div></section></section><section><section>
@@ -14525,137 +14486,6 @@ To increase parallelism, we can either:</p>
 <p><br></p>
 <p><strong>work efficiency</strong>: a parallel algorithm is <em>work efficient</em> if it performs asymptotically the same work as the best known sequential algorithm for the problem.</p>
 <p>So, we want a <em>work efficient</em> parallel algorithm with low span.</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Scheduling">Scheduling<a class="anchor-link" href="#Scheduling">&#182;</a></h2><p>Key issue of parallel algorithms is <strong>scheduling</strong>: which processor will run which task when?</p>
-<ul>
-<li>typically have more tasks than processors.</li>
-</ul>
-<p>Recall our parallel sum method:</p>
-
-</div>
-</div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="figures/dag-sum.png" alt="dag-sum" width="450"/></p>
-<p><a href="https://homes.cs.washington.edu/~djg/teachingMaterials/spac/sophomoricParallelismAndConcurrency.pdf">source</a></p>
-<p>We must decide when to run each part of the sum. There are dependencies that constrain the order.</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Scheduler">Scheduler<a class="anchor-link" href="#Scheduler">&#182;</a></h2><ul>
-<li>For each task generated by a parallel algorithm, assign it to an available processor</li>
-<li>Goal: minimize execution time.</li>
-</ul>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Greedy-Scheduler">Greedy Scheduler<a class="anchor-link" href="#Greedy-Scheduler">&#182;</a></h2><p>Whenever there is a processor available and a task ready to execute, assign the task to the processor and start it immediately.</p>
-<p>Why might this not be optimal?</p>
-<p><img src="figures/greedy.png" alt="greedy" width="500"/></p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Greedy schedulers have an important property that is summarized by the greedy scheduling principle.</p>
-<p>Assuming $P$ processors, then the time $T_P$ to perform computation with work $W$ and span $S$ is bounded by:</p>
-<p>$T_P &lt; \frac{W}{P} + S$</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Because we know:</p>
-<ul>
-<li>$T_P \ge \frac{W}{P}$, since that would be the optimal division of work to processors</li>
-<li>$T_P \ge S$, by the definition of span</li>
-</ul>
-<p>we can conclude that the best we can hope for is:</p>
-<p>$T_P \ge \mathrm{max}(\frac{W}{P},S)$</p>
-<p>Therefore the time using a greedy scheduler is bounded by:</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br>
-$ \mathrm{max}(\frac{W}{P},S) \le T_P &lt; \frac{W}{P} + S$</p>
-<p><br>
-How good is greedy? How close is $(\frac{W}{P} + S)$ to $\mathrm{max}(\frac{W}{P},S)$?</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>actually pretty close.</p>
-<p>$\frac{W}{P} + S \le 2 * \mathrm{max}(\frac{W}{P},S)$</p>
-<p>(why? consider what the worst possible span is...)</p>
-<p><br></p>
-<p>Greedy scheduler gets better the more parallelism is possible in the algorithm.</p>
-<p>Recall average parallelism: $\overline{P} = \frac{W}{S}$</p>
-<p>We can rewrite:</p>
-<p>$T_P &lt; \frac{W}{P} + S$<br>
-$~~~~= \frac{W}{P} + \frac{W}{\overline{P}}$<br>
-$~~~~=\frac{W}{P}(1+\frac{P}{\overline{P}})$</p>
-<p>So, the greater $\overline{P}$ is than $P$, the closer to optimal we get.</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>E.g., recall our parallel sum method, which has</p>
-<p>$W=O(n)$<br>
-$S=O(\lg n)$</p>
-<p><br>
-$\overline{P} = \frac{W}{S} = \frac{O(n)}{O(\lg n)}$</p>
-<p><br></p>
-<p>$ \mathrm{max}(\frac{W}{P},S) \le T_P &lt; \frac{W}{P} + S$</p>
-<p><br>
-so, if we have 2 processors:</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$\mathrm{max}(\frac{O(n)}{2},O(\lg n)) \le T_2 &lt; \frac{O(n)}{2} + O(\lg n)$</p>
-<p>$\frac{O(n)}{2} \le T_2 &lt; \frac{O(n)}{2} + O(\lg n)$</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br></p>
-<p>if we have $\lg n$ processors:</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$\mathrm{max}(\frac{O(n)}{\lg n},O(\lg n)) \le T_{\lg n} &lt; \frac{O(n)}{\lg n} + O(\lg n)$</p>
-<p>$\frac{O(n)}{\lg n} \le T_{\lg n} &lt; \frac{O(n)}{\lg n} + O(\lg n)$</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The advantage of the Work-Span model:</p>
-<ul>
-<li><p>We can design parallel algorithms without worrying about scheduling details.</p>
-</li>
-<li><p>We are ignoring some overhead in the creation of the schedule itself.</p>
-<ul>
-<li>This is acceptable since we are focused on asymptotics (just as in RAM model)</li>
-</ul>
-</li>
-</ul>
 
 </div>
 </div></section></section>

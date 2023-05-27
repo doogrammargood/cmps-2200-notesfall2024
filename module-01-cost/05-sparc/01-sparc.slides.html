@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>04-sparc slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>01-sparc slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Overview of SPARC language</li>
 <li>Foundation of cost model framework</li>
@@ -14142,8 +14142,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Example-SPARC-program">Example SPARC program<a class="anchor-link" href="#Example-SPARC-program">&#182;</a></h2><p><br><br></p>
-<p><p> <span>\[\begin{array}{l}  
+<h2 id="Example-SPARC-program">Example SPARC program<a class="anchor-link" href="#Example-SPARC-program">&#182;</a></h2>\begin{array}{l}  
 \texttt{let}\\   
 ~~~~x = 2 + 3\\  
 ~~~~f (w) = (w * 4, w - 2)\\  
@@ -14151,9 +14150,7 @@ div.jp-OutputPrompt {
 \texttt{in}\\   
 ~~~~x + y + z\\  
 \texttt{end}   
-\end{array}\]</span></p>
-<br><br></p>
-<p><br><br>
+\end{array}<p><br><br>
 <strong>binding</strong>: associate entities (data or code) with identifiers.</p>
 
 </div>
@@ -14177,7 +14174,7 @@ $\:\:e$<br>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><p> <span>\[\begin{array}{l}  
+\begin{array}{l}  
 \texttt{let}\\   
 ~~~~x = 2 + 3\\  
 ~~~~f (w) = (w * 4, w - 2)\\  
@@ -14185,9 +14182,7 @@ $\:\:e$<br>
 \texttt{in}\\   
 ~~~~x + y + z\\  
 \texttt{end}   
-\end{array}\]</span></p>
-<br><br></p>
-<p>$x = 2 + 3 = 5$<br>
+\end{array}<p>$x = 2 + 3 = 5$<br>
 $f(4) \rightarrow (16, 2)$<br>
 $x + y + z= 5 + 16 + 2 = 23$</p>
 
@@ -14349,7 +14344,7 @@ $x + y + z= 5 + 16 + 2 = 23$</p>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
@@ -14368,6 +14363,8 @@ $x + y + z= 5 + 16 + 2 = 23$</p>
 <span class="c1"># how many inches in a meter?</span>
 <span class="n">meter2inch</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">meter2cm</span><span class="p">,</span> <span class="n">cm2inch</span><span class="p">)</span>
 <span class="n">meter2inch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">compose</span><span class="p">(</span><span class="n">meter2cm</span><span class="p">,</span> <span class="n">cm2inch</span><span class="p">)(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14383,7 +14380,7 @@ $x + y + z= 5 + 16 + 2 = 23$</p>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[44]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -14404,8 +14401,8 @@ $x + y + z= 5 + 16 + 2 = 23$</p>
 <h2 id="scoping-and-recursion">scoping and recursion<a class="anchor-link" href="#scoping-and-recursion">&#182;</a></h2><p>$ x(p) = e $</p>
 <p>vs</p>
 <p>$ x = \mathtt{lambda} \: p . e $</p>
-<p><br>
-When can $x$ be referenced from $e$?</p>
+<p><br></p>
+<p>When can $x$ be referenced from $e$?</p>
 
 </div>
 </div><div class="fragment">
@@ -14419,14 +14416,15 @@ When can $x$ be referenced from $e$?</p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br><br></p>
-<p>What does this do?<span class="math display">\[\begin{array}{l}  
+<p><p>What does this do?</p>
+\begin{array}{l}  
 \texttt{let}\\  
-~~~~f(i) = \texttt{if} ~(i < 2) ~\texttt{then}~ i ~\texttt{else}~ i  *   
+~~~~f(i) = \texttt{if} ~(i &lt; 2) ~\texttt{then}~ i ~\texttt{else}~ i  *   
 f(i - 1) \\  
 \texttt{in} \\   
 ~~~~f(5) \\  
 \texttt{end}   
-\end{array}\]</span> </p>
+\end{array}
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14470,7 +14468,7 @@ f(i - 1) \\
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Binary-tree">Binary tree<a class="anchor-link" href="#Binary-tree">&#182;</a></h3><p>We can also define datatypes recursively like:</p>
-<p><span class="math display">\[\begin{array}{l}  
+\begin{array}{l}  
 \texttt{type}~\mathit{tree} = \mathit{Leaf}~\texttt{of}~\mathbb{Z}~|~\mathit{Node}~\texttt{of}~(\mathit{tree}, \mathbb{Z}, \mathit{tree})  
 \\  
 \\\\
@@ -14486,14 +14484,14 @@ f(i - 1) \\
 \\  
 ~~~~~~~~~~~~~\texttt{return}~\texttt{true}  
 \\  
-~~~~~~~~~\texttt{else}~\texttt{if}~x < y~\texttt{then}   
+~~~~~~~~~\texttt{else}~\texttt{if}~x &lt; y~\texttt{then}   
 \\  
 ~~~~~~~~~~~~~\mathit{find}~(\mathit{left}, x)  
 \\  
 ~~~~~~~~~\texttt{else}  
 \\  
 ~~~~~~~~~~~~~\mathit{find}~(\mathit{right}, x)  
-\end{array}\]</span></p>
+\end{array}
 </div>
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14628,6 +14626,61 @@ $ 10 + 20^2 \rightarrow$<br>
 $ 410 $</p>
 
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">curry</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a function f of two variables,</span>
+<span class="sd">    return a function g that binds the first variable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>      <span class="c1"># nested function 1</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">g</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>         <span class="c1"># returns f&#39;n g. input: x, output function of y  </span>
+<span class="n">curried_f</span> <span class="o">=</span> <span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">curried_f</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>       
+<span class="nb">print</span><span class="p">(</span><span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="mi">10</span><span class="p">))</span>     <span class="c1"># returns f&#39;n h. input: y, output f(10,y)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>&lt;function f at 0x7fa918875430&gt;
+&lt;function curry.&lt;locals&gt;.g at 0x7fa918875040&gt;
+410
+420
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
@@ -14654,6 +14707,9 @@ $ 410 $</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="mi">10</span><span class="p">))</span>     <span class="c1"># returns f&#39;n h. input: y, output f(10,y)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="mi">10</span><span class="p">)(</span><span class="mi">20</span><span class="p">))</span> <span class="c1"># returns f(10,20)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">curry</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="mi">10</span><span class="p">)(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># returns f(10,3)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 
      </div>

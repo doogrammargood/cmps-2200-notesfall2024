@@ -1,6 +1,6 @@
-## Slides for CMPS2200: Introduction to Algorithms
+# CMPS2200: Introduction to Algorithms
 
-[CMPS 2200 Slides Repository](https://github.com/CMPS-2200/cmps-2200-notes)
+## [CMPS 2200 Slides Repository](https://github.com/CMPS-2200/cmps-2200-notes)
 
 All lecture slides are listed below. These are organized by module, 
 each of which may contain one more more lectures.
@@ -14,7 +14,7 @@ Linked below are are all produced slide decks. You may also clone
 the repository and view the jupyter notebooks using [Visual Studio
 Code](https://code.visualstudio.com/).
 
-|Topic|
+|Slide Decks|
 |-----|
 |**Module 01: Formalizing the cost of an algorithm**|
 |[&nbsp;&nbsp;Introduction](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/01-intro/01-intro.slides.html)|

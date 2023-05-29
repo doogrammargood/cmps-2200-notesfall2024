@@ -25,6 +25,7 @@ Code](https://code.visualstudio.com/).
 |[&nbsp;&nbsp;Cost models](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/06-cost/01-cost.slides.html)|
 |**Module 02: Recurrences**|
 |[&nbsp;&nbsp;Recurrences](https://cmps-2200.github.io/cmps-2200-notes/module-02-recurrences/01-tree-method/01-tree-method.slides.html)|
+|[&nbsp;&nbsp;The Brick Method](https://cmps-2200.github.io/cmps-2200-notes/module-02-recurrences/02-brick-method/02-brick-method.slides.html)|
 |**Module 03: Sequences**|
 |**Module 04: Divide and Conquer**|
 |**Module 05: Randomized Algorithms**|

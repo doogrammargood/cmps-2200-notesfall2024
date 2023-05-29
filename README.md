@@ -21,7 +21,7 @@ them using [Visual Studio Code](https://code.visualstudio.com/).
 |[&nbsp;&nbsp;Cost models](https://cmps-2200.github.io/cmps-2200-notes/module-01-cost/06-cost/01-cost.slides.html)|
 |[                        **Module 02: Recurrences**](https://github.com/CMPS-2200/cmps-2200-slides/tree/main/module-02-recurrences)|
 |[&nbsp;&nbsp;Recurrences](https://cmps-2200.github.io/cmps-2200-notes/module-02-recurrences/01-tree-method/01-tree-method.slides.html)|
-|&nbsp;&nbsp;name [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-02-recurrences/02-brick-method/02-brick-method.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-02-recurrences/02-brick-method/02-brick-method.ipynb?flush_cache=True)|
+|[&nbsp;&nbsp;The Brick Method](https://cmps-2200.github.io/cmps-2200-notes/module-02-recurrences/02-brick-method/02-brick-method.slides.html)|
 |&nbsp;&nbsp;name [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-02-recurrences/03-example-algorithm/03-integer-multiplication.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-02-recurrences/03-example-algorithm/03-integer-multiplication.ipynb?flush_cache=True)|
 |[                          **Module 03: Sequences**](https://github.com/CMPS-2200/cmps-2200-slides/tree/main/module-03-sequences)|
 |&nbsp;&nbsp;Sequences Overview [live](https://mybinder.org/v2/gh/CMPS-2200/cmps-2200-slides/main?filepath=module-03-sequences/01-sequences/01-sequence.ipynb)/[static](https://nbviewer.jupyter.org/github/CMPS-2200/cmps-2200-slides/blob/main/module-03-sequences/01-sequences/01-sequence.ipynb?flush_cache=True)|

@@ -14138,7 +14138,7 @@ div.jp-OutputPrompt {
 <li>suitable for parallel algorithms</li>
 <li>good level of abstraction for talking about parallel algorithms</li>
 </ul>
-<p>When possible, we will also show Python versions of key algorithms.</p>
+<p>As much as possible, we will also show Python versions of key algorithms.</p>
 
 </div>
 </div></div></section></section><section><section>
@@ -14151,8 +14151,6 @@ div.jp-OutputPrompt {
 <li>no <strong>side effects</strong></li>
 </ul>
 </li>
-</ol>
-<ol>
 <li>function can be treated as values<ul>
 <li>function A can be passed to function B</li>
 </ul>
@@ -14163,11 +14161,22 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Pure-function">Pure function<a class="anchor-link" href="#Pure-function">&#182;</a></h2><p>A function is <strong>pure</strong> if it maps an input to an output with no <strong>side effects.</strong></p>
+<h2 id="Pure-function">Pure function<a class="anchor-link" href="#Pure-function">&#182;</a></h2><p>A function is <strong>pure</strong> if it maps an input to an output with no <strong>side effects</strong>.</p>
+<p>A <strong>side effect</strong> is any change in the state of a program outside of a function's output</p>
+<p><strong>Pure</strong> functions are simple. Pure functions</p>
+<ul>
+<li>only take input through parameters and return output calculated from that input. </li>
+<li>do not depend on nor modify outside state.</li>
+</ul>
 <p>A computation is <strong>pure</strong> if all of its functions are pure.</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
@@ -14207,19 +14216,14 @@ div.jp-OutputPrompt {
 
 </div>
 
-</div></div><div class="fragment">
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We can view the <code>double</code> function as a mathematical function, defined by the mapping:</p>
-$$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>versus...</p>
+$$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$<p>versus...</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
@@ -14267,7 +14271,7 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 <p>This has the side effecet of changing (or <em>mutating</em>) <code>mylist</code>.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>though compare with...</p>
@@ -14276,7 +14280,7 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">append_sum</span><span class="p">(</span><span class="n">mylist</span><span class="p">):</span>
@@ -14300,19 +14304,7 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>None
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
 
 
 
@@ -14327,39 +14319,6 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 
 </div>
 
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Almost all "real" computations have some side effects. Consider:</p>
-
-</div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">do_sum</span><span class="p">(</span><span class="n">mylist</span><span class="p">):</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mylist</span><span class="p">:</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">v</span>
-    <span class="k">return</span> <span class="n">total</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><code>do_sum</code> has the side effect of modifying <code>total</code>. But, this effect is not visible outside of <code>do_sum</code>, due to variable scoping.</p>
-<blockquote><p><strong>benign effect:</strong> a side-effect that is not observable from outside of the function.</p>
-</blockquote>
-<p>A function with benign effects is still considered pure.</p>
-
-</div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14473,13 +14432,11 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 <p>Two key properties:</p>
 <ol>
 <li>function maps an input to an output $f : X \mapsto Y$<ul>
-<li>no <strong>side effects</strong></li>
+<li>no side effects</li>
 </ul>
 </li>
-</ol>
-<ol>
-<li>function can be treated as values<ul>
-<li>function A can be passed to function B</li>
+<li><strong>function can be treated as values</strong><ul>
+<li><strong>function A can be passed to function B</strong></li>
 </ul>
 </li>
 </ol>
@@ -14593,6 +14550,12 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 
 </div>
 
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><code>yield</code> turns the function into an iterable object which returns values in the order that they are yielded. For more info, see this <a href="https://www.guru99.com/python-yield-return-generator.html">guru99 tutorial</a>.</p>
+
+</div>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
@@ -14670,23 +14633,46 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 
 </div>
 
-</div></div><div class="fragment">
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="What's-the-big-deal?">What's the big deal?<a class="anchor-link" href="#What's-the-big-deal?">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">map_function</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">function</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="n">map_function</span><span class="p">(</span><span class="n">double</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>If we know that <code>function</code> is pure, then we can trivially parallelize <code>map_function</code> for many inputs.</li>
-</ul>
-<ul>
-<li>By using higher-order functions, we can define a few primitive, high-order functions that will make it easier to reason about and analyze run-time of parallel computations.</li>
+<li><p>If we know that <code>function</code> is pure, then we can trivially parallelize <code>map_function</code> for many inputs.</p>
+</li>
+<li><p>By using higher-order functions, we can define a few primitive, high-order functions that will make it easier to reason about and analyze run-time of parallel computations.</p>
+</li>
 </ul>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Lambda-Functions">Lambda Functions<a class="anchor-link" href="#Lambda-Functions">&#182;</a></h2><ul>
 <li>Lambda functions are anonymous functions that we can quickly define and use in python</li>
-<li>They come from Lambda Calculus developed by Alonso Churchill</li>
+<li>They come from Lambda Calculus developed by Alonso Church</li>
 </ul>
 
 </div>
@@ -14730,13 +14716,13 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 
 </div>
 
-</div></div></section></section><section><section>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We can also chain functions together. E.g., $e_2$ can be another function.</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
@@ -14774,7 +14760,7 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 
 </div>
 
-</div></div></section></section><section><section>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Doing computation via lambda calculus seems limiting.</p>
@@ -14795,7 +14781,13 @@ $$ \{(0, 0), (1, 2), (2, 4), \ldots \}$$
 </ul>
 
 </div>
-</div></div></section></section>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Coming-up">Coming up<a class="anchor-link" href="#Coming-up">&#182;</a></h2><p>Next we will learn about SPARC, the functional psuedo-language used in our book.</p>
+
+</div>
+</div></section></section>
 </div>
 </div>
 </body>

@@ -14101,7 +14101,7 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Recurrences---Example-Recursive-Algorithm">Recurrences - Example Recursive Algorithm<a class="anchor-link" href="#Recurrences---Example-Recursive-Algorithm">&#182;</a></h2>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h3><p>We've been discussing Divide and Conquer algorithms.</p>
@@ -14114,10 +14114,10 @@ div.jp-OutputPrompt {
 <p>Recurrences can easily be written and interpretted from the perspective of divide and conquer algorithms.</p>
 
 </div>
-</div>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$ 
+<h2 id="General-Recurrences">General Recurrences<a class="anchor-link" href="#General-Recurrences">&#182;</a></h2>$$ 
 \begin{equation}
 W(n) = \begin{cases}
   c_b, &amp; \text{if $n=1$} \\
@@ -14131,17 +14131,21 @@ $$<ul>
 </ul>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Tree Method</strong></p>
-<p>We can solve recurrences by drawing and analyzing the Recursion Trees that result from them.</p>
+<h2 id="Tree-Method">Tree Method<a class="anchor-link" href="#Tree-Method">&#182;</a></h2><p>We can solve recurrences by drawing and analyzing the Recursion Trees that result from them.</p>
 <ul>
 <li>The root node is the instance of the whole problem. </li>
 <li>Children are subproblems resulting from the divide step.</li>
 <li>The cost of every node is the cost to perform the combine step for that subproblem.</li>
 </ul>
 <p>The cost of the entire tree is then the cost of all of the levels of the tree.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In the tree method, we generalize the cost of every level as a function of that level, $C(i)$. E.g,</p>
 $$C(i) = \frac{n^2}{2^i},\quad 3^in,\quad n,\quad \lg{\frac{3n}{2^i}},\quad 1, etc...$$<p>And sum up over all levels:</p>
 $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and by using properities of series to arrive as a final runtime.</p>
@@ -14150,7 +14154,7 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The tree method is tedious, but it works. Often, we can exploit patterns to perform our analysis more quickly.</p>
+<h2 id="The-Brick-Method">The Brick Method<a class="anchor-link" href="#The-Brick-Method">&#182;</a></h2><p>The tree method is tedious, but it works. Often, we can exploit patterns to perform our analysis more quickly.</p>
 <p><strong>Brick method:</strong></p>
 <ul>
 <li><strong>Root dominated</strong>: cost <em>decreases</em> geometrically as we descend the tree<ul>
@@ -14192,7 +14196,22 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 </ul>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+
+<pre><code>       1001   
+     x 1101   
+     ======
+       1001   
+      0000    
+     1001     
+  + 1001      
+  =========
+    1110101   (117)</code></pre>
+
+</div>
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14270,21 +14289,6 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 
 </div>
 
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-
-<pre><code>       1001   
-     x 1101   
-     ======
-       1001   
-      0000    
-     1001     
-  + 1001      
-  =========
-    1110101   (117)</code></pre>
-
-</div>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">

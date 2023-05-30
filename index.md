@@ -29,7 +29,7 @@ Code](https://code.visualstudio.com/).
 |[&nbsp;&nbsp;Divide and Conquer Multiplication](https://cmps-2200.github.io/cmps-2200-notes/module-02-recurrences/03-example-algorithm/03-integer-multiplication.slides.html)|
 |**Module 03: Sequences**|
 |[&nbsp;&nbsp;Sequences Overview](https://cmps-2200.github.io/cmps-2200-notes/module-03-sequences/01-sequences/01-sequence.slides.html)|
-|[&nbsp;&nbsp;Iterate and Reduce](https://cmps-2200.github.io/cmps-2200-notes/module-03-sequences/02-operators/02-operators.slides.html)|
+|[&nbsp;&nbsp;Reduce](https://cmps-2200.github.io/cmps-2200-notes/module-03-sequences/02-operators/02-operators.slides.html)|
 |[&nbsp;&nbsp;Scan](https://cmps-2200.github.io/cmps-2200-notes/module-03-sequences/03-scan/03-scan.slides.html)|
 |[&nbsp;&nbsp;Problem solving with sequences](https://cmps-2200.github.io/cmps-2200-notes/module-03-sequences/04-problems/04-problems.slides.html)|
 |**Module 04: Divide and Conquer**|

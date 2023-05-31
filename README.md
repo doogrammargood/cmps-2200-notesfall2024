@@ -47,9 +47,9 @@ them using [Visual Studio Code](https://code.visualstudio.com/).
 |[&nbsp;&nbsp;Optimal BSTs](https://cmps-2200.github.io/cmps-2200-notes/module-07-dynamic/03-optimal-BSTs/01-optimal-BSTs.slides.html)|
 |[                             **Module 08: Graphs**](https://github.com/cmps-2200/cmps-2200-notes/tree/main/module-08-graph)|
 |[&nbsp;&nbsp;Graphs](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/01-graphs/01-graphs.slides.html)|
-|[&nbsp;&nbsp;Breadth First Search](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/02-BFS/01-breadth-first-search.slides.html)|
-|[&nbsp;&nbsp;Depth First Search](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/03-DFS/01-depth-first-search.slides.html)|
-|[&nbsp;&nbsp;Shortest Path](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/04-shortest-path/01-shortest-path.slides.html)|
+|[&nbsp;&nbsp;Breadth-First Search](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/02-BFS/01-breadth-first-search.slides.html)|
+|[&nbsp;&nbsp;Depth-First Search](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/03-DFS/01-depth-first-search.slides.html)|
+|[&nbsp;&nbsp;Shortest Paths](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/04-shortest-path/01-shortest-path.slides.html)|
 |[&nbsp;&nbsp;Bellman-Ford](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/05-bellman-ford/01-bellman-ford.slides.html)|
 |[&nbsp;&nbsp;All Pairs Shortest Paths](https://cmps-2200.github.io/cmps-2200-notes/module-08-graph/06-all-pairs-shortest-paths/01-all-pairs-shortest-paths.slides.html)|
 |[                     **Module 09: Spanning trees**](https://github.com/cmps-2200/cmps-2200-notes/tree/main/module-09-spanning-trees)|

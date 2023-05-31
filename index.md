@@ -43,7 +43,7 @@ Code](https://code.visualstudio.com/).
 |[&nbsp;&nbsp;Quicksort](https://cmps-2200.github.io/cmps-2200-notes/module-05-random/03-quicksort/01-quicksort.slides.html)|
 |**Module 06: Greedy Algorithms**|
 |[&nbsp;&nbsp;Greedy Algorithms](https://cmps-2200.github.io/cmps-2200-notes/module-06-greedy/01-greedy-algorithms/01-greedy-algorithms.slides.html)|
-|[&nbsp;&nbsp;Priority Queues](https://cmps-2200.github.io/cmps-2200-notes/module-06-greedy/02-priority-queues/01-priority-queues.slides.html)|
+|[&nbsp;&nbsp;Meldable Priority Queues](https://cmps-2200.github.io/cmps-2200-notes/module-06-greedy/02-priority-queues/01-priority-queues.slides.html)|
 |[&nbsp;&nbsp;Huffman Encoding](https://cmps-2200.github.io/cmps-2200-notes/module-06-greedy/03-huffman/01-huffman-encoding.slides.html)|
 |**Module 07: Dynamic Programming**|
 |[&nbsp;&nbsp;Dynamic Programming](https://cmps-2200.github.io/cmps-2200-notes/module-07-dynamic/01-dynamic-programming/01-dynamic-programming.slides.html)|

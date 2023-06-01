@@ -14335,18 +14335,40 @@ $S(e_1 || e_2) = 1 + \max(S(e_1), S(e_2))$</p>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="function-application:-$e_1-e_2$">function application: $e_1 e_2$<a class="anchor-link" href="#function-application:-$e_1-e_2$">&#182;</a></h2><p>$W(e_1 e_2) = W(e_1) + W(e_2) + W([\hbox{Eval}(e_2)/x]e_1) + 1$</p>
+<h2 id="function-application:-$e_1-e_2$">function application: $e_1 e_2$<a class="anchor-link" href="#function-application:-$e_1-e_2$">&#182;</a></h2><p>Apply $e_1$ using as input the result of $e_2$</p>
+<p>e.g,</p>
+<p>$\mathtt{lambda} (\: x \: . ~ x * x)(6/3)$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$W(e_1 e_2) = W(e_1) + W(e_2) + W([\hbox{Eval}(e_2)/x]e_1) + 1$</p>
 <ul>
 <li>$\hbox{Eval}(e)$ evaluates to be the return of expression $e$</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>$[v/x]e$: replace all free (unbound) occurrences of $x$ in $e$ with value $v$ <ul>
 <li>e.g., $[10/x](x^2+10) \rightarrow 110$</li>
 </ul>
 </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>$W([\hbox{Eval}(e_2)/x]e_1)$ is the cost of substituting the output of $e_2$ into all instances of $x$ in $e_1$</li>
 </ul>
 
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We won't get into the weeds of calculating $W([\hbox{Eval}(e_2)/x]e_1)$ in this course.</p>

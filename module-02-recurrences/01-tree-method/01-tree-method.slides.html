@@ -14107,16 +14107,24 @@ div.jp-OutputPrompt {
 <h2 id="Recurrences">Recurrences<a class="anchor-link" href="#Recurrences">&#182;</a></h2><p>Recurrences are a way to capture the behavior of recursive algorithms.</p>
 <p>Key ingredients:</p>
 <ul>
-<li>Base case ($n = c$): constant time </li>
-<li>Inductive case ($n &gt; c$): recurse on smaller instance and use output to compute solution</li>
+<li>Base case ($n = b_c$): constant time </li>
+<li>Inductive case ($n &gt; b_c$): recurse on smaller instance and use output to compute solution</li>
 </ul>
+<blockquote><p>$b_c$ is the size of the base case problems</p>
+</blockquote>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Actually recursion is a conceptual way to view algorithm execution, and we can reframe an algorithm specification to make it recursive.</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Selection-Sort">Selection Sort<a class="anchor-link" href="#Selection-Sort">&#182;</a></h2>
+<h2 id="Selection-Sort">Selection Sort<a class="anchor-link" href="#Selection-Sort">&#182;</a></h2><p>Consider <code>selection_sort</code>:</p>
+
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -14139,7 +14147,13 @@ div.jp-OutputPrompt {
 </div>
 </div>
 
-</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>How can we reframe it recursively?</p>
+
+</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14162,12 +14176,38 @@ div.jp-OutputPrompt {
 </div>
 </div>
 
-</div></section></section><section><section>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What is the running time and why?</p>
 
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">selection_sort_recursive</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;L=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">L</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+        <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">selection_sort_recursive</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14200,8 +14240,11 @@ W(n) &amp;=&amp; \sum_{i=1}^n i  \\
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Why is it true that $\frac{n(n+1)}{2} \in \Theta(n^2)$?</p>
-<p>Quickly, we can see that the highest order term is $n^2$ and so this makes sense. However, we can prove it rigorously.</p>
-<p>We can use the limit theorem or prove it directly from the the asymptotic definition by finding the necessary constants.</p>
+<p>Quickly, we can see that the highest order term is $n^2$ and so this makes sense.</p>
+<blockquote><p>$ \frac{n(n+1)}{2} = \frac{n^2}{2}+\frac{n}{2}$</p>
+</blockquote>
+<p>However, we can prove it rigorously.</p>
+<p>We can either use <strong>the limit theorem</strong> <em>or</em> prove it <strong>directly from the asymptotic definition</strong> by finding the necessary constants.</p>
 <p>For practice, lets do the latter.</p>
 
 </div>
@@ -14210,17 +14253,22 @@ W(n) &amp;=&amp; \sum_{i=1}^n i  \\
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Asymptotic-Proof-that-$%5Cfrac%7Bn(n+1)%7D%7B2%7D-%5Cin-%5CTheta(n%5E2)$">Asymptotic Proof that $\frac{n(n+1)}{2} \in \Theta(n^2)$<a class="anchor-link" href="#Asymptotic-Proof-that-$%5Cfrac%7Bn(n+1)%7D%7B2%7D-%5Cin-%5CTheta(n%5E2)$">&#182;</a></h3><p>By definition:</p>
 <p>$f(n) \in \Theta(g(n))$ if <strong>there exist</strong> positive constants $c_1$, $c_2$, and $n_0$ such that</p>
-<p>$c_1*g(n) \le f(n) \le c_2*g(n)$ <strong>for all</strong> $n \ge n_0$</p>
+<p>$c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)$ <strong>for all</strong> $n \ge n_0$</p>
 <p><br></p>
-<p>Thus we need $c_1$, $c_2$, and $n_0$ s.t.</p>
-$$c_1*n^2 \le \frac{n(n+1)}{2} \le c_2*n^2 \qquad \forall \quad n &gt;= n_0$$
+
 </div>
-</div></section><section>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$c_1*n^2 \le \frac{n(n+1)}{2} \le c_2*n^2 \qquad \forall \quad n &gt;= n_0$$<p>What $c_1$ can we pick to make the left inequality true?</p>
-<p>It helps to rearrange our expression slightly.</p>
-$$c_1*n^2 \le \frac{n^2}{2}+\frac{n}{2} \le c_2*n^2$$
+<p>Thus we need $c_1$, $c_2$, and $n_0$ s.t.</p>
+$$c_1 \cdot n^2 \le \frac{n^2}{2}+\frac{n}{2} \le c_2 \cdot n^2 \qquad \forall \quad n &gt;= n_0$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Left side</strong></p>
+$$c_1 \cdot n^2 \le \frac{n^2}{2}+\frac{n}{2} \le c_2 \cdot n^2 \qquad \forall \quad n &gt;= n_0$$<p>What $c_1$ can we pick to make the left inequality true?</p>
+$$c_1 \cdot n^2 \le \frac{n^2}{2}+\frac{n}{2}$$
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14232,21 +14280,28 @@ $$\frac{n^2}{2} &lt;= \frac{n^2}{2}+\frac{n}{2}$$<p>This is obviously true for a
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Right side</strong></p>
 <p>What about the other side?</p>
-$$\frac{n^2}{2}+\frac{n}{2} \le c_2*n^2$$
+$$\frac{n^2}{2}+\frac{n}{2} \le c_2 \cdot n^2$$<p>What $c_2$ can we choose?</p>
+
 </div>
-</div>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If we let $c_2 = 1$, then</p>
 $$\frac{n^2}{2}+\frac{n}{2} &lt;= n^2$$<p>Is this statement true?</p>
 
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>It must be!</p>
-<p>Lets consider the $\frac{n}{2}$ term. It is definitely less than or equal to $\frac{n^2}{2}$ which if it were that instead would cause equality.</p>
+<p>Yes!</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We have that:</p>
 <p>$\frac{n^2}{2}+\frac{n}{2} &lt;= n^2 \qquad \forall \; n \ge 0$</p>
 <p>Thus $n_0 = 0$.</p>
 
@@ -14254,20 +14309,23 @@ $$\frac{n^2}{2}+\frac{n}{2} &lt;= n^2$$<p>Is this statement true?</p>
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Finally, we have that $c_1*n^2 \le \frac{n(n+1)}{2} \le c_2*n^2$ is true $\forall \; n &gt;= n_0$ with $c_1 = \frac{1}{2}$, $c_2 = 1$, and $n_0 = 0$.</p>
+<p><strong>Putting it all together</strong></p>
+<p>Finally, we have that $ \frac{n^2}{2} \le \frac{n^2}{2}+\frac{n}{2} \le n^2$.</p>
+<p>This is true $\forall \; n &gt;= 0$.</p>
+<p>We have chosen $c_1 = \frac{1}{2}$, $c_2 = 1$, and $n_0 = 0$.</p>
 <p>Since we have found constants to satisfy the asymptotic definition, $\frac{n(n+1)}{2} \in \Theta(n^2) \quad \blacksquare$</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Working-towards-more-general-recurrences">Working towards more general recurrences<a class="anchor-link" href="#Working-towards-more-general-recurrences">&#182;</a></h3><p>The recurrence for Selection Sort is somewhat simple - what if we have multiple recursive calls and split the input? (This is actually what <em>divide-and-conquer</em> algorithms do.)</p>
-<p>We'll look at methods to solve recurrences in order to obtain Big-O bounds for recursive algorithms.</p>
+<h3 id="Working-towards-more-general-recurrences">Working towards more general recurrences<a class="anchor-link" href="#Working-towards-more-general-recurrences">&#182;</a></h3><p>The recurrence for Selection Sort is somewhat simple - what if we have multiple recursive calls and split the input? (like <em>divide-and-conquer</em> algorithms)</p>
+<p>We'll learn methods to solve recurrences for general recursive algorithms.</p>
 <p>We will:</p>
 <ul>
-<li><p>Get intuition for recurrences by looking the recursion tree.</p>
+<li><p>Get intuition for recurrences by analyzing their recursion trees.</p>
 </li>
-<li><p>Develop the <strong>brick</strong> method to quickly state asymptotic bounds on a recurrence by looking at the shape of the tree.</p>
+<li><p>Develop the <strong>brick</strong> method to quickly state asymptotic bounds for many recurrences by looking at the patterns of these trees.</p>
 </li>
 </ul>
 
@@ -14292,7 +14350,7 @@ $$\frac{n^2}{2}+\frac{n}{2} &lt;= n^2$$<p>Is this statement true?</p>
     <span class="n">left</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">lst</span><span class="p">[:</span><span class="n">mid</span><span class="p">])</span>
     <span class="n">right</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">mid</span><span class="p">:])</span>
 
-    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="c1"># implementation omitted</span>
 </pre></div>
 
      </div>
@@ -14303,7 +14361,13 @@ $$\frac{n^2}{2}+\frac{n}{2} &lt;= n^2$$<p>Is this statement true?</p>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Since <code>merge_sort</code> sorts a list by recursively sorting both halves of the list and merging the with $\Theta(n)$ work, the recurrence for the work is:</p>
+<p><code>merge_sort</code> sorts a list by recursively sorting both halves of the list and merging the results with $\Theta(n)$ work.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The recurrence for the work is:</p>
 $$
 \begin{align}
 W(n) = \begin{cases}
@@ -14311,36 +14375,31 @@ W(n) = \begin{cases}
   2W(n/2) + c_1n + c_2, &amp; \text{otherwise} 
   \end{cases}
 \end{align}
-$$<p>How do we solve this recurrence to obtain $W(n) = \Theta(n\log n)$?</p>
+$$<p>How do we solve this recurrence to obtain $W(n) = O(n\log n)$?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>First, we draw the recursion tree for the recurrence.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="figures/mergesort_tree.png" alt="alttext"></p>
-<p>The recursion tree for Merge Sort has linear work at every level.</p>
-<p>There are a logarithmic number of levels, each requiring linear work so the total work of the tree is $\Theta(n\log n)$.</p>
+<h2 id="Drawing-the-Recursion-Tree">Drawing the Recursion Tree<a class="anchor-link" href="#Drawing-the-Recursion-Tree">&#182;</a></h2><p><img src = "figures/mergesort_tree_1.jpeg" width = "100%" class="center"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src = "figures/mergesort_tree_2.jpeg" width = "100%" class="center"></p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Solving-Recurrences-with-the-Tree-Method">Solving Recurrences with the Tree Method<a class="anchor-link" href="#Solving-Recurrences-with-the-Tree-Method">&#182;</a></h2><p><br></p>
-<div>
-
-size at level $i$
-
-</div> <div style="text-align: right"> 
-
-cost at level $i$ 
-
-</div><p><img src="figures/merge-tree.jpg" alt="merge-tree" width="75%"/></p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Recipe:">Recipe:<a class="anchor-link" href="#Recipe:">&#182;</a></h3><ol>
+<h2 id="Solving-Recurrences-with-the-Tree-Method">Solving Recurrences with the Tree Method<a class="anchor-link" href="#Solving-Recurrences-with-the-Tree-Method">&#182;</a></h2><h3 id="Recipe:">Recipe:<a class="anchor-link" href="#Recipe:">&#182;</a></h3><ol>
 <li>Expand tree for two levels.</li>
 <li>Determine the cost of each level $i$ ($i$ starts at $0$).</li>
 <li>Determine the number of levels</li>
@@ -14352,62 +14411,44 @@ cost at level $i$
 <p><br></p>
 
 </div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Solving-the-Summation">Solving the Summation<a class="anchor-link" href="#Solving-the-Summation">&#182;</a></h2>$$W(n) = \sum_{i=0}^{\lg n} (c_1n + 2^i c_2)$$$$= \sum_{i=0}^{\lg n}c_1 n + \sum_{i=0}^{\lg n} 2^i c_2$$
+</div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>E.g., for merge sort:</p>
-<ul>
-<li>level $i$ contains $2^i$ nodes</li>
-<li>each node at level $i$ costs $c_1 \frac{n}{2^i} + c_2$</li>
-<li>so, each level costs $2^i * (c_1 \frac{n}{2^i} + c_2) = c_1n + 2^i c_2$</li>
-<li>since each level reduces size by half, we have $\lg n$ levels</li>
-<li>so, total cost of tree is:</li>
-</ul>
-$$W(n) = \sum_{i=0}^{\lg n} (c_1n + 2^i c_2)$$
+<blockquote><p>To solve this, we'll make use of bounds for <strong>geometric series</strong>.</p>
+<p>For $\alpha &gt; 1$: $\:\:\: \sum_{i=0}^n \alpha^i  &lt; \frac{\alpha}{\alpha - 1}\cdot\alpha^n$</p>
+<p>e.g,</p>
+<p>$\sum_{i=0}^{\lg n} 2^i &lt; \frac{2}{1} * 2^{\lg n} = 2n$</p>
+<p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$</p>
+<p>e.g,</p>
+<p>$\sum_{i=0}^{\lg n} \frac{1}{2^i} &lt; 2$</p>
+</blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br> plugging in...</p>
+$$= \sum_{i=0}^{\lg n} (c_1 n + 2^i c_2)$$$$= \sum_{i=0}^{\lg n}c_1 n + \sum_{i=0}^{\lg n} 2^i c_2$$$$= c_1n \sum_{i=0}^{\lg n} 1 + c_2 \sum_{i=0}^{\lg n} 2^i$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$&lt;c_1n \lg n + 2 c_2 n$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\in O(n \lg n)$$
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$W(n) = \sum_{i=0}^{\lg n} (c_1n + 2^i c_2)$$<blockquote><p>To solve this, we'll make use of bounds for <strong>geometric series</strong>.</p>
-<ul>
-<li><p>For $\alpha &gt; 1$: $\:\:\: \sum_{i=0}^n \alpha^i  &lt; \frac{\alpha}{\alpha - 1}\cdot\alpha^n$
-<br></p>
-<ul>
-<li>e.g., $\sum_{i=0}^{\lg n} 2^i &lt; \frac{2}{1} * 2^{\lg n} = 2n$</li>
-</ul>
-</li>
-</ul>
-<p><br></p>
-<ul>
-<li><p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$
-<br></p>
-<ul>
-<li>e.g., $\sum_{i=0}^{\lg n} \frac{1}{2^i} &lt; 2$</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-
-</div>
-</div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br> plugging in...</p>
-$$= \sum_{i=0}^{\lg n} (c_1 n + 2^i c_2)$$$$= \sum_{i=0}^{\lg n}c_1 n + \sum_{i=0}^{\lg n} 2^i c_2$$$$= c_1n \sum_{i=0}^{\lg n} 1 + c_2 \sum_{i=0}^{\lg n} 2^i$$$$&lt;c_1n \lg n + 2 c_2 n$$$$\in O(n \lg n)$$
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>What about the span?</p>
-<p><br>
-<img src="figures/tree_span.png" width="500">
-<br></p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The recurrence for the span of Mergesort is:</p>
+<h2 id="What-about-the-span?">What about the span?<a class="anchor-link" href="#What-about-the-span?">&#182;</a></h2><p>The recurrence for the span of Mergesort is:</p>
 $$
 \begin{align}
 S(n) = \begin{cases}
@@ -14415,13 +14456,51 @@ S(n) = \begin{cases}
   S(n/2) + c_4 \lg n, &amp; \text{otherwise} 
   \end{cases}
 \end{align}
-$$
+$$<p>Why?</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The branching factor is $1$.</p>
+<p>$S(n) = \pmb{S(n/2)} + c_4 \lg n$</p>
+
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Since each level of the recursion tree is concurrent and all nodes have the same cost, we have that the cost of each level is</p>
-$$\lg\frac{n}{2^i}$$<p>and the cost of the whole tree is:</p>
+<p><img src = "figures/span_in_work_tree.jpeg" width = "100%" class="center"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$S(n) = S(n/2) + \pmb{c_4 \lg n}$</p>
+<p>For span recurrences, this term represents the span of each subproblem.</p>
+<p>A sequential merge algorithm requires $O(n)$ work and span.</p>
+<p>However, there exists a <a href="https://www.mcs.anl.gov/~itf/dbpp/text/node127.html">parallel merge algorithm</a> with:</p>
+<ul>
+<li>$W(n) \in O(n)$</li>
+<li>$S(n) \in O(\lg n)$</li>
+</ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Solving-the-Span-recurrence">Solving the Span recurrence<a class="anchor-link" href="#Solving-the-Span-recurrence">&#182;</a></h3>$$
+\begin{align}
+S(n) = \begin{cases}
+  c_3, &amp; \text{if $n=1$} \\
+  S(n/2) + c_4 \lg n, &amp; \text{otherwise} 
+  \end{cases}
+\end{align}
+$$<p><img src="figures/span_tree.jpeg" width="500"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$ \begin{align}
 S(n) &amp; = &amp; \sum_{i=0}^{\lg n} \lg\frac{n}{2^i}\\
 &amp; = &amp; \sum_{i=0}^{\lg n} (\lg n - i)\\
@@ -14455,7 +14534,13 @@ $$<ul>
 </ul>
 
 </div>
-</div></div></section></section><section><section>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="General-Recurrences">General Recurrences<a class="anchor-link" href="#General-Recurrences">&#182;</a></h2><p><img src="figures/general-recursion-tree.jpeg"></p>
+
+</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="More-Practice">More Practice<a class="anchor-link" href="#More-Practice">&#182;</a></h3><p>Another recurrence:</p>
@@ -14465,77 +14550,71 @@ W(n) = \begin{cases}
   2W(n/2) + n^2, &amp; \text{otherwise} 
   \end{cases}
 $$<p>What is the asymptotic runtime?</p>
-<p><img src="figures/tree.png" alt="tree" width="50%"/></p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$W(n) = 2W(n/2) + c_1n^2 + c_2$$<p><img width="50%" src="figures/n_squared.png"/></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$= \sum_i^{\lg n} (c_1 \frac{n^2}{2^i} + 2^i c_2)$</p>
-<p>$= c_1 n^2 \sum_{i=0}^{\lg n} \frac{1}{2^i} + c_2 \sum_{i=0}^{\lg n} 2^i$</p>
-<p>$= c_1 n^2 \sum_{i=0}^{\lg n} (\frac{1}{2})^i + c_2 \sum_{i=0}^{\lg n} 2^i$</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>To solve this, we can again use <strong>geometric series</strong>.</p>
-<p>&gt;</p>
-<blockquote><ul>
-<li><p>For $\alpha &gt; 1$: $\:\:\: \sum_{i=0}^n \alpha^i  &lt; \frac{\alpha}{\alpha - 1}\cdot\alpha^n$
-<br></p>
-<ul>
-<li>e.g., $\sum_{i=0}^{\lg n} 2^i &lt; \frac{2}{1} * 2^{\lg n} = 2n$</li>
-</ul>
-</li>
-</ul>
-<p><br></p>
-<ul>
-<li><p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$
-<br></p>
-<ul>
-<li>e.g., $\sum_{i=0}^{\lg n} \frac{1}{2^i} &lt; 2$</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$&lt; 2 c_1 n^2 + 2 c_2 n$</p>
-<p>$\in O(n^2)$</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So what if branching factor is not 2?</p>
-$$W(n) = 4 W \Big(\frac{n}{2}\Big) + O(n)$$<p><strong>costs</strong></p>
-<ul>
-<li>level 0: $c_1n + c_2$</li>
-<li>level 1: $4(c_1 \frac{n}{2} + c_2)$</li>
-<li>level 2: $16(c_1 \frac{n}{4} + c_2)$</li>
-<li>level $i$ ?</li>
-</ul>
+$$W(n) = 2W(n/2) + n^2$$<p><img width="110%" src="figures/quadratic-recurrence.jpeg"/></p>
 
 </div>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$4^i(c_1 \frac{n}{2^i} + c_2)$$<p><br></p>
+<p>$W(n) = \sum_i^{\lg n} (\frac{n^2}{2^i})$</p>
+<p>$= n^2 \sum_{i=0}^{\lg n} \frac{1}{2^i}$</p>
+<p>$= c_1 n^2 \sum_{i=0}^{\lg n} (\frac{1}{2})^i$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>To solve this, we can again use <strong>geometric series</strong>.</p>
+<p>&gt;</p>
+<blockquote><p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$</p>
+<p>e.g., $\sum_{i=0}^{\lg n} \frac{1}{2^i} &lt; 2$</p>
+</blockquote>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$&lt; 2 n^2$</p>
+<p>$\in O(n^2)$</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So what if branching factor is not 2?</p>
+<p><img width="110%" src="figures/quadratic-recurrence_2.jpeg"/></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$W(n) = \sum_{i=0}^{\lg n} n^2$$<p><br></p>
 <p>still $\lg n$ levels. Why?</p>
 <p>Because at every level we are dividing the problem size in half, so we still need $\log_2 n$ levels.</p>
-<p>so $W(n)$ is:</p>
-<p><br></p>
-$$= c_1n \sum_{i=0}^{\lg n} \Big(\frac{4}{2}\Big)^i + c_2 \sum_{i=0}^{\lg n} 4^i$$$$&lt; 2 c_1 n^2 + \frac{4}{3} c_2 4^{\lg n}$$$$(\hbox{since} \:\:\ \sum_{i=0}^n \alpha^i  &lt; \frac{\alpha}{\alpha - 1}\cdot\alpha^n)$$$$= 2 c_1 n^2 + \frac{4}{3} c_2 2^{\lg n} 2^{\lg n}$$$$= 2 c_1 n^2 + \frac{4}{3} c_2 n^2$$$$\in O(n^2)$$
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>If we were dividing the problem size in thirds, we would need $\log_3 n$ levels</p>
+</blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$W(n) = \sum_{i=0}^{\lg n} n^2$$$$W(n) = n^2 \sum_{i=0}^{\lg n} 1$$$$W(n) = n^2 \lg n$$$$W(n) \in \Theta(n^2 \lg n)$$
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Coming-up">Coming up<a class="anchor-link" href="#Coming-up">&#182;</a></h2><p>We will general our <strong>recurrence</strong> solving strategies by noting common patterns in our recursion trees.</p>
+
 </div>
 </div></section></section>
 </div>

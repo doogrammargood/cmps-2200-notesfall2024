@@ -14419,17 +14419,22 @@ $$<p>How do we solve this recurrence to obtain $W(n) = O(n\log n)$?</p>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>To solve this, we'll make use of bounds for <strong>geometric series</strong>.</p>
+$$= c_1n \sum_{i=0}^{\lg n} 1 + c_2 \sum_{i=0}^{\lg n} 2^i$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>To solve this, we'll make use of bounds for <strong>geometric series</strong>.</p>
 <p>For $\alpha &gt; 1$: $\:\:\: \sum_{i=0}^n \alpha^i  &lt; \frac{\alpha}{\alpha - 1}\cdot\alpha^n$</p>
 <p>e.g,</p>
 <p>$\sum_{i=0}^{\lg n} 2^i &lt; \frac{2}{1} * 2^{\lg n} = 2n$</p>
+<p><br></p>
 <p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$</p>
 <p>e.g,</p>
 <p>$\sum_{i=0}^{\lg n} \frac{1}{2^i} &lt; 2$</p>
-</blockquote>
 
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br> plugging in...</p>
@@ -14570,10 +14575,8 @@ $$W(n) = 2W(n/2) + n^2$$<p><img width="110%" src="figures/quadratic-recurrence.j
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>To solve this, we can again use <strong>geometric series</strong>.</p>
-<p>&gt;</p>
-<blockquote><p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$</p>
+<p>For $\alpha &lt; 1$: $\:\:\: \sum_{i=0}^\infty \alpha^i  &lt; \frac{1}{1-\alpha}$</p>
 <p>e.g., $\sum_{i=0}^{\lg n} \frac{1}{2^i} &lt; 2$</p>
-</blockquote>
 
 </div>
 </div></div><div class="fragment">

@@ -14157,22 +14157,32 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 <h2 id="The-Brick-Method">The Brick Method<a class="anchor-link" href="#The-Brick-Method">&#182;</a></h2><p>The tree method is tedious, but it works. Often, we can exploit patterns to perform our analysis more quickly.</p>
 <p><strong>Brick method:</strong></p>
 <ul>
-<li><strong>Root dominated</strong>: cost <em>decreases</em> geometrically as we descend the tree<ul>
-<li>$ W(n) \in O(\hbox{root}) $</li>
+<li><strong>Root dominated</strong>: cost <em>decreases</em> geometrically as we descend the tree
+$$W(n) \in O(\hbox{root})$$<ul>
 <li>e.g., $W(n) = 2 W(\frac{n}{2}) + n^2$</li>
 </ul>
 </li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><strong>Leaf dominated</strong>: cost <em>increases</em> geometrically as we descend the tree<ul>
-<li>$W(n) \in O(\hbox{leaves})$</li>
+<li><strong>Leaf dominated</strong>: cost <em>increases</em> geometrically as we descend the tree
+$$W(n) \in O(\hbox{leaves})$$<ul>
 <li>e.g., $W(n) = 2 W(\frac{n}{2}) + \sqrt{n}$</li>
 </ul>
 </li>
 </ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><strong>Balanced</strong>: neither of the above is true<ul>
-<li>$ W(n) \in O((\hbox{num levels}) * (\hbox{max cost at any level})) $</li>
+<li><strong>Balanced</strong>: neither of the above is true
+$$W(n) \in O((\hbox{num levels}) \cdot (\hbox{max cost at any level}))$$<ul>
 <li>e.g., $W(n) = W(n-1) + n \in O(n^2)$</li>
 <li>e.g., $W(n) = 2 W(\frac{n}{2}) + n \in O(n \lg n)$</li>
 </ul>
@@ -14180,12 +14190,12 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 </ul>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Integer-multiplication">Integer multiplication<a class="anchor-link" href="#Integer-multiplication">&#182;</a></h3><p>With our powerful ideas of divide &amp; conquer, recurrences, and our techniques for solving recurrences, let's see how we can put them to use to make algorithmic headway on a problem where it seems there is no headway to be made!</p>
 <p><strong>Multiplication!</strong></p>
-<p>You learned this algorithm in elementary school for integer multiplication:</p>
+<p>Here is an elementary school algorithm for integer multiplication:</p>
 <ul>
 <li><p>Input: $n$ bit integers $x= \langle x_{n-1}, \ldots, x_0\rangle$ and $y = \langle y_{n-1}, \ldots, y_0\rangle$</p>
 </li>
@@ -14196,25 +14206,10 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 </ul>
 
 </div>
-</div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-
-<pre><code>       1001   
-     x 1101   
-     ======
-       1001   
-      0000    
-     1001     
-  + 1001      
-  =========
-    1110101   (117)</code></pre>
-
-</div>
 </div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">int2binary</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -14235,7 +14230,7 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -14253,13 +14248,15 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nine</span> <span class="o">=</span> <span class="n">int2binary</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">nine</span><span class="p">)</span>
 <span class="n">thirteen</span> <span class="o">=</span> <span class="n">int2binary</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">thirteen</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">thirteen</span><span class="p">)</span>
+
+<span class="mi">9</span><span class="o">*</span><span class="mi">13</span>
 </pre></div>
 
      </div>
@@ -14285,11 +14282,40 @@ $$\sum_{i=0}^{\log n} C(i)$$<p>We solve the summation through simplification and
 </div>
 </div>
 
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>117</pre>
 </div>
 
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div>
+
+</div>
+
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+
+<pre><code>       1001   
+     x 1101   
+     ======
+       1001   
+      0000    
+     1001     
+  + 1001      
+  =========
+    1110101</code></pre>
+
+</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
@@ -14361,16 +14387,27 @@ $</p>
 <p><br></p>
 
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Wait...Is multiplying by $2^{n/2}$ efficient?</strong></p>
-
-</div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Recall: $2^2 [10] \rightarrow [1000] \:\:$ (shift two places to the left).</p>
+<p><strong>What is does multiplying by $2^{n/2}$ do, and is it efficient?</strong></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$2^2 [11] \rightarrow [1100] \:\:$ (shift two places to the left).</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Multiplication the long way</strong></p>
+<p>$\begin{align} 
+x &amp;=&amp; 2^{n/2} x_L + x_R \:\:\:\:\:\: \hbox{e.g.} \: 1001:  2^2 (10) + (01)\\
+y &amp;=&amp; 2^{n/2} y_L + y_R \:\:\:\:\:\: \hbox{e.g.} \: 1101:  2^2 (11) + (01)\\
+\end{align}
+$</p>
 <p><br></p>
 <p>So then,</p>
 <p>$\begin{align}
@@ -14383,10 +14420,10 @@ $</p>
 <p>What recursive algorithm, and recurrence is suggested by this observation?</p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>$W(n) = 4W(n/2) + cn$</p>
+<blockquote><p>$W(n) = 4W(n/2) + n$</p>
 </blockquote>
 <p>What is the solution to this recurrence using the brick method? Is it root-dominated, or leaf-dominated?</p>
 
@@ -14394,7 +14431,13 @@ $</p>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="work-of-recursive-multiplication">work of recursive multiplication<a class="anchor-link" href="#work-of-recursive-multiplication">&#182;</a></h3><p>$C(\hbox{root}) = n$</p>
+<h3 id="Work-of-recursive-multiplication">Work of recursive multiplication<a class="anchor-link" href="#Work-of-recursive-multiplication">&#182;</a></h3><p><img width="110%" src="figures/recurrence-1.jpeg"/></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$C(\hbox{root}) = n$</p>
 <p>$C(\hbox{level}\:1) = 4(\frac{n}{2})= 2 \cdot n$</p>
 <p>geometrically <strong>increasing</strong> as we descend the recurrence tree.</p>
 <p>A recurrence is <strong>leaf-dominated</strong> if for all $v$, there is an $\alpha &gt; 1$ such that:</p>
@@ -14402,35 +14445,50 @@ $$C(v) \leq \frac{1}{\alpha} \sum_{u \in D(v)} C(u)$$<p>let $\alpha \leftarrow 2
 <p>$n \le \frac{1}{2}\cdot 2 \cdot n$</p>
 
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>$W(n) = 4W(n/2) + cn$</p>
+<h3 id="how-many-leaf-nodes-are-there?">how many leaf nodes are there?<a class="anchor-link" href="#how-many-leaf-nodes-are-there?">&#182;</a></h3><blockquote><p>$W(n) = 4W(n/2) + n$</p>
 </blockquote>
 <p>The cost of a leaf dominated recurrence is $O(L)$, where $L$ is the number of leaves.</p>
-<h3 id="how-many-leaf-nodes-are-there?">how many leaf nodes are there?<a class="anchor-link" href="#how-many-leaf-nodes-are-there?">&#182;</a></h3><p><br></p>
-<p>nodes per level: $1, 4, 64, \ldots 4^i \ldots 4^{\lg n}=(2\cdot2)^{\lg n}=n\cdot n = n^2$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>nodes per level: $1, 4, 64, \ldots 4^i \ldots 4^{\lg n} = n^{\lg 4} = n^2$</p>
 <blockquote><p>This is a leaf-dominated reucrrence that is $O(n^2)$ -- the same as the elementary school algorithm!</p>
 </blockquote>
 <p>Now, what is the span of this algorithm if implemented in parallel?</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="span-of-recursive-multiplication">span of recursive multiplication<a class="anchor-link" href="#span-of-recursive-multiplication">&#182;</a></h3><p>Assuming each multiplication can be done in parallel, and that addition has span $O(n)$, we get that</p>
-$$S(n) = S(n/2) + cn$$<p></p>
+<h3 id="Span-of-recursive-multiplication">Span of recursive multiplication<a class="anchor-link" href="#Span-of-recursive-multiplication">&#182;</a></h3><p>Assuming each multiplication can be done in parallel, and that addition has span $O(n)$, we get that</p>
+$$S(n) = S(n/2) + n$$<p></p>
 <p>which yields a span of ...</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p><strong>brick method</strong></p>
 <p>$S(\hbox{root})=n$</p>
 <p>$S(\hbox{level 1}) = \frac{n}{2}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$\rightarrow$ <strong>root dominated</strong></p>
 <p>$S(n) \in O(n)$. This is much better than the span of the grade school algorithm, which is $O(n^2)$!</p>
 <p><br></p>
 
 </div>
-</div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>What parallelism is achieved?</strong></p>
@@ -14442,36 +14500,44 @@ $$S(n) = S(n/2) + cn$$<p></p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="recursive-multiplication-with-less-work">recursive multiplication with less work<a class="anchor-link" href="#recursive-multiplication-with-less-work">&#182;</a></h3><p>Recall that</p>
+<h3 id="Recursive-multiplication-with-less-work">Recursive multiplication with less work<a class="anchor-link" href="#Recursive-multiplication-with-less-work">&#182;</a></h3><p>Recall that</p>
 <p>$\begin{align}
 x\cdot y &amp;=&amp; (2^{n/2} x_L + x_R)(2^{n/2} y_L + y_R) \\
  &amp;=&amp; 2^n (x_L \cdot y_L) + 2^{n/2} (x_L \cdot y_R + x_R \cdot y_L) + (x_R \cdot y_R) \\
 \end{align}
 $</p>
-<p><br></p>
-<p>Can we reduce this from 4 multiplications to 3??</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Observation:</p>
-<p>$\begin{align} 
-(x_L + x_R)\cdot (y_L + y_R) &amp;=&amp; (x_L\cdot y_L) + (x_L\cdot y_R) + (x_R\cdot y_L) + (x_R\cdot y_R)\\
-\end{align}
-$</p>
-<p>$\begin{align}
-(x_L\cdot y_R) + (x_R\cdot y_L) = (x_L + x_R)\cdot (y_L + y_R) - (x_L\cdot y_L) - (x_R\cdot y_R)\\
-\end{align}$</p>
-<p>How does our observation help us?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Observation:</p>
+<p>$\begin{align} 
+(x_L + x_R)\cdot (y_L + y_R) &amp;=&amp; (x_L\cdot y_L) + \pmb{(x_L\cdot y_R) + (x_R\cdot y_L)} + (x_R\cdot y_R)\\
+\end{align}
+$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+\pmb{(x_L\cdot y_R) + (x_R\cdot y_L)} = (x_L + x_R)\cdot (y_L + y_R) - (x_L\cdot y_L) - (x_R\cdot y_R)\\
+\end{align}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>How does our observation help us?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>If we calculate $(x_L\cdot y_L)$, $(x_R\cdot y_R)$, and $(x_L + x_R)\cdot (y_L + y_R)$, that is <em>three</em> recursive multiplications.</p>
-<p>So with 3 recursive multiplications and two more "additions", we then get that $W(n) = 3W(n/2) + dn$. What is the running time?</p>
+<p>So with 3 recursive multiplications and two more "additions", we then get that $W(n) = 3W(n/2) + n$. What is the running time?</p>
 
 </div>
 </div></div></section></section><section><section>

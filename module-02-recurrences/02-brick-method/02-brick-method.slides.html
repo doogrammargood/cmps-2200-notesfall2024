@@ -14104,31 +14104,71 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Recurrences can be more general, so how do we get a handle on asymptotic runtimes when the recursion is really complicated?</p>
-<p><strong>Key Idea:</strong> The branching properties of the recursion tree determine work at each level and the number of leaves.</p>
-<p>The <strong>brick method</strong> gives a way to derive asymptotic runtimes by looking at the relationships between parent and child nodes in the recursion tree. This way we only need to worry about the costs of the root and the leaves.</p>
+<h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2><p>Recurrences allow us to express the runtime of any algorithm.</p>
+$$T(n) = a \cdot T(\frac{n}{b}) + f(n)$$<ul>
+<li>$a$ is the branching factor.</li>
+<li>$\frac{n}{b}$ gives us the sub-problem size at the next level.</li>
+<li>$f(n)$ is the cost of the work (or span) within each recursive call.</li>
+</ul>
 
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Key Idea:</strong> Recurrences can be drawn as recursion trees. The total cost of a recurrence is the sum of the costs over the entire tree.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Example</strong></p>
+<p><img width="110%" src="figures/quadratic-recurrence.jpeg"/></p>
+$$W(n) \in O(n^2)$$
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>In the tree method, if the costs grow or decay geometrically across levels, then we need only consider the cost of the root (<strong>decay</strong>), or the total cost of the leaves (<strong>growth</strong>).</p>
-<p>If there is no geometric growth or decay then we can calculate the cost of the worst level (often either the root or leaves) and multiply it by the number of levels.</p>
+<h2 id="Generalizing-Recurrence-Solutions">Generalizing Recurrence Solutions<a class="anchor-link" href="#Generalizing-Recurrence-Solutions">&#182;</a></h2><p>There are often patterns in the costs down the levels of a tree.</p>
+<p>We will examine and use these patterns to our benefit.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The <strong>brick method</strong> gives a way to derive asymptotic runtimes by looking at the relationships between parent and child nodes in the recursion tree.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="The-Brick-Method">The Brick Method<a class="anchor-link" href="#The-Brick-Method">&#182;</a></h2><blockquote><p>In recursion trees, if the costs grow or decay geometrically across levels, then we need only consider the cost of the root (if they <strong>decay</strong>), or the total cost of the leaves (if they <strong>grow</strong>).</p>
+<p>If there is no growth or decay then we can calculate the cost of the worst level (often either the root or leaves) and multiply it by the number of levels.</p>
 </blockquote>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This leads to three cases:</p>
 <ol>
 <li><strong>root dominated</strong></li>
 <li><strong>leaf dominated</strong></li>
 <li><strong>balanced</strong></li>
 </ol>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p>Conveniently, to distinguish these three cases we need only consider the cost of each node in the tree and how it relates to the cost of its children.</p>
 </blockquote>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The value of $n$ decreases geometrically as we collect the terms in our recurrences. We'll make use of bounds for geometric series. For any $\alpha &gt; 1$:</p>
+<h2 id="Geometric-Series-Recap">Geometric Series Recap<a class="anchor-link" href="#Geometric-Series-Recap">&#182;</a></h2><p>The value of $n$ decreases geometrically as we collect the terms in our recurrences. We'll make use of bounds for geometric series.</p>
+<p>For any $\alpha &gt; 1$:</p>
 $$ \sum_{i=0}^n \alpha^i  \lt \frac{\alpha}{\alpha - 1}\cdot\alpha^n$$<p>For $\alpha &lt; 1$:</p>
 $$ \sum_{i=0}^\infty \alpha^i  \lt \frac{1}{1-\alpha}$$
 </div>
@@ -14137,8 +14177,22 @@ $$ \sum_{i=0}^\infty \alpha^i  \lt \frac{1}{1-\alpha}$$
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Root-dominated">Root-dominated<a class="anchor-link" href="#Root-dominated">&#182;</a></h3><p>For a node $v$ in the recursion tree, let $C(v)$ denote its cost and $D(v)$ denote its children.</p>
 <p>A recurrence is <strong>root-dominated</strong> if for all $v$, there is an $\alpha &gt; 1$ such that:</p>
-$$C(v) \geq \alpha \sum_{u \in D(v)} C(u)$$<p>The cost of a root dominated recurrence is $O(C(r))$ if $r$ is the root.</p>
+$$C(v) \geq \alpha \sum_{u \in D(v)} C(u)$$<p>The cost of node $C(v)$ is larger than the cost of its children by a geometric factor.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>The cost of a root dominated recurrence is $O(C(r))$ if $r$ is the root.</p>
 <p>This is because the cost reduces geometrically as we go toward the leaves, and the total cost bounded by $\alpha/(\alpha-1)$ times $C(r)$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Example</strong></p>
+<p><img width="110%" src="figures/quadratic-recurrence.jpeg"/></p>
 
 </div>
 </div></section><section>
@@ -14148,21 +14202,39 @@ $$W(n) = 2 W\Big(\frac{n}{2}\Big) + n^2$$<p>$C(\hbox{root}) = n^2$</p>
 <p>$C(\hbox{level}\:1) = \Big(\frac{n}{2}\Big)^2 + \Big(\frac{n}{2}\Big)^2 = \frac{n^2}{2}$</p>
 <p><br></p>
 <p>Cost has <strong>decreased</strong> by a factor of two when descending one level in the tree.</p>
-<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>so, if $\alpha \leftarrow 2$:</p>
 <p>$C(v) \ge \alpha \sum_{u \in D(v)} C(u)$</p>
 <p>$n^2 \ge 2 * \frac{n^2}{2}$</p>
 <p>$n^2 \ge n^2$</p>
 <p><br></p>
-<p>Because the cost is asymptotically dominated by the <strong>root</strong>, we need to only consider its cost: $O(n^2)$.</p>
+<p>Because the cost is asymptotically dominated by the <strong>root</strong>, we need to only consider its cost:</p>
+<p>$W(n) \in O(n^2)$.</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Leaf-dominated">Leaf-dominated<a class="anchor-link" href="#Leaf-dominated">&#182;</a></h3><p>A recurrence is <strong>leaf-dominated</strong> if for all $v$, there is an $\alpha &gt; 1$ such that:</p>
-$$C(v) \leq \frac{1}{\alpha} \sum_{u \in D(v)} C(u)$$<p>If we have $L$ leaves in the recursion tree, the cost of a leaf dominated recurrence is $O(L)$.</p>
-<p>This is because the cost increases geometrically as we go toward the leaves, and the total cost is bounded by $\alpha/(\alpha-1)$ times $c_b \cdot L$.</p>
+$$C(v) \leq \frac{1}{\alpha} \sum_{u \in D(v)} C(u)$$<p>The cost of node $C(v)$ is smaller by a geometric factor than the cost of its children.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In other words, the cost is increasing geometrically as we go toward the leaves, and the total cost is bounded by $\alpha/(\alpha-1)$ times $c_b \cdot L$.</p>
+<p>If we have $L$ leaves in the recursion tree, the cost of a leaf dominated recurrence is $O(L)$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Example</strong></p>
+<p><img width="110%" src="figures/leaf-dom.jpeg"/></p>
 
 </div>
 </div></section><section>
@@ -14172,28 +14244,42 @@ $$W(n) = 2W\Big(\frac{n}{2}\Big) + \sqrt{n}$$<p>$C(\hbox{root}) = \sqrt{n}$</p>
 <p>$C(\hbox{level}\:1) = \sqrt{\Big(\frac{n}{2}\Big)} + \sqrt{\Big(\frac{n}{2}\Big)} = 2 \frac{\sqrt{n}}{\sqrt{2}} = \sqrt{2}\sqrt{n}$</p>
 <p><br></p>
 <p>Cost has <strong>increased</strong> by a factor of $\sqrt{2}$ when descending one level in the tree.</p>
-<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>so, if $\alpha \leftarrow \frac{1}{\sqrt{2}}$:</p>
 <p>$C(v) \le \frac{1}{\alpha} \sum_{u \in D(v)} C(u)$</p>
 <p>$\sqrt{n} \le \frac{1}{\sqrt{2}} * \sqrt{2}\sqrt{n}$</p>
 <p>$\sqrt{n} \le \sqrt{n}$</p>
 <p><br></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Because the cost is asymptotically dominated by the <strong>leaves</strong> (i.e., lowest level of the tree), we need to only consider their cost:</p>
-<p><br></p>
 <ul>
 <li>Cost of each leaf is 1 (since $\sqrt{1}==1$).</li>
 <li>Depth of tree is $\lg{n}$ (since we divide by 2 at each level)</li>
 <li>Number of leaves of a binary tree with depth $\lg{n}$ is $2^{\lg{n}} = n$</li>
 </ul>
-<p><br></p>
-<p>So, final cost is $n*1 = O(n)$</p>
+<p>So, final cost is $W(n) \in O(n)$</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Balanced">Balanced<a class="anchor-link" href="#Balanced">&#182;</a></h3><p>A recurrence is <strong>balanced</strong> when every level of the recursion tree has the same asymptotic cost. In this case, the recurrence is
-<em>number of levels</em> ($\log n$) times <em>maximum cost per level</em> ($C_L$).</p>
+<em>number of levels</em> ($T_d$ "tree depth") times <em>maximum cost per level</em> ($C_L$).</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Example</strong></p>
+<p><img width="110%" src="figures/balanced.jpeg"/></p>
 
 </div>
 </div></section><section>
@@ -14215,9 +14301,8 @@ $$W(n) = 2 W\Big(\frac{n}{2}\Big) + n$$<p>$C(\hbox{root}) = n$</p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's look at some examples:</p>
-$$ W(n) = 2 W(n/2) + \sqrt{n} $$$$ W(n) = 3 W(n/2) + n $$$$ W(n) = 2 W(n/3) + n $$$$ W(n) = 3 W(n/3) + n $$<p>Do you see a way to count the number of leaves in the recursion tree?</p>
-
+<h2 id="Practice">Practice<a class="anchor-link" href="#Practice">&#182;</a></h2><p>Let's look at some examples:</p>
+$$ W(n) = 2 W(n/2) + \sqrt{n} $$$$ W(n) = 3 W(n/2) + n $$$$ W(n) = 2 W(n/3) + n $$$$ W(n) = 3 W(n/3) + n $$
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">

@@ -14118,7 +14118,7 @@ div.jp-OutputPrompt {
 </blockquote>
 <p>distinguished from a <strong>data structure,</strong> which contains the actual implementations.</p>
 <p>ADT: what<br>
-data structure: how</p>
+Data Structure: how</p>
 <p>ADT often also includes <strong>cost specification</strong> (e.g., value lookup is $O(1)$, search is $O(n)$, etc).</p>
 
 </div>
@@ -14202,15 +14202,25 @@ data structure: how</p>
 <p>$ X = \{(0, $ '$a$'$), (1, $ '$b$'$), (2, $ '$c$'$)\} \equiv \langle $'$a$'$, \: $'$b$'$, \: $'$c$'$\rangle$</p>
 <p>$ Y = \{(1, $ '$b$'$), (2, $ '$c$'$), (0, $ '$a$'$)\} \equiv \langle $'$a$'$, \: $'$b$'$, \: $'$c$'$\rangle$</p>
 <p><br></p>
-<p>but $Z$ is not a sequence. why not?</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$Z$ is not a sequence. why not?</p>
 <p>$ Z = \{(0, $ '$a$'$), (2, $ '$c$'$)\} $</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>with domain $\{0, \ldots, n-1\}$</p>
+<blockquote><p>does not have domain $\{0, \ldots, n-1\}$</p>
 </blockquote>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br><br><br></p>
 <p>Next, we'll define a number of functions over sequences and use them to solve problems.</p>
 <p>For each, we'll show the mathematical definition, SPARC syntax, and python code.</p>
@@ -14227,7 +14237,11 @@ data structure: how</p>
 <p>and returns a sequence of length $n$ by applying $f$ to each element in $\langle 0, \ldots, n-1 \rangle$</p>
 <p><strong>formal definition</strong>:<br>
 $tabulate \: (f : \: \mathbb{N} \rightarrow \alpha)\: (n :\: \mathbb{N}) : \: \mathbb{S}_\alpha = \langle f(0), f(1), \ldots, f(n-1) \rangle$</p>
-<p><br></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>SPARC syntax</strong>:</p>
 <p>$tabulate \: (\mathtt{lambda} \: i \: . \: e)\: e_n \equiv \langle e : \: 0 \le i &lt; e_n \rangle $</p>
 <ul>
@@ -14239,6 +14253,7 @@ $tabulate \: (f : \: \mathbb{N} \rightarrow \alpha)\: (n :\: \mathbb{N}) : \: \m
 <p><br></p>
 <p>e.g.</p>
 <p>$tabulate \: fib \:\: 9 \equiv \langle fib \: i : \: 0 \le i &lt; 9 \rangle \Rightarrow \langle 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 \rangle$</p>
+<p><br></p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14348,12 +14363,17 @@ $tabulate \: (f : \: \mathbb{N} \rightarrow \alpha)\: (n :\: \mathbb{N}) : \: \m
 <p>and returns a sequence of type $\mathbb{S}_\beta$ with length $n$ by applying $f$ to each element $x \in a$</p>
 <p><strong>formal definition</strong>:</p>
 <p>$ map \: (f : \alpha \rightarrow \beta)(a : \mathbb{S}_\alpha) : \mathbb{S}_\beta = \{(i, f(x)) : (i, x) \in a\}$</p>
-<p><br></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>SPARC syntax</strong>:</p>
 <p>$\langle e : p \in e_s \rangle \equiv map\:(\mathtt{lambda} \: p \: . \: e)\: e_s$</p>
 <p><br></p>
 <p>e.g., assume $a = \langle 2, 4, 5, 7\rangle$</p>
 <p>$map\: (\mathtt{lambda} \: x \: . \: x^2)\: a \equiv \langle x^2 : x \ \in a \rangle \Rightarrow \langle  4, 16, 25, 49 \rangle$</p>
+<p><br></p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14447,12 +14467,17 @@ $tabulate \: (f : \: \mathbb{N} \rightarrow \alpha)\: (n :\: \mathbb{N}) : \: \m
 <p><strong>formal definition</strong>:<br>
 (convoluted because we have to preserve the relative order of the elements)</p>
 <p>$ filter \: (f : \alpha \rightarrow \mathbb{B})(a : \mathbb{S}_\alpha) : \mathbb{S}_\alpha = \{\: (\: \vert \: \{(j,y) \in a | j &lt; i \land f(y)\} \: \vert, \: x) : (i,x) \in a | f(x) \: \}$</p>
-<p><br></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>SPARC syntax</strong>:</p>
 <p>$\langle x \in e_s \: \vert \: e \rangle \equiv filter\:(\mathtt{lambda}\: x \: . \: e)\: e_s$</p>
 <p><br></p>
 <p>e.g., assume $a = \langle 2, 4, 5, 7\rangle$</p>
 <p>$filter\: \mathtt{isEven} \: a \equiv \langle x : x \in a \: \vert \: \mathtt{isEven}\: x \rangle \Rightarrow \langle  2, 4\rangle$</p>
+<p><br></p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14589,7 +14614,7 @@ $</p>
 <p>$\mathit{cmp}$ is a comparison operator over the keys of the tuples. The collected sequence is sorted in order by the keys. The values appear in the same order as they did in the input sequence.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14613,6 +14638,13 @@ $</p>
 </div>
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Note that collect depends on <code>sorted</code>, a $\Theta(n \lg n)$ operation.</p>
+
+</div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14621,21 +14653,41 @@ $</p>
 <li>subsequence starting at location $i$ with length $j$</li>
 <li>e.g., $subseq(\langle 1,2,3,4,5,6 \rangle, 2, 3) \Rightarrow \langle 3, 4, 5 \rangle$</li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Append">Append<a class="anchor-link" href="#Append">&#182;</a></h3><ul>
 <li>$append(a,b)$ appends sequence $b$ after sequence $a$</li>
 <li>shorthand: $a +\!\!+ \: b$</li>
 <li>e.g., $\langle 1,2,3 \rangle +\!\!+ \: \langle 4, 5 \rangle \Rightarrow \langle 1,2,3,4,5 \rangle $</li>
 </ul>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Flatten">Flatten<a class="anchor-link" href="#Flatten">&#182;</a></h3><ul>
 <li>append two or more sequences.</li>
 <li>$flatten \langle \langle 1,2,3 \rangle, \langle 4 \rangle, \langle 5, 6 \rangle \rangle \Rightarrow \langle 1,2,3,4,5,6 \rangle$</li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Update">Update<a class="anchor-link" href="#Update">&#182;</a></h3><ul>
 <li>$update (a, (i, x))$ updates location $i$ of sequence $a$ to have value $x$</li>
 <li>e.g., $a = \langle 1,2,3,4,5,6 \rangle$</li>
 <li>$update \: a \: (2, 99) \Rightarrow \langle 1,2,\mathbf{99},4,5,6 \rangle$</li>
 <li>How can we ensure data persistence here?</li>
 </ul>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Inject">Inject<a class="anchor-link" href="#Inject">&#182;</a></h3><ul>
 <li>update multiple locations at once</li>
 <li>e.g., $a = \langle 1,2,3,4,5,6 \rangle$</li>
@@ -14659,15 +14711,18 @@ $a = \langle 1,2,3,4,5,6 \rangle$</p>
 <p>$\langle 1,2,\mathbf{99},4,5,6 \rangle$  <strong>OR</strong>
 $\langle 1,2,\mathbf{100},4,5,6 \rangle$</p>
 <p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>essentially ignore race conditions</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Iterate">Iterate<a class="anchor-link" href="#Iterate">&#182;</a></h2><ul>
-<li>Iterate over a sequence and accumulate a result that changes at each step (e.g., "running sum")</li>
-</ul>
+<h2 id="Iterate">Iterate<a class="anchor-link" href="#Iterate">&#182;</a></h2><p>Iterate over a sequence and accumulate a result that changes at each step (e.g., "running sum")</p>
 <p>$iterate \ (f : \alpha \times \beta \rightarrow \alpha) (x : \alpha) (a : \mathbb{S}_\beta) : \alpha$</p>
 <p>$iterate$ is a function that takes as input:</p>
 <ul>
@@ -14683,6 +14738,11 @@ x &amp; \hbox{if} \: |a| = 0\\
 iterate \: f \:\: f(x, a[0]) \:\:\: a[1 \ldots |a|-1]&amp; \hbox{otherwise}
 \end{cases}
 $</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>e.g.</p>
 <p>$iterate \:\: + \:\:\: 0 \:\:\: \langle 2,5,1,6 \rangle \Rightarrow (((2+5)+1)+6) \Rightarrow 14$</p>
 <p><br></p>
@@ -14796,14 +14856,14 @@ iterate: calling plus x=[1, 2, 3, 4, 5, 6] a=[]
 $</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iterate: calling </span><span class="si">%s</span><span class="s1"> x=</span><span class="si">%s</span><span class="s1"> a=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+    <span class="c1">#print(&#39;iterate: calling %s x=%s a=%s&#39; % (f.__name__, x, a))</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span>
     <span class="k">else</span><span class="p">:</span>
@@ -14812,19 +14872,40 @@ $</p>
 <span class="k">def</span> <span class="nf">iterate_prefixes</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">next_element</span><span class="p">):</span>
         <span class="n">prefixes</span><span class="p">,</span> <span class="n">current_result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">iterate_prefixes: prefixes=</span><span class="si">%s</span><span class="s1"> current_result=</span><span class="si">%s</span><span class="s1"> next_element=</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">next_element</span><span class="p">))</span>
+        <span class="c1">#print(&#39;\titerate_prefixes: prefixes=%s current_result=%s next_element=%s\n&#39; % (prefixes, current_result, next_element))</span>
         <span class="c1"># get next result</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">current_result</span><span class="p">,</span> <span class="n">next_element</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">prefixes</span> <span class="o">+</span> <span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">r</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">([],</span> <span class="n">x</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>    
 
 
-<span class="n">iterate_prefixes</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iterate_prefixes</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">]))</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>([2, 6, 30, 210, 2310, 30030, 510510, 9699690], 9699690)
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -14838,10 +14919,10 @@ $</p>
 <p>Let's design a solution using $iterate$</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -14863,8 +14944,20 @@ $</p>
     <span class="k">else</span><span class="p">:</span>                
         <span class="k">return</span> <span class="p">(</span><span class="n">last_positive_value</span><span class="p">,</span> <span class="n">new_sequence</span><span class="p">)</span>   <span class="c1"># last_positive_value is unchanged</span>
     
+</pre></div>
 
-<span class="c1"># call extend_positive for each element of input [1,0,-2,...]</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># call extend_positive for each element of input [1,0,-2,...]</span>
 <span class="n">result1</span> <span class="o">=</span> <span class="n">extend_positive</span><span class="p">(</span> <span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="p">[]),</span>  <span class="mi">1</span><span class="p">)</span> 
 <span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
 
@@ -14911,7 +15004,7 @@ $</p>
 
 </div>
 
-</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
@@ -14968,7 +15061,7 @@ iterate: calling extend_positive x=(7, [-inf, 1, 1, 1, 2, 3, 3, 3]) a=[]
 
 </div>
 
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In SPARC:</p>
@@ -14988,13 +15081,19 @@ iterate: calling extend_positive x=(7, [-inf, 1, 1, 1, 2, 3, 3, 3]) a=[]
 \texttt{in}~b  
 \end{array}
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Can we solve $\mathtt{RightmostPositive}$ using <em>iteratePrefixes</em> instead?</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>First we need to define the function to apply.</p>
+
+</div>
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
@@ -15037,7 +15136,7 @@ iterate: calling extend_positive x=(7, [-inf, 1, 1, 1, 2, 3, 3, 3]) a=[]
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In SPARC</p>
@@ -15057,7 +15156,7 @@ iterate: calling extend_positive x=(7, [-inf, 1, 1, 1, 2, 3, 3, 3]) a=[]
 \texttt{in}~b  
 \end{array}
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Much less code!</p>

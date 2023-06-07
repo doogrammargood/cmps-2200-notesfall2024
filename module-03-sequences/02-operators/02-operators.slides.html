@@ -14116,10 +14116,15 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Reduce">Reduce<a class="anchor-link" href="#Reduce">&#182;</a></h2><blockquote><p>A function that repeatedly applies an <strong>associative binary operation</strong> to a collection of elements until the result is <em>reduced</em> to a single value.</p>
 </blockquote>
-<p>Associative operations allow commuting the order of operations.</p>
+<p>Associative operations can be executed in different orders over the same inputs and give the same output.</p>
 <ul>
 <li>$plus(plus(2,3), 5) = plus(2, plus(3,5)) = 10$</li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p><strong>formal definition of reduce</strong>:</p>
 <p>$reduce \: (f : \alpha \times \alpha \rightarrow \alpha) (id : \alpha) (a : \mathbb{S}_\alpha) : \alpha$</p>
@@ -14133,7 +14138,11 @@ div.jp-OutputPrompt {
 <ul>
 <li>a value of type $\alpha$ that is the result of the "sum" with respect to $f$ of the input sequence $a$</li>
 </ul>
-<p><br></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>When $f$ is associative: $reduce \: f \: id \: a  \: \equiv \: iterate \: f \: id \: a$</p>
 <p><br></p>
 <p>$reduce \: f \: id \: a =
@@ -14143,12 +14152,17 @@ a[0] &amp; \hbox{if} \: |a| = 1\\
 f(reduce \: f \: id \: (a[0 \ldots \lfloor \frac{|a|}{2} \rfloor - 1]), \\ \:\:\:reduce \: f \: id \: (a[\lfloor \frac{|a|}{2} \rfloor \ldots |a|-1])&amp; \hbox{otherwise}
 \end{cases}
 $</p>
-<h2 id="reduce-is-a-variant-of-iterate-that-allows-for-easier-parallelism">reduce is a variant of iterate that allows for easier parallelism<a class="anchor-link" href="#reduce-is-a-variant-of-iterate-that-allows-for-easier-parallelism">&#182;</a></h2>
+
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Reduce-is-a-variant-of-iterate-that-allows-for-easier-parallelism">Reduce is a variant of iterate that allows for easier parallelism<a class="anchor-link" href="#Reduce-is-a-variant-of-iterate-that-allows-for-easier-parallelism">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
@@ -14181,7 +14195,7 @@ $</p>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -14196,26 +14210,34 @@ $</p>
 
 </div>
 
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Work and Span of reduce?</p>
-
+<h2 id="Work-and-Span-of-reduce?">Work and Span of reduce?<a class="anchor-link" href="#Work-and-Span-of-reduce?">&#182;</a></h2>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Assuming that $f(n)$ has $O(1)$ work and span as <code>times</code> does above:</p>
-$$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
+$$W(n) = 2W(n/2) + 1$$$$S(n) = S(n/2) + 1$$
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$W(n) \in O(n)$$$$S(n) \in O(\lg n)$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Compare-with-iterate;-sometimes-called-%22left-folding%22">Compare with iterate; sometimes called "left folding"<a class="anchor-link" href="#Compare-with-iterate;-sometimes-called-%22left-folding%22">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># compare with iterate; sometimes called &quot;left folding&quot;</span>
-<span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span>
     <span class="k">else</span><span class="p">:</span>
@@ -14252,23 +14274,21 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 
 </div>
 
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Work and Span of iterate?</p>
-
+$$W(n) = W(n-1) + 1$$$$S(n) = S(n-1) + 1$$
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$W(n) = W(n-1) + 1 \in O(n)$</p>
-<p>$S(n) = S(n-1) + 1 \in O(n)$</p>
-
+$$W(n), S(n) \in O(n)$$
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Does-order-matter?">Does order matter?<a class="anchor-link" href="#Does-order-matter?">&#182;</a></h2><p><img src="figures/lfold.png" alt="left-fold" width="50%"/></p>
+<h2 id="Does-order-matter?">Does order matter?<a class="anchor-link" href="#Does-order-matter?">&#182;</a></h2><p><img src="figures/iterate-reduce-plus.jpeg" width="110%"/></p>
 <p>For what function $f$ would $iterate$ and $reduce$ return different answers?</p>
 <div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">iterate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 </pre></div>
@@ -14278,7 +14298,13 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 </pre></div>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/iterate-reduce-minus.jpeg" width="110%"/></p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
@@ -14319,7 +14345,7 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>So, why use <em>reduce</em>?</p>
@@ -14485,7 +14511,7 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
@@ -14522,7 +14548,7 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14543,10 +14569,10 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 <p>What is base case and left identity?</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">singleton</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -14570,7 +14596,7 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -14585,15 +14611,15 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#list(map(singleton, [1,3,6,4,8,7,5,2]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">singleton</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
 
-<span class="p">[[</span><span class="n">val</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="c1">#[[val] for val in [1,3,6,4,8,7,5,1]]</span>
 </pre></div>
 
      </div>
@@ -14609,13 +14635,13 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[[1], [3], [6], [4], [8], [7], [5], [1]]</pre>
+<pre>[[1], [3], [6], [4], [8], [7], [5], [2]]</pre>
 </div>
 
 </div>
@@ -14624,13 +14650,13 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 
 </div>
 
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What if we use <code>iterate</code> instead of <code>reduce</code>?</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
@@ -14684,39 +14710,60 @@ $$W(n) = 2W(n/2) + 1 \in O(n)$$$$S(n) = S(n/2) + 1 \in O(\lg n)$$
 </ul>
 <p>$[1] \rightarrow [1,3] \rightarrow [1,3,6] \rightarrow [1,3,4,6] \ldots$</p>
 <p><br><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Assuming the <code>merge</code> function has <strong>work</strong> $O(n)$.</p>
 $$W(n) = W(n-1) + n \in O(n^2)$$<p><br><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Assuming the <code>merge</code> function has <strong>span</strong> $O(\lg n)$ (note our implementation above doesn't do this).</p>
-$$S(n) = S(n-1) + \lg n \in O(n \lg n)$$<p><br><br><br><br></p>
+$$S(n) = S(n-1) + \lg n \in O(n \lg n)$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><code>reduce(merge, [], list(map(singleton, [1,3,6,4,8,7,5,2])))</code></p>
 <p>This is <strong>merge sort</strong>!</p>
 <p><br><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Assuming the <code>merge</code> function has <strong>work</strong> $O(n)$.</p>
 $$W(n) = 2W(n/2) + n \in O(n \lg n)$$<p>Assuming the <code>merge</code> function has <strong>span</strong> $O(\lg n)$.</p>
 $$S(n) = S(n/2) + \lg n \in O(\lg^2 n)$$
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Map-Reduce">Map-Reduce<a class="anchor-link" href="#Map-Reduce">&#182;</a></h3><p>Scalable, parallel programming model popularized by Google.</p>
 <p>It is used to parallelize the processing of large datasets across clusters of computers.</p>
 <p>It consists of four basic steps:</p>
-<p>1) Split the data in trivial key-value pairs, somewhat analogous to base cases</p>
-
-<pre><code>- In this step we are mapping each piece of data to some value, returning a list of all key-value pairs.
-</code></pre>
-<p>2) Collect all values for the same keys into lists.</p>
-
-<pre><code>- Results in a collection of tuples, one for each key. The value for each key is now a list of all the values for that key from the previous step
-</code></pre>
-<p>3) Reduce the values for each key into a single data point</p>
-
-<pre><code>- this can be in parallel
-</code></pre>
-<p>4) Return a list of all processed key value pairs</p>
+<ol>
+<li>Split the data in trivial key-value pairs, somewhat analogous to base cases<ul>
+<li>In this step we are mapping each piece of data to some value, returning a list of all key-value pairs.</li>
+</ul>
+</li>
+<li>Collect all values for the same keys into lists.<ul>
+<li>Results in a collection of tuples, one for each key. The value for each key is now a list of all the values for that key from the previous step</li>
+</ul>
+</li>
+<li>Reduce the values for each key into a single data point<ul>
+<li>this can be in parallel</li>
+</ul>
+</li>
+<li>Return a list of all processed key value pairs</li>
+</ol>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14747,7 +14794,7 @@ $$S(n) = S(n/2) + \lg n \in O(\lg^2 n)$$
 </div>
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h4><p>Suppose we are counting the frequencies of words in some text. This is a common task in the field of natural language processing.</p>
@@ -14757,27 +14804,41 @@ $$S(n) = S(n/2) + \lg n \in O(\lg^2 n)$$
 "right foot right"
 "wet foot dry foot"
 "high foot low foot"</code></pre>
-<p>1) Split it into all words, mapping each to a frequency of 1. There will be repeated words.</p>
-
-<pre><code>`[('left', 1), ('foot', 1), ('left', 1), ('foot', 1), ('right', 1), ('foot', 1), ('right', 1), ('wet', 1), ('foot', 1), ('dry', 1), ('foot', 1), ('high', 1), ('foot', 1), ('low', 1), ('foot', 1)]`
-
-</code></pre>
-<p>2) Collect all values for the same word into individual lists.</p>
-
-<pre><code>`[('dry', [1]), ('foot', [1, 1, 1, 1, 1, 1, 1]), ('high', [1]), ('left', [1, 1]), ('low', [1]), ('right', [1, 1]), ('wet', [1])]`
-
-</code></pre>
-<p>3) Run reduce on every tuple above to sum all counts into a final frequency.</p>
-
-<pre><code>`('dry', 1)`, `('foot', 7)`, `('high', 1)`, `('left', 2)`, `('low', 1)`, `('right', 2)`, `('wet', 1)]`
-
-</code></pre>
-<p>4) Return a list of all word frequencies</p>
-
-<pre><code>`[('dry', 1), ('foot', 7), ('high', 1), ('left', 2), ('low', 1), ('right', 2), ('wet', 1)]`</code></pre>
 
 </div>
-</div></section></section>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Step 1</strong>: Split it into all words, mapping each to a frequency of 1. There will be repeated words.</p>
+
+<pre><code>[('left', 1), ('foot', 1), ('left', 1), ('foot', 1), ('right', 1), ('foot', 1), ('right', 1), ('wet', 1), ('foot', 1), ('dry', 1), ('foot', 1), ('high', 1), ('foot', 1), ('low', 1), ('foot', 1)]</code></pre>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Step 2</strong>: Collect all values for the same word into individual lists.</p>
+
+<pre><code>[('dry', [1]), ('foot', [1, 1, 1, 1, 1, 1, 1]), ('high', [1]), ('left', [1, 1]), ('low', [1]), ('right', [1, 1]), ('wet', [1])]</code></pre>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Step 3</strong>: Run reduce on every tuple above to sum all counts into a final frequency.</p>
+
+<pre><code>[('dry', 1), ('foot', 7), ('high', 1), ('left', 2), ('low', 1), ('right', 2), ('wet', 1)]</code></pre>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Step 4</strong>: Return a list of all word frequencies</p>
+
+<pre><code>[('dry', 1), ('foot', 7), ('high', 1), ('left', 2), ('low', 1), ('right', 2), ('wet', 1)]</code></pre>
+
+</div>
+</div></div></section></section>
 </div>
 </div>
 </body>

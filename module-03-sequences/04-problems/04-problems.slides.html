@@ -14114,7 +14114,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Review of primitive functions.</span>
@@ -14144,7 +14144,24 @@ div.jp-OutputPrompt {
         <span class="n">result</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
-<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="c1"># cont...</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">id_</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -14154,13 +14171,22 @@ div.jp-OutputPrompt {
                  <span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:]))</span>
 
 <span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span>
-            <span class="p">[</span><span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))],</span>
-             <span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-           <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="n">id_</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">id_</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">subproblem</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))[::</span><span class="mi">2</span><span class="p">]]</span>
 
-<span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+        <span class="n">partial_output</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">scan</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">subproblem</span><span class="p">)</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span><span class="n">partial_output</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>==0 else
+             <span class="n">f</span><span class="p">(</span><span class="n">partial_output</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))],</span>
+            <span class="n">total</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
 </pre></div>
 
      </div>
@@ -14171,8 +14197,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The cost of these functions depends on the concrete data structure used to represent the sequence.</p>
-<p>E.g., for an <strong>array</strong>:</p>
+<h2 id="Costs">Costs<a class="anchor-link" href="#Costs">&#182;</a></h2><p>The cost of these functions depends on the concrete data structure used to represent the sequence. E.g., for an <strong>array</strong>:</p>
 
 </div>
 </div><div class="fragment">
@@ -14215,6 +14240,10 @@ div.jp-OutputPrompt {
 1  
 &amp;   
 1  
+\\
+\mathit{subseq}~a~(i,j)  
+&amp; 1  
+&amp; 1   
 \\   
 \mathit{tabulate}~f~n  
 &amp; 1 + \displaystyle\sum_{i=0}^n W\left({f(i)}\right)  
@@ -14227,11 +14256,18 @@ div.jp-OutputPrompt {
 \mathit{filter}~f~a  
 &amp; 1 + \displaystyle\sum_{x \in a} W\left({f(x)}\right)  
 &amp; \lg \lvert a \rvert + \displaystyle\max_{x \in a} S\left({f(x)}\right)   
-\\[2mm]  
-\mathit{subseq}~a~(i,j)  
-&amp; 1  
-&amp; 1   
-\\[2mm]  
+\\[2mm]
+\end{array}
+$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$
+\begin{array}{lcc}
+\text{Operation} &amp; \text{Work} &amp; \text{Span}  
+\\   
 \mathit{append}~a~b  
 &amp; 1 + \lvert a \rvert+\lvert b \rvert  
 &amp; 1   
@@ -14275,7 +14311,7 @@ div.jp-OutputPrompt {
 $</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Why does filter require logarithmic span?</p>
@@ -14290,10 +14326,20 @@ $</p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We need to account for the work to create the return array.</p>
-<p><br><br>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br>
 We can't do this in constant span, because the location of one value depends on the location of other values.
 <br><br></p>
 <p>$filter \:\: positive \:\: [-1,3,-2,4,-5,6] \rightarrow [3,4,6]$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br><br>
 <strong>idea:</strong> Make a first, parallel pass to map all satisfying values to singletons and everything else to empty lists:</p>
 <p>$[[],[3],[],[4],[],[6]]$</p>
@@ -14301,10 +14347,10 @@ We can't do this in constant span, because the location of one value depends on 
 <p>$[3,4,6]$</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">deflate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -14336,7 +14382,7 @@ We can't do this in constant span, because the location of one value depends on 
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14351,26 +14397,21 @@ We can't do this in constant span, because the location of one value depends on 
 
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="All-Contiguous-Subsequences">All Contiguous Subsequences<a class="anchor-link" href="#All-Contiguous-Subsequences">&#182;</a></h3><p>Given a sequence $a$, generate all contiguous subsequences.</p>
-<p><br><br></p>
-<p>$\langle a \langle i, \ldots,j \rangle : 0 \le i &lt; |a|, i \le j &lt; |a| \rangle$</p>
-<p>$\equiv$</p>
-<p>$\langle a \langle i, \ldots,j \rangle : 0 \le i \le j &lt; |a| \rangle$</p>
-<p>$\equiv$</p>
-<p>$flatten \langle \: \langle a[i \ldots i+j]: i \le j &lt; |a| \rangle : 0 \le i &lt; |a| \rangle$</p>
-<p>$\equiv$</p>
-<p>$flatten (tabulate (\mathtt{lambda} \:  i \: . tabulate ( \mathtt{lambda} \: j \: . \: a[i \ldots i+j])(|a| - i - 1)|a|)$</p>
-<p>[1, 3, 5, 7]</p>
-<p>[1], [1,3], [1,3,5], [1,3,5,7], [3], [3,5], [3,5,7],...</p>
+<h2 id="Example-Problem:-All-Contiguous-Subsequences">Example Problem: All Contiguous Subsequences<a class="anchor-link" href="#Example-Problem:-All-Contiguous-Subsequences">&#182;</a></h2><p>Given a sequence $a$, generate all contiguous subsequences.</p>
+<p><br></p>
+<p>E.g,</p>
+<p>$a = [1, 3, 5, 7]$</p>
+<p>$\texttt{all_contiguous_subsequences}(a) = $</p>
+<p>$[1], [1,3], [1,3,5], [1,3,5,7], [3], [3,5], [3,5,7], [5], [5,7], [7]$</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sequential solution</span>
@@ -14396,7 +14437,7 @@ We can't do this in constant span, because the location of one value depends on 
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -14425,23 +14466,26 @@ We can't do this in constant span, because the location of one value depends on 
 
 </div>
 
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Can we solve this using our primitives?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>$\texttt{tabulate}$ is our equivalent of a basic for loop.</p>
+
+</div>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nested tabulate</span>
-<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-<span class="n">flatten</span><span class="p">(</span>
-    <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> 
-             <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
-                      <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">),</span>
-         <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-<span class="p">)</span>
-<span class="c1">#i=0</span>
-<span class="c1">#tabulate(lambda j: a[i:i+j+1],</span>
-    <span class="c1">#len(a)-i)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14457,7 +14501,155 @@ We can't do this in constant span, because the location of one value depends on 
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>We can use $\texttt{tabulate}$ to slice into a list:</p>
+
+</div>
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[[1], [1, 2], [1, 2, 3], [1, 2, 3, 4], [1, 2, 3, 4, 5]]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We can nest our $\texttt{tabulate}$s to vary $i$ as well.</p>
+
+</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> 
+            <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">),</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[[[1], [1, 2], [1, 2, 3], [1, 2, 3, 4], [1, 2, 3, 4, 5]],
+ [[2], [2, 3], [2, 3, 4], [2, 3, 4, 5]],
+ [[3], [3, 4], [3, 4, 5]],
+ [[4], [4, 5]],
+ [[5]]]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Last step, flatten everything together.</p>
+
+</div>
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># all contiguous subsequences</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">flatten</span><span class="p">(</span>
+    <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> 
+             <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">),</span>
+         <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 
 
 
@@ -14486,43 +14678,71 @@ We can't do this in constant span, because the location of one value depends on 
 
 </div>
 
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="analysis-of-All-Contiguous-Subsequences">analysis of All Contiguous Subsequences<a class="anchor-link" href="#analysis-of-All-Contiguous-Subsequences">&#182;</a></h3><p>How many calls to <code>a[i:i+j+1]</code> (i.e., <code>subseq</code>)?</p>
+<h2 id="Analysis-of-All-Contiguous-Subsequences">Analysis of All Contiguous Subsequences<a class="anchor-link" href="#Analysis-of-All-Contiguous-Subsequences">&#182;</a></h2><h3 id="Work">Work<a class="anchor-link" href="#Work">&#182;</a></h3><div class="highlight"><pre><span></span><span class="n">flatten</span><span class="p">(</span>
+    <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> 
+             <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">),</span>
+         <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>How many calls to <code>a[i:i+j+1]</code> (i.e., <code>subseq</code>)?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If $|a|=n$,</p>
-$$ \sum_{i=1}^n = \frac{n(n-1)}{2}  \in O(n^2) $$<p>Work and span of <code>subseq</code> is O(1) (<strong>why?</strong>)</p>
-<p>Therefore, total work is $O(n^2)$.</p>
-<p><br></p>
-<p>Span of inner <code>tabulate</code> is $O(1)$, and outer <code>tabulate</code> is also $O(1)$.</p>
-<p><br></p>
-<p><code>flatten</code> at the end requires $O(\lg n)$ span.</p>
-<p>Therefore, total span is $O(\lg n)$</p>
-
+$$ \sum_{i=1}^n = \frac{n(n-1)}{2}  \in O(n^2) $$
 </div>
-</div></div></section></section><section><section>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="How-would-work/span-differ-using-a-singly-linked-list?">How would work/span differ using a singly linked list?<a class="anchor-link" href="#How-would-work/span-differ-using-a-singly-linked-list?">&#182;</a></h3><p>E.g., accessing element $i$ costs?</p>
+<p>Work and span of <code>subseq</code> is O(1) (<strong>why?</strong>)</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Therefore, total work is $O(n^2)$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Span">Span<a class="anchor-link" href="#Span">&#182;</a></h3><div class="highlight"><pre><span></span><span class="n">flatten</span><span class="p">(</span>
+    <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> 
+             <span class="n">tabulate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="p">),</span>
+         <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$O(i)$ work to access the $i$ th element of a singly linked list.</p>
-<p><br><br></p>
-<p>Because of this, there is little opportunity for parallelism.</p>
-<p>E.g.</p>
-<p>$\mathit{map}~f~a$</p>
-<p>span is $1 + \displaystyle\sum_{x \in a}  S\left({f(x)}\right)   $</p>
+<p>Span of inner <code>tabulate</code> is $O(1)$, and outer <code>tabulate</code> is also $O(1)$.</p>
 <p><br></p>
-<p>compared to the costs for an array implementation:</p>
-<p>span is $ 1 + \displaystyle\max_{x \in a}  S\left({f(x)}\right)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><code>flatten</code> at the end requires $O(\lg n)$ span.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Therefore, total span is $O(\lg n)$</p>
 
 </div>
 </div></div></section></section>

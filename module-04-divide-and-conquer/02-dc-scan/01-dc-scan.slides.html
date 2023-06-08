@@ -14126,14 +14126,17 @@ div.jp-OutputPrompt {
 </ul>
 </li>
 </ul>
-<p>As we'll see, each algorithmic paradigm has high-level strategies to i) <em>prove correctness</em> and ii) <em>determine work/span</em>.</p>
-<p>How do we prove the correctness of a divide-and-conquer algorithm?</p>
+<p>As we'll see, each algorithmic paradigm has high-level strategies to</p>
+<ol>
+<li><em>prove correctness</em> </li>
+<li><em>determine work/span</em></li>
+</ol>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Induction -- why and how?</p>
+<h2 id="How-do-we-prove-the-correctness-of-a-divide-and-conquer-algorithm?">How do we prove the correctness of a divide-and-conquer algorithm?<a class="anchor-link" href="#How-do-we-prove-the-correctness-of-a-divide-and-conquer-algorithm?">&#182;</a></h2><p>Induction -- why and how?</p>
 <p>Induction provides a natural framework for divide-and-conquer algorithms.</p>
 <p>The <strong>base case</strong> of the induction requires us to prove that the algorithm works for the base case.</p>
 <p>For the <strong>induction step</strong>, we use the inductive hypothesis that the solutions to the smaller instances are correct. Then, we must prove that the combine step correctly produces the desired solution.</p>
@@ -14142,16 +14145,15 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>What about determining work/span?</p>
-<p>We've seen that recurrences can capture the behavior of divide-and-conquer algorithms - they simply capture the cost of recursively solving smaller instances and then combining the solutions.</p>
+<h2 id="Determining-work/span?">Determining work/span?<a class="anchor-link" href="#Determining-work/span?">&#182;</a></h2><p>We've seen that recurrences can capture the behavior of divide-and-conquer algorithms - they simply capture the cost of recursively solving smaller instances and then combining the solutions.</p>
 <p>The general form of the work is:</p>
 $$ W(n) = W_{\mathsf{\small divide}}(n) + \sum_{i=1}^{k}W(n_i) + W_{\mathsf{\small combine}}(n) + 1 $$<p>The general form for the span is:</p>
 $$ S(n) = S_{\mathsf{\small divide}}(n) + \max_{i=1}^{k}S(n_i) + S_{\mathsf{\small combine}}(n) + 1 $$
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's look at how Merge Sort fits into this framework.</p>
+<h2 id="High-level-framework-through-the-lens-of-Merge-Sort">High level framework through the lens of Merge Sort<a class="anchor-link" href="#High-level-framework-through-the-lens-of-Merge-Sort">&#182;</a></h2><p>Let's look at how Merge Sort fits into this framework.</p>
 $$
 \begin{array}{l}  
 \mathit{mergeSort}~a =  
@@ -14176,19 +14178,19 @@ $$
 \end{array}\
 $$
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For the correctness, we need to show that Merge Sort truly sorts the list. Let's perform induction:</p>
 <ul>
 <li><p><strong>Base case</strong>: We correctly sort a singleton list.</p>
 </li>
-<li><p><strong>Induction Step</strong>: We assume that we can correctly sort the two halves of the list (by the inductive hypothesis). The final step is to prove that the merge step works correctly to combine two sorted lists into one sorted list (which we've shown previously).</p>
+<li><p><strong>Induction Step</strong>: We assume that we can correctly sort the two halves of the list (by the inductive hypothesis). The final step would be to prove that the merge step works correctly to combine two sorted lists into one sorted list.</p>
 </li>
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For the running time, recall that we characterized the work/span of Merge Sort as:</p>
@@ -14196,25 +14198,84 @@ $$ W(n) = 2W(n/2) + O(n) $$<p>and</p>
 $$ S(n) = S(n/2) + O(\log n) $$<p>This fits into the framework above: the divide step takes $O(1)$ time, there are 2 concurrent recursive calls, and merging takes $O(n)$ work and $O(\log n)$ span.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now let's look at <code>scan</code>. We developed a contraction-based algorithm for this problem, but let's look at a divide-and-conquer strategy.</p>
-<p>Remember that we looked at taking prefix sums for intuition. Let's reuse that example:</p>
-<p>$\texttt{prefix\_sum}([2,1,3,2,2,5,4,1]) \rightarrow ([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
-<p>Now, instead of contracting pairs of entries what if we just split the list and recursively compute prefix sums?</p>
-<p>$\texttt{prefix\_sum}([2,1,3,2]) \rightarrow (l, l')$</p>
-<p>$\texttt{prefix\_sum}([2,5,4,1]) \rightarrow (r, r')$</p>
-<p>We'd get results $(l, l')$ and $(r, r')$ where:</p>
-<p>$(l, l') = (\langle 0, 2, 3, 6\rangle, 8)$</p>
-<p>$(r, r') = (\langle 0, 2, 7, 11\rangle, 12)$</p>
-<p>Now, it's easy to see that $l$ already gives us half the solution - how do we get the result by combining solutions?</p>
+<h2 id="Divide-and-Conquer-Scan">Divide and Conquer Scan<a class="anchor-link" href="#Divide-and-Conquer-Scan">&#182;</a></h2><p>We developed a contraction-based algorithm for this problem, but let's look at a divide-and-conquer strategy.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>To compute prefix sums, all we have to do is to add the sum of the first half to all of the elements of $r$ and to $r'$. We can generalize this approach to get:</p>
+<p>Remember that we looked at taking prefix sums for intuition. Let's reuse that example:</p>
+<p>$\texttt{prefix_sum}([2,1,3,2,2,5,4,1]) \rightarrow ([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Divide and Conquer Approach</strong></p>
+<p>Instead of contracting pairs of entries what if we just split the list and recursively compute prefix sums?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\texttt{prefix_sum}([2,1,3,2]) \rightarrow (l, l') = (\langle 0, 2, 3, 6\rangle, 8)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\texttt{prefix_sum}([2,5,4,1]) \rightarrow (r, r') = (\langle 0, 2, 7, 11\rangle, 12)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now, it's easy to see that $l$ already gives us half the solution - how do we get the result by combining solutions?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>All we have to do is to add the sum of the first half to all of the elements of $r$ and to $r'$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Full-Example">Full Example<a class="anchor-link" href="#Full-Example">&#182;</a></h3><p>$a = [2,1,3,2,2,5,4,1]$</p>
+<p>We need to get:</p>
+<p>$\texttt{prefix_sum}([2,1,3,2,2,5,4,1]) \rightarrow ([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Recursively run $\texttt{prefix_sum}$ on both halves of the list:</p>
+<p>$\texttt{prefix_sum}([2,1,3,2]) \rightarrow (l, l') = (\langle 0, 2, 3, 6\rangle, 8)$</p>
+<p>$\texttt{prefix_sum}([2,5,4,1]) \rightarrow (r, r') = (\langle 0, 2, 7, 11\rangle, 12)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Generate $y$, the right half of the output by adding $l'$ to every element in $r$:</p>
+<p>$y = [0+8,\ 2+8,\ 7+8,\ 11+8] = [8, 10, 15, 19]$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Append $y$ to $l$ and calculate the final sum by adding $l'$ to $r'$.</p>
+<p>$([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{array}{l}  
 \mathit{scanDC}~f~\mathit{id}~a =  
@@ -14245,22 +14306,7 @@ $$
 \end{array}\
 $$
 </div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Full-Example">Full Example<a class="anchor-link" href="#Full-Example">&#182;</a></h3><p>$a = [2,1,3,2,2,5,4,1]$</p>
-<p>We need to get:</p>
-<p>$\texttt{prefix\_sum}([2,1,3,2,2,5,4,1]) \rightarrow ([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
-<p>Recursively run $\texttt{prefix\_sum}$ on both halves of the list:</p>
-<p>$\texttt{prefix\_sum}([2,1,3,2]) \rightarrow (l, l') = (\langle 0, 2, 3, 6\rangle, 8)$</p>
-<p>$\texttt{prefix\_sum}([2,5,4,1]) \rightarrow (r, r') = (\langle 0, 2, 7, 11\rangle, 12)$</p>
-<p>Generate $y$, the right half of the output by adding $l'$ to every element in $r$:</p>
-<p>$y = [0+8,\ 2+8,\ 7+8,\ 11+8] = [8, 10, 15, 19]$</p>
-<p>Append $y$ to $l$ and calculate the final sum by adding $l'$ to $r'$.</p>
-<p>$([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
-
-</div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Correctness-Proof">Correctness Proof<a class="anchor-link" href="#Correctness-Proof">&#182;</a></h3><p>How do we prove the correctness of this algorithm?</p>
@@ -14270,24 +14316,52 @@ $$
 <li><p><strong>Induction Step</strong>: For the induction hypothesis, we assume that we correctly compute the scan results for the two halves of the list. For the combine step, we compute $f(l', x)$ for all $x\in r$. Why is this the correct result for the right half of the list?</p>
 </li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Example</strong></p>
+<blockquote><p>$\texttt{prefix_sum}([2,1,3,2,2,5,4,1]) \rightarrow$</p>
+<p>$\texttt{prefix_sum}([2,1,3,2]) \rightarrow (l, l') = (\langle 0, 2, 3, 6\rangle, 8)$</p>
+<p>$\texttt{prefix_sum}([2,5,4,1]) \rightarrow (r, r') = (\langle 0, 2, 7, 11\rangle, 12)$</p>
+<p>$y = [0+8,\ 2+8,\ 7+8,\ 11+8] = [8, 10, 15, 19]$</p>
+<p>$l +\!\!+ y = ([0, 2, 3, 6, 8, 10, 15, 19], 20)$</p>
+</blockquote>
 <p><strong>Proof</strong></p>
-<p>We know that $l' = f(l[(n/2)-1], a[(n/2)-1])$ and since $l[(n/2)-1]$ is a correct scan result and $a[(n/2)-1])$ is the next element to be added, then $l'$ is the correct scan result for the left side of the list.</p>
-<p>Consider the first element of $y$, it is $f(l', id) = l' = f(l[(n/2)-1], a[(n/2)-1])$.</p>
-<p>This is the correct scan result for $a$ at position $n/2 + 1$.</p>
-<p>We can similarly show that each successive element in $y$ is the correct scan result for $a$ in the right half of the solution.</p>
-<p>Finally, since $f$ is associative we can see that $f(l', r')$ is the correct "sum" result as well. Therefore, $\texttt{prefix\_sum}$ is correct. $\blacksquare$</p>
+<p>We know that $l' = f(l[(n/2)-1], a[(n/2)-1])$. Since $l[(n/2)-1]$ is a correct scan result and $a[(n/2)-1])$ is the next element to be added, then $l'$ is the correct scan result for the left side of the list.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consider the first element of $y$, it is $f(l', id) = l' = f(l[(n/2)-1], a[(n/2)-1])$.</p>
+<p>This is the correct scan result for $a$ at position $n/2 + 1$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We can similarly show that each successive element in $y$ is the correct scan result for $a$ in the right half of the solution.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Finally, since $f$ is associative we can see that $f(l', r')$ is the correct "sum" result as well. Therefore, $\texttt{prefix_sum}$ is correct. $\blacksquare$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Runtime Analysis</strong></p>
 <p>Assuming that $f(n)$ can be computed in constant time, we get the following recurrences for work and span:</p>
 $$ W(n) = 2W(n/2) + O(n)$$<p>and</p>
 $$ S(n) = S(n/2) + O(1) $$<p>Thus the work is $O(n \log n)$ and the span is $O(\log n)$.</p>
 <p>Is this algorithm work-efficient? Why or why not?</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Do you find <code>scanDC</code> more or less intuitive than the version using contract?</p>
@@ -14296,12 +14370,12 @@ $$ S(n) = S(n/2) + O(1) $$<p>Thus the work is $O(n \log n)$ and the span is $O(\
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">scanDC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="n">space</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="s1">&#39;  &#39;</span> <span class="c1"># for printing</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="s1">&#39;a=&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="c1"># space = len(a) * &#39;  &#39; # for printing</span>
+    <span class="c1"># print(space, &#39;a=&#39;, a)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">([],</span> <span class="n">id_</span><span class="p">)</span>
@@ -14334,33 +14408,7 @@ $$ S(n) = S(n/2) + O(1) $$<p>Thus the work is $O(n \log n)$ and the span is $O(\
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>                 a= [2, 1, 3, 2, 2, 5, 4, 1]
-         a= [2, 1, 3, 2]
-     a= [2, 1]
-   a= [2]
-   a= [1]
-     a= [3, 2]
-   a= [3]
-   a= [2]
-         a= [2, 5, 4, 1]
-     a= [2, 5]
-   a= [2]
-   a= [5]
-     a= [4, 1]
-   a= [4]
-   a= [1]
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -14375,7 +14423,12 @@ $$ S(n) = S(n/2) + O(1) $$<p>Thus the work is $O(n \log n)$ and the span is $O(\
 
 </div>
 
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="What-if-we-divided-into-more-than-2-parts?">What if we divided into more than 2 parts?<a class="anchor-link" href="#What-if-we-divided-into-more-than-2-parts?">&#182;</a></h2>
 </div>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
@@ -14410,15 +14463,15 @@ $$
 \end{array}\
 $$
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ternaryScanDC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="n">space</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="s1">&#39;  &#39;</span> <span class="c1"># for printing</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="s1">&#39;a=&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="c1"># space = len(a) * &#39;  &#39; # for printing</span>
+    <span class="c1"># print(space, &#39;a=&#39;, a)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">([],</span> <span class="n">id_</span><span class="p">)</span>
@@ -14463,31 +14516,7 @@ $$
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>                 a= [2, 1, 3, 2, 2, 5, 4, 1]
-     a= [2, 1]
- a= []
-   a= [2]
-   a= [1]
-       a= [3, 2, 2]
-   a= [3]
-   a= [2]
-   a= [2]
-       a= [5, 4, 1]
-   a= [5]
-   a= [4]
-   a= [1]
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14502,16 +14531,17 @@ $$
 
 </div>
 
-</div>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Is this any more efficient?</p>
+<p>Is $\texttt{ternaryScanDC}$ any more efficient?</p>
 <p>$W(n) = 3W(n/3) + O(n)$</p>
 <p>This is balanced.</p>
 <p>$W(n) \in O(n \log_3 n)$</p>
+<p><br></p>
 
 </div>
-</div>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What about the span?</p>

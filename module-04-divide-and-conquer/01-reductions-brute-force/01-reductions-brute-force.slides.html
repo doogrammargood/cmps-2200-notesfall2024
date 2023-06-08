@@ -14111,7 +14111,7 @@ div.jp-OutputPrompt {
 <li>Asymptotic analysis of performance (Recurrences)</li>
 <li>Abstract Data Types (sequences)</li>
 </ul>
-<p>We will now move to learning about algorithmic <em>paradigms</em> and see examples of how they work in different problem areas.</p>
+<p>We will now shift our focus to algorithmic <em>paradigms</em> and see examples of how they work in different problem areas.</p>
 <p>First we will look at how problems can be related to one another through <strong>reductions</strong> and then define the concept of a <strong>search space</strong> for an problem.</p>
 
 </div>
@@ -14127,16 +14127,22 @@ div.jp-OutputPrompt {
 <li><p>Use these output(s) to construct the solution to $\mathcal{I}_A$.</p>
 </li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>It's convenient to view this schematically as:</p>
-<p><br><p> 
- <img src="figures/reduction.jpg" alt="reduction.jpg">
+<p><img src="figures/reduction.jpg" alt="reduction.jpg">
 <br><p></p>
 <p>What is the running time of our generic algorithm for solving $A$?</p>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/reduction.jpg" alt="reduction.jpg">
+<br><p></p>
 <p>The time to solve $A$ on an input $\mathcal{I}_A$:</p>
 <ul>
 <li>the time to construct one or more instances of $B$</li>
@@ -14146,13 +14152,65 @@ div.jp-OutputPrompt {
 <p>We say that a reduction is <em>efficient</em> if the running time of the input/output transformations do not exceed the running time of the problem being solved.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Have we already seen this in action? Maybe selection sort?</p>
+<h2 id="Example:-Reduce-min-to-sorting">Example: Reduce min to sorting<a class="anchor-link" href="#Example:-Reduce-min-to-sorting">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reduction from min-finding to sorting.</span>
+<span class="k">def</span> <span class="nf">my_min</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">L</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">my_min</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>-1</pre>
+</div>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+
+</div>
+
+</div>
+
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In this reduction, the input transformation is trivial, we sort the list, and the output transformation consists of taking the first element of the sorted list.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What about in the other direction, is <code>selection_sort</code> an example of reducing sorting to min?</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14195,77 +14253,53 @@ div.jp-OutputPrompt {
 
 </div>
 
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is not really a reduction - each successive call to <code>min</code> depends on the result of a prior call. How about the opposite direction?</p>
+<p>This is not really a reduction - <code>selection_sort</code> depends on a bunch of successive calls to <code>min</code>.</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reduction from min-finding to sorting.</span>
-<span class="k">def</span> <span class="nf">my_min</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">L</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="n">my_min</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>-1</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is a reduction since the input transformation is trivial, we sort the list, and for the output transformation take the first element of the sorted list.</p>
-<p><br><p>
-<img width=70% src="figures/reduction.jpg"/>
+<h2 id="Relationship-between-problems-$A$-and-$B$">Relationship between problems $A$ and $B$<a class="anchor-link" href="#Relationship-between-problems-$A$-and-$B$">&#182;</a></h2><p><img width=70% src="figures/reduction.jpg"/>
 <br><p></p>
-<p>What do we expect of the relationship between problems $A$ and $B$?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If we construct a valid reduction from $A$ to $B$, then we have shown that problem $A$ is "no harder" than $B$. If $A$ were strictly harder than $B$, we couldn't solve $A$ with a reduction to $B$!</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Suppose we are speculating about the difficulty of a scary looking problem $A$. Now suppose we manage to find a problem $B$ so that we have an efficient reduction from $A$ to $B$.</p>
 <p>The runtime (work or span) of $A$ is upper bounded by the runtime of <em>any</em> algorithm for $B$, without having found an algorithm for $A$ or $B$!</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This a useful concept that is used to "map" the complexity of problems, whether or not we have efficient algorithms! (We'll get to this in more detail at the end of the semester.)</p>
-<p><br><br><br></p>
-<p><strong>summary:</strong></p>
-<p>If $A$ is reducible to $B$ then:</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Reductions-Key-Points">Reductions Key Points<a class="anchor-link" href="#Reductions-Key-Points">&#182;</a></h3><p>If $A$ is reducible to $B$ then:</p>
 <ul>
 <li>$A$ is not harder than $B$</li>
 <li>$B$ is at least as hard as $A$</li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br><br>
 So, by reducing <code>min</code> to <code>sort</code>, we've just shown that</p>
 <ul>
@@ -14298,25 +14332,45 @@ So, by reducing <code>min</code> to <code>sort</code>, we've just shown that</p>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$O(n)$, since this is the best runtime for median finding.</p>
-<p>What about the more general problem of finding the $k$ th smallest number in a list of length $n$?</p>
+<p>$\Omega(n)$, since this is the best runtime for median finding.</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What about the more general problem of finding the $k^\texttt{th}$ smallest number in a list of length $n$?</p>
+<p><br></p>
+
+</div>
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><code>median finding</code> is reducible to <code>find the kth smallest number in a list</code></p>
 
 </div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>The <code>kth smallest number</code> problem is atleast as hard as <code>median</code>.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>The runtime of <code>kth smallest number</code> is $\Omega(n)$.</p>
+
+</div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Convex Hull</strong>: Given a set of points in the plane, find the extreme points and return them in counterclockwise order. This generates the "convex hull" of the point set.</p>
+<h2 id="Example:-Convex-Hull:">Example: Convex Hull:<a class="anchor-link" href="#Example:-Convex-Hull:">&#182;</a></h2><p>Given a set of points in the plane, find the extreme points and return them in counterclockwise order. This generates the "convex hull" of the point set.</p>
 <p><br><br></p>
 <p><p>
 <img width="60%" src ="figures/convexhull.jpg"/></p>
 <p><p>
-<br><br></p>
+<br></p>
 <p>The extreme points always create a convex boundary around the point set, hence the name.</p>
 <p>How difficult is convex hull, relative to other computational problems?</p>
 
@@ -14328,13 +14382,25 @@ So, by reducing <code>min</code> to <code>sort</code>, we've just shown that</p>
 <p>That means that interestingly, convex hull is at least as hard as sorting!</p>
 
 </div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Reduction: Sorting -&gt; Convex Hull</strong>:</p>
+<p>Given a list of length $n$ to sort, we can construct a point set by taking each list element $a\in L[i]$ and creating a corresponding point $(a, a^2)$.</p>
+<p><br>
+<img src="figures/convexhull_reduction.png" alt="convexhull_reduction.png">
+<br></p>
+
+</div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Reduction</strong>: Given a list of length $n$ to sort, we can construct a point set by taking each list element $a\in L[i]$ and creating a corresponding point $(a, a^2)$. Any algorithm that returns the points of the convex hull of this point set in counterclockwise order will produce the elements of the original list in sorted order.</p>
-<p><br><br>
-<img src="figures/convexhull_reduction.png" alt="convexhull_reduction.png">
-<br><br></p>
+<p>Any algorithm that returns the points of the convex hull of this point set in counterclockwise order will produce the elements of the original list in sorted order.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Can we say anything else? Well, it turns out sorting is $\Omega(n \log n)$. So computing the convex hull is $\Omega(n \log n)$, otherwise we could do better than $O(n \log n)$ for sorting a list.</p>
 
 </div>
@@ -14342,36 +14408,85 @@ So, by reducing <code>min</code> to <code>sort</code>, we've just shown that</p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Search-Spaces-and-Brute-Force">Search Spaces and Brute-Force<a class="anchor-link" href="#Search-Spaces-and-Brute-Force">&#182;</a></h2><p>Let's now focus on another way to think about the difficulty of a computational problem, which motivates a very simple algorithmic paradigm.</p>
-<p>As the name suggests, the "brute force" paradigm for a problem $A$ and an instance $\mathcal{I}_A$, just looks at every possible solution and checks each one.</p>
-<p>Let's consider the problem of sorting by brute force. Given a list $L$ of length $n$, how would this work?</p>
+<p>As the name suggests, the "brute force" paradigm for an instance $\mathcal{I}_A$ of problem $A$ just looks at every possible solution and checks each one.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Brute-Force-Sorting">Brute Force Sorting<a class="anchor-link" href="#Brute-Force-Sorting">&#182;</a></h3><p>Let's consider the problem of sorting by brute force. Given a list $L$ of length $n$, how would this work?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We'd need to consider every possible sorted order of length $n$ on the elements in $L$. How many are there?</p>
-<p>There are $n!$ - why?</p>
-<p>Now, if we can explicitly generate all permutations, we'd need to check each one for "sortedness". How long does that take?</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Thus, sorting by brute force takes $O(n \cdot n!)$ work. For $n=100$, this is at least $10^{100}$!! There are only about $10^{80}$ atoms in the known universe... so this is horribly inefficient.</p>
-<p>Is there any upside to brute force?</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The work of this algorithm for sorting is astronomical (literally), but let us consider the span.</p>
-<p>How quickly can we check (in parallel) that a list is sorted?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>For all $i=0,\ldots,n-2$, check that $L[i] \leq L[i+1]$. This can be done with a parallel <code>filter</code>. Then, do a parallel <code>reduce</code> to check that all $n-1$ inequalities are met in $O(\log n)$ span.</p>
+<p>$n!$ - why?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now, if we can explicitly generate all permutations, we'd need to check each one for "sortedness". How long does that take?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Thus, sorting by brute force takes $O(n \cdot n!)$ work. For $n=100$, this is at least $10^{100}$!!</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>There are only about $10^{80}$ atoms in the known universe...</p>
+</blockquote>
+<p>This is horribly inefficient.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Is there any upside to brute force?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The work of this algorithm for sorting is astronomical (literally), but let us consider the span.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Span</strong></p>
+<p>How quickly can we check (in parallel) that a list is sorted?</p>
+<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>For all $i=0,\ldots,n-2$, check that $L[i] \leq L[i+1]$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>This can be done with a parallel <code>filter</code>.</p>
+<p>Then, do a parallel <code>reduce</code> to check that all $n-1$ inequalities are met in $O(\log n)$ span.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>Overall it takes $O(\log n)$ span to check that a list is sorted, for each candidate permutation. All permutations can be checked concurrently.</p>
 <p>So, while brute force sorting is not at all work-efficient, we can achieve a very efficient span!</p>
 
@@ -14379,28 +14494,76 @@ So, by reducing <code>min</code> to <code>sort</code>, we've just shown that</p>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Consider the problem of finding the maximum element in a list $L$ of length $n$.</p>
+<h3 id="Brute-Force-Maximum">Brute Force Maximum<a class="anchor-link" href="#Brute-Force-Maximum">&#182;</a></h3><p>Consider the problem of finding the maximum element in a list $L$ of length $n$.</p>
 <p>What is the search space?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Since the maximum of a list is just an element in the list, the search space has $n$ elements.</p>
+<p>Since the maximum of a list is just an element in the list, the search space is all $n$ elements in the list.</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How do we check whether each candidate solution is the correct one?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>If each candidate $x$ is greater than or equal to every other $y\in L$, then $x$ is the solution. This takes $O(n)$ work. Over all $n$ elements, the brute force approach takes $O(n^2)$ work and and $O(\log n)$ span (why?).</p>
+<p>If each candidate $x$ is greater than or equal to every other $y\in L$, then $x$ is the solution.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>This takes $O(n)$ work.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Over all $n$ elements, the brute force approach takes $O(n^2)$ work and and $O(\log n)$ span (why?).</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How does this compare to other approaches we've seen?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Using <code>iterate</code></strong>: $O(n)$ work, $O(n)$ span</p>
 <p><strong>Using <code>reduce</code></strong>: $O(n)$ work, $O(\log n)$ span</p>
 <p><strong>Brute-force</strong>: $O(n^2)$ work, $O(\log n)$ span</p>
 
 </div>
-</div></div></section></section>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Why-Discuss-Brute-Force?">Why Discuss Brute Force?<a class="anchor-link" href="#Why-Discuss-Brute-Force?">&#182;</a></h2><ul>
+<li><p>It gives us an upper bound on the potential runtime</p>
+</li>
+<li><p>It is a useful theoretical idea</p>
+<ul>
+<li>We will revisit it when thinking about complexity classes</li>
+</ul>
+</li>
+<li><p>Bruce Force algorithms are simple</p>
+<ul>
+<li>Sometimes, it is convenient to prototype a brute force solution first before implementing a more complex and efficient one.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></section></section>
 </div>
 </div>
 </body>

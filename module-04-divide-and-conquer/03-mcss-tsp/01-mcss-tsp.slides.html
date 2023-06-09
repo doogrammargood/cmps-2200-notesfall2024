@@ -14123,67 +14123,202 @@ a[0] &amp; \hbox{if} \: |a| = 1\\
 f(reduce \: f \: id \: (a[0 \ldots \lfloor \frac{|a|}{2} \rfloor - 1]), \\ \:\:\:reduce \: f \: id \: (a[\lfloor \frac{|a|}{2} \rfloor \ldots |a|-1])&amp; \hbox{otherwise}
 \end{cases}
 $</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For example:</p>
 <p><code>reduce(merge, [], list(map(singleton, [1,3,6,4,8,7,5,2])))</code></p>
-<p>Can all divide-and-conquer algorithms be implemented with <code>reduce</code>?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The divide-and-conquer framework is much more general than <code>reduce</code>. So <code>reduce</code> cannot be used when, for example, we wish to split the input into 3 or more parts, or if they are of unequal size.</p>
+<p><br></p>
+<p>Can all divide-and-conquer algorithms be implemented with <code>reduce</code>?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>The divide-and-conquer framework is more general than <code>reduce</code>.</p>
+<p><code>reduce</code> cannot be used when, for example, we wish to split the input into 3 or more parts, or if they are of unequal size.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Maximum-Continguous-Subsequence-Sum">Maximum Continguous Subsequence Sum<a class="anchor-link" href="#Maximum-Continguous-Subsequence-Sum">&#182;</a></h2><p>Given a sequence of integers, the <strong>Maximum Contiguous Subsequence Sum Problem</strong> (MCSS) requires finding the contiguous subsequence of the sequence with maximum total sum:</p>
-$$\textsf{MCS}{}\,(a) = \arg\max_{0 \leq i,j &lt; |a|} \left( {\left( \sum_{k=i}^j a[k]  \right)} \right)$$<p></p>
-<p>We define the sum of an empty sequence to $-\infty$.&lt;/p&gt;</p>
-<p>Example: For $a = \langle 1, -2, 0, 3, -1, 0, 2, -3 \rangle$ a maximum contiguous subsequence (MCSS) is $\langle\, 3, -1, 0, 2 \rangle$. Another is $\langle 0, 3, -1, 0, 2 \rangle.$&lt;/p&gt;</p>
-<p><br><br><br><br><br></p>
-<p>MCSS is useful for many applications, from genomics to data science and finance.</p>
-<p>Let's first take a brute-force approach to this problem. What is the solution space, and how long does it take to evaluate it?</p>
+<h2 id="Maximum-Continguous-Subsequence-Sum">Maximum Continguous Subsequence Sum<a class="anchor-link" href="#Maximum-Continguous-Subsequence-Sum">&#182;</a></h2><p>Given a sequence of integers, the <strong>Maximum Contiguous Subsequence Sum Problem</strong> (MCSS) requires finding a contiguous subsequence with maximum total sum:</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We must consider every contiguous subsequence and evaluate the sum of each. There are $O(n^2)$ contiguous subsequences. To evaluate the sum of each contiguous subsequence we need $O(n)$ work and $O(\log n)$ span. Thus the brute-force approach takes $O(n^3)$ work and $O(\log n)$ span.</p>
+<p>E.g,</p>
+<p>For $a = \langle 1, -2, 0, 3, -1, 0, 2, -3 \rangle$ a maximum contiguous subsequence (MCS) is $\langle\, 3, -1, 0, 2 \rangle$. Another is $\langle 0, 3, -1, 0, 2 \rangle.$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\textsf{MCS}{}\,(a) = \arg\max_{0 \leq i,j &lt; |a|} \left( {\left( \sum_{k=i}^j a[k]  \right)} \right)$$<p></p>
+<p>We define the sum of an empty sequence to $-\infty$.</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>MCSS is useful for many applications, from genomics to data science and finance.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Brute-Force">Brute Force<a class="anchor-link" href="#Brute-Force">&#182;</a></h2><p>Let's first take a brute-force approach to this problem. What is the solution space, and how long does it take to evaluate it?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Consider every contiguous subsequence and evaluate the sum of each. </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>There are $O(n^2)$ contiguous subsequences. </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>To evaluate the sum of each contiguous subsequence we need $O(n)$ work and $O(\log n)$ span. </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Thus the brute-force approach takes $O(n^3)$ work and $O(\log n)$ span.</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Can we do better using divide-and-conquer?</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As usual let's start by dividing the input into two equal parts and recursively finding the solution. If the MCSS is within either part entirely, then in the combine step we just need to return the subsequence with larger maximum.</p>
-<p>But what if the MCSS spans the two halves?</p>
+<h2 id="Divide-and-Conquer">Divide and Conquer<a class="anchor-link" href="#Divide-and-Conquer">&#182;</a></h2>$$a = \langle 1, -2, 0, 3, -1, 0, 2, -3 \rangle$$$$\texttt{MCS} = \langle\, 0, 3, -1, 0, 2 \rangle$$$$\texttt{MCSS} = 4$$<p>As usual let's start by dividing the input into two equal parts and recursively finding the solution.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>If the $\texttt{MCSS}$ is within either part entirely, then in the combine step we just need to return the sum.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>But what if the $\texttt{MCS}$ spans the two halves?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="figures/mcss_combine.jpg" alt="MCSS Combine Fig" width="75%"/></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Example: $a = \langle 1, -2, 0, 3, -1, 0, 2, -3 \rangle$</p>
 <ul>
-<li><p>Split into left = $\langle 1, -2, 0, 3 \rangle$, right = $\langle -1, 0, 2, -3 \rangle$</p>
-</li>
-<li><p>Left MCSS is $\langle 0, 3 \rangle$ (or just $\langle 3 \rangle$) $= 3$</p>
-</li>
-<li><p>Right MCSS is $\langle 0, 2 \rangle$ $= 2$</p>
-</li>
-<li><p>But, the best MCSS crossing the cut is $\langle 0, 3, -1, 0, 2 \rangle$ $=4$</p>
-</li>
-</ul>
-<p><br><br></p>
-<p>The maximum sum spanning the cut is the sum of the largest suffix on the left plus the largest prefix on the right.</p>
-<p><br><br></p>
-<p>Suppose we could identify an MCSS ending at position $\lfloor n/2 \rfloor$ and an MCSS beginning at position $\lfloor n/2 \rfloor$. Then we could add values of these to obtain a candidate MCSS for the whole sequence. Then the best of the three candidate solutions is an MCSS for the entire sequence.</p>
-<ul>
-<li><strong>MCSSS</strong>$(i)$: maximum contiguous sum <strong>starting</strong> at position $i$</li>
-<li><strong>MCSSE</strong>$(i)$: maximum contiguous sum <strong>ending</strong> at position $i$</li>
+<li>Split into left = $\langle 1, -2, 0, 3 \rangle$, right = $\langle -1, 0, 2, -3 \rangle$</li>
 </ul>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Suppose MCSSE and MCSSS can be solved in $\Theta(n)$ work and $\Theta(\log n)$ span, and $\mathit{bestAcross}~(b, c)$ constructs an MCSS crossing the split using these solutions. Then we could give this divide-and-conquer algorithm.</p>
+<ul>
+<li>Left $\texttt{MCSS}$ comes from $\langle 0, 3 \rangle$ (or just $\langle 3 \rangle$) $= 3$</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Right $\texttt{MCSS}$ comes from $\langle 0, 2 \rangle$ $= 2$ </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>But, the best $\texttt{MCSS}$ crossing the cut comes from $\langle 0, 3, -1, 0, 2 \rangle$ $=4$</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Spanning-the-Middle">Spanning the Middle<a class="anchor-link" href="#Spanning-the-Middle">&#182;</a></h3><p>The maximum sum spanning the cut is the sum of the largest suffix on the left plus the largest prefix on the right.</p>
+<p><br></p>
+<p>E.g,</p>
+$$\langle 1, -2, 0, 3, -1, 0, 2, -3 \rangle$$$$\langle 1, -2, \pmb{\underline{0, 3}} \rangle ~~ \langle \pmb{\underline{-1, 0, 2}}, -3 \rangle$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If we could identify the $\texttt{MCSS}$ ending at position $\lfloor n/2 \rfloor - 1$ and the $\texttt{MCSS}$ beginning at position $\lfloor n/2 \rfloor$, then we could add values of these to obtain a candidate $\texttt{MCSS}$ for the whole sequence.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Then the best of the three candidate solutions is an $\texttt{MCSS}$ for the entire sequence:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>$\texttt{MCSS(left)}$</li>
+<li>$\texttt{MCSS(right)}$</li>
+<li>$\texttt{bestAcross(left, right)}$<ul>
+<li>$\texttt{MCSS-suffix}$: maximum contiguous sum <strong>ending</strong> at last element</li>
+<li>$\texttt{MCSS-prefix}$: maximum contiguous sum <strong>starting</strong> at first element</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Divide-and-Conquer-Algorithm">Divide and Conquer Algorithm<a class="anchor-link" href="#Divide-and-Conquer-Algorithm">&#182;</a></h2><p>Suppose we have $\texttt{MCSS-suffix}$ and $\texttt{MCSS-prefix}$ and $\mathit{bestAcross}~(b, c)$ which constructs an $\texttt{MCSS}$ crossing the split using these solutions. Then we could give this divide-and-conquer algorithm:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{array}{l}
 \mathit{MCSSDC}~a =  
@@ -14212,27 +14347,111 @@ $$
 \\   
 ~~~~~~~~\texttt{end}  
 \end{array}\
-$$<p><strong>Correctness</strong>:</p>
-<p>We can proceed by induction as usual. The base case produces the correct results. For the induction step, we make the hypothesis that the recursively computed MCSS's for $b$ and $c$ are correct. With a correct implementation of $\mathit{bestAcross}$, we can conclude $\max\{m_b, m_c, m_{bc}\}$ is an MCSS.</p>
-<p><strong>Work/Span</strong>:</p>
-<p>Using our assumption about $\mathit{bestAcross}$ we have that:</p>
-$$ W(n) = 2W(n/2) + \Theta(n)$$<p>and</p>
-$$ S(n) = S(n/2) + \Theta(\log n)$$<p>These yield $O(n\log n)$ work and $O(\log^2 n)$ span.</p>
+$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Correctness</strong>:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We can proceed by induction as usual. The base case produces the correct results. The $\texttt{MCSS}$ of an empty list is $-\infty$ and the $\texttt{MCSS}$ of a list of size $1$ is its single element.</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>But how do we obtain an MCSS starting at a specified position (MCSSS) or ending at a specified position (MCSSE)?</p>
-<p>Because one end of the contiguous subsequence is fixed, it turns out that we can use <code>reduce</code>,  <code>scan</code> and <code>scanI</code> (an inclusive version of scan) to design algorithms for <a href="https://www.diderot.one/courses/43/books/185/part/332/chapter/2684#atom-176120">MCSSS</a> and <a href="https://www.diderot.one/courses/43/books/185/part/332/chapter/2684#atom-176121">MCSSE</a> using $O(n)$ work and $O(\log n)$ span for our application in which the start and end position is the middle of the input list.</p>
-<p><strong>MCSS starting at position $i$:</strong></p>
+<p>For the induction step, we make the hypothesis that the recursively computed MCSS's for $b$ and $c$ are correct. With a correct implementation of $\mathit{bestAcross}$ (we will detail this function soon), we can conclude $\max\{m_b, m_c, m_{bc}\}$ is an MCSS.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Work/Span</strong>:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We will show that $\texttt{MCSS-suffix}$ and $\texttt{MCSS-prefix}$ can be solved in $\Theta(n)$ work and $\Theta(\log n)$ span.</p>
+<p>Using this assumption about $\mathit{bestAcross}$ we have that:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$ W(n) = 2W(n/2) + \Theta(n)$$<p>and</p>
+$$ S(n) = S(n/2) + \Theta(\log n)$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>These yield $O(n\log n)$ work and $O(\log^2 n)$ span.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Implementing-$%5Ctexttt%7BMCSS-suffix%7D$-and-$%5Ctexttt%7BMCSS-prefix%7D$">Implementing $\texttt{MCSS-suffix}$ and $\texttt{MCSS-prefix}$<a class="anchor-link" href="#Implementing-$%5Ctexttt%7BMCSS-suffix%7D$-and-$%5Ctexttt%7BMCSS-prefix%7D$">&#182;</a></h2><p>How do we obtain an $\texttt{MCSS}$ starting at a specified position ($\texttt{MCSS-prefix}$) or ending at a specified position ($\texttt{MCSS-suffix}$)?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p><strong>$\texttt{MCSS-prefix}$ Intuition</strong></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Since we are calculating the sum from the start of a sequence, we can use prefix sum to solve it.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/mcsss_fig.jpg" alt="MCSSS Fig" width="50%"/></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>$\texttt{MCSS-prefix}$ Intuition</strong></p>
+<p>Since we are calculating the sum from the start of a sequence, we can use prefix sum to solve it.</p>
+<p><img src="figures/mcsss_fig.jpg" alt="MCSSS Fig" width="50%"/></p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>left = $\langle 1, -2, 0, 3 \rangle$, right = $\langle -1, 0, 2, -3 \rangle$</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+<span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The max of the prefixes gives us the $\texttt{MCSS}$ starting at the beginning of $\texttt{right}$.</p>
+<p>Max of $1$ happens when using prefix $[-1, 0, 2]$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>$\texttt{MCSS}$ starting at position $i$:</strong></p>
 $$
 \begin{array}{l}  
-\mathit{MCSSSOpt}~a~i =  
+\mathit{MCSSprefix}~a~i =  
 \\   
 ~~~~\texttt{let}   
 \\   
-~~~~~~~~b = \mathit{scanI}~\text{'}\,{\texttt{+}}\,\text{'}~0~a~[i \cdots (|a|-1)]  
+~~~~~~~~b = \mathit{scan}~\,{\texttt{+}}\,~0~a~[i \cdots (|a|-1)]  
 \\   
 ~~~~\texttt{in}  
 \\   
@@ -14240,23 +14459,82 @@ $$
 \\   
 ~~~~\texttt{end}  
 \end{array}
-$$<p>The intuition for this approach is just that if we lock position $i$ for the subsequence, then computing a prefix sum and then subsequent maximum suffices.</p>
-<p><img src="figures/mcsss_fig.jpg" alt="MCSSS Fig" width="50%"/></p>
-<p>left = $\langle 1, -2, 0, 3 \rangle$, right = $\langle -1, 0, 2, -3 \rangle$</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
-<span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-<p>Max of $1$ happens when using prefix $[-1, 0, 2]$</p>
+$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Runtime</strong></p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Solving MCSSE is similar, except "backwards":</p>
-<p><strong>MCSS ending at position $i$:</strong></p>
+<p>$\texttt{scan}$, $\texttt{reduce}$</p>
+<p>$W(n) \in \Theta(n)$</p>
+<p>$S(n) \in \Theta(\lg n)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\texttt{MCSSS}$</p>
+<p>$W(n) \in \Theta(n)$</p>
+<p>$S(n) \in \Theta(\lg n)$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>$\texttt{MCSS-suffix}$ Intuition:</strong></p>
+<p>We can calculate suffix sums by subtracting prefix sums from the sum of the entire sequence.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/mcss-suffix.jpeg" alt="MCSSE Fig" width="50%"/></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Subtracting the smallest prefix sum will give the max suffix sum.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b=&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;v=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">b</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="n">v</span><span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w=&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">w</span><span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v-w=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">-</span><span class="n">w</span><span class="p">)</span>
+<span class="n">v</span><span class="o">-</span><span class="n">w</span><span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+<p>Max of $3$ happens for subsequence $[0,3]$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{array}{l}  
-\mathit{MCSSEOpt}~a~j=  
+\mathit{MCSSE}~a~j=  
 \\  
 ~~~~\texttt{let}  
 \\  
@@ -14270,56 +14548,15 @@ $$
 \\  
 ~~~~\texttt{end}  
 \end{array}\
-$$<p>Here, $v$ is the sum of $a[0\cdots j]$. The key observation here is that for a location $i$, if we subtract prefix sum up to position $i$ from $v$ then we have the subsequence sum for $a[i\cdots j]$. The first <code>scan</code> computes these prefixes and the <code>reduce</code> identifies which difference is maximum.</p>
-<p><img src="figures/mcsse_fig.jpg" alt="MCSSE Fig" width="50%"/></p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b=&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;v=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<span class="n">b</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="n">v</span><span class="o">=</span> <span class="mi">2</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w=&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-<span class="n">w</span><span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v-w=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">-</span><span class="n">w</span><span class="p">)</span>
-<span class="n">v</span><span class="o">-</span><span class="n">w</span><span class="o">=</span> <span class="mi">3</span>
-</pre></div>
-<p>Max of $3$ happens for subsequence $[0,3]$</p>
-
+$$
 </div>
-</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-
-<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="c1"># print(&#39;a=%s&#39; % a) # for tracing</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">id_</span>
-    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># can call these in parallel</span>
-        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]),</span>
-                  <span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">:]))</span>
-        
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-
-<span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This is a horribly inefficient implementation of scan</span>
-<span class="sd">    only to understand what it does.</span>
-<span class="sd">    We&#39;ll discuss how to make it more efficient later.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-            <span class="p">[</span><span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))],</span>
-             <span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-           <span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">MCSS_prefix</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">MCSS_prefix</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="c1"># return the MCSS in a that starts at index i</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>

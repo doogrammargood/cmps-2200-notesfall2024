@@ -14478,7 +14478,7 @@ $$
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$\texttt{MCSSS}$</p>
+<p>$\texttt{MCSS-prefix}$</p>
 <p>$W(n) \in \Theta(n)$</p>
 <p>$S(n) \in \Theta(\lg n)$</p>
 
@@ -14505,28 +14505,27 @@ $$
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b=&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;v=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<span class="n">b</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="n">v</span><span class="o">=</span> <span class="mi">2</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">prefixes</span><span class="p">,</span> <span class="nb">sum</span> <span class="o">=</span> <span class="n">scan</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;prefixes =&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;sum =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="nb">sum</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w=&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-<span class="n">w</span><span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">min_prefix</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">min</span><span class="p">,</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">prefixes</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;min_prefix =&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">min_prefix</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v-w=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">-</span><span class="n">w</span><span class="p">)</span>
-<span class="n">v</span><span class="o">-</span><span class="n">w</span><span class="o">=</span> <span class="mi">3</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;suffix_sum =&#39;</span><span class="p">,</span> <span class="nb">sum</span> <span class="o">-</span> <span class="n">min_prefix</span><span class="p">)</span>
+<span class="n">suffix_sum</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
-<p>Max of $3$ happens for subsequence $[0,3]$</p>
 
 </div>
 </div></div></section><section>
@@ -14534,7 +14533,7 @@ $$
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{array}{l}  
-\mathit{MCSSE}~a~j=  
+\mathit{MCSS-suffix}~a~j=  
 \\  
 ~~~~\texttt{let}  
 \\  
@@ -14550,7 +14549,16 @@ $$
 \end{array}\
 $$
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Runtime</strong></p>
+<p>$\texttt{MCSS-suffix}$</p>
+<p>$W(n) \in \Theta(n)$</p>
+<p>$S(n) \in \Theta(\lg n)$</p>
+
+</div>
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>

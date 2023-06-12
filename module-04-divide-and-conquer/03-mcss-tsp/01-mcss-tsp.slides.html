@@ -14629,57 +14629,114 @@ $$
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-Euclidean-Traveling-Salesperson-Problem">The Euclidean Traveling Salesperson Problem<a class="anchor-link" href="#The-Euclidean-Traveling-Salesperson-Problem">&#182;</a></h2><p>In the Euclidean Traveling Salesperson Problem (eTSP), you are given a set of $n$ 2D points. The goal is to find a "tour" (of the points with minimum cost. That is, we must construct a sequence of all the points (i.e., a sequence of 2D points) that begins and ends with the same point such that:</p>
+<h2 id="The-Euclidean-Traveling-Salesperson-Problem-(eTSP)">The Euclidean Traveling Salesperson Problem (eTSP)<a class="anchor-link" href="#The-Euclidean-Traveling-Salesperson-Problem-(eTSP)">&#182;</a></h2><p>In eTSP, you are given a set of $n$ 2D points.</p>
+<p>The goal is to find a "tour" of the points with minimum cost.</p>
+<p>That is, we must construct a sequence of all the points (i.e., a sequence of 2D points) that begins and ends with the same point such that:</p>
 <ul>
 <li>every point is visited exactly once (except the starting point) </li>
 <li>the sum of distances between adjacent points is minimized</li>
 </ul>
-<p>This is an incredibly widespread and useful problem -- consider all the various kinds of routing problems that are solved every day. For a simple example, think of Amazon/USPS/UPS package deliveries.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is an incredibly widespread and useful problem -- consider all the various kinds of routing problems (Amazon, USPS, UPS, etc.) that are solved every day.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Which solution is better?</p>
 <p><br><p> 
  <img src="figures/eTSP_simple.jpg" alt="eTSP_simple.jpg">
 <br><p></p>
-<p>Given an input with $n$ points, how many possible solutions are there?</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Brute-Force?">Brute-Force?<a class="anchor-link" href="#Brute-Force?">&#182;</a></h2><p>If we take a brute-force approach to this problem, what is the solution space and how can we search it?</p>
-<p>There are $n!$ possible solutions, and we must check the cost of each by summing $n-1$ distances. This can be done with $O(n)$ work and $O(\log n)$ span. So we can solve eTSP with $O(n\cdot n!)$ work and $O(\log n)$ span.</p>
+<h2 id="Brute-Force?">Brute-Force?<a class="anchor-link" href="#Brute-Force?">&#182;</a></h2><p>Given an input with $n$ points, how many possible solutions are there?</p>
+<p>What is the solution space and how can we search it?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>There are $n!$ possible solutions, and we must check the cost of each by summing $n-1$ distances.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This can be done with $O(n)$ work and $O(\lg n)$ span using $\texttt{reduce}$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>What is the runtime of brute force eTSP?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$O(n\cdot n!)$ work and $O(\log n)$ span.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This is good span, but an astronomical amount of work. What if we had more points?</p>
 <p><br><p> 
  <img src="figures/eTSP_harder.jpg" alt="eTSP_harder.jpg">
 <br><p></p>
-<p>16! is about $2 x 10^{13}$, so while there are very few points the brute-force approach is not tractable!</p>
-<p>Is the brute-force algorithm work-efficient?</p>
+<p><br></p>
 
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>16! is about $2 x 10^{13}$, so while there are very few points the brute-force approach is not tractable!</p>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Divide-and-Conquer?">Divide-and-Conquer?<a class="anchor-link" href="#Divide-and-Conquer?">&#182;</a></h2><p>What intuition can we get about the fact that this problem is in 2D?</p>
 <p><br><p> 
  <img src="figures/eTSP_harder_sol.jpg" alt="eTSP_harder_sol.jpg">
 <br><p></p>
-<p>Since points that are "clustered" can possibly be dealt with first, how about a divide-and-conquer approach? How would that work?</p>
+<p><br></p>
+<p>Since clusters of points can possibly be dealt with separately, how about a divide-and-conquer approach?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Divide-and-Conquer-Approach">Divide and Conquer Approach<a class="anchor-link" href="#Divide-and-Conquer-Approach">&#182;</a></h2><p>We can split the input using a "cut" through the plane that separates the input points into two equal parts. Then, recursively solve eTSP for each smaller point set.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We can split the input using a "cut" through the plane that separates the input points into two equal parts. Then, recursively solve eTSP for each smaller point set.</p>
 <p>How do we combine smaller solutions into larger ones?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We need to make sure that two tours can be combined into the best possible single tour.</p>
-<p><br><p> 
- <img src="figures/eTSP_merge2.jpg" alt="eTSP_merge.jpg">
-<br><p></p>
-<p>To do this, we try all possible pairs of edges across both sides and pick the pair which when connected gives the minimum cost. This yields the following algorithm:</p>
+<h2 id="Combining-eTSP-tours">Combining eTSP tours<a class="anchor-link" href="#Combining-eTSP-tours">&#182;</a></h2><p>We need to make sure that two tours can be combined into the best possible single tour.</p>
+<p><img width="80%" src ="figures/eTSP_merge2.jpg"/>
+<br></p>
+<p>To do this, we try all possible pairs of edges across both sides and pick the pair which when connected gives the minimum cost. This yields the following algorithm.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{array}{l}  
 \mathit{eTSP}~(P) =  
@@ -14708,30 +14765,67 @@ $$
 \\  
 ~~~~~~~~\texttt{end}  
 \end{array}\
-$$<p>The function $\mathit{minVal}_{\mathit{first}}$ uses the first value of the pairs to find the minimum, and returns the (first) pair with that minimum. The function $\mathit{swapEdges}(E,e,e')$ finds the edges $e$ and $e'$ and swaps the endpoints. As there are two ways to swap, it picks the cheaper one.</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Correctness</strong>: Does this algorithm compute a tour? Does this algorithm compute a minimum-cost tour?</p>
-<p>We can show by induction that this algorithm always produces a tour.</p>
-<h3 id="However,-the-combine-step-does-not-necessarily-produce-a-minimum-cost-tour!">However, the combine step does not necessarily produce a minimum cost tour!<a class="anchor-link" href="#However,-the-combine-step-does-not-necessarily-produce-a-minimum-cost-tour!">&#182;</a></h3><p><br></p>
-<p>Actually, we currently do not know of any  polynomial-work algorithm to solve this problem. In fact, the brute-force algorithm is essentially the best we can do. (We'll get to this in more detail at the end of the semester.)</p>
-<p>What we do know how to do efficiently is to compute an <em>approximation</em> to the optimal eTSP solution. We can compute a solution that is within $(1+\epsilon)$ of optimal. The running time is polynomial in $n$ and $1/\epsilon$.</p>
-<p>This algorithm is actually not correct in the sense that it is not necessarily an approximation to the optimal solution. Rather, it is a <em>heuristic</em> that works well in practice.</p>
+$$<blockquote><p>The function $\mathit{minVal}_{\mathit{first}}$ iterates over all pairs of edges and finds the pair yielding the minimum cost.</p>
+<p>The function $\mathit{swapEdges}(E,e,e')$ swaps the end points of edges $e$ and $e'$. As there are two ways to swap, it picks the cheaper one.</p>
+</blockquote>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Correctness">Correctness<a class="anchor-link" href="#Correctness">&#182;</a></h2><p>Does this algorithm compute a tour? Does this algorithm compute a minimum-cost tour?</p>
+<p>We can show by induction that this algorithm always produces a tour.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="However,-the-combine-step-does-not-necessarily-produce-a-minimum-cost-tour!">However, the combine step does not necessarily produce a minimum cost tour!<a class="anchor-link" href="#However,-the-combine-step-does-not-necessarily-produce-a-minimum-cost-tour!">&#182;</a></h3>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Our algorithm is actually not correct in the sense that it does not necessarily return the optimal solution. Rather, it is a <em>heuristic</em> that works well in practice.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Actually, we currently do not know of any  polynomial-work algorithm to solve this problem.</p>
+<p>In fact, the brute-force algorithm is essentially the best we can do. (We'll get to this in more detail at the end of the semester.)</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>It is possible to efficiently is to compute an <em>approximation</em> to the optimal eTSP solution. It is possible to compute a solution that is within $(1+\epsilon)$ of optimal. The running time is polynomial in $n$ and $1/\epsilon$.</p>
+</blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Work/Span</strong>:</p>
-<p>This algorithm has two recursive calls that each operate on $n/2$ points. To combine the solution we must check $O(n^2)$ ways too cross the cut and compute the best. This requires $O(n^2)$ work and $O(\log n)$ span.</p>
+<p>This algorithm has two recursive calls that each operate on $n/2$ points.</p>
+<p>Our combination step requires that we check $O(n^2)$ ways too cross the cut and compute the best. This requires $O(n^2)$ work and $O(\log n)$ span.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>So we have that the work is $W(n) = 2W(n/2) + O(n^2).$ This is a root-dominated recurrence, and thus $W(n) = O(n^2)$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>The span is $S(n) = S(n/2) + O(\log n)$. This is a balanced recurrence with $\lg n$ levels, and so $S(n) = O(\log^2 n)$.</p>
 
 </div>
-</div></section></section>
+</div></div></section></section>
 </div>
 </div>
 </body>

@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Randomized Linear Work Selection</li>
 </ul>
@@ -14113,30 +14113,197 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Given an unsorted list $a$ and an integer $k$ ($0\leq k&lt; |a|$), the <strong>order statistics</strong> (or <strong>selection</strong>) problem asks us to return the $k^{th}$ smallest element from $a$. We also refer to the $k^{th}$ smallest element as the element of <em>rank</em> $k$.</p>
-<p>Example: Let $a=\langle 2, 5, 4, 1, 3, -1, 99\rangle.$ For $k=0$, the "$0^{th}$ smallest" element is the minimum element in $a$, or $-1$. For $k=n-1$, it is the maximum, or $99$. For $k=3$, we return $3$.</p>
-<p>Before we come up with a randomized algorithm, we can make a couple of simple observations.</p>
-<p>First, any algorithm for this problem requires $\Omega(n)$ work. Why?</p>
-<p>Second, we can reduce this problem to sorting: we sort $a$ and return the $k^{th}$ element of this sorted list. This requires $O(n\log n)$ time.</p>
-<p>Can we do any better? Sorting seems like overkill since we don't really need to rearrange all the elements, or even return a list.</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>A useful observation is that the $k^{th}$ smallest element in $a$ <em>partitions</em> $a$ into a set of $k-1$ smaller elements, and a set of $n-k-1$ larger elements.</p>
-<p><br><br></p>
-<p>Example: Suppose $a=\langle 2, 5, 4, 1, 3, -1, 99\rangle$ and $k=3$.</p>
-<p>So $3$ is larger than $\langle 2, 1, -1 \rangle$ and smaller than $\langle5, 4, 99\rangle$.</p>
-<p><br><br></p>
-<p>Notice that <em>for any</em> element $x$ in the list, we can look at each element in the list to compute the rank of $x$. This can be done in $O(n)$ work and $O(\log n)$ span.</p>
-<p>Example: Suppose $a=\langle 2, 5, 4, 1, 3, -1, 99\rangle$ and $k=3$. So $a[0] = 2$ is larger than 2 elements ($\langle 1, -1 \rangle$) and smaller than 5 elements ($\langle 5, 4, 3, 99\rangle$).</p>
-<p><br><br></p>
-<p>We can see from this example that once we've identified 3 smaller elements ($\langle 1, -1 \rangle$ and $2$), the element of rank $k=3$ in $a$ must be in $\langle5, 4, 3, 99\rangle$. Moreover it's rank is $k-3 = 0$ in this list.</p>
-<p>This is a little like binary search, but with the partition step helping establish some order.</p>
+<h2 id="The-$%5Ctexttt%7BSelection-Problem%7D$">The $\texttt{Selection Problem}$<a class="anchor-link" href="#The-$%5Ctexttt%7BSelection-Problem%7D$">&#182;</a></h2><p>Given an unsorted list $a$ and an integer $k$ ($0\leq k&lt; |a|$), the <strong>order statistics</strong> (or <strong>selection</strong>) problem asks us to return the $k^{th}$ smallest element from $a$.</p>
 
 </div>
 </div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We also refer to the $k^{th}$ smallest element as the element of <em>rank</em> $k$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Example:</p>
+<p>Let $a=\langle 5, 11, 9, 3, 6, -1, 99\rangle.$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>For $k=0$, the "$0^{th}$ smallest" element is the minimum element in $a$, or $-1$.</li>
+<li>For $k=n-1$, it is the maximum, or $99$.</li>
+<li>For $k=3$, we return $6$.</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h2><p>Before we come up with a randomized algorithm, we can reason about bounds for our runtime using reductions.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>First, let's establish a <strong>lower bound</strong> on our potential runtime.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What problems can we reduce to the $\texttt{Selection Problem}$?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Both $\texttt{Min}$ and $\texttt{Max}$ reduce to this problem.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What does that tell us about our runtime?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$W(n) \in \Omega(n)$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Now let's establish an <strong>Upper Bound</strong> on our potential runtime.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What can we reduce this problem to?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\texttt{Sorting}$: Sort $a$ and return the $k^{th}$ element of this sorted list.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$W(n) \in O(n \log n)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>We have that $W(n) \in \Omega(n) ~ \cap ~ O(n \log n)$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Can we do any better? Sorting seems like overkill since we don't really need to rearrange all the elements, or even return a list.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Let's-build-an-Algorithm">Let's build an Algorithm<a class="anchor-link" href="#Let's-build-an-Algorithm">&#182;</a></h2><p>A useful observation is that the $k^{th}$ smallest element in $a$ <em>partitions</em> $a$ into a set of $k-1$ smaller elements, and a set of $n-k-1$ larger elements.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Example: Suppose $a=\langle 5, 11, 9, 3, 6, -1, 99\rangle$.</p>
+<p>$n = |a| = 7$.</p>
+<p>Let $k=3$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So $6$ is larger than $\langle 5, 3, -1 \rangle$ and smaller than $\langle11, 9, 99\rangle$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>This implies that <em>for any</em> element $x$ in the list, we can compute its rank by partitioning the list.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This can be done in $O(n)$ work and $O(\log n)$ span.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Pivoting-to-Search">Pivoting to Search<a class="anchor-link" href="#Pivoting-to-Search">&#182;</a></h2><p>We'll use partitioning to invent an algorithm to find the element with rank $k$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Again, suppose $a=\langle 5, 11, 9, 3, 6, -1, 99\rangle$ and we are <em>looking</em> for the element with rank $k=3$.</p>
+<p>We can choose an element to partition around (a "pivot" element) to get an indication of where to continue searching.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>For simplicity, let's pivot around $a[0] = 5$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>$5$ is larger than 2 elements in $l = \langle 3, -1 \rangle$ and smaller than 4 elements in $r = \langle 11, 9, 6, 4\rangle$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br>
+What does this tell us?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>We've identified 3 smaller elements ($\langle 1, -1 \rangle$ and $2$).</p>
+<p>Thus, the element of rank $k=3$ in $a$ must be in $r = \langle5, 4, 3, 99\rangle$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Moreover it's rank is $k-3 = 0$ in $r$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is a little like binary search, but with the partition step helping establish some order.</p>
+
+</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This observation motivates the following recursive algorithm.</p>
@@ -14160,7 +14327,12 @@ $$\begin{array}{ll}
 ~~~~\texttt{else}~\mathit{simple\_select}~r~(k - (|a| - |r|))  
 \\  
 \texttt{end}  
-\end{array}$$<p>We just have one recursive call so no parallelism there. However, we can use filter to partition in parallel. This has $O(|a|)$ work $O(\log |a|)$ span.</p>
+\end{array}$$
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h3><p>We just have one recursive call so no parallelism there. However, we can use filter to partition in parallel. This has $O(n)$ work $O(\log n)$ span.</p>
 <p><br><br></p>
 <p>What is the total work over all recursions?</p>
 <p>We know that the work in each recursive call is the $\max\{W(\mid l\mid), W(\mid r\mid)\} + O(n)$.</p>
@@ -14169,7 +14341,7 @@ $$\begin{array}{ll}
 <p>Moreover the span is $S(n) = S(n-1) + \lg n \in O(n\lg n)$ - far worse than sorting!</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>

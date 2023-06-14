@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Random variables and expectations</li>
 <li>Making random choices in algorithms</li>
@@ -14114,7 +14114,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Suppose you could flip a coin to make a decision in an algorithm, rather than relying on inputs. So:</p>
+<h2 id="Why-make-random-decisions?">Why make random decisions?<a class="anchor-link" href="#Why-make-random-decisions?">&#182;</a></h2><p>Suppose you could flip a coin to make a decision in an algorithm, rather than relying on inputs. So:</p>
 <div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;heads&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
@@ -14126,51 +14126,153 @@ div.jp-OutputPrompt {
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>When we don't know exactly how to proceed in solving a problem, we can make a random choice and hope we made the right one.</p>
-<p>Alternately, we can view randomization as helping us avoid always making the wrong choice.</p>
-<p>Additionally for instances where we might not have a good way to proceed, we can "guess" an answer and "hope" it's a good choice.</p>
-<p>What does "hope" mean, computationally? A proof that at least most of the time, we are correct/efficient.</p>
-<p><br><br>
-Randomized algorithms can often be:</p>
-<p>1- easier to understand</p>
-<p>2- faster</p>
-<p>3- more robust to adversarial input (cryptography)</p>
+<ul>
+<li>When there is no clear algorithmic choice, we can make a random one and hope we made the right one.</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Alternately, we can view randomization as helping us avoid always making the wrong choice.</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Additionally for instances where we might not have a good way to proceed, we can "guess" an answer and "hope" it's a good choice. </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What does "hope" mean, computationally?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>A proof that our algorithm is, on average, correct and efficient.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Benefits">Benefits<a class="anchor-link" href="#Benefits">&#182;</a></h3><p>Randomized algorithms can often be:</p>
+<ol>
+<li>easier to understand</li>
+<li>faster</li>
+<li>more robust to adversarial input (cryptography)</li>
+</ol>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Basic-Definitions">Basic Definitions<a class="anchor-link" href="#Basic-Definitions">&#182;</a></h3><p>A probability space consists of a <strong>sample space</strong> $\Omega$ representing the set of possible <em>outcomes</em>, and a <strong>probability measure</strong> $\mathbf{P}: \Omega \rightarrow \mathbb{R}$. The probability measure $\mathbf{P}$ must satisfy three conditions:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><strong>Nonnegativity</strong>: $\mathbf{P}\left[{A}\right] \in [0,1]$</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><strong>Additivity</strong>: For any two disjoint events $A$ and $B$ (i.e., $A \cap B = \emptyset$): $\mathbf{P}\left[{A \cup B}\right] =  
+\mathbf{P}\left[{A}\right] + \mathbf{P}\left[{B}\right]$</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><strong>Normalization</strong>: $\mathbf{P}\left[{\Omega}\right] = 1$</li>
+</ul>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h3><p>Let $\Omega$ be the set of all outcomes of a pair of 6-sided dice.</p>
+<p>$\Omega = \{(1,1), (1,2),...,(2,1),...,(6,6)\}$</p>
+<p>How many outcomes are there if the dice sum to 3? To 4?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The dice sum to 3 if we roll any of $\{(1, 2), (2, 1)\}$</p>
+<p>They sum to 4 if we roll any of $\{(1, 3), (2, 2), (3, 1)\}$.</p>
+<p>What is the probability of rolling a 3? ... a 4?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Every outcome is disjoint and has probability 1/36. So the probability of rolling a 3 is 2/36 = 1/18 and the probability of rolling a 4 is 3/36 = 1/12.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>If we want to consider multiple, possibly overlapping events. Then, the <strong>union bound</strong> is helpful:</p>
+$$\mathbf{P}\left[{\bigcup_{0 \leq i &lt; n} A_i}\right] \leq \sum_{i=0}^{n-1} \mathbf{P}\left[{A_i}\right]$$
+</blockquote>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Basic-Definitions">Basic Definitions<a class="anchor-link" href="#Basic-Definitions">&#182;</a></h3><p>A probability space consists of a <strong>sample space</strong> $\Omega$ representing the set of possible <em>outcomes</em>, and a <strong>probability measure</strong> $\mathbf{P}: \Omega \rightarrow \mathbb{R}$. The probability measure $\mathbf{P}$ must satisfy: &lt;/p&gt;</p>
-<ul>
-<li><p><strong>Nonnegativity</strong>: $\mathbf{P}\left[{A}\right] \in [0,1]$</p>
-</li>
-<li><p><strong>Additivity</strong>: For any two disjoint events $A$ and $B$ (i.e., $A \cap B = \emptyset$): $\mathbf{P}\left[{A \cup B}\right] =  
-\mathbf{P}\left[{A}\right] + \mathbf{P}\left[{B}\right]$</p>
-</li>
-<li><p><strong>Normalization</strong>: $\mathbf{P}\left[{\Omega}\right] = 1$</p>
-</li>
-</ul>
-<p>For example, let $\Omega$ be the set of all outcomes of a pair of 6-sided dice.</p>
-<p>$\Omega = \{(1,1), (1,2),...,(2,1),...,(6,6)\}$</p>
-<p>How many outcomes are there if the dice sum to 3? To 4?</p>
-<p>The dice sum to 3 if we roll any of $\{(1, 2), (2, 1)\}$, and sum to 4 if we roll any of $\{(1, 3), (2, 2), (3, 1)\}$.</p>
-<p>Every outcome is disjoint and has probability 1/36. So the probability of rolling a 3 is 2/36 = 1/18 and the probability of rolling a 4 is 3/36 = 1/12.</p>
-<p>If we want to consider multiple, possibly overlapping events. Then, the <strong>union bound</strong> is helpful:</p>
-$$\mathbf{P}\left[{\bigcup_{0 \leq i &lt; n} A_i}\right] \leq \sum_{i=0}^{n-1} \mathbf{P}\left[{A_i}\right]$$
+<h3 id="Conditional-Probabilities">Conditional Probabilities<a class="anchor-link" href="#Conditional-Probabilities">&#182;</a></h3><p>We may want to know the probability of an event $A$ with "partial knowledge."  It is very common to want to know the <strong>conditional probability</strong> of an event $A$ <em>given</em> that $B$ occurs ($\mathbf{P}\left[{B}\right] &gt; 0$)?</p>
+
 </div>
-</div></section></section><section><section>
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Conditional-Probabilities">Conditional Probabilities<a class="anchor-link" href="#Conditional-Probabilities">&#182;</a></h3><p>We may want to know the probability of an event $A$ with "partial knowledge."  It is very common to want to know the <strong>conditional probability</strong> of an event $A$ <em>given</em> that $B$ occurs ($\mathbf{P}\left[{B}\right] &gt; 0$)?</p>
-<p>For example, what is the probability that the first die comes up 1 given that the sum of a pair of dice is 4?</p>
-<p>$A = \{(1,1),(1,2),(1,3),(1,4),(1,5),(1,6)\}$</p>
-<p>$B = \{(1,3),(2,2),(3,1)\}$</p>
-<p>${A \cap B} = \{(1,3)\}$</p>
-$$\mathbf{P}\left[{A \mid B}\right] = \frac{|A \cap B|}{|B|} = \frac{1}{3}.$$<p><BR><BR></p>
 <p>The <strong>conditional probability</strong> of an event $A$ <em>given</em> that $B$ occurs ($\mathbf{P}\left[{B}\right] &gt; 0$) is:</p>
 $$\mathbf{P}\left[{A \mid B}\right] = \frac{\mathbf{P}\left[{A \cap B}\right]}{\mathbf{P}\left[{B}\right]}$$
 </div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h2><p>What is the probability that the first die comes up 1 given that the sum of a pair of dice is 4?</p>
+$$\mathbf{P}\left[{A \mid B}\right] = \frac{\mathbf{P}\left[{A \cap B}\right]}{\mathbf{P}\left[{B}\right]}$$
+</div>
 </div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$A = \{(1,1),(1,2),(1,3),(1,4),(1,5),(1,6)\}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$B = \{(1,3),(2,2),(3,1)\}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>${A \cap B} = \{(1,3)\}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\mathbf{P}\left[{A \mid B}\right] = \frac{|A \cap B|}{|B|} = \frac{1}{3}.$$
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="The-Law-of-Total-Probability">The Law of Total Probability<a class="anchor-link" href="#The-Law-of-Total-Probability">&#182;</a></h3><p>A useful fact that relates conditional probabilities to non-conditional probabilities is the <strong>Law of Total Probability</strong>:</p>
@@ -14180,19 +14282,57 @@ $$\mathbf{P}\left[{A \mid B}\right] = \frac{\mathbf{P}\left[{A \cap B}\right]}{\
 \\  
 &amp; = &amp;  \sum_{i=0}^{n-1} \mathbf{P}\left[{A_i}\right]\mathbf{P}\left[{B \mid A_i}\right]  
 \end{array}$</p>
-<p>An intuitive way to think about this is that the probability of an event $B$ is just the sum of the probability over all potential disjoint situations.</p>
+<p><br></p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>For example, suppose there are two variations of the flu vaccine: $A_1$ and $A_2$. The probability that someone is given vaccine $A_1$ is $0.4$. The probability that someone is given vaccine $A_2$ is $0.6$. (This example is fictional.)</p>
-<p>A person who receives vaccine $A_1$ has a $12\%$ chance of catching the flu this season, and a person who received vaccine $A_2$ has a $5\%$ chance of catching the flu.</p>
+<blockquote><p>Intuition: the probability of an event $B$ is just the sum of its probability over all potential disjoint situations.</p>
+</blockquote>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h2><p>Suppose (this example is fictional) there are two variations of the flu vaccine: $A_1$ and $A_2$.</p>
+<p>The probability that a person will receive $A_1$ is $0.4$ and the probability that a person will receive $A_2$ is $0.6$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>A person who receives vaccine $A_1$ has a $12\%$ chance of catching the flu this season</p>
+<p>A person who received vaccine $A_2$ has a $5\%$ chance of catching the flu.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What is the probability $\mathbf{P}\left[B\right]$ that a vaccinated person will catch the flu?</p>
-<p>$\mathbf{P}\left[{A_1}\right] = 0.4$</p>
-<p>$\mathbf{P}\left[{A_2}\right] = 0.6$</p>
-<p>$\mathbf{P}\left[{B \mid A_1}\right] = 0.12$</p>
-<p>$\mathbf{P}\left[{B \mid A_2}\right] = 0.05$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the probability $\mathbf{P}\left[B\right]$ that a vaccinated person will catch the flu?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>$\mathbf{P}\left[{A_1}\right] = 0.4$</li>
+<li>$\mathbf{P}\left[{A_2}\right] = 0.6$</li>
+<li>$\mathbf{P}\left[{B \mid A_1}\right] = 0.12$</li>
+<li>$\mathbf{P}\left[{B \mid A_2}\right] = 0.05$</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{array}{lll}
 \mathbf{P}\left[{B}\right] &amp;=&amp; \sum_{i=0}^{n-1} \mathbf{P}\left[{A_i}\right]\mathbf{P}\left[{B \mid A_i}\right]  \\ \\
@@ -14200,20 +14340,30 @@ $$
 &amp;=&amp; 0.4 * 0.12 + 0.6 * 0.05 \\ \\
 &amp;=&amp; 0.078
 \end{array}
-$$<p>What is the probability that a vaccinated person will catch the flu is $\mathbf{P}\left[B\right] = 0.078$ or $7.8\%$.</p>
-<p>For a second example of this, see Vol 1, Ch 18 of the book.</p>
-
+$$
 </div>
-</div>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Independence">Independence<a class="anchor-link" href="#Independence">&#182;</a></h3><p>Another useful concept is <strong>independence</strong>. We say that two events $A$ and $B$ are independent when they are disjoint. So if $A$ and $B$ are independent, $\mathbf{P}\left[{A \cap B}\right] = \mathbf{P}\left[{A}\right] \cdot \mathbf{P}\left[{B}\right].$</p>
+<p>For a second example of this, see Vol 1, Ch 18 of the book.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Independence">Independence<a class="anchor-link" href="#Independence">&#182;</a></h3><p>Another useful concept is <strong>independence</strong>. We say that two events $A$ and $B$ are independent when they are disjoint.</p>
+<p>If $A$ and $B$ are independent, $\mathbf{P}\left[{A \cap B}\right] = \mathbf{P}\left[{A}\right] \cdot \mathbf{P}\left[{B}\right].$</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Random-Variables-and-Expectations">Random Variables and Expectations<a class="anchor-link" href="#Random-Variables-and-Expectations">&#182;</a></h3><p>A <strong>random variable</strong> $X$ is a real-valued function on the outcomes of an experiment, i.e. $X : \Omega\to \mathbb{R}$. We will consider only discrete random variables.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Even more simply, we will most often use <strong>indicator random variables</strong>, which map outcomes to 0 or 1.</p>
 $$X(d_1,d_2) =  
 \left\{  
@@ -14222,35 +14372,53 @@ $$X(d_1,d_2) =
 \\  
 0 \text{    if}~d_1 \not= d_2 ~.  
 \end{array}  
-\right.$$<p>Note: The term "random variable" is somewhat odd. Really it's just a function, but we use this terminology since it's output it dependent on a random process and it is useful to look at functions of outcomes (which have probabilities under a given probability measure).</p>
+\right.$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Note: The term "random variable" is somewhat odd. Really it's just a function, but we use this terminology since it's output it dependent on a random process and it is useful to look at functions of outcomes (which have probabilities under a given probability measure).</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Expectation">Expectation<a class="anchor-link" href="#Expectation">&#182;</a></h2><p>The <strong>expectation</strong> of a random variable $X$ defined for a probability space $(\Omega, \mathbf{P})$ is denoted:</p>
+$$\mathbf{E}_{\Omega,\mathbf{P}}[X] = \sum_{y \in \Omega} X(y) \cdot  
+\mathbf{P}\left[\{y\}\right].$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We usually write this more conveniently as:</p>
+$$ \mathbf{E}\left[{X}\right] = \sum_{x} x \cdot \mathbf{P}\left[X = x\right]. $$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h3>$$ \mathbf{E}\left[{X}\right] = \sum_{x} x \cdot \mathbf{P}\left[X = x\right]. $$<p>Let $X$ be the value of a pair of dice. $X$ can take on values between 2 and 12, where each has a certain probability based on the possible ways the dice can sum to that value.  What is the expected value of the value of a pair of unbiased dice? It is:</p>
+$$
+2\cdot\frac{1}{36} + 3\cdot\frac{2}{36} + 4\cdot\frac{3}{36} + \cdots + 11\cdot\frac{2}{36} + 12\cdot\frac{1}{36}$$<p><br></p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The <strong>expectation</strong> of a random variable $X$ defined for a probability space $(\Omega, \mathbf{P})$ is denoted:</p>
-$$\mathbf{E}_{\Omega,\mathbf{P}}[X] = \sum_{y \in \Omega} X(y) \cdot  
-\mathbf{P}\left[\{y\}\right].$$<p>We usually write this more conveniently as:</p>
-$$ \mathbf{E}\left[{X}\right] = \sum_{x} x \cdot \mathbf{P}\left[X = x\right]. $$<p>Let $X$ be the value of a pair of dice. $X$ can take on values between 2 and 12, where each has a certain probability based on the possible ways the dice can sum to that value.  What is the expected value of the value of a pair of unbiased dice? It is:</p>
-<p>$\begin{align}
-\mathbf{E}\left[{X}\right] &amp;= \sum_{x=2}^{12} x \cdot \mathbf{P}\left[X = x\right] \\
-&amp;= 2\cdot\frac{1}{36} + 3\cdot\frac{2}{36} + 4\cdot\frac{3}{36} + \cdots + 11\cdot\frac{2}{36} + 12\cdot\frac{1}{36}
-\end{align}$</p>
-<p><p><br><br>
-Intuitively, the expectation is really just a weighted average of the values of the random variable.</p>
+<p>Intuitively, the expectation is really just a weighted average of the outcomes of the random variable.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">expectation</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">d1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">d2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
         <span class="n">expectation</span> <span class="o">+=</span> <span class="p">(</span><span class="n">d1</span><span class="o">+</span><span class="n">d2</span><span class="p">)</span><span class="o">/</span><span class="mi">36</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">expectation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expectation</span><span class="p">)</span> 
 </pre></div>
 
      </div>
@@ -14279,23 +14447,60 @@ Intuitively, the expectation is really just a weighted average of the values of 
 
 </div>
 
-</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's look at coin flips where we have equal probability of heads/tails. Let $X$ be the number of flips until we get heads. What is $E[X]$? Observe that:</p>
-<p>$\begin{align}
-E[X] &amp;=&amp; \frac{1}{2}\cdot 1 + \frac{1}{2} (1 + 1) + \frac{1}{2} (1 + 1 + 1)\\
-\end{align}$</p>
-<p>$\begin{align}
-E[X] &amp;=&amp; \frac{1}{2}\cdot 1 + \frac{1}{2} (1 + E[X]) \\
-\end{align}$</p>
-<p>Solving for $E[X]$, we get that $E[X] = 2$. More generally, the expected number of trials to get an outcome of probability $p$ is $1/p$. (We'll see this later.)</p>
+<h3 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h3><p>Let's look at coin flips where we have equal probability of heads/tails. Let $X$ be the number of flips until we get heads. What is $E[X]$?</p>
+<p>Observe that we have two cases:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The first flip is heads. <ul>
+<li>This happens with probability $1/2$. </li>
+<li>The number of flips is 1.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The first flip is tails. <ul>
+<li>This happens with probability $1/2$. </li>
+<li>The number of flips is 1 plus the expected number of flips to get a heads.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$E[X] = \frac{1}{2}\cdot 1 + \frac{1}{2} (1 + E[X])$$<p>Solving for $E[X]$, what do we get?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$E[X] = 2$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>More generally, the expected number of trials to get an outcome of probability $p$ is $1/p$. (We'll see this later.)</p>
+</blockquote>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We will make repeated use of some basic facts about the expectations of random variables.</p>
+<h2 id="Useful-Facts">Useful Facts<a class="anchor-link" href="#Useful-Facts">&#182;</a></h2><p>We will make repeated use of some basic facts about the expectations of random variables.</p>
 <p>First, we can easily treat the expected value of functions of random variables:</p>
 $$ \mathbf{E}\left[f(X)\right] = \sum_{x} f(x) \cdot \mathbf{P}\left[X = x\right]. $$<p>We also have <strong>linearity of expectations</strong> for random variables:</p>
 $$ \mathbf{E}\left[X + Y\right] = \mathbf{E}\left[X\right] + E\left[ Y\right]. $$<p>This identity will help us simplify the calcuation of the <em>expected</em> work and span of an algorithm.</p>
@@ -14304,26 +14509,91 @@ $$ \mathbf{E}\left[X + Y\right] = \mathbf{E}\left[X\right] + E\left[ Y\right]. $
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>How does all this relate to algorithms?</p>
-<p>The sample space we must consider for an algorithm is the set of decisions made by the algorithm. We typically use random variables that map outcomes to a way to measure work/span.</p>
-<p><br><br></p>
-<p>However it is usually difficult to reason directly about the overall outcome (e.g. correctness or work/span), so we try to identify when choices are independent or conditional upon one another.</p>
-<p><br><br></p>
-<p>Ultimately if we choose to make random choices in our algorithm, we must relax our notion of correctness and our definitions of work/span.</p>
-<p><br><br></p>
-<p>For correctness, some executions may produce the wrong output while others are correct. We usually seek to have a very high <em>probability of correctness</em>.</p>
-<p><br><br></p>
-<p>For work/span, some executions may take longer than others. We seek to provide asymptotic bounds on the <em>expected</em> work or span of a randomized algorithm. Intuitively, this is the weighted average of the running times over all possible sets of random choices.</p>
-<p>When using randomization we usually have one of two types of algorithms.</p>
-<p>A <strong>Monte Carlo</strong> randomized algorithm has a <strong>deterministic</strong> worst-case runtime but a randomized output that is correct with some probability.</p>
-<p>A <strong>Las Vegas</strong> randomized algorithm always produces a correct solution, but has an <strong>expected</strong> runtime.</p>
+<h2 id="How-does-all-this-relate-to-algorithms?">How does all this relate to algorithms?<a class="anchor-link" href="#How-does-all-this-relate-to-algorithms?">&#182;</a></h2><ul>
+<li>The sample space we must consider for an algorithm is the set of decisions made by the algorithm. <ul>
+<li>We try to come up with random variables that map outcomes to a way to measure work/span.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>It is usually difficult to reason directly about the overall outcome. <ul>
+<li>We try to identify when choices are independent or conditional upon one another.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>For correctness, some executions may produce the wrong output while others are correct. <ul>
+<li>We usually seek to have a very high <em>probability of correctness</em>. </li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>For work/span, some executions may take longer than others. <ul>
+<li>We seek to provide asymptotic bounds on the <em>expected</em> work or span of a randomized algorithm. </li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Ultimately, if we choose to make random choices in our algorithm, we must relax our notion of correctness and our definitions of work/span.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Types-of-Random-Algorithms">Types of Random Algorithms<a class="anchor-link" href="#Types-of-Random-Algorithms">&#182;</a></h2><p>When using randomization we usually have one of two types of algorithms:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>A <strong>Monte Carlo</strong> randomized algorithm has a <strong>deterministic</strong> worst-case runtime but a randomized output that is correct with some probability.<ul>
+<li>Example: <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test">The Miller-Rabin Primality Test</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>A <strong>Las Vegas</strong> randomized algorithm always produces a correct solution, but has an <strong>expected</strong> runtime.<ul>
+<li>Example: <a href="https://cmps-2200.github.io/cmps-2200-notes/module-05-random/03-quicksort/01-quicksort.slides.html#/">Quicksort</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We will focus on Las Vegas algorithms.</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Randomly-splitting-a-list">Randomly splitting a list<a class="anchor-link" href="#Randomly-splitting-a-list">&#182;</a></h3><p>Suppose we are given a list $L$ of length $n$. We choose a random index $i$ of the list and return $L[i:]$ as output.</p>
+<h2 id="Example:-Randomly-splitting-a-list">Example: Randomly splitting a list<a class="anchor-link" href="#Example:-Randomly-splitting-a-list">&#182;</a></h2><p>Suppose we are given a list $L$ of length $n$. We choose a random index $i$ of the list and return $L[i:]$ as output.</p>
 <p>What is the expected size of $L[i:]$?</p>
 
 </div>
@@ -14331,23 +14601,87 @@ $$ \mathbf{E}\left[X + Y\right] = \mathbf{E}\left[X\right] + E\left[ Y\right]. $
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Let $X$ be a random variable that is the size of the output list. By the definition of expectation we have:</p>
-<p>$\begin{align}
-\mathbf{E}[X] &amp;=&amp; \sum_{x=1}^{n} x \cdot \mathbf{P}[X = x] \\
-&amp;=&amp; \sum_{x=1}^{n} x \cdot \frac{1}{n} \\
-&amp;=&amp; \frac{1}{n}\cdot\sum_{x=1}^{n} x \\
-&amp;=&amp; \frac{1}{n}\cdot\frac{n(n+1)}{2}\\
-&amp;=&amp; \frac{n+1}{2} \\
-\end{align}$</p>
-<p>This might follow your intuition that, since all indices are equally likely, the chosen index averages out to roughly half of the list size.</p>
-<p>A related question is, what is the probability of getting a list with more than half of the elements? That is, what is $\mathbf{P}\left[X \geq n/2\right]$?</p>
-<p>$\begin{align}
-\mathbf{P}\left[X \geq n/2\right] &amp;=&amp; \sum_{x=n/2}^{n} \mathbf{P}[X = x] \\
-&amp;=&amp; \sum_{x=n/2}^{n} \frac{1}{n} \\
-&amp;=&amp; \frac{1}{n}\cdot\sum_{x=n/2}^{n} 1 \\
-&amp;=&amp; \frac{n/2}{n} \\
-&amp;=&amp; \frac{1}{2} \\
-\end{align}$</p>
+$$\mathbf{E}[X] = \sum_{x=1}^{n} x \cdot \mathbf{P}[X = x]$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the probability that we choose any individual index?</p>
 
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\mathbf{P}[i] = \frac{1}{n}$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Expected-size-of-$L%5Bi:%5D$">Expected size of $L[i:]$<a class="anchor-link" href="#Expected-size-of-$L%5Bi:%5D$">&#182;</a></h3>$$\mathbf{E}[X] = \sum_{x=1}^{n} x \cdot \mathbf{P}[X = x]$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\mathbf{E}[X] = \sum_{x=1}^{n} x \cdot \frac{1}{n}$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$= \frac{1}{n}\cdot\sum_{x=1}^{n} x$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$= \frac{1}{n}\cdot\frac{n(n+1)}{2}$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$= \frac{n+1}{2}$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This might follow your intuition that, since all indices are equally likely, the chosen index averages out to roughly half of the list size.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>A related question is, what is the probability of getting a list with more than half of the elements?</p>
+<p>That is, what is $\mathbf{P}\left[X \geq n/2\right]$?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Intuitively, we can say it is the probability of choosing any index that gives us a size $\geq n/2$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\mathbf{P}\left[X \geq n/2\right] = ~ ?$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\mathbf{P}\left[X \geq n/2\right] = \sum_{x=n/2}^{n} \mathbf{P}[X = x]$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$= \sum_{x=n/2}^{n} \frac{1}{n}$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$= \frac{1}{n}\cdot\sum_{x=n/2}^{n} 1$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$= \frac{n/2}{n} ~ = ~~ \frac{1}{2}$$
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14360,18 +14694,62 @@ $$ \mathbf{E}\left[X + Y\right] = \mathbf{E}\left[X\right] + E\left[ Y\right]. $
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let $X_i$ be an indicator random variable that is 1 if element $i$ is chosen, and 0 otherwise. Let $X$ be the size of $R$. We can see that $X = \sum_{i=0}^{n-1} X_i$ by definition. So by linearity of expectation we can compute:</p>
-$$\mathbf{E}[X] = \sum_{i=0}^{n} \mathbf{E}[X_i].$$<p>Now notice that by the definition of expectation</p>
-$$E[X_i] = 0\cdot \mathbf{P}[X_i = 0] + 1\cdot\mathbf{P}[X_i = 1] = \mathbf{P}[X_i = 1].$$<p>Since we flip a coin for each element independently, $\mathbf{P}[X_i = 1] = 1/2.$ Thus, $\mathbf{E}[X_i] = 1/2$ for all $i$. So we have that</p>
-$$\mathbf{E}[X] = \sum_{i=0}^{n} \frac{1}{2} = \frac{n}{2}.$$<p>So the expected size of $R$ is $n/2$.</p>
+<p>Let $X_i$ be an indicator random variable that is 1 if element $i$ is chosen, and 0 otherwise, and let $X$ be the size of $R$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We can see that $X = \sum_{i=0}^{n-1} X_i$ by definition.</p>
+<p>By linearity of expectation we can compute:</p>
+$$\mathbf{E}[X] = \sum_{i=0}^{n} \mathbf{E}[X_i].$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We can note that by the definition of expectation</p>
+<p>$\begin{align}
+E[X_i] &amp;= 0\cdot \mathbf{P}[X_i = 0] + 1\cdot\mathbf{P}[X_i = 1] \\
+&amp;= \mathbf{P}[X_i = 1]\\
+&amp;= 1/2
+\end{align}$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Thus, $\mathbf{E}[X_i] = 1/2$ for all $i$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So we have that
+$\begin{align}
+\mathbf{E}[X] &amp;= \sum_{i=0}^{n} \mathbf{E}[X_i] \\
+&amp;= \sum_{i=0}^{n} \frac{1}{2} = \frac{n}{2}
+\end{align}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So the expected size of $R$ is $n/2$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>These simplistic algorithms illustrate the kind of analysis we will be doing to analyze the expected work and span of algorithms for manipulating lists.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>These simplistic algorithms illustrate the kind of analysis we will be doing to analyze the expected work and span of algorithms for manipulating lists.</p>
-<p>We will look at algorithms for selection and sorting. For both problems we will analyze recursive algorithms that use randomization to select the input for the recursive calls.</p>
+<h2 id="Coming-Up">Coming Up<a class="anchor-link" href="#Coming-Up">&#182;</a></h2><p>We will look at algorithms for selection and sorting. For both problems we will analyze recursive algorithms that use randomization to select the input for the recursive calls.</p>
 <p>This creates a complicated situation in which each successive call depends on the previous one, and thereby requires some clever accounting to derive the expected work and span.</p>
+<p>We will start by examining the problem of selection.</p>
 
 </div>
 </div></section></section>

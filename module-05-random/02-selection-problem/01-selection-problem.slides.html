@@ -14273,7 +14273,7 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
-<p>$5$ is larger than 2 elements in $l = \langle 3, -1 \rangle$ and smaller than 4 elements in $r = \langle 11, 9, 6, 4\rangle$.</p>
+<p>$5$ is larger than 2 elements in $l = \langle 3, -1 \rangle$ and smaller than 4 elements in $r = \langle 11, 9, 6, 99\rangle$.</p>
 
 </div>
 </div></div><div class="fragment">
@@ -14287,8 +14287,8 @@ What does this tell us?</p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
-<p>We've identified 3 smaller elements ($\langle 1, -1 \rangle$ and $2$).</p>
-<p>Thus, the element of rank $k=3$ in $a$ must be in $r = \langle5, 4, 3, 99\rangle$.</p>
+<p>We've identified 3 smaller elements ($\langle 3, -1 \rangle$ and $5$).</p>
+<p>Thus, the element of rank $k=3$ in $a$ must be in $r = \langle11, 9, 6, 99\rangle$.</p>
 
 </div>
 </div></div><div class="fragment">
@@ -14300,13 +14300,12 @@ What does this tell us?</p>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is a little like binary search, but with the partition step helping establish some order.</p>
+<p>This motivates an algorithm like binary search, but with the partition step helping establish some order.</p>
 
 </div>
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This observation motivates the following recursive algorithm.</p>
 $$\begin{array}{ll}  
 \mathit{simple\_select}~a~k =   
 \\  
@@ -14333,18 +14332,48 @@ $$\begin{array}{ll}
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h3><p>We just have one recursive call so no parallelism there. However, we can use filter to partition in parallel. This has $O(n)$ work $O(\log n)$ span.</p>
-<p><br><br></p>
-<p>What is the total work over all recursions?</p>
-<p>We know that the work in each recursive call is the $\max\{W(\mid l\mid), W(\mid r\mid)\} + O(n)$.</p>
-<p><br><br></p>
-<p>Consider the case where $a$ is a sorted list. Then in every call, $\ell = \emptyset$, and $\mid r\mid = n-1$. So we would we have $W(n) = W(n-1) + n = O(n^2)$. This is worse than just sorting the list!</p>
-<p>Moreover the span is $S(n) = S(n-1) + \lg n \in O(n\lg n)$ - far worse than sorting!</p>
+<p><br></p>
+<p>What is the total work over all recursive calls?</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>We know that the work in each recursive call is the $\max\{W(\mid l\mid), W(\mid r\mid)\} + O(n)$.</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the worst case scenario?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consider the case where $a$ is a sorted list. Then in every call, $\ell = \emptyset$, and $\mid r\mid = n-1$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So we would we have $W(n) = W(n-1) + n = O(n^2)$.</p>
+<p>This is worse than just sorting the list!</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Moreover the span is $S(n) = S(n-1) + \lg n \in O(n\lg n)$</p>
+<p>Far worse than sorting!</p>
+
+</div>
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">simple_select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -14363,11 +14392,7 @@ $$\begin{array}{ll}
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;...recursing with r=</span><span class="si">%s</span><span class="s1"> and k=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span>  <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))))</span>
         <span class="k">return</span> <span class="n">simple_select</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span>  <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
     
-<span class="c1"># -1, 1, 2, 3, 4, 5, 99</span>
-<span class="c1"># k=3 -&gt; 3</span>
-<span class="c1"># k=0 -&gt; -1</span>
-<span class="c1"># k=6 -&gt; 99</span>
-<span class="n">simple_select</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">simple_select</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14388,21 +14413,21 @@ $$\begin{array}{ll}
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>
-a= [2, 5, 4, 1, 3, -1, 99] k= 3 p= 2
-l= [1, -1] r= [5, 4, 3, 99]
-...recursing with r=[5, 4, 3, 99] and k=0
+a= [5, 11, 9, 3, 6, -1, 99] k= 3 p= 5
+l= [3, -1] r= [11, 9, 6, 99]
+...recursing with r=[11, 9, 6, 99] and k=0
 
-a= [5, 4, 3, 99] k= 0 p= 5
-l= [4, 3] r= [99]
-...recursing with l=[4, 3] and k=0
+a= [11, 9, 6, 99] k= 0 p= 11
+l= [9, 6] r= [99]
+...recursing with l=[9, 6] and k=0
 
-a= [4, 3] k= 0 p= 4
-l= [3] r= []
-...recursing with l=[3] and k=0
+a= [9, 6] k= 0 p= 9
+l= [6] r= []
+...recursing with l=[6] and k=0
 
-a= [3] k= 0 p= 3
+a= [6] k= 0 p= 6
 l= [] r= []
-...returning p=3
+...returning p=6
 </pre>
 </div>
 </div>
@@ -14410,13 +14435,13 @@ l= [] r= []
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>3</pre>
+<pre>6</pre>
 </div>
 
 </div>
@@ -14425,14 +14450,14 @@ l= [] r= []
 
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># worst case: find the max of a sorted list</span>
-<span class="n">simple_select</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">99</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">simple_select</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">99</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14453,27 +14478,27 @@ l= [] r= []
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>
-a= [-1, 1, 2, 3, 4, 5, 99] k= 6 p= -1
-l= [] r= [1, 2, 3, 4, 5, 99]
-...recursing with r=[1, 2, 3, 4, 5, 99] and k=5
+a= [-1, 3, 5, 6, 9, 11, 99] k= 6 p= -1
+l= [] r= [3, 5, 6, 9, 11, 99]
+...recursing with r=[3, 5, 6, 9, 11, 99] and k=5
 
-a= [1, 2, 3, 4, 5, 99] k= 5 p= 1
-l= [] r= [2, 3, 4, 5, 99]
-...recursing with r=[2, 3, 4, 5, 99] and k=4
+a= [3, 5, 6, 9, 11, 99] k= 5 p= 3
+l= [] r= [5, 6, 9, 11, 99]
+...recursing with r=[5, 6, 9, 11, 99] and k=4
 
-a= [2, 3, 4, 5, 99] k= 4 p= 2
-l= [] r= [3, 4, 5, 99]
-...recursing with r=[3, 4, 5, 99] and k=3
+a= [5, 6, 9, 11, 99] k= 4 p= 5
+l= [] r= [6, 9, 11, 99]
+...recursing with r=[6, 9, 11, 99] and k=3
 
-a= [3, 4, 5, 99] k= 3 p= 3
-l= [] r= [4, 5, 99]
-...recursing with r=[4, 5, 99] and k=2
+a= [6, 9, 11, 99] k= 3 p= 6
+l= [] r= [9, 11, 99]
+...recursing with r=[9, 11, 99] and k=2
 
-a= [4, 5, 99] k= 2 p= 4
-l= [] r= [5, 99]
-...recursing with r=[5, 99] and k=1
+a= [9, 11, 99] k= 2 p= 9
+l= [] r= [11, 99]
+...recursing with r=[11, 99] and k=1
 
-a= [5, 99] k= 1 p= 5
+a= [11, 99] k= 1 p= 11
 l= [] r= [99]
 ...recursing with r=[99] and k=0
 
@@ -14487,7 +14512,7 @@ l= [] r= []
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
@@ -14502,11 +14527,21 @@ l= [] r= []
 
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The problem is that we just don't know anything about the element we're using for the partition. How do we avoid this worst case?</p>
-<p>Pick a random element, or <strong>pivot</strong>, for partitioning!</p>
+<h2 id="The-Problem,-and-its-Solution">The Problem, and its Solution<a class="anchor-link" href="#The-Problem,-and-its-Solution">&#182;</a></h2><p>The problem is that we just don't know anything about the element we're using for the partition. How do we avoid this worst case?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Pick a random <strong>pivot</strong> for partitioning!</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$\begin{array}{ll}  
 \mathit{select}~a~k =   
 \\  
@@ -14527,14 +14562,12 @@ $$\begin{array}{ll}
 ~~~~\texttt{else}~\mathit{select}~r~(k - (|a| - |r|))  
 \\  
 \texttt{end}  
-\end{array}$$<p>If we get a sorted list as input, what is the probability of the worst-case?</p>
-<p>The size of the $l$ and $r$ will depend on the random choice. Thus the recurrences describing the work and span depend on each random choice and we need to find their expected asymptotic work/span.</p>
-
+\end{array}$$
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -14556,8 +14589,7 @@ $$\begin{array}{ll}
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;...recursing with r=</span><span class="si">%s</span><span class="s1"> and k=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span>  <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))))</span>
         <span class="k">return</span> <span class="n">select</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span>  <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
     
-<span class="c1">#select([2,5,4,1,3,-1,99], 3)</span>
-<span class="n">select</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">99</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">select</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">99</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14578,16 +14610,12 @@ $$\begin{array}{ll}
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>
-a= [-1, 1, 2, 3, 4, 5, 99] k= 6 p= -1
-l= [] r= [1, 2, 3, 4, 5, 99]
-...recursing with r=[1, 2, 3, 4, 5, 99] and k=5
+a= [-1, 3, 5, 6, 9, 11, 99] k= 6 p= 5
+l= [-1, 3] r= [6, 9, 11, 99]
+...recursing with r=[6, 9, 11, 99] and k=3
 
-a= [1, 2, 3, 4, 5, 99] k= 5 p= 1
-l= [] r= [2, 3, 4, 5, 99]
-...recursing with r=[2, 3, 4, 5, 99] and k=4
-
-a= [2, 3, 4, 5, 99] k= 4 p= 5
-l= [2, 3, 4] r= [99]
+a= [6, 9, 11, 99] k= 3 p= 11
+l= [6, 9] r= [99]
 ...recursing with r=[99] and k=0
 
 a= [99] k= 0 p= 99
@@ -14600,7 +14628,7 @@ l= [] r= []
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 
 
 
@@ -14615,34 +14643,134 @@ l= [] r= []
 
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's get some intution for what's happening. We saw that the work of our algorithm depends on $\max\{W(\mid l\mid), W(\mid r\mid)\}$ in each recursive call. While there is only a $1/n$ probability of choosing a balanced split, any constant fraction reduction in the size of the larger list yields good performance.</p>
-<p>So, suppose we knew that $\max\{W(\mid l\mid), W(\mid r\mid)\} \leq W(3n/4)$. This would be a good enough split since the overall work would be $W(n) = W(3n/4) + n = O(n)$. (root dominated)</p>
-<p>What we want to know is:  <strong>What's the probability that the input to the recursive call has size $\le \frac{3}{4} n$ ?</strong></p>
-<p><br><br></p>
+<h2 id="Quantifying-our-chances">Quantifying our chances<a class="anchor-link" href="#Quantifying-our-chances">&#182;</a></h2><p>If we get a sorted list as input, what is the probability of the worst-case?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The size of the $l$ and $r$ will depend on the random choice.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Thus the recurrences describing the work and span depend on each random choice and we need to find their expected asymptotic work/span.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Intuition">Intuition<a class="anchor-link" href="#Intuition">&#182;</a></h3><p>We saw that the work of our algorithm depends on $\max\{W(\mid l\mid), W(\mid r\mid)\}$ in each recursive call.</p>
+<p>What is the probability of getting a perfect split?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$1/n$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>What about a split that is "good enough"?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So, suppose we knew that $\max\{W(\mid l\mid), W(\mid r\mid)\} \leq W(3n/4)$.</p>
+<p>This would be a good enough split since the overall work would be $W(n) = W(3n/4) + n \in O(n)$. (root dominated)</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Probability-of-%22good-enough%22">Probability of "good enough"<a class="anchor-link" href="#Probability-of-%22good-enough%22">&#182;</a></h3><p>What is the probability that the input to the recursive call has size $\le \frac{3}{4} n$?</p>
+<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We can examine where $p$ might land in the sorted version of $a$, to understand the probability of a good split.</p>
 <p><img width="60%" src="figures/selection-intuition.jpg"/></p>
-<p>If the sampled pivot lies in the green region, then the size of the array passed to the recursive call is at most $3n/4$.</p>
-<p>The probability of sampling a point in the green region is $1/2$.</p>
-<p>We can see that $\mathbf{P}[\max\{W(\mid l\mid), W(\mid r\mid)\} \leq W(3n/4)] = 1/2$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If we sample any pivot in the green region, what is the size of the larger partition?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>It is at most $3n/4$.</p>
+<p>What is the probability of sampling a point in the green region?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$1/2$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\mathbf{P}[\max\{W(\mid l\mid), W(\mid r\mid)\} \leq W(3n/4)] = 1/2$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If we think of each choice of pivot as a coin flip ("good" vs. "bad") then the expected number of pivot choices to reduce the input to $3n/4$ is 2.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In other words, every two recursions yields the desired reduction in list size, and so in expectation we will do linear work.</p>
-<p><br><br>
-<strong>What if we're unlucky?</strong></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>What if we're unlucky?</strong></p>
 <p>We could keep sampling pivots outside of the green area. What is the probability if we do so $i$ times in a row?</p>
-<p><br><br>
-$\frac{1}{2} * \frac{1}{2} * \frac{1}{2} * ... = \frac{1}{2^i}$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>$\frac{1}{2} * \frac{1}{2} * \frac{1}{2} * ... = \frac{1}{2^i}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>E.g., for $i=10$, probability of getting no good pivots is $\approx 0.1\%$.</p>
 <p>Thus, probability of getting at least one good pivot for 10 splits is $\approx 99.9\%$</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's analyze the performance more closely. Let $X(n)$ be the fractional size of the larger side of the split, for an input of size $n$. So</p>
-$$X(n) = \frac{\max{\{|l|, |r|\}}}{n}$$<p>e.g., $n=6$</p>
+<h2 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h2><p>With our intuition established, let's analyze the performance rigorously.</p>
+<p>Let $X(n)$ be the fractional size of the larger side of the split, for an input of size $n$. So</p>
+$$X(n) = \frac{\max{\{|l|, |r|\}}}{n}$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>e.g., $n=6$</p>
 <table>
 <thead><tr>
 <th>i</th>
@@ -14690,17 +14818,108 @@ $$X(n) = \frac{\max{\{|l|, |r|\}}}{n}$$<p>e.g., $n=6$</p>
 </tr>
 </tbody>
 </table>
-<p>Then the work and span recurrences are:</p>
-$$W(n) \leq W(X(n) \cdot n) + O(n)$$$$S(n) \leq S(X(n) \cdot n) + O(\lg n)$$<p></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
-<p>First, we'll bound $\mathbf{E}[X(n)].$ As we discussed above, if $|l| = i$, then $|r| = n - i -1$. Using the fact that the probability of the pivot being any particular $i$ is $1/n$, we have:</p>
-$$\begin{align}
- \mathbf{E}\left[{X(n)}\right] &amp;=  \sum_{i=0}^{n-1}P[X(i)] \cdot X(i)\\
+<p>Our work and span recurrences are:</p>
+$$W(n) \leq W(X(n) \cdot n) + O(n)$$$$S(n) \leq S(X(n) \cdot n) + O(\lg n)$$<p></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="The-expected-size-of-the-larger-partition">The expected size of the larger partition<a class="anchor-link" href="#The-expected-size-of-the-larger-partition">&#182;</a></h3><p>We want to prove that $\mathbf{E}[X(n)] = 3/4$ as our intuition says.</p>
+<p>As we discussed previously, if $|l| = i$, then $|r| = n - i -1$.</p>
+<p>Using the fact that the probability of the pivot being any particular $i$ is $1/n$, we have:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+ \mathbf{E}\left[{X(n)}\right] &amp;= \sum_{i=0}^{n-1} X(i) \cdot P[X(i)] \\
  &amp; =  \frac{1}{n} \sum_{i=0}^{n-1} \frac{\max\{i, n-i-1\}}{n} \\
- &amp;\leq  \frac{1}{n} \sum_{j=n/2}^{n-1} \frac{2}{n} \cdot j  ~~~~~~~~~~~~~~ \left(\sum_{j=3}^{5} \frac{2}{n} \cdot j = \frac{2*3}{6} + \frac{2*4}{6} + \frac{2*5}{6}\right) \\
+\end{align}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<table>
+<thead><tr>
+<th>i</th>
+<th>len(l)</th>
+<th>len(r)</th>
+<th>X(i)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>5/6</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>4/6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3/6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3/6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>4/6</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>5/6</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+ \mathbf{E}\left[{X(n)}\right] &amp;=  \sum_{i=0}^{n-1} X(i) \cdot P[X(i)]\\
+ &amp; =  \frac{1}{n} \sum_{i=0}^{n-1} \frac{\max\{i, n-i-1\}}{n} \\
+ &amp;\leq  \frac{1}{n} \sum_{j=n/2}^{n-1} \frac{2j}{n}  ~~~~~~~~~~~~~~ \left(\sum_{j=3}^{5} \frac{2j}{n} = \frac{2*3}{6} + \frac{2*4}{6} + \frac{2*5}{6}\right) \\
  &amp;\leq  \frac{2}{n^2}\sum_{j=n/2}^{n-1} j\\
  &amp;\leq  \frac{3}{4}  
-\end{align}$$<p>Last line uses $\sum_{i=x}^y i = \frac12(x+y)(y - x + 1)$:</p>
+\end{align}$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Thus the expected size of the larger partition is $\leq  \frac{3}{4}$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Full detail</strong></p>
+<p>Last line uses $\sum_{i=x}^y i = \frac12(x+y)(y - x + 1)$:</p>
 <p>$= \frac12 (n/2 + (n-1))((n-1)-(n/2) + 1)$</p>
 <p>$= \frac12 (3n/2 - 1)(n/2)$</p>
 <p>$= \frac12 (3n^2/4 - n/2)$</p>
@@ -14708,27 +14927,95 @@ $$\begin{align}
 <p>$=(3n^2 - 2n)/8$</p>
 <p>multiply by $2/n^2$:</p>
 <p>$= \frac{3n^2-2n}{4n^2} = \frac{3n^2}{4n^2} - \frac{1}{2n} \le \frac{3}{4}$</p>
-<p><br></p>
-<p>It might seem tempting to say that we are done. However, we could get "unlucky" in a series of recursions even though $\mathbf{E}[X(n)]\leq 3/4.$ We will show the following.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="What-if-we're-unlucky?">What if we're unlucky?<a class="anchor-link" href="#What-if-we're-unlucky?">&#182;</a></h2><p>It might seem tempting to say that we are done. However, we could get "unlucky" in a series of recursions even though $\mathbf{E}[X(n)]\leq 3/4.$ We will show the following.</p>
+<p><strong>Theorem.</strong> At the $d^{th}$ level of recursion, the size of the input is $(3/4)^d n$ in expectation.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Theorem.</strong> At the $d^{th}$ level of recursion, the size of the input is $(3/4)^d n$ in expectation.</p>
 <p><strong>Proof</strong>: We can prove this by induction.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The base case $d=0$ holds trivially.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For the inductive step, we make the inductive hypothesis that our theorem holds for $d  \ge 0$ and will show that it holds after the $d+1^{st}$ recursive call.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For the $d^{th}$ recursive call, let $Y_d$ be a random variable for the instance size and let $Z_d$ be the rank of the pivot.</p>
-<p>For any value of $y$ and $z$, let $f(y,z)$ be a function that take in $y$ - the size of the input - and $z$ - the position of the pivot - and returns the fraction of the input reduced by that choice of the pivot. The expected input size in the $(d+1)^{st}$ call is:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>For any value of $y$ and $z$, let $f(y,z)$ be a function that take in $y$ (the size of the input) and $z$ (the position of the pivot) and returns the fraction of the input reduced by that choice of the pivot.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The expected input size in the $(d+1)^{st}$ call is:
+$$\mathbf{E}[Y_{d+1}] = \sum_{y}{\sum_{z}{y\cdot f(y,z) \mathbf{P}_{Y_d,Z_d}(y,z)}} $$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$\begin{align}  
-\mathbf{E}[Y_{d+1}] &amp;= \sum_{y,z}{y\cdot f(y,z) \mathbf{P}_{Y_d,Z_d}(y,z)}   \\  
+\mathbf{E}[Y_{d+1}] &amp;= \sum_{y}{\sum_{z}{y\cdot f(y,z) \mathbf{P}_{Y_d,Z_d}(y,z)}}   \\  
 &amp; = \sum_{y}{\sum_{z}{y f(y,z) \mathbf{P}_{Y_d}(y) \mathbf{P}_{Z_d \mid Y_d}(z \mid y)}}   
- ~~~~~~~ \hbox{by definition} ~~ p(a,b) = p(b)p(a|b)\\  
+ ~~~~~ \hbox{by def,} ~~ p(a,b) = p(a)p(b|a)\\  
 &amp;= \sum_{y}{y \mathbf{P}_{Y_d}(y) \sum_{z}{f(y,z) \mathbf{P}_{Z_d \mid Y_d}(z \mid y)}}  ~~~~~~ \hbox{grouping terms} \\  
-&amp;=  \sum_{y}{y \mathbf{P}_{Y_d}(y) \mathbf{E}\left[{X(y)}\right]} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \hbox{definition of}~ X(i) ~\hbox{and expectation}\\  
-&amp; \le  \frac{3}{4} \sum_{y}{y \mathbf{P}_{Y_d}(y)} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\hbox{by our bound above} \\ 
-&amp; \le  \frac{3}{4} \mathbf{E}\left[{Y_d}\right].    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\hbox{definition of expectation}
+&amp;=  \sum_{y}{y \mathbf{P}_{Y_d}(y) \mathbf{E}\left[{X(y)}\right]} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \hbox{def of}~ X(i) ~\hbox{and expectation}\\  
+&amp; \le  \frac{3}{4} \sum_{y}{y \mathbf{P}_{Y_d}(y)} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\hbox{by our bound above} \\ 
+&amp; \le  \frac{3}{4} \mathbf{E}\left[{Y_d}\right].    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\hbox{definition of expectation}
 \end{align}$$<p>Thus $\mathbf{E}[Y_{d+1}] \le \frac{3}{4} \mathbf{E}\left[{Y_d}\right]$</p>
-<p>This proves the theorem since we can repeatedly apply the bound.</p>
-<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Since we have shown that $\mathbf{E}[Y_{d+1}] \le \frac{3}{4} \mathbf{E}\left[{Y_d}\right]$, a statement true for all $d$, at the $d^{th}$ level of recursion, the size of the input is $(3/4)^d n$ in expectation. $\blacksquare$</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Expected-Work">Expected Work<a class="anchor-link" href="#Expected-Work">&#182;</a></h3><p>We've shown that for every pivot, we expect the larger of the two partitions to be $&lt; 3/4n$.</p>
+<p>Furthermore, we've shown that the expected size of the problem at every level $d$ is $(3/4)^d n$ in expectation.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Finally, we need to compute the <strong>expected</strong> work.</p>
-<p>(Think of using the tree method, but using the <strong>expected</strong> size of $n$ at each level.)</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is analogous to the tree method, but using the <strong>expected</strong> size of $n$ at each level.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$
 \begin{align}
 \mathbf{E}[W(n)] &amp; \le \sum_{i=0}^n \mathbf{E}[Y_i]~~~~~~~~ \hbox{since there is linear work at each iteration}\\
@@ -14738,23 +15025,22 @@ $$\begin{align}
 &amp; \in O(n)
 \end{align}
 $</p>
-<p>For the span we can also use the theorem to show that at each level the span is $O(\log n)$. <a href="https://www.diderot.one/courses/106/books/426/chapter/5750#atom-429433">By showing that the number of levels is $O(\log n)$ with high probability</a>, we can establish that the span is $O(\log^2 n)$ with high probability.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Span">Span<a class="anchor-link" href="#Span">&#182;</a></h3><p>For the span we can also use the theorem to show that at each level the span is $O(\log n)$. <a href="https://www.diderot.one/courses/106/books/426/chapter/5750#atom-429433">By showing that the number of levels is $O(\log n)$ with high probability</a>, we can establish that the span is $O(\log^2 n)$ with high probability.</p>
 
-     </div>
 </div>
-</div>
-</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Final-Results">Final Results<a class="anchor-link" href="#Final-Results">&#182;</a></h2><p>Finally, we have that by using random pivots to solve the $\texttt{Selection Problem}$ we achieve the following work and span in expectation:</p>
+<p>$W(n) \in O(n)$</p>
+<p>$S(n) \in O(\log^2 n)$</p>
 
+</div>
 </div></section></section>
 </div>
 </div>

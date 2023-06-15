@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>01-quicksort slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>02-supplementary slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -14099,191 +14099,45 @@ div.jp-OutputPrompt {
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Quicksort">Quicksort<a class="anchor-link" href="#Quicksort">&#182;</a></h2>
+<h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="The-Monty-Hall-Problem">The Monty Hall Problem<a class="anchor-link" href="#The-Monty-Hall-Problem">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Agenda:</p>
-<ul>
-<li>Quicksort</li>
-</ul>
+<h2 id="The-Monty-Hall-Problem">The Monty Hall Problem<a class="anchor-link" href="#The-Monty-Hall-Problem">&#182;</a></h2><p><img width="60%" src="figures/Monty_Hall.png"/></p>
+<p>Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?"</p>
+<p>Is it to your advantage to switch your choice?</p>
+<p>Why or why not?</p>
+<p>This <a href="https://en.wikipedia.org/wiki/Monty_Hall_problem">puzzle</a> is based on the game show <em>Let's Make a Deal</em> and named after the host Monty Hall.</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Sorting">Sorting<a class="anchor-link" href="#Sorting">&#182;</a></h3><p>We saw how the problem of selection could be solved with a randomized algorithm. The key was to choose a random element and then partition the list into two parts.</p>
-<p>What if we recursively sorted these two parts?</p>
+<p><img width="60%" src="figures/Monty_Hall_standard_probs.png"/></p>
+<p>So the probability of winning by switching is 2/3, while the probability of keeping yoour choice and winning is 1/3.</p>
 
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let $a=\langle 2, 5, 4, 1, 3, -1, 99\rangle.$</p>
-<p>Suppose we chose 4 as the pivot.</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Then the two parts of the list are $\ell=\langle 2, 1, 3, -1\rangle$ and $r=\langle 5, 99\rangle$.</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>In sorted order they are $\ell'=\langle -1, 1, 2, 3\rangle$ and $r'=\langle 5, 99\rangle$.</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So all we have to do is append $l'$, the pivot and $r'$!</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This suggests a divide-and-conquer algorithm, but with similar characteristics as our algorithm for selection.</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This sorting algorithm is actually called <em>Quicksort</em> (invented in 1959 by C. A. R. Hoare).</p>
-
-</div>
-</div></div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\begin{array}{ll}  
-\mathit{quicksort}~a =  \\  
-~~~~\texttt{if}~|a| = 0~\texttt{then}~a  \\  
-~~~~\texttt{else}   \\  
-~~~~~~~~\texttt{let}  \\  
-~~~~~~~~~~~~p = \texttt{pick a random pivot from}~a  \\  
-~~~~~~~~~~~~    a_1 = \left\langle\, x \in a \;|\; x &lt; p \,\right\rangle  \\  
-~~~~~~~~~~~~    a_2 = \left\langle\, x \in a \;|\; x = p \,\right\rangle  \\  
-~~~~~~~~~~~~    a_3 = \left\langle\, x \in a \;|\; x &gt; p \,\right\rangle  \\  
-~~~~~~~~~~~~    (s_1,s_3) = (\mathit{quicksort}~a_1)~\mid\mid{}~(\mathit{quicksort}~a_3)  \\  
-~~~~~~~~   \texttt{in}  \\  
-~~~~~~~~~~~~    s_1 \texttt{++}{} a_2 \texttt{++}{} s_3  \\  
-~~~~~~~~  \texttt{end}  
-\end{array}
-$$
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>In terms of parallelism, we can partition in parallel as before and sort the two parts of the list in parallel.</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h2><p>How should we analyze the work of quicksort?</p>
-<p>We'll take a slightly different approach than for selection to estimate the expected work. To account for work, we'll look at the total amount of expected work.</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>First, an assumption to streamline our analysis:</p>
-<blockquote><p>We will "simulate" randomess using priorities: before the start of the algorithm, we assign each key a uniformly random priority from the real interval $[0, 1]$ such that each key has a unique priority. The algorithm then picks the pivot by selecting the key with the highest priority.</p>
-</blockquote>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let the random variable $Y(n)$ be the number of comparisons made by Quicksort on an input of size $n$. Note that the work is $O(Y(n))$, since there is $O(1)$ work done by non-comparisons (i.e., choosing pivots, concatenation of lists).</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We ultimately want to know how many comparisons are made by quick sort.</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Quantifying-the-number-of-expected-comparisons">Quantifying the number of expected comparisons<a class="anchor-link" href="#Quantifying-the-number-of-expected-comparisons">&#182;</a></h2><p>Let $X_{ij}$ be an indicator random variable that is 1 if $t_i$ and $t_j$ are ever compared and 0 otherwise. So we have that $Y(n) = \sum_i \sum_j X_{ij}$ and so this means that:</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$ \mathbf{E}\left[Y(n)\right] = \mathbf{E}\left[\sum_i \sum_j X_{ij}\right] = \sum_i \sum_j \mathbf{E}\left[X_{ij}\right] $$
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We have that $\mathbf{E}[X_{ij}] = \mathbf{P}[X_{ij} = 1]$.</p>
-<p>So when are a pair of elements $t_i$ and $t_j$ compared?</p>
-
-</div>
-</div></div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="When-are-a-pair-of-elements-$t_i$-and-$t_j$-compared?">When are a pair of elements $t_i$ and $t_j$ compared?<a class="anchor-link" href="#When-are-a-pair-of-elements-$t_i$-and-$t_j$-compared?">&#182;</a></h3><p>It's useful to consider the sorted version of $a$, indexed as $t_0, t_1, \ldots, t_{n-1}$.</p>
-<p><img src="figures/qsort.png" alt="quick sort" width="50%"/></p>
-<p>e.g.</p>
-<p>$
-a = [1,~~~~\mathbf{2},~~~~5,~~~~6,~~~~9,~~~\mathbf{10},~~~~12] \\
-p = [0.3, ~0.2, ~0.7, ~0.8, ~0.4, ~0.1, ~0.5]
-$</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>If any element <em>between</em> $t_i$ and $t_j$ in the sorted order is chosen as a pivot <em>before</em> $t_i$ or $t_j$, then they will never be compared.</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>E.g, two elements $t_i$ and $t_j$ are only ever compared if one of them is a pivot <strong>and</strong> if it has the highest priority in the sequence of elements $t_i$ to $t_j$.</p>
-
-</div>
-</div></div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Since the pivot is chosen randomly, the probability that either $t_i$ or $t_j$ has the highest probability in the range of elements from $t_i$ to $t_j$ is:</p>
-$$ \mathbf{P}[X_{ij}] = \frac{2}{j - i + 1}. $$
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$j - i +1$ is the number of elements between $t_i$ and $t_j$ inlcuding $t_i$ and $t_j$.</p>
-<p>$
-a = [1,~~~~\mathbf{2},~~~~5,~~~~6,~~~~9,~~~\mathbf{10},~~~~12] \\
-p = [0.3, ~0.2, ~0.7, ~0.8, ~0.4, ~0.1, ~0.5]\\
-i = ~[0, ~~~\mathbf{1}, ~~~~~2, ~~~~3, ~~~~4, ~~~~\mathbf{5}, ~~~~~6]
-$
-<br></p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Expected-Work">Expected Work<a class="anchor-link" href="#Expected-Work">&#182;</a></h2>$$\begin{align}
-\mathbf{E}\left[{Y(n)}\right] &amp;\leq \sum_{i=0}^{n-1} \sum_{j=i+1}^{n} \mathbf{E}\left[{X_{ij}}\right] \\
-&amp;=  \sum_{i=0}^{n-1}  \sum_{j=i+1}^{n} \frac{2}{j-i+1} \\
-&amp;=  \sum_{i=0}^{n-1}  \sum_{k=1}^{n-i} \frac{2}{k+1} \\
-&amp;=  \sum_{i=0}^{n-1}  \sum_{k=1}^{n} \frac{2}{k} \\
-&amp;\leq  2 \sum_{i=0}^{n-1}  \ln n      ~~~~~~~~~ \hbox{Harmonic series:} \sum_{k=1}^n \frac{1}{k} &lt; \ln n \\ 
-&amp;=  O(n\lg n)
-\end{align}$$
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Span">Span<a class="anchor-link" href="#Span">&#182;</a></h2><p>Analyzing the span of Quicksort can be done in the same way as we did for selection.</p>
-<p>That is, if we have a guarantee that at level $d$ of recursion that the larger of the two lists is $(3/4)^d n$, then we can show that the span at each level is $O(\log n)$ (expected).</p>
-<p>Using the same approach as for selection we can show that the total span is $O(\log^2 n)$ with high probability.</p>
+<p><img width="60%" src="figures/Monty_closed_door.png"/></p>
+<p>Suppose you pick Door 1. With the doors closed, there is a 1/3 probability of winning the car.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img width="50%" src="figures/Monty_open_door.png"/></p>
+<p>With one door open, the odds of that door being winning go to 0 and the odds of Door 2 being winning go to 2/3.</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Marilyn_vos_Savant#The_Monty_Hall_problem">her column titled "Ask Marilyn"</a>,  <a href="https://en.wikipedia.org/wiki/Marilyn_vos_Savant">Marilyn vos Savant</a> suggested that it's useful to think of having 1,000,000 doors. You make a choice, and the host opens 999,998 doors. Should you switch?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img width="60%" src="figures/Monty_Little_green_alien.png"/></p>
+<p>In this arrangement, we flip a coin after the goat is revealed and have even odds of winning. One way to think about this is that we're just ignoring the information that is given.</p>
 
 </div>
 </div></section></section>

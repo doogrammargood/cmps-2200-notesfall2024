@@ -14282,25 +14282,134 @@ div.jp-OutputPrompt {
 </aside></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Leftist-Heap-Recap">Leftist Heap Recap<a class="anchor-link" href="#Leftist-Heap-Recap">&#182;</a></h3><ul>
+<li>Leftist heaps depend on the <em>meld</em> operation for <em>deleteMin</em> and <em>insert</em>.</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><p><em>meld</em> combines two heaps by recursively melding one into the right subheap of the other.</p>
+<ul>
+<li><em>meld</em> recursively operates down the right spine to build the melded heap</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>To keep <em>meld</em> efficient, a leftist heap keeps the right spine of the heap short by ensuring that every meld maintains the invariant: <ul>
+<li>$rank(R(x)) \leq rank(L(x))$</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Does this guarantee logarithmic runtimes?</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Theorem</strong>: If $A$ and $B$ are leftist heaps, then <em>meld</em> runs in $O(\log |A| + \log |B|)$ work.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The key observation is that the meld operation only advances along the right spine of either $A$ or $B$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The number of recursive calls will be limited by $rank(A)$ or $rank(B)$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the relationship betweent the size of a leftist heap and its rank?</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Lemma</strong>: In a leftist heap with $n$ nodes, the rank of the root node is at most $\log_2 (n + 1).$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Proof</strong>: To prove this lemma, we first want to show that if a heap has rank $r$, then it has at least $2^r - 1$ nodes.</p>
-<p>Let $n(r)$ be the number of nodes in the smallest leftist heap of rank $r$. According to the way we assign rank, the right child of any node $x$ of rank $r$ is $r-1$. Also by the leftist property, for a node $x$ of rank $r$, $rank(L(x)) \geq rank(R(x)) = r - 1.$ Then for a leftist heap rooted at $x$ of rank $r$ we get the following recurrence:</p>
-<p>$n(r) = 1 + n(rank(L(x))) + n(rank(R(x))) \geq 1 + 2n(r-1). $</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Let $n(r)$ be the number of nodes in the smallest leftist heap of rank $r$. According to the way we assign rank, the right child of any node $x$ of rank $r$ is $r-1$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Also by the leftist property, for a node $x$ of rank $r$:</p>
+<p>$rank(L(x)) \geq rank(R(x)) = r - 1.$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Then for a leftist heap rooted at $x$ of rank $r$ we get the following recurrence:</p>
+<p>$n(r) = 1 + n(rank(L(x))) + n(rank(R(x)))$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$n(r) \geq 1 + n(r-1) + n(r-1)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$n(r) \geq 1 + 2n(r-1)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This recurrence yields a complete binary tree which has $n(r) \geq 2^{r}-1$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Now to prove the lemma, suppose we have a leftist heap with $n$ nodes and rank $r$. First, $n \geq n(r)$ by definition. This means that $n \geq 2^r - 1$.</p>
 $$\begin{align}
 n &amp;\geq 2^r - 1 \\
 n + 1 &amp;\geq 2^r \\
-r &amp;\leq \log_2 (n+1)
+r &amp;\leq \log_2 (n+1) ~~ \blacksquare
 \end{align}
-$$<p>How does this help us?</p>
-
+$$
 </div>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Theorem</strong>: If $A$ and $B$ are leftist heaps, then the meld algorithm runs in $O(\log |A| + \log |B|)$ work and produces a leftist heap with all of the elements from $A$ and $B$.</p>
-<p><strong>Proof</strong>: The key observation is that the meld operation only advances along the right spine of either $A$ or $B$. But since rank decreases by 1 each time we advance, there are $rank(A) + rank(B)$ constant-time operations in total. By the lemma, this results in $O(\log |A| + \log |B|)$ work.</p>
+<p><strong>Theorem</strong>: If $A$ and $B$ are leftist heaps, then the meld algorithm runs in $O(\log |A| + \log |B|)$ work.</p>
+<p><strong>Proof</strong>: Since meld only advances along the right spine of either $A$ or $B$, and since rank decreases by 1 each time we advance, there are $rank(A) + rank(B)$ constant-time operations in total. By the lemma, this results in $O(\log |A| + \log |B|)$ work. $\blacksquare$</p>
+<blockquote><p><strong>Lemma</strong>: In a leftist heap with $n$ nodes, the rank of the root node is at most $\log_2 (n + 1).$</p>
+</blockquote>
 
 </div>
 </div></section></section>

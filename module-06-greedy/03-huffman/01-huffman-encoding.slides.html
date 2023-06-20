@@ -14099,12 +14099,21 @@ div.jp-OutputPrompt {
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Data-Compression">Data Compression<a class="anchor-link" href="#Data-Compression">&#182;</a></h2>
+<style>.jp-RenderedHTMLCommon table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: none;
+  color: var(--jp-ui-font-color1);
+  font-size: 20px;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}</style><h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Data-Compression">Data Compression<a class="anchor-link" href="#Data-Compression">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Huffman Coding</li>
 </ul>
@@ -14113,9 +14122,26 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Fixed-length-encoding">Fixed-length encoding<a class="anchor-link" href="#Fixed-length-encoding">&#182;</a></h2><p>Suppose we are given a document $D$ in which we use the alphabet $\Sigma = \{\sigma_1 \ldots \sigma_k\}$. Our goal is to create a binary encoding of $\Sigma$ to represent $D$ with as few bits as possible. Of course, the encoding must distinctly represent $\Sigma$.</p>
-<p>Example: Suppose $\Sigma=\{A, B, C, D\}$, and document $D = \langle A, A, A, A, A, A, A, A, A, B, C, D\rangle$.</p>
-<p>A naive encoding could be</p>
+<h2 id="Document-encoding">Document encoding<a class="anchor-link" href="#Document-encoding">&#182;</a></h2><p>If we are given a document $D$ in which we use the alphabet $\Sigma = \{\sigma_1 \ldots \sigma_k\}$, our goal is to create a binary encoding of $\Sigma$ to represent $D$ with as few bits as possible.</p>
+<p>Of course, the encoding must distinctly represent $\Sigma$.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Example:</p>
+<p>Suppose $\Sigma=\{A, B, C, D\}$, and document $D = \langle A, A, A, A, A, A, A, A, A, B, C, D\rangle$.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>A naive encoding could be:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <table>
 <thead><tr>
 <th>$$\sigma$$</th>
@@ -14141,21 +14167,31 @@ div.jp-OutputPrompt {
 </tr>
 </tbody>
 </table>
-<p>This is a <strong>fixed-length</strong> encoding of $\Sigma$. What is the number of bits required to encode the entire document with this encoding?</p>
 
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is a <strong>fixed-length</strong> encoding of $\Sigma$.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the number of bits required to encode the entire document with this encoding?</p>
+
+</div>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The length of the document with this encoding is $2\cdot 12 = 24$. The encoding is:</p>
-<p>$e(D) = "000000000000000000011011"$</p>
+<p>$e(D) = \texttt{"}000000000000000000011011\texttt{"}$</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Variable-length-encoding">Variable-length encoding<a class="anchor-link" href="#Variable-length-encoding">&#182;</a></h2><p>Fixed-length encoding doesn't account for redundancy in the document.</p>
-<p>Let $f: \sigma \rightarrow \mathbb{R}$ be the number of times a character appears in $D$; this is easily computed in $O(|D|)$ work. What about the span?</p>
+<h2 id="A-more-space-efficent-encoding?">A more space-efficent encoding?<a class="anchor-link" href="#A-more-space-efficent-encoding?">&#182;</a></h2><p>Fixed-length encoding doesn't account for redundancy in the document.</p>
 <p>Intuitively, we should encode the document by the frequency of the characters in the alphabet. The more frequent the character, the smaller its code should be.</p>
 <p>$D = \langle A, A, A, A, A, A, A, A, A, B, C, D\rangle$</p>
 <table>
@@ -14183,6 +14219,13 @@ div.jp-OutputPrompt {
 </tr>
 </tbody>
 </table>
+<blockquote><p>Let $f: \sigma \rightarrow \mathbb{Z}$ be the number of times a character appears in $D$; this is easily computed in $O(|D|)$ work. (What about the span?)</p>
+</blockquote>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>So, following that logic, we could come up with a code like this:</p>
 <table>
 <thead><tr>
@@ -14209,16 +14252,26 @@ div.jp-OutputPrompt {
 </tr>
 </tbody>
 </table>
-<p>Is this a valid encoding?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br><br>
-How should we decode <code>11</code>? It's ambiguous between <code>BB</code> and <code>D</code>.</p>
-<p><br><br></p>
-<p>Instead, we could use:</p>
+<p>Is this a valid encoding?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>How should we decode <code>11</code>?</p>
+<p><br></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Unambiguous-Encoding">Unambiguous Encoding<a class="anchor-link" href="#Unambiguous-Encoding">&#182;</a></h3><p>Instead, we could use:</p>
 <table>
 <thead><tr>
 <th>$$\sigma$$</th>
@@ -14244,14 +14297,40 @@ How should we decode <code>11</code>? It's ambiguous between <code>BB</code> and
 </tr>
 </tbody>
 </table>
-<p>This is a <strong>variable-length</strong> encoding, where each character may be encoded by a different number of bits.</p>
-<p>This leads to an encoding of $D = \langle A, A, A, A, A, A, A, A, A, B, C, D\rangle$ as:</p>
-<p><br><br><br></p>
+<p>This <strong>variable-length</strong> encoding is unambiguous.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>For our document $D = \langle A, A, A, A, A, A, A, A, A, B, C, D\rangle$, we get the encoding:</p>
 <p>$e'(D) = "00000000010110111"$</p>
-<p><br><br></p>
-<p>This has length $1\cdot 9 + 2\cdot 1 + 3\cdot 1 + 3\cdot 1 = 17$. So this is a bit better.</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This has length $1\cdot 9 + 2\cdot 1 + 3\cdot 1 + 3\cdot 1 = 17$. So this is a bit better (we got a length of 24 before).</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Optimizing-the-cost-of-encoding">Optimizing the cost of encoding<a class="anchor-link" href="#Optimizing-the-cost-of-encoding">&#182;</a></h3><p>Given a document $D$ in which we use the alphabet $\Sigma = \{\sigma_1 \ldots \sigma_k\}$, our goal is to create a binary encoding of $\Sigma$ to represent $D$ with as few bits as possible.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In general, the cost of a given encoding $e$ is</p>
-$$C(e) = \sum_{i=0}^{|D|} |e(D[i])| = \sum_{\sigma\in\Sigma} f(\sigma)\cdot e(\sigma).$$<p>Over all possible valid encodings $e: \Sigma \rightarrow \{0,1\}^*$, we want to find a variable-length encoding $e_*$ so that $C(e_*)$ is minimized.</p>
+$$C(e) = \sum_{i=0}^{|D|} |e(D[i])| = \sum_{\sigma\in\Sigma} f(\sigma)\cdot e(\sigma).$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Over all possible valid encodings $e: \Sigma \rightarrow \{0,1\}^*$, we want to find a variable-length encoding $e_*$ so that $C(e_*)$ is minimized.</p>
 
 </div>
 </div></div></section></section><section><section>
@@ -14259,70 +14338,135 @@ $$C(e) = \sum_{i=0}^{|D|} |e(D[i])| = \sum_{\sigma\in\Sigma} f(\sigma)\cdot e(\s
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Encodings-as-Trees">Encodings as Trees<a class="anchor-link" href="#Encodings-as-Trees">&#182;</a></h2><p>How do we ensure that a variable-length encoding is valid? In other words, how do we only consider variable-length encodings that are <em>prefix-free</em>?</p>
 <p>We can think of an encoding as representing a tree, with characters from $\Sigma$ as leaves. Note that a fixed-length encoding has all leaves at the same level.</p>
-<p>For the two encodings we gave, we'd have:</p>
-<p><img src = "figures/encoding_trees.jpg" width="60%"></p>
-<p>Every prefix-free encoding $e$ can be represented by a tree $T_e$.</p>
-<p>The depth of each character $d_T(\sigma)$ in the tree determines how many bits are needed to encode $\sigma$.</p>
-<p>So the optimal compression of $D$ can be achieved by identifying the encoding tree $T$ that minimizes:</p>
-$$C(T) = \sum_{\sigma\in\Sigma} f(\sigma)\cdot d_T(\sigma)$$<p>We will come up with a greedy algorithm for constructing $T$ and show that it is optimal.</p>
 
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Huffman-Coding">Huffman Coding<a class="anchor-link" href="#Huffman-Coding">&#182;</a></h3><p>Intuitively we know we should ensure that when constructing an encoding tree, the higher the frequency, the shorter the path length.</p>
-<p>How about if we sort the frequencies in descending order and then assign tree positions in this order? But how do we guarantee the highest frequency characters have a short depth?</p>
-<p>We could group the characters into two sets of equal total frequency, this way the more frequent characters will have lower depth. This divide-and-conquer approach was developed by Shannon-Fano... but is not optimal.</p>
-<p>David Huffman (as a graduate student in Robert Fano's class) came up with a <em>bottom-up</em> greedy algorithm as a class project and was able to prove that it was optimal.</p>
-<p>The main idea of this algorithm is to choose the two <strong>least</strong> frequent characters $x$ and $y$ and create a subtree with $x$ and $y$ as sibling leaves for the final encoding. We then remove $x$ and $y$ from $\Sigma$ and add a <em>new</em> character $z$ with frequency $f(x)+f(y)$, and recurse to compute a tree $T'$. The final tree $T$ is just $T'$ with $z$ replaced by the subtree with $x, y$ as siblings.</p>
-<p><img src="figures/huffman_example.jpg" width="60%"></p>
-<p><br></p>
-<h3 id="How-can-we-use-a-min-heap-to-implement-this-algorithm?">How can we use a min-heap to implement this algorithm?<a class="anchor-link" href="#How-can-we-use-a-min-heap-to-implement-this-algorithm?">&#182;</a></h3>
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We need to efficiently retrieve the next two smallest frequency nodes.</p>
-<p><img src="figures/huffman-heap-2.png" alt="huffman-heap-2.png"></p>
-<ol>
-<li>Initialize a min-heap with character frequencies $f(\sigma)$</li>
-</ol>
-<p>Then, repeat:</p>
-<ol>
-<li>Call <code>deleteMin</code> twice to get the two least frequent nodes $x$ and $y$</li>
-<li>Create a new node $z$ with frequency $f(x) + f(y)$</li>
-<li>Make $x$ and $y$ children of $z$ in the tree.</li>
-<li>Call <code>insert</code> to add $z$ to the heap</li>
-</ol>
-<p>How many times will this repeat?</p>
-<p><br><br></p>
-<p>What is work/span of this algorithm?</p>
+<p>For the two encodings we gave, we'd have:</p>
+<p><img src = "figures/encoding_trees.jpg" width="60%"></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Prefix-free-encodings">Prefix-free encodings<a class="anchor-link" href="#Prefix-free-encodings">&#182;</a></h3><p>Every prefix-free encoding $e$ can be represented by a tree $T_e$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The depth of each character $d_T(\sigma)$ in the tree determines how many bits are needed to encode $\sigma$.</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Because we will always reduce the number of nodes by 1, this will repeat $n$ times (where $n = |\Sigma|$).</p>
-<p>The cost of 2 calls to <code>deleteMin</code> and one call to <code>insert</code> is $3 \lg n$.</p>
-<p>Thus, total work is $O(n \lg n)$.</p>
-<p>We unfortunately have not exposed any parallelism in this algorithm, so the span is also $O(n \lg n)$.</p>
+<p>So the optimal compression of $D$ can be achieved by identifying the encoding tree $T$ that minimizes:</p>
+$$C(T) = \sum_{\sigma\in\Sigma} f(\sigma)\cdot d_T(\sigma)$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We want to build a prefix-free encoding that is optimal.</p>
+<p>Claude Shannon and Robert Fano came up with <a href="https://en.wikipedia.org/wiki/Shannon%E2%80%93Fano_coding">methods</a> for building prefix-free encodings, but they aren't optimal.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>David Huffman (as a graduate student in Fano's class) came up with a <em>bottom-up</em> greedy algorithm to build prefix-free encodings as a class project and was able to prove that it was optimal.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Huffman-Coding">Huffman Coding<a class="anchor-link" href="#Huffman-Coding">&#182;</a></h3><p>Intuitively we know we should ensure that when constructing an encoding tree, the higher the frequency, the shorter the path length.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Conversely, the lowest frequency characters should be on the lowest levels.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The main idea of Huffman's algorithm is to choose the two <strong>least</strong> frequent characters $x$ and $y$ from $\Sigma$ and create a subtree with $x$ and $y$ as sibling leaves for the final encoding.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We then remove $x$ and $y$ from $\Sigma$ and add a <em>new</em> character $z$ with frequency $f(x)+f(y)$, and recurse to compute a tree $T'$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The final tree $T$ is just $T'$ with $z$ replaced by the subtree with $x, y$ as siblings.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/huffman_example.jpg" width="60%"></p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Proof-of-Optimality">Proof of Optimality<a class="anchor-link" href="#Proof-of-Optimality">&#182;</a></h3><p><strong>Greedy Choice</strong>: Let $x, y\in\Sigma$ have the two smallest frequencies ($f(x) \leq f(y)$). Then there is an optimal encoding $T$ for $\Sigma$ with $x, y$ as sibling leaves at maximum depth.</p>
-<p><strong>Proof</strong>: First let us observe that in an optimal solution $T^*$, $x$ must have maximum depth. Suppose that it did not, and some character $a$ with frequency $f(a)$ had depth $d_{T^*}(a) &gt; d_{T^*}(x)$. Then we can construct a new tree $T^{**}$ with cost</p>
+<p><strong>Proof</strong>: First let us observe that in an optimal solution $T^*$, $x$ must have maximum depth. Suppose that it did not, and some character $a$ with frequency $f(a)$ had depth $d_{T^*}(a) &gt; d_{T^*}(x)$. Then we can construct a new tree $T^{**}$ by swapping them.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The cost will be:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$\begin{align}
 C(T^{**}) &amp;=&amp; C(T^*) - f(a)d_{T^*}(a)  - f(x)d_{T^*}(x) + f(x)d_{T^*}(a) + f(a)d_{T^*}(x) \\
 &amp;=&amp; C(T^*) - (f(a)d_{T^*}(a) + f(x)d_{T^*}(x) - f(x)d_{T^*}(a) - f(a)d_{T^*}(x)) \\
 &amp;=&amp; C(T^*) - (f(a)-f(x))(d_{T^*}(a) - d_{T^*}(x)) \\
 \end{align}$</p>
-<p>If $f(a) &gt; f(x)$ then $C(T^{**}) &lt; C(T^*)$, which is a contradiction. So this means that we can swap $a$ and $x$ without changing the cost and thus some optimal solution has $x$ as a maximum depth leaf.</p>
-<p><img src = "figures/huffman_exchange_argument.jpg" width = "30%"></p>
-<p>Now why are $x$ and $y$ siblings? Well, first we can observe that every leaf in an optimal tree has a sibling. If not, we can reduce the encoding cost of some character. Now we can apply the same swapping argument as above to establish that $y$ is a sibling of $x$ in some optimal solution.</p>
-<p><strong>Optimal Substructure</strong>: Let $\Sigma' = \Sigma - \{x, y\} \cup \{z\}$, where $z\not\in \Sigma$ is a character with frequency $f(z) = f(x) + f(y)$. If $T'$ is an optimal encoding for $\Sigma'$, then an optimal encoding $T$ for $\Sigma$ can be constructed from $T'$ by replacing the leaf representing $z$ with an internal node that has $x, y$ as children.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If $f(a) &gt; f(x)$ then $C(T^{**}) &lt; C(T^*)$. This is a contradiction.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So this means that we can swap $a$ and $x$ without changing the cost and thus some optimal solution has $x$ as a maximum depth leaf. $\blacksquare$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Why are $x$ and $y$ siblings? Now we can apply the same swapping argument as above to establish that $y$ is a sibling of $x$ in some optimal solution.</p>
+<p><strong>Optimal Substructure</strong>: Let $\Sigma' = \Sigma - \{x, y\} \cup \{z\}$, where $z\not\in \Sigma$ is a character with frequency $f(z) = f(x) + f(y)$.</p>
+<p>If $T'$ is an optimal encoding for $\Sigma'$, then an optimal encoding $T$ for $\Sigma$ can be constructed from $T'$ by replacing the leaf representing $z$ with an internal node that has $x, y$ as children.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p><strong>Proof</strong>: We first make a useful observation of the relationship between the cost of $T$ and $T'$. Observe that:</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$\begin{align}
 C(T) &amp;=&amp; \sum_{\sigma\in\Sigma} f(\sigma)d_T(\sigma) \\
 &amp;=&amp; f(x)d_T(x) + f(y)d_T(y) + \sum_{\sigma\in\Sigma - \{x,y\}} f(\sigma)d_T(\sigma) \\
@@ -14332,12 +14476,121 @@ C(T) &amp;=&amp; \sum_{\sigma\in\Sigma} f(\sigma)d_T(\sigma) \\
 &amp;=&amp; f(z)+f(z)d_T(z) + \sum_{\sigma\in\Sigma - \{x,y\}} f(\sigma)d_T(\sigma) \\
 &amp;=&amp; f(z) + C(T') \\
 \end{align}$</p>
-<p>Suppose that $T$ was not optimal, and that there was some other tree $Z$ with $C(Z) &lt; C(T)$. We can assume that $Z$ must have the two smallest frequency characters as siblings at maximum depth as established above. Now let's construct<br>
-$Z'$ by removing $x, y$ and adding $z$ with $f(z) = f(x)+f(y)$. $Z'$ is an encoding for $\Sigma'$, and we have that $C(Z) = f(z) + C(Z')$. By our assumption $C(Z) &lt; C(T)$, so $f(z) + C(Z') &lt; f(z) + C(T')$ using the observation above. But this is a contradiction to the optimality of $T'$ since we now have that $C(Z') &lt; C(T').$</p>
-<p>Thus Huffman coding produces an optimal prefix-free encoding.</p>
 
 </div>
-</div></section></section><section><section>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p><strong>Optimal Substructure</strong>: Let $\Sigma' = \Sigma - \{x, y\} \cup \{z\}$, where $z\not\in \Sigma$ is a character with frequency $f(z) = f(x) + f(y)$. If $T'$ is an optimal encoding for $\Sigma'$, then an optimal encoding $T$ for $\Sigma$ can be constructed from $T'$ by replacing the leaf representing $z$ with an internal node that has $x, y$ as children.</p>
+</blockquote>
+<p>We've established</p>
+<p>$C(T) = f(z) + C(T')$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Suppose that $T$ was not optimal, and that there was some other tree $Z$ with $C(Z) &lt; C(T).$</p>
+<p>We can assume that $Z$ must have the two smallest frequency characters as siblings at maximum depth as established above.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now let's construct $Z'$ by removing $x, y$ and adding $z$ with $f(z) = f(x)+f(y)$.</p>
+<p>$Z'$ is an encoding for $\Sigma'$, and we have that $C(Z) = f(z) + C(Z')$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>By our assumption $C(Z) &lt; C(T)$, so $f(z) + C(Z') &lt; f(z) + C(T')$ using the observation above.</p>
+<p>But this is a contradiction to the optimality of $T'$ since we now have that $C(Z') &lt; C(T').$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Thus Huffman coding produces an optimal prefix-free encoding. $\blacksquare$</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Implementation-and-Runtime">Implementation and Runtime<a class="anchor-link" href="#Implementation-and-Runtime">&#182;</a></h2>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Heaps allow us to efficiently retrieve and insert nodes.</p>
+<p><img src="figures/huffman-heap-2.png" width="70%"></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Huffman's Algorithm:</strong></p>
+<p>Initialize a min-heap with character frequencies $f(\sigma)$</p>
+<p>Then, repeat:</p>
+<ol>
+<li>Call <code>deleteMin</code> twice to get the two least frequent nodes $x$ and $y$</li>
+<li>Create a new node $z$ with frequency $f(x) + f(y)$</li>
+<li>Make $x$ and $y$ children of $z$ in the tree.</li>
+<li>Call <code>insert</code> to add $z$ to the heap</li>
+</ol>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Work-and-Span">Work and Span<a class="anchor-link" href="#Work-and-Span">&#182;</a></h2><blockquote><p><strong>Huffman's Algorithm</strong></p>
+<p>Initialize a min-heap with character frequencies $f(\sigma)$</p>
+<p>Then, repeat:</p>
+<ol>
+<li>Call <code>deleteMin</code> twice to get the two least frequent nodes $x$ and $y$</li>
+<li>Create a new node $z$ with frequency $f(x) + f(y)$</li>
+<li>Make $x$ and $y$ children of $z$ in the tree.</li>
+<li>Call <code>insert</code> to add $z$ to the heap</li>
+</ol>
+</blockquote>
+<p>Work/span?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Because every iteration reduces the number of nodes by 1, there will be $n$ iterations (where $n = |\Sigma|$).</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The cost of 2 calls to <code>deleteMin</code> and one call to <code>insert</code> is $3 \lg n$.</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Thus, total work is $O(n \lg n)$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Span?</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>No parallelism, so the span is also $O(n \lg n)$.</p>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Decoding">Decoding<a class="anchor-link" href="#Decoding">&#182;</a></h3><p>So how do we use Huffman coding in practice?</p>

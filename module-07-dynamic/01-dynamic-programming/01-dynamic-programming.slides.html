@@ -14099,12 +14099,21 @@ div.jp-OutputPrompt {
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Dynamic-Programming">Dynamic Programming<a class="anchor-link" href="#Dynamic-Programming">&#182;</a></h2>
+<style>.jp-RenderedHTMLCommon table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: none;
+  color: var(--jp-ui-font-color1);
+  font-size: 20px;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}</style><h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Dynamic-Programming">Dynamic Programming<a class="anchor-link" href="#Dynamic-Programming">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>"Dynamic Programming" Paradigm</li>
 </ul>
@@ -14159,33 +14168,109 @@ div.jp-OutputPrompt {
 </tbody>
 </table>
 <p>The problem is that the greedy choice to maximize value/weight is incorrect because we can have leftover capacity. We really need to look at <em>all possible</em> choices of objects and their associated optimal solutions.</p>
-<p>Let $OPT(n, W)$ be an optimal solution to the Knapsack problem for a set of objects $S$ where we are choosing the object at index $n$ and we have a current capacity of $W$.</p>
-<BR>
-
-<p>Now, we can make the following simple observation:</p>
-<BR>
-
-<p>If object $n$ is in the optimal solution, then $OPT(n, W)= \{n\} \cup OPT(n-1, W-w(n)).$</p>
-<p>If it isn't, then $OPT(n, W) = OPT(n-1, W)$.</p>
 
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Optimal Substructure for Knapsack</strong>: For any set $S$ of $n$ objects and $W&gt;0$, we have</p>
+<h3 id="Exploring-Multiple-Solutions">Exploring Multiple Solutions<a class="anchor-link" href="#Exploring-Multiple-Solutions">&#182;</a></h3><table>
+<thead><tr>
+<th>index</th>
+<th>value</th>
+<th>weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>9</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>Let $OPT(n, W)$ be an optimal solution to the Knapsack problem for a set of objects $S$ where we are choosing the object at index $n$ and we have a current capacity of $W$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Now, we can make the following simple observation:</p>
+<p>If object $n$ is in the optimal solution, then</p>
+<p>$OPT(n, W)= \{n\} \cup OPT(n-1, W-w(n)).$</p>
+<p>else</p>
+<p>$OPT(n, W) = OPT(n-1, W)$.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Optimal-Substructure-for-Knapsack">Optimal Substructure for Knapsack<a class="anchor-link" href="#Optimal-Substructure-for-Knapsack">&#182;</a></h2><p>For any set $S$ of $n$ objects and $W&gt;0$, we have</p>
 <p>$\begin{align}
 v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
 &amp;v(OPT(n-1, W))\}
 \end{align}$</p>
 <p>with respect to choosing some object $n$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In a way, this really isn't saying much. Put plainly we're just saying that the optimal solution either contains object $n$ or it doesn't.</p>
-<p>For the example above, for choosing object $1$, we have that:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Note that our optimal substructure recurrence depends both on the number of objects as well as their weights.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>From our example:</p>
+<table>
+<thead><tr>
+<th>index</th>
+<th>value</th>
+<th>weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>9</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>For choosing object $1$, we have that:</p>
 <p>$\begin{align}
 v(OPT(1, 5)) &amp;=&amp; \max\{v(1) + v(OPT(0, 2)), v(OPT(0, 5))\} \\
 &amp;=&amp; \max\{9, 10\} \\
 &amp;=&amp; 10. \\
 \end{align}$</p>
-<p>Does this give us an algorithm? It is easy to write this in SPARC:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Does this give us an algorithm?</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$\begin{array}{ll}
 \mathit{knapsack~~n~~W} = \\
 ~~~~~\mathtt{if}~~~n = 0\\
@@ -14199,21 +14284,122 @@ $$\begin{array}{ll}
 ~~~~~~~~~~~~~~~~~~~~\mathit{knapsack ~~n-1 ~~ W}\\
 ~~~~~~~~~~\mathtt{else}\\
 ~~~~~~~~~~~~~~~~~~~~\max\{\mathit{v(i)+knapsack~~n-1~~W-w(n)},~~\mathit{knapsack~~n-1~~W}\} \\
-\end{array}$$<p>We can see that our optimal substructure recurrence depends both on the number of objects as well as their weights.</p>
-<p>The number of recursive calls doubles in every recursion. But suppose all items have weight 1 - is there a glaring inefficiency we can fix? Let's consider the recursion tree:</p>
+\end{array}$$
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="The-recurrence">The recurrence<a class="anchor-link" href="#The-recurrence">&#182;</a></h3><p>$\begin{align}
+v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
+&amp;v(OPT(n-1, W))\}
+\end{align}$</p>
+<p>The number of recursive calls doubles in every recursion. But suppose all items have weight 1, is there a glaring inefficiency we can fix? Let's consider the recursion tree:</p>
 <p><img src="figures/knapsack_recursion_tree.jpg" width="70%"></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If we blindly recompute the redundant calls when they are encountered, then we will do $\Omega(2^n)$ work and $O(n)$ span even if we can take all the items.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>However, suppose that whenever we need to compute $v(OPT(i, w)$, we compute it once and save the result for later use (e.g., in a suitable data structure) -- this is called <em>memoization</em>. Then, we no longer have a binary tree but rather a <strong>directed acyclic graph</strong> or <strong>DAG</strong>.</p>
 <p><img src="figures/knapsack_recursion_dag.jpg" width="70%"></p>
 <p>The number of nodes in this DAG will allow us to determine the work of this algorithm, and the longest path in the DAG will allow us to determine the span.</p>
-<p><br><br></p>
-<p>When performing memoization, we can either proceed <strong>top-down</strong> or <strong>bottom-up</strong>:</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Memoization">Memoization<a class="anchor-link" href="#Memoization">&#182;</a></h2><p>When performing memoization, we can either proceed <strong>top-down</strong> or <strong>bottom-up</strong>:</p>
 <ul>
-<li><p><strong>top-down</strong>: use recursion solution as usual, but maintain a hashmap or related data structure to quickly lookup solutions previously computed</p>
+<li><p><strong>top-down</strong>: use recursion as usual, but maintain a hashmap or related data structure to quickly look up solutions previously computed</p>
 </li>
 <li><p><strong>bottom-up</strong>: start with solutions to smallest problem instances, then proceed to larger instances. This is typically implemented by filling a table.</p>
 </li>
 </ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Bottom-up-Memoization-Example">Bottom-up Memoization Example<a class="anchor-link" href="#Bottom-up-Memoization-Example">&#182;</a></h2><p>We can use our recurrence to build and fill in a table.</p>
+<p>$\begin{align}
+v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
+&amp;v(OPT(n-1, W))\}
+\end{align}$</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg .tg-t6ha{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-on5d{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:middle}
+.tg .tg-b8y7{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:top}
+.tg .tg-418g{border-color:#000000;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-l4pv{border-color:#000000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-4n8x{border-color:#000000;font-size:20px;text-align:center;vertical-align:top}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-b8y7"></th>
+    <th class="tg-b8y7" colspan="7">W<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-on5d" rowspan="4">n<br></td>
+    <td class="tg-l4pv"></td>
+    <td class="tg-418g">0</td>
+    <td class="tg-418g">1</td>
+    <td class="tg-418g">2</td>
+    <td class="tg-418g">3</td>
+    <td class="tg-418g">4</td>
+    <td class="tg-418g">5</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">0</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">1</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">2</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <table>
 <thead><tr>
 <th>index</th>
@@ -14239,64 +14425,412 @@ $$\begin{array}{ll}
 </tr>
 </tbody>
 </table>
-<p>Optimal solution is 13 (second and third items)
-<br><br></p>
-<p>Recall our recurrence:</p>
+<p>First we fill in item $0$ by simply considering it. For each capacity, can it fit in a bag of that capacity?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg .tg-t6ha{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-on5d{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:middle}
+.tg .tg-b8y7{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:top}
+.tg .tg-418g{border-color:#000000;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-l4pv{border-color:#000000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-4n8x{border-color:#000000;font-size:20px;text-align:center;vertical-align:top}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-b8y7"></th>
+    <th class="tg-b8y7" colspan="7">W<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-on5d" rowspan="4">n<br></td>
+    <td class="tg-l4pv"></td>
+    <td class="tg-418g">0</td>
+    <td class="tg-418g">1</td>
+    <td class="tg-418g">2</td>
+    <td class="tg-418g">3</td>
+    <td class="tg-418g">4</td>
+    <td class="tg-418g">5</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">10<br></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">1</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">2</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Then we use the recurrence to fill in the following rows.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$\begin{align}
 v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
 &amp;v(OPT(n-1, W))\}
 \end{align}$</p>
-<p>We can use it to build the following table:</p>
-<p><em>Item to Consider</em> (rows) by <em>Weight</em> (cols)</p>
-<p>First we fill in item $0$ by simply considering it. For each capacity, can it fit in a bag of that capacity?</p>
-<p>Then we use the recurrence to fill in the following rows.</p>
 <table>
 <thead><tr>
-<th></th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
+<th>index</th>
+<th>value</th>
+<th>weight</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>10</td>
+<td>5</td>
 </tr>
 <tr>
 <td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>6</td>
-<td>6</td>
-<td>10</td>
+<td>3</td>
 </tr>
 <tr>
 <td>2</td>
-<td>0</td>
-<td>0</td>
 <td>7</td>
-<td>7</td>
-<td>7</td>
-<td><strong>13</strong></td>
+<td>2</td>
 </tr>
 </tbody>
 </table>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg .tg-t6ha{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-on5d{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:middle}
+.tg .tg-b8y7{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:top}
+.tg .tg-418g{border-color:#000000;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-l4pv{border-color:#000000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-4n8x{border-color:#000000;font-size:20px;text-align:center;vertical-align:top}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-b8y7"></th>
+    <th class="tg-b8y7" colspan="7">W<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-on5d" rowspan="4">n<br></td>
+    <td class="tg-l4pv"></td>
+    <td class="tg-418g">0</td>
+    <td class="tg-418g">1</td>
+    <td class="tg-418g">2</td>
+    <td class="tg-418g">3</td>
+    <td class="tg-418g">4</td>
+    <td class="tg-418g">5</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">0</td>
+    <td class="tg-418g">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-418g">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">10<br></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">1</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-418g">6</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">2</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+v(OPT(1, 3)) = \max \{6 + &amp;v(OPT(0, 3-3)),\\ 
+&amp;v(OPT(0, 3)) \}
+\end{align}$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<table>
+<thead><tr>
+<th>index</th>
+<th>value</th>
+<th>weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg .tg-t6ha{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-on5d{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:middle}
+.tg .tg-b8y7{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:top}
+.tg .tg-418g{border-color:#000000;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-l4pv{border-color:#000000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-4n8x{border-color:#000000;font-size:20px;text-align:center;vertical-align:top}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-b8y7"></th>
+    <th class="tg-b8y7" colspan="7">W<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-on5d" rowspan="4">n<br></td>
+    <td class="tg-l4pv"></td>
+    <td class="tg-418g">0</td>
+    <td class="tg-418g">1</td>
+    <td class="tg-418g">2</td>
+    <td class="tg-418g">3</td>
+    <td class="tg-418g">4</td>
+    <td class="tg-418g">5</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-418g">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-418g">10<br></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">1</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">6</td>
+    <td class="tg-4n8x">6</td>
+    <td class="tg-418g">10</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">2</td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+    <td class="tg-4n8x"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+v(OPT(1, 5)) = \max \{6 + &amp;v(OPT(0, 5-3)),\\ 
+&amp;v(OPT(0, 5)) \}
+\end{align}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+v(OPT(1, 5)) = \max \{6 + 0, 10 \} = 10
+\end{align}$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<table>
+<thead><tr>
+<th>index</th>
+<th>value</th>
+<th>weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:4px 10px;word-break:normal;}
+.tg .tg-t6ha{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-on5d{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:middle}
+.tg .tg-b8y7{border-color:#ffffff;font-size:20px;text-align:center;vertical-align:top}
+.tg .tg-418g{border-color:#000000;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-l4pv{border-color:#000000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-4n8x{border-color:#000000;font-size:20px;text-align:center;vertical-align:top}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-b8y7"></th>
+    <th class="tg-b8y7" colspan="7">W<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-on5d" rowspan="4">n<br></td>
+    <td class="tg-l4pv"></td>
+    <td class="tg-418g">0</td>
+    <td class="tg-418g">1</td>
+    <td class="tg-418g">2</td>
+    <td class="tg-418g">3</td>
+    <td class="tg-418g">4</td>
+    <td class="tg-418g">5</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">10<br></td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">1</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-418g">6</td>
+    <td class="tg-4n8x">6</td>
+    <td class="tg-418g">10</td>
+  </tr>
+  <tr>
+    <td class="tg-t6ha">2</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">0</td>
+    <td class="tg-4n8x">7</td>
+    <td class="tg-4n8x">7</td>
+    <td class="tg-4n8x">7</td>
+    <td class="tg-418g">13</td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+v(OPT(2, 5)) = \max \{7 + &amp;v(OPT(1, 5-2)),\\ 
+&amp;v(OPT(1, 5)) \}
+\end{align}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\begin{align}
+v(OPT(2, 5)) = \max \{7 + 6, 10 \} = 13
+\end{align}$</p>
+
+</div>
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -14317,8 +14851,20 @@ v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
             <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span><span class="p">(</span><span class="n">recursive_knapsack</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
+</pre></div>
 
-<span class="k">def</span> <span class="nf">tabular_knapsack</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tabular_knapsack</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
     <span class="c1"># we&#39;ll rely on indices to also represent weights, so we&#39;ll index from 1...W </span>
     <span class="c1"># in the weight dimension of the table</span>
@@ -14347,21 +14893,6 @@ v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
 <span class="n">W</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">objects</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabular_knapsack</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
-<span class="c1">#print(recursive_knapsack(objects, len(objects)-1, W))</span>
-
-
-<span class="c1">#W = 5</span>
-<span class="c1">#objects = [(10, 5), (9, 3)]</span>
-<span class="c1">#n = len(objects)-1</span>
-<span class="c1">#print(recursive_knapsack(objects.copy(), n, W))</span>
-<span class="c1">#print(tabular_knapsack(objects.copy(), W))</span>
-
-
-<span class="c1">#W = 1000</span>
-<span class="c1">#objects = [(i, i) for i in range(1, 500000)]</span>
-<span class="c1">#n = len(objects)-1</span>
-<span class="c1">#print(recursive_knapsack(objects, n, W))</span>
-<span class="c1">#print(tabular_knapsack(objects, W))</span>
 </pre></div>
 
      </div>
@@ -14399,16 +14930,33 @@ v(OPT(n, W)) = \max \{&amp;v(n) + v(OPT(n-1, W - w(n))), \\
 <li>Optimal Substructure</li>
 <li>Recursion DAG</li>
 </ul>
-<p>The correctness of the dynamic programming approach follows from the optimal substructure property (i.e., induction). If we can prove that the optimal substructure property holds, and that we compute a solution by correctly implementing this property then our solution is optimal.</p>
-<p>As with divide and conquer algorithms, achieving a good work/span can be tricky. We can minimize redundant computation by memoizing solutions to all subproblems. This can be done <em>top-down</em> by saving the result of a recursive call the first time we encounter it. Or, we can compute the optimal substructure property <em>bottom-up</em> by starting with the base case(s) and working our way up.</p>
-<p>Can we derive the number of nodes in the DAG using the optimal substructure property?</p>
 
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Work-and-Span-in-Dynamic-Programming">Work and Span in Dynamic Programming<a class="anchor-link" href="#Work-and-Span-in-Dynamic-Programming">&#182;</a></h3><p>Since we memoize the solution to every distinct subproblem, the number of nodes in the DAG is equal to the number of distinct subproblems considered.</p>
+<p>The correctness of the dynamic programming approach follows from the optimal substructure property (i.e., induction). If we can prove that the optimal substructure property holds, and that we compute a solution by correctly implementing this property then our solution is optimal.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>As with divide and conquer algorithms, achieving a good work/span can be tricky. We can minimize redundant computation by memoizing solutions to all subproblems, which we can do:</p>
+<ul>
+<li><p><em>top-down</em> by saving the result of a recursive call the first time we encounter it.</p>
+</li>
+<li><p><em>bottom-up</em> by filling in a table using the recurrence as a guide.</p>
+</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Work-and-Span-in-Dynamic-Programming">Work and Span in Dynamic Programming<a class="anchor-link" href="#Work-and-Span-in-Dynamic-Programming">&#182;</a></h3><p>Since we memoize the solution to every distinct subproblem, the number of nodes in the DAG is equal to the number of distinct subproblems considered, that is, the number of cells in the table..</p>
+<p>There are at most $O(nW)$ nodes in the table, and the longest path in the DAG is $O(n)$.</p>
 <p>The longest path in the DAG represents the span of our dynamic programming algorithm.</p>
+<p>Each node requires $O(1)$ work/span, so the work is $O(nW)$ and the span is $O(n)$.</p>
 
 </div>
 </div></section></section><section><section>

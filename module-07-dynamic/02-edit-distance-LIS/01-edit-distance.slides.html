@@ -14552,7 +14552,12 @@ $$<p><br></p>
 <p>In any recursive call, the subproblems we consider consist of strings with one less character. So there are $O(mn)$ subproblems, each of which can each be computed in $O(1)$ time (if we have precomputed the necessary dependencies). The longest path in the recursion DAG is $O(m+n)$.</p>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Implementation:-Top-down-w/out-memoization">Implementation: Top-down w/out memoization<a class="anchor-link" href="#Implementation:-Top-down-w/out-memoization">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
@@ -14569,7 +14574,7 @@ $$<p><br></p>
             <span class="k">return</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">T</span><span class="p">)))</span>
-            
+        
 <span class="n">S</span><span class="o">=</span> <span class="s1">&#39;abcdefghijkl&#39;</span>
 <span class="n">T</span><span class="o">=</span> <span class="s1">&#39;abcdghikjl&#39;</span>
 <span class="c1">#   abcdefghijk-l</span>
@@ -14642,7 +14647,947 @@ $$<p><br></p>
 
 </div>
 
-</div></div></section></section>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Solving-MED-using-a-Bottom-Up-Approach">Solving MED using a Bottom-Up Approach<a class="anchor-link" href="#Solving-MED-using-a-Bottom-Up-Approach">&#182;</a></h2><p>As we did for knapsack, we can use a table to calculate and store solutions to subproblems.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-0alu{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-trnk{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-re03{border-color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-trnk" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0alu" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>We fill in the values in the first row to give the cost of deleting characters from <code>'kitten'</code> to match the empty string <code>''</code> to the left.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-0alu{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-trnk{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-re02{border-color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re05{border-color:#000000;color:#cb0000;font-weight:bold;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-trnk" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0alu" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-re02">0</td>
+    <td class="tg-re05">1</td>
+    <td class="tg-re05">2</td>
+    <td class="tg-re05">3</td>
+    <td class="tg-re05">4</td>
+    <td class="tg-re05">5</td>
+    <td class="tg-re05">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We fill in the values in the first column to give the cost of inserting characters from <code>'sitting'</code> to match the empty string above.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-0alu{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-trnk{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-re02{border-color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re04{border-color:#000000;color:#036400;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re03{border-color:#000000;color:#cb0000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-trnk" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0alu" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-re02">0</td>
+    <td class="tg-re03">1</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-re04">1</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re04">2</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re04">3</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re04">4</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re04">5</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re04">6</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re04">7</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We fill in the rest using our recurrence:</p>
+$$
+\mathit{MED}(S, T) = 
+\begin{cases}
+\mathit{MED}(S[1:], T[1:]), ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\texttt{if}~~S[0]=T[0] \\
+1+\min\{\mathit{MED}(S[1:], T),\mathit{MED}(S, T[1:])\}, ~~~~~\texttt{otherwise} \\
+\end{cases}
+$$
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-6zma{border-color:#000000;color:#f56b00;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-409p{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-1um3{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-re03{border-color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re04{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-6j81{border-color:#000000;color:#cb0000;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle;text-decoration:underline;}
+.tg .tg-4qyb{border-color:#000000;color:#036400;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle;text-decoration:underline;}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-409p" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-1um3" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-6zma">0</td>
+    <td class="tg-6j81">1</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-4qyb">1</td>
+    <td class="tg-re04">2</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re03">7</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-409p{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-1um3{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-ve0v{border-color:#000000;color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re03{border-color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re04{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-xmct{border-color:#000000;color:#f56b00;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle;text-decoration:underline;}
+.tg .tg-41fk{border-color:#000000;color:#cb0000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-295u{border-color:#000000;color:#036400;font-size:20px;text-align:left;vertical-align:middle}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-409p" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-1um3" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-ve0v">0</td>
+    <td class="tg-ve0v">1</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-ve0v">1</td>
+    <td class="tg-xmct">2</td>
+    <td class="tg-41fk">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">7</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-295u">3</td>
+    <td class="tg-re04">2</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re03">7</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-6zma{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-drif{border-color:#000000;color:#036400;font-size:20px;font-weight:bold;text-align:left;text-decoration:underline;
+  vertical-align:middle}
+.tg .tg-409p{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-1um3{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-8xes{border-color:#000000;color:#f56b00;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-ve0v{border-color:#000000;color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-re03{border-color:#000000;color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-41fk{border-color:#000000;color:#cb0000;font-size:20px;text-align:left;vertical-align:middle}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-409p" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-1um3" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-ve0v">0</td>
+    <td class="tg-ve0v">1</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-ve0v">1</td>
+    <td class="tg-ve0v">2</td>
+    <td class="tg-8xes">3</td>
+    <td class="tg-41fk">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">7</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-ve0v">3</td>
+    <td class="tg-drif">2</td>
+    <td class="tg-6zma">3</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re03">7</td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+    <td class="tg-re03"></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:9px 16px;word-break:normal;}
+.tg .tg-6zma{border-color:#000000;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-409p{border-color:#ffffff;color:#cb0000;font-size:20px;font-style:italic;text-align:center;vertical-align:middle}
+.tg .tg-1um3{border-color:#ffffff;color:#036400;font-size:20px;font-style:italic;text-align:center;vertical-align:middle;writing-mode:vertical-lr;transform:rotate(-180deg);}
+.tg .tg-8xes{border-color:#000000;color:#f56b00;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-ve0v{border-color:#000000;color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-6ua1{border-color:#000000;color:#fe0000;font-size:20px;font-weight:bold;text-align:left;text-decoration:underline;
+  vertical-align:middle}
+.tg .tg-re03{border-color:#000000;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-d999{border-color:#ffffff;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-1e1z{border-color:#c0c0c0;font-size:20px;font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-wo5g{border-color:#000000;color:#343434;font-size:20px;text-align:left;vertical-align:middle}
+.tg .tg-295u{border-color:#000000;color:#036400;font-size:20px;text-align:left;vertical-align:middle}
+</style></p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-d999"></th>
+    <th class="tg-409p" colspan="8">Cost to Delete</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-1um3" rowspan="9">Cost to Insert</td>
+    <td class="tg-1e1z"></td>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-1e1z">k</td>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-1e1z">e</td>
+    <td class="tg-1e1z">n</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">''</td>
+    <td class="tg-ve0v">0</td>
+    <td class="tg-ve0v">1</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">s</td>
+    <td class="tg-ve0v">1</td>
+    <td class="tg-ve0v">2</td>
+    <td class="tg-wo5g">3</td>
+    <td class="tg-ve0v">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">7</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-ve0v">3</td>
+    <td class="tg-ve0v">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">t</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">2</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">i</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">3</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-re03">5</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">n</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">7</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-re03">4</td>
+    <td class="tg-8xes">5</td>
+    <td class="tg-6ua1">4</td>
+  </tr>
+  <tr>
+    <td class="tg-1e1z">g</td>
+    <td class="tg-re03">7</td>
+    <td class="tg-re03">8</td>
+    <td class="tg-re03">7</td>
+    <td class="tg-re03">6</td>
+    <td class="tg-re03">5</td>
+    <td class="tg-295u">6</td>
+    <td class="tg-6zma">5</td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Tracing-back-the-edits">Tracing back the edits<a class="anchor-link" href="#Tracing-back-the-edits">&#182;</a></h3><p><img src="figures/edit-trace-1.jpeg" width="80%"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/edit-trace-2.jpeg" width="80%"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/edit-trace-3.jpeg" width="80%"></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Alignments:</strong></p>
+<p><code>k-itte-n-</code> $~~~~~~~$ <code>-kitt-en-</code><br>
+<code>-sitt-ing</code> $~~~~~~~$ <code>s-itti-ng</code></p>
+
+</div>
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="s1">&#39;kitten&#39;</span>
+<span class="n">T</span> <span class="o">=</span> <span class="s1">&#39;sitting&#39;</span>
+<span class="c1">#    -kitt-en-</span>
+<span class="c1">#    s-itti-ng</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>5
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section></section>
 </div>
 </div>
 </body>

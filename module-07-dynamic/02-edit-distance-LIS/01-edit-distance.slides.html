@@ -14099,220 +14099,98 @@ div.jp-OutputPrompt {
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Edit-Distance,-Longest-Increasing-Subsequence">Edit Distance, Longest Increasing Subsequence<a class="anchor-link" href="#Edit-Distance,-Longest-Increasing-Subsequence">&#182;</a></h2>
+<h1 id="CMPS-2200">CMPS 2200<a class="anchor-link" href="#CMPS-2200">&#182;</a></h1><h1 id="Introduction-to-Algorithms">Introduction to Algorithms<a class="anchor-link" href="#Introduction-to-Algorithms">&#182;</a></h1><h2 id="Longest-Increasing-Subsequence,-Edit-Distance">Longest Increasing Subsequence, Edit Distance<a class="anchor-link" href="#Longest-Increasing-Subsequence,-Edit-Distance">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
-<li>Edit Distance and Longest Increasing Subsequence</li>
+<li>Longest Increasing Subsequence</li>
+<li>Edit Distance</li>
 </ul>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Edit-Distance">Edit Distance<a class="anchor-link" href="#Edit-Distance">&#182;</a></h3><p>Given two strings $S, T \in \Sigma^*$, how similar are they?</p>
-<p>We can measure this using <em>edit distance</em>, which is the number of insertions and deletions needed to turn $S$ into $T$. Note that we can also go from $T$ to $S$ if we just reverse the edits (by turning insertions into deletions)</p>
-<p>Example:</p>
-<p>$S$ = <code>abcdefghijkl</code><br>
-$T$ = <code>abcdghikjl</code></p>
-<p>How many edits are needed?</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Notation Note</strong>:</p>
-<p>We will represent insertions and deletions using dashes. All insertions and deletions refer to modifying the top string.</p>
-<p>A dash in the bottom string means delete the character above it.</p>
-<p>E.g.,</p>
-<p><code>abc</code><br>
-<code>a-c</code></p>
-<p>A dash in the top string means insert a character here to match the character below.</p>
-<p>E.g.,</p>
-<p><code>jkl-l</code><br>
-<code>jklol</code></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Consider following edit sequence:</strong></p>
-<p>$S$: <code>abcdefghijkl---</code><br>
-$T$: <code>abcd--ghi---kjl</code></p>
-<p>This has 5 deletions and 3 insertions, for a total of 8 edits. What about this one:</p>
-<p>$S$: <code>abcdefghijk-l</code><br>
-$T$: <code>abcd--ghi-kjl</code></p>
-<p>We have 3 deletions and 1 insertion for a total of 4 edits.</p>
-<p>Our goal is to compute the <strong>minimum edit distance</strong> between two strings $S$ and $T$ of lengths $m$ and $n$, respectively.</p>
-<p>It might seem like a toy problem, but this is a critical problem in comparing gene and protein sequences. By attaching  weights to insertions and deletions, we can assess the evolutionary distance between two sequences.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br></p>
-<h2 id="Greedy-Solution?">Greedy Solution?<a class="anchor-link" href="#Greedy-Solution?">&#182;</a></h2><p>Suppose we had the following two strings:</p>
-<p>$S=$<code>relevant</code><br>
-$T=$<code>elephant</code></p>
-<p>Suppose we had a greedy choice: if the characters match, do nothing, else insert into $S$:</p>
-<p>$S=$<code>--------relevant</code><br>
-$T=$<code>elephant</code></p>
-<p>Clearly not ideal, need to follow it up to delete all extra characters in $S$ past the end of $T$.</p>
-<p>Runtime: S+T, literally the worst!</p>
-<p>Suppose we had a greedy choice: if the characters match, do nothing, else delete from $S$:</p>
-<p>$S=$<code>relevant</code><br>
-$T=$<code>-ele----phant</code></p>
-<p>Also not ideal.</p>
-<p>The problem is that what choice we make at any particular position should depend on how it effects the rest of the problem.</p>
-<p>We should examine both options, delete and insert, to decide what to do with respect to how that choice affects everything after.</p>
-<p>Here is an optimal set of edits for "relevant elephant"</p>
-<p>$S=$<code>relev--ant</code><br>
-$T=$<code>-ele-phant</code></p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Optimal-substructure?">Optimal substructure?<a class="anchor-link" href="#Optimal-substructure?">&#182;</a></h2><p><br></p>
-<p>Let's use case-based reasoning about the optimal solution as we did for Knapsack.</p>
-<p>Let $\mathit{MED}(S, T)$ be the optimal number of edits between $S$ and $T$.</p>
-<p>In an optimal sequence of edits, how would we deal with the first two characters of $S$ and $T$, respectively?</p>
-<p><br></p>
-<p>For the base cases, is $S$ is empty and $T$ is not, what is the edit cost?</p>
-<p>S=<code>`&lt;br&gt;
-T=</code>abcde`</p>
-<p>If either string is empty, then the edit cost is simply the length of the other string.</p>
-<p><br></p>
-<p>What if $S[0] = T[0]$?<br>
-S=<code>abc</code><br>
-T=<code>ade</code></p>
-<p>then there is no benefit to editing and $\mathit{MED}(S, T) = \mathit{MED}(S[1:], T[1:])$, e.g, $\mathit{MED}(bc, de)$.</p>
-<p><br></p>
-<p>What if $S[0] \neq T[0]$?</p>
-<p>S=<code>abc</code><br>
-T=<code>bde</code></p>
-<p>then we must incur 1 edit. We must either perform a deletion or insertion. <br><br></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The less costly edit arises from either:</p>
-<p><strong>Deleting from $S$</strong>. The cost is 1 (the cost of the deletion) plus the $\mathit{MED}$ of the tail of $S$ with all of $T$.</p>
-<p>$1+\mathit{MED}(S[1:], T)~~~~$    e.g, $1+\mathit{MED}($ <code>bc</code> , <code>bde</code> $)$  <br><br></p>
-<p><strong>Inserting into $S$</strong>. If we insert into $S$, we have to match up all of $S$, which still remains, with the tail of T since we've ensured its first character matches.</p>
-<p>S=<code>babc</code><br>
-T=<code>bde</code></p>
-<p>$1+\mathit{MED}(S, T[1:])~~~~$  e.g, $1+\mathit{MED}($ <code>abc</code> , <code>de</code> $)$</p>
-<p><br><br></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Optimal Substructure for Edit Distance</strong>: Let $S$ and $T$ be strings of length $m$ and $n$. Then,</p>
-$$
-\mathit{MED}(S, T) = 
-\begin{cases}
-\mathit{MED}(S[1:], T[1:]), ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\texttt{if}~~S[0]=T[0] \\
-1+\min\{\mathit{MED}(S[1:], T),\mathit{MED}(S, T[1:])\}, ~~~~~\texttt{otherwise} \\
-\end{cases}
-$$<p><br><br></p>
-<p>Just as with Knapsack, this recursion tree for this recurrence yields an exponential number of nodes. How many nodes are there, and what is the depth?</p>
+<h2 id="Longest-Increasing-Subsequence">Longest Increasing Subsequence<a class="anchor-link" href="#Longest-Increasing-Subsequence">&#182;</a></h2><p>We've seen a few sequence algorithms:</p>
+<ul>
+<li>longest run</li>
+<li>maximum contiguous subsequence</li>
+<li>longest gap. </li>
+</ul>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The recursion tree has $O(2^{m+n})$ nodes and depth $O(m+n)$. Are there shared subproblems?</p>
-<p>For $S$=<code>ABC</code> and $T$=<code>DBC</code> we have the following DAG:</p>
-<p><img src="figures/edit_distance_dag.jpg" width="80%"></p>
-<p>How much sharing is possible? In other words, how many distinct subproblems are there?</p>
+<p>Let's look another trend we might want to identify from a sequence.</p>
+<p>Given a sequence $S = \langle s_0, s_1, \ldots, s_{n-1} \rangle$, what is the longest increasing subsequence?</p>
+<blockquote><p>Note that subsequences don't need to be contiguous.</p>
+</blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Example: $S=\langle 5, 2, 8, 6, 3, 6, 9, 7\rangle$.</p>
+<p>Every subsequence of length 1 is trivially increasing.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Increasign subsequences include:</p>
+<ul>
+<li><p>$\langle 2, 6, 9 \rangle$</p>
+</li>
+<li><p>$\langle 2, 8, 9 \rangle$</p>
+</li>
+<li><p>$\langle 5, 6, 7\rangle$</p>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the longest?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><p>$\langle 2, 3, 6, 9 \rangle$</p>
+</li>
+<li><p>$\langle 2, 3, 6, 7 \rangle$</p>
+</li>
+</ul>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>In any recursive call, the subproblems we consider consist of strings with one less character. So there are $O(mn)$ subproblems, each of which can each be computed in $O(1)$ time (if we have precomputed the necessary dependencies). The longest path in the recursion DAG is $O(m+n)$.</p>
+<h2 id="Solving-LIS">Solving LIS<a class="anchor-link" href="#Solving-LIS">&#182;</a></h2>$$S=\langle 5, 2, 8, 6, 3, 6, 9, 7\rangle$$<p>Let's reduce this problem to something slightly simpler with the observation that the longest increasing subsequence must start somewhere in $S$.</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-    <span class="c1">#print(&quot;S:%s, T:%s&quot; % (S, T))</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">S</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">T</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="k">return</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">T</span><span class="p">)))</span>
-
-<span class="n">S</span><span class="o">=</span> <span class="s2">&quot;abcdefghijkl&quot;</span>
-<span class="n">T</span><span class="o">=</span> <span class="s2">&quot;abcdghikjl&quot;</span>
-<span class="n">S</span> <span class="o">=</span> <span class="s1">&#39;kitten&#39;</span>
-<span class="n">T</span> <span class="o">=</span> <span class="s1">&#39;sitting&#39;</span>
-<span class="c1">#    -kitt-en-</span>
-<span class="c1">#    s-itti-ng</span>
-<span class="c1">#S = &#39;relevant&#39;</span>
-<span class="c1">#T = &#39;elephant&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>5
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></div></section></section><section><section>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Longest-Increasing-Subsequence">Longest Increasing Subsequence<a class="anchor-link" href="#Longest-Increasing-Subsequence">&#182;</a></h2><p>We previously looked at approaches to identify trends in a sequence: longest run, maximum contiguous subsequence, longest gap.</p>
-<p>Let's look another trend we might want to identify from a sequence. Given a sequence $S = \langle s_0, s_1, \ldots, s_{n-1} \rangle$, what is the longest increasing subsequence? Note that subsequences don't need to be contiguous.</p>
-<p>Example: $S=\langle 5, 2, 8, 6, 3, 6, 9, 7\rangle$. Every subsequence of length 1 is trivially increasing. Also $\langle 2, 6, 9 \rangle$, $\langle 2, 8, 9 \rangle$ are increasing, as is $\langle 5, 6, 7\rangle$. What is the longest?</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's reduce this problem to something slightly simpler with the observation that the longest increasing subsequence must start somewhere in $S$.</p>
 <p>Let $\mathit{LIS}(S, i)$ be the longest increasing subsequence for $S$ that starts with $S[i]$ as the first element.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How can we use the function $\mathit{LIS}(S, i)$ to solve the original problem?</p>
 
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>If we can compute $LIS(S, i)$ then we can compute $ \mathit{LIS}(S) = \max_{0\leq i &lt; n} \mathit{LIS}(S, i).$</p>
 <ul>
 <li>If $S[i]$ is the first element, then the next element $j$ in the longest increasing subsequence must have $j&gt;i$ and $S[j] &gt; S[i]$. </li>
@@ -14320,22 +14198,38 @@ $$<p><br><br></p>
 </ul>
 
 </div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Optimal-Substructure">Optimal Substructure<a class="anchor-link" href="#Optimal-Substructure">&#182;</a></h2><p><strong>Optimal Substructure for Longest Increasing Subsequence</strong>: Given a sequence $S$, we have that the longest increasing subesquence of $S$ is $ \mathit{LIS}(S) = \max_{0\leq i &lt; n} \mathit{LIS}(S, i)$ where
+$$\mathit{LIS}(S, i) = 1 + \max_{j: S[j] &gt; S[i]} \mathit{LIS}(S, j).$$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>To compute this optimal substructure property, how many distinct subproblems must be computed from scratch?</p>
+
+</div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Optimal Substructure for Longest Increasing Subsequence</strong>: Given a sequence $S$, we have that the longest increasing subesquence of $S$ is $ \mathit{LIS}(S) = \max_{0\leq i &lt; n} \mathit{LIS}(S, i)$ where
-$$\mathit{LIS}(S, i) = 1 + \max_{j: S[j] &gt; S[i]} \mathit{LIS}(S, j).$$</p>
-<p>To compute this optimal substructure property, how many distinct subproblems must be computed from scratch?</p>
+<p>There are only a linear number of starting points for an optimal solution.</p>
+<p>But for each subproblem, the work to compute an optimal solution, even if we have computed all subproblems already, is actually linear in the size of the sequence we consider.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This optimal substructure property is little different than what we saw in Knapsack where every subproblem depended on two subproblems which could be solved in $O(1)$ time.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This optimal substructure property is little different than what we've seen so far. There are only a linear number of starting points for an optimal solution. But for each subproblem, the work to compute an optimal solution, even if we have computed all subproblems already, is actually linear in the size of the sequence we consider (instead of $O(1)$).</p>
-<p>However there are only a linear number of starting points for an optimal solution.</p>
-
+<h2 id="Implementation:-Top-down-w/out-memoization">Implementation: Top-down w/out memoization<a class="anchor-link" href="#Implementation:-Top-down-w/out-memoization">&#182;</a></h2>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14390,12 +14284,364 @@ $$\mathit{LIS}(S, i) = 1 + \max_{j: S[j] &gt; S[i]} \mathit{LIS}(S, j).$$</p>
 
 </div>
 
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Runtime">Runtime<a class="anchor-link" href="#Runtime">&#182;</a></h2><p>For a list $S$ of length $n$, we incur $O(n^2)$ work if we reuse the results from already visited subproblems.</p>
+<p>Since we decrease the length of the list by at least one element in each recursive call, the longest path in the DAG is $n$.</p>
+<p>At each node, we require $O(\lg n)$ span to compute the max (e.g., using <code>reduce</code>), and $O(1)$ span to compute <code>rest</code> (using filter), so the span is $O(n \lg n).$</p>
+<p>$W(n) \in O(n^2)$</p>
+<p>$S(n) \in O(n \lg n)$</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Edit-Distance">Edit Distance<a class="anchor-link" href="#Edit-Distance">&#182;</a></h1><p>Given two strings $S, T \in \Sigma^*$, how similar are they?</p>
+<p>We can measure this using <em>edit distance</em>, which is the number of insertions and deletions needed to turn $S$ into $T$. Note that we can also go from $T$ to $S$ if we just reverse the edits (by turning insertions into deletions)</p>
+<p>Example:</p>
+<p>$S$ = <code>abcdefghijkl</code><br>
+$T$ = <code>abcdghikjl</code></p>
+<p>How many edits are needed?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>This might seem like a toy problem, but it is a critical problem in comparing gene and protein sequences. By attaching weights to insertions and deletions, we can assess the evolutionary distance between two sequences.</p>
+</blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Notation Note</strong>:</p>
+<p>We will represent insertions and deletions using dashes. All insertions and deletions refer to modifying the top string.</p>
+<p>A dash in the bottom string means delete the character above it.</p>
+<p>E.g.,</p>
+<p><code>abc</code><br>
+<code>a-c</code></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>A dash in the top string means insert a character here to match the character below.</p>
+<p>E.g.,</p>
+<p><code>jkl-l</code><br>
+<code>jklol</code></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Consider following edit sequence:</strong></p>
+<p>$S$: <code>abcdefghijkl---</code><br>
+$T$: <code>abcd--ghi---kjl</code></p>
+<p>This has 5 deletions and 3 insertions, for a total of 8 edits.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What about this one:</p>
+<p>$S$: <code>abcdefghijk-l</code><br>
+$T$: <code>abcd--ghi-kjl</code></p>
+
+</div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So, for a list $S$ of length $n$, we incur $O(n^2)$ work if we reuse the results from already visited subproblems. Since we decrease the length of the list by at least one element in each recursive call, the longest path in the DAG is $n$. At each node, we require $O(\lg n)$ span to compute the max (e.g., using <code>reduce</code>), and $O(1)$ span to compute <code>rest</code> (using filter), so the span is $O(n \lg n).$</p>
+<p>We have 3 deletions and 1 insertion for a total of 4 edits.</p>
 
 </div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Our goal is to compute the <strong>minimum edit distance</strong> between two strings $S$ and $T$ of lengths $m$ and $n$, respectively.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Greedy-Solution?">Greedy Solution?<a class="anchor-link" href="#Greedy-Solution?">&#182;</a></h2><p>Suppose we had the following two strings</p>
+<p>$S=$<code>relevant</code><br>
+$T=$<code>elephant</code></p>
+<p>and suppose we had a greedy choice:</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>If the characters match, do nothing, else insert into $S$</strong>:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$S=$<code>--------relevant</code><br>
+$T=$<code>elephant</code></p>
+<p>Clearly not ideal, need to follow it up to delete all extra characters in $S$ past the end of $T$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Runtime: S+T, literally the worst!</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Greedy choice 2:</p>
+<p><strong>If the characters match, do nothing, else delete from $S$</strong>:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$S=$<code>relevant</code><br>
+$T=$<code>-ele----phant</code></p>
+<p>Also not ideal.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Why-isn't-greedy-working?">Why isn't greedy working?<a class="anchor-link" href="#Why-isn't-greedy-working?">&#182;</a></h3>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The choice we make at any particular position should depend on how it effects the rest of the problem.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We should examine both options, delete and insert, to decide what to do with respect to how that choice affects everything after.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Here is an optimal set of edits for "relevant elephant"</p>
+<p>$S=$<code>relev--ant</code><br>
+$T=$<code>-ele-phant</code></p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Optimal-substructure?">Optimal substructure?<a class="anchor-link" href="#Optimal-substructure?">&#182;</a></h2><p>Let's use case-based reasoning about the optimal solution as we did for Knapsack.</p>
+<p>Let $\mathit{MED}(S, T)$ be the optimal number of edits between $S$ and $T$.</p>
+<p>In an optimal sequence of edits, how would we deal with the first two characters of $S$ and $T$, respectively?</p>
+<p><strong>Three cases:</strong></p>
+<p>$~~$ 1) $~~S$ or $T$ is empty</p>
+<p>$~~$ 2) $~~S[0]=T[0]$</p>
+<p>$~~$ 3) $~~S[0] \neq T[0]$</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="1)-$S$-or-$T$-is-empty">1) $S$ or $T$ is empty<a class="anchor-link" href="#1)-$S$-or-$T$-is-empty">&#182;</a></h3><p>If $S$ is empty and $T$ is not, what is the edit cost?</p>
+<p>S=<code>''</code><br>
+T=<code>'abcde'</code></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If either string is empty, then the edit cost is simply the length of the other string.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<h3 id="2)-$S%5B0%5D-=-T%5B0%5D$">2) $S[0] = T[0]$<a class="anchor-link" href="#2)-$S%5B0%5D-=-T%5B0%5D$">&#182;</a></h3><p>S=<code>'abc'</code><br>
+T=<code>'ade'</code></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>There is no benefit to editing position $0$. The edit distance is the edit distance of the tails of these strings.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\mathit{MED}(S, T) = \mathit{MED}(S[1:], T[1:])$</p>
+<p>e.g,</p>
+<p>$\mathit{MED}(S, T) = \mathit{MED}($<code>'bc'</code>$, $<code>'de'</code>$)$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="3)-$S%5B0%5D-%5Cneq-T%5B0%5D$">3) $S[0] \neq T[0]$<a class="anchor-link" href="#3)-$S%5B0%5D-%5Cneq-T%5B0%5D$">&#182;</a></h3><p>S=<code>'abc'</code><br>
+T=<code>'bde'</code></p>
+<p>We must either perform a deletion or insertion, whichever is less costly <br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Deleting from $S$</strong>. The cost is 1 (the cost of the deletion) plus the $\mathit{MED}$ of the tail of $S$ with all of $T$.</p>
+<p>S=<code>'abc'</code><br>
+T=<code>'-bde'</code></p>
+<p>$\mathit{MED}(S, T) = 1+\mathit{MED}($<code>'bc'</code>,<code>'bde'</code>$)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\mathit{MED}(S, T) = 1+\mathit{MED}(S[1:], T)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Inserting into $S$</strong>. If we insert into $S$, we have to match up all of $S$, which still remains, with the tail of T since we've ensured its first character matches.</p>
+<p>S=<code>'-abc'</code><br>
+T=<code>'bde'</code></p>
+<p>$\mathit{MED}(S, T) = 1+\mathit{MED}($<code>'abc'</code>,<code>'de'</code>$)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\mathit{MED}(S, T) = 1+\mathit{MED}(S, T[1:])$</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Optimal-Substructure">Optimal Substructure<a class="anchor-link" href="#Optimal-Substructure">&#182;</a></h2><p><strong>Optimal Substructure for Edit Distance</strong>: Let $S$ and $T$ be strings of length $m$ and $n$. Then,</p>
+$$
+\mathit{MED}(S, T) = 
+\begin{cases}
+\mathit{MED}(S[1:], T[1:]), ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\texttt{if}~~S[0]=T[0] \\
+1+\min\{\mathit{MED}(S[1:], T),\mathit{MED}(S, T[1:])\}, ~~~~~\texttt{otherwise} \\
+\end{cases}
+$$<p><br></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Problem-Size">Problem Size<a class="anchor-link" href="#Problem-Size">&#182;</a></h3><p>Just as with Knapsack, this recursion tree for this recurrence yields an exponential number of nodes. How many nodes are there, and what is the depth?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The recursion tree has $O(2^{m+n})$ nodes and depth $O(m+n)$. Are there shared subproblems?</p>
+<p>For $S$=<code>ABC</code> and $T$=<code>DBC</code> we have the following DAG:</p>
+<p><img src="figures/edit_distance_dag.jpg" width="80%"></p>
+<p>How much sharing is possible? In other words, how many distinct subproblems are there?</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="figures/edit_distance_dag.jpg" width="80%"></p>
+<p>In any recursive call, the subproblems we consider consist of strings with one less character. So there are $O(mn)$ subproblems, each of which can each be computed in $O(1)$ time (if we have precomputed the necessary dependencies). The longest path in the recursion DAG is $O(m+n)$.</p>
+
+</div>
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="c1">#print(&quot;S:%s, T:%s&quot; % (S, T))</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">S</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">T</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">T</span><span class="p">)))</span>
+            
+<span class="n">S</span><span class="o">=</span> <span class="s1">&#39;abcdefghijkl&#39;</span>
+<span class="n">T</span><span class="o">=</span> <span class="s1">&#39;abcdghikjl&#39;</span>
+<span class="c1">#   abcdefghijk-l</span>
+<span class="c1">#   abcd--ghi-kjl</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>4
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="s1">&#39;relevant&#39;</span>
+<span class="n">T</span> <span class="o">=</span> <span class="s1">&#39;elephant&#39;</span>
+<span class="c1">#    relev--ant</span>
+<span class="c1">#    -ele-phant</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MED</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>4
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div></div></section></section>
 </div>
 </div>

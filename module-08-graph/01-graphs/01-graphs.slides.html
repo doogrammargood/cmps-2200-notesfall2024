@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>Overview of graphs</li>
 </ul>
@@ -14118,6 +14118,11 @@ div.jp-OutputPrompt {
 <li>a set of $n$ vertices/nodes $V$ </li>
 <li>a set of $m$ edges $E \subseteq V \times V$</li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>A <strong>graph</strong> is way to represent objects and their relations</p>
 <ul>
 <li><strong>Node:</strong> represents an object</li>
@@ -14130,8 +14135,6 @@ div.jp-OutputPrompt {
 </ul>
 <p><img src="../figures/graph.png" width="50%"/></p>
 <p><a href="https://github.com/iit-cs579/main/blob/master/read/ek-02.pdf">Source</a></p>
-<p>Examples of <strong>directed</strong> and <strong>undirected</strong> graphs?</p>
-<p><br><br><br><br><br></p>
 
 </div>
 </div></section></section><section><section>
@@ -14145,11 +14148,22 @@ div.jp-OutputPrompt {
 <li>disease spread</li>
 </ul>
 <p><img src="https://statnet.org/nme/movie.gif"/> <a href="https://statnet.org/nme/">source</a></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>6-degrees of Kevin Bacon</li>
 </ul>
 <p><img src="../figures/kevin.jpg" width="50%"/></p>
 <p><a href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Source</a></p>
+<p>Also interesting: <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Bacon_number">Erdös-Bacon Number</a></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="../figures/giant.png" width="50%"/></p>
 <p><a href="https://www.cis.upenn.edu/~mkearns/teaching/NetworkedLife/teensex.pdf">Source</a></p>
 
@@ -14157,21 +14171,28 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Graphs-queries">Graphs queries<a class="anchor-link" href="#Graphs-queries">&#182;</a></h2><p>What are some things you might want to know about a graph? E.g., consider Facebook friendship graph, transport network, etc.</p>
+<h2 id="Graphs-queries">Graphs queries<a class="anchor-link" href="#Graphs-queries">&#182;</a></h2><p>What are some things you might want to know about a graph? E.g., consider social networks, transport network, etc.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>Who is friends with Justin Beiber?</p>
+<li><p>Who is friends with Billie Eilish?</p>
 <ul>
 <li><p>find <strong>neighbors</strong> of a node:</p>
 <p>$ N(v) =\{v_i ~ \mid (v, v_i) \in E ~~ \hbox{or} ~~(v_i, v) \in E\}$</p>
 </li>
 </ul>
 </li>
-<li><p>How popular is Justin Beiber?</p>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><p>How popular is Billie Eilish?</p>
 <ul>
 <li><p><strong>degree</strong>: number of neighbors of a node:</p>
 <p>$ |N(v)|$</p>
@@ -14181,11 +14202,11 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Do I know someone who is friends with Justin?<ul>
+<li>Do I know someone who is friends with Billie?<ul>
 <li><strong>path</strong>: a sequence of nodes in which each consecutive pair are neighbors</li>
 <li><strong>reachability</strong>: $a$ is reachable from $b$ if there is a path between them</li>
 </ul>
@@ -14193,7 +14214,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
@@ -14203,6 +14224,11 @@ div.jp-OutputPrompt {
 </ul>
 </li>
 </ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="../figures/components.png" width=50%/></p>
 <p><a href="https://github.com/iit-cs579/main/blob/master/read/ek-02.pdf">Source</a></p>
 
@@ -14234,7 +14260,13 @@ D &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
 $</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/graph.png" width="50%"/></p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14253,14 +14285,24 @@ $</p>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">directed</span><span class="p">:</span> <span class="c1"># add reverse direction</span>
             <span class="n">graph</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">graph</span>
-        
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>        
 <span class="n">graph</span> <span class="o">=</span> <span class="n">make_graph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;undirected&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
       
-<span class="n">digraph</span> <span class="o">=</span> <span class="n">make_graph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">directed&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14287,7 +14329,43 @@ $</p>
   1    0    1    1
   0    1    0    1
   0    1    1    0
+</pre>
+</div>
+</div>
 
+</div>
+
+</div>
+
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">digraph</span> <span class="o">=</span> <span class="n">make_graph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">directed&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>
 directed
   A    B    C    D
 ---  ---  ---  ---
@@ -14303,7 +14381,7 @@ directed
 
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
@@ -14361,7 +14439,7 @@ directed
 
 </div>
 
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Runtime to access neighbors of a node?</p>
@@ -14373,12 +14451,12 @@ directed
 <p>$O(|V|)$</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Why-is-this-space-inefficient?">Why is this space inefficient?<a class="anchor-link" href="#Why-is-this-space-inefficient?">&#182;</a></h3>
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If there are $|V|$ nodes, what is the maximum number of edges?</p>
@@ -14387,21 +14465,26 @@ directed
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$<p>....but, if a graph is dense, then there's not really any value in representing the data as a graph.</p>
+$$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>....but, if a graph is dense, then there's not really any value in representing the data as a graph.</p>
 <p>Luckily, most real-world graphs are extremely sparse.</p>
 <ul>
 <li>E.g., you are probably not friends with over 1,000 people.</li>
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="it's-a-small-world-after-all...">it's a small world after all...<a class="anchor-link" href="#it's-a-small-world-after-all...">&#182;</a></h3><p><img src="../figures/small.png" alt="small"></p>
 <p>Source: <a href="http://www.nature.com/nature/journal/v393/n6684/pdf/393440a0.pdf"><em>Collective dynamics of 'small-world' networks.</em> Duncan J. Watts &amp; Steven H. Strogatz</a></p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Edge-Sets">Edge Sets<a class="anchor-link" href="#Edge-Sets">&#182;</a></h2><p>We could simply store the graph as a set of edges.</p>
@@ -14460,13 +14543,13 @@ $$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$<p>....but, if a graph is dense, then there
 <p>$O(|E|)$</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How can we access the neighbors of a node?</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
@@ -14534,7 +14617,7 @@ $$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$<p>....but, if a graph is dense, then there
 <h1 id="Map-of-Neighbors">Map of Neighbors<a class="anchor-link" href="#Map-of-Neighbors">&#182;</a></h1><p>We can use a hashmap (<code>dict</code>) to store the neighbors of each node.</p>
 
 </div>
-</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
@@ -14577,7 +14660,7 @@ $$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$<p>....but, if a graph is dense, then there
 
 </div>
 
-</div></section><section>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What is work of accessing neighbors?</p>
@@ -14623,15 +14706,13 @@ $$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$<p>....but, if a graph is dense, then there
 
 </div>
 
-</div></div></section><section>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Constant time to lookup the neighbors of a node.</p>
-<p>But, to enumerate all the neighbors, it could take $|V|$ in the worst-case.</p>
-<p>So, same as the Adjacency Matrix, but with $O(|E|)$ space, instead of $O(|V|^2)$</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Graph-Search">Graph Search<a class="anchor-link" href="#Graph-Search">&#182;</a></h2><p>One of the fundamental operations over graphs</p>
@@ -14643,6 +14724,11 @@ $$\frac{|V|(|V|-1)}{2} \in O(|V|^2)$$<p>....but, if a graph is dense, then there
 </li>
 <li>For efficiency, visit each node at most once.</li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br><br>
 Can be used to solve a number of problem:</p>
 <ul>
@@ -14652,7 +14738,7 @@ Can be used to solve a number of problem:</p>
 </ul>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Generic-Graph-Search">Generic Graph Search<a class="anchor-link" href="#Generic-Graph-Search">&#182;</a></h2><p>Consider the task of crawling every web page reachable from a starting page $s$.</p>
@@ -14680,24 +14766,26 @@ Can be used to solve a number of problem:</p>
 <li>update the three sets</li>
 </ul>
 </blockquote>
-<p><br><br>
-We'll look at two common search algorithms, <strong>breadth-first search</strong> and <strong>depth-first search</strong>.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>We'll look at two common search algorithms, <strong>breadth-first search</strong> and <strong>depth-first search</strong>.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Vertex-Hopping">Vertex Hopping<a class="anchor-link" href="#Vertex-Hopping">&#182;</a></h2><p>Just to get an idea of the problem, we'll start with an inefficient way of searching called <strong>vertex hopping</strong></p>
-<p><br><br></p>
-<blockquote><p>loop until all nodes visited:</p>
-<ul>
-<li>pick a node</li>
-<li>visit all its neighbors</li>
-</ul>
-</blockquote>
+
+<pre><code>until all nodes visited:
+    pick a node
+    visit all its neighbors</code></pre>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
@@ -14749,7 +14837,7 @@ searching with D
 
 </div>
 
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This of course ignores the idea of <strong>paths</strong> in a graph.</p>

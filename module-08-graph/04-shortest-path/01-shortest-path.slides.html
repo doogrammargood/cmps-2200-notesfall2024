@@ -14116,10 +14116,10 @@ div.jp-OutputPrompt {
 <p>Can we generalize these?</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -14146,19 +14146,27 @@ div.jp-OutputPrompt {
 
 <span class="k">def</span> <span class="nf">dfs_fn</span><span class="p">(</span><span class="n">frontier</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">frontier</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</pre></div>
 
-<span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;E&#39;</span><span class="p">}</span>
-        <span class="p">}</span>
+     </div>
+</div>
+</div>
+</div>
 
-<span class="n">generic_search</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">bfs_fn</span><span class="p">)</span>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph.jpeg" width="40%"/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">generic_search</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">bfs_fn</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14181,8 +14189,8 @@ div.jp-OutputPrompt {
 <pre>visiting A
 visiting C
 visiting B
-visiting G
 visiting F
+visiting G
 visiting D
 visiting E
 visiting H
@@ -14193,7 +14201,7 @@ visiting H
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14208,7 +14216,14 @@ visiting H
 
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph.jpeg" width="40%"/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
@@ -14264,10 +14279,10 @@ visiting G
 
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Priority-First-Search">Priority First Search<a class="anchor-link" href="#Priority-First-Search">&#182;</a></h2><p>We can view the <code>get_next_node_fn</code> as a way to pick the <strong>highest priority</strong> node to visit at each iteration.</p>
+<h2 id="Priority-First-Search">Priority First Search<a class="anchor-link" href="#Priority-First-Search">&#182;</a></h2><p>We could use the <code>get_next_node_fn</code> as a way to pick the <strong>highest priority</strong> node to visit at each iteration.</p>
 <p>E.g., consider a Web crawler that prioritizes which pages to visit first</p>
 <ul>
 <li>more interesting pages</li>
@@ -14282,8 +14297,9 @@ visiting G
 <h2 id="Weighted-graphs">Weighted graphs<a class="anchor-link" href="#Weighted-graphs">&#182;</a></h2><p>Up to now we have focused on unweighted graphs.</p>
 <p>For many problems, we need to associate real-valued <strong>weights</strong> to each edge.</p>
 <p>E.g., consider a graph where nodes are cities and edges represent the distance between them.</p>
-<p><img src="../figures/weighted.png" width=70%/></p>
-<p>The <strong>weight of a path</strong> in the graph is the sum of the weights of the edges along that path.</p>
+<center>
+<img src="../figures/weighted.png" width=60%/>
+</center><p>The <strong>weight of a path</strong> in the graph is the sum of the weights of the edges along that path.</p>
 <p>The <strong>shortest weighted path</strong> (or just <strong>shortest path</strong>) between <strong>s</strong> and <strong>e</strong> is the one with minimal weight.</p>
 <p><strong>What is the shortest path from s to e</strong>?</p>
 
@@ -14303,7 +14319,7 @@ visiting G
 <ul>
 <li>visit b</li>
 <li>visit a</li>
-<li>but, will not visit path from a to b, since it doesn't visit a node more than once</li>
+<li>but, will not traverse the path from a to b, since it doesn't visit a node more than once</li>
 </ul>
 <p>Thus, BFS will not discover that the shortest path from $s$ to $b$ is $s \rightarrow a \rightarrow b$.</p>
 <p>How could we modify the graph so we can use BFS to find the shortest path?</p>

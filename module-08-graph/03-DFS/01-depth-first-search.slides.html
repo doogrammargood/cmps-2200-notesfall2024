@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Today's agenda:</p>
+<p>Agenda:</p>
 <ul>
 <li>depth-first search</li>
 <li>comparison with breadth-first search</li>
@@ -14129,14 +14129,13 @@ div.jp-OutputPrompt {
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>While BFS uses a queue, we can implement DFS with a stack</p>
-<p><strong>last in first out</strong></p>
+<p>While BFS uses a queue, we can implement DFS with a stack: <strong>last in first out</strong></p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -14156,7 +14155,28 @@ div.jp-OutputPrompt {
     <span class="n">frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">dfs_stack_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
-    
+  
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph.jpeg" width=40%/>
+</center>
+</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span>  
 <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">},</span>
             <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">},</span>
@@ -14167,8 +14187,27 @@ div.jp-OutputPrompt {
             <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">},</span>
             <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;E&#39;</span><span class="p">}</span>
         <span class="p">}</span>
+</pre></div>
 
-<span class="n">dfs_stack</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph.jpeg" width=40%/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_stack</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14189,13 +14228,13 @@ div.jp-OutputPrompt {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>visiting A
-visiting C
-visiting F
-visiting G
 visiting B
 visiting D
 visiting E
 visiting H
+visiting C
+visiting F
+visiting G
 </pre>
 </div>
 </div>
@@ -14203,7 +14242,7 @@ visiting H
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -14218,25 +14257,65 @@ visiting H
 
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Animated_BFS.gif" width=30%/></p>
-
+<h3 id="Compare-with-bfs_serial!">Compare with <code>bfs_serial</code>!<a class="anchor-link" href="#Compare-with-bfs_serial!">&#182;</a></h3>
 </div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Compare-with-bfs_serial!">Compare with <code>bfs_serial</code>!<a class="anchor-link" href="#Compare-with-bfs_serial!">&#182;</a></h3><p><code>dfs_stack</code>:</p>
-<ul>
-<li><code>node = frontier.pop()</code></li>
-</ul>
-<p><code>bfs_serial</code>:</p>
-<ul>
-<li><code>node = frontier.popleft()</code></li>
-</ul>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">bfs_serial</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">bfs_serial_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frontier</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">visited</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">frontier</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span> <span class="c1"># &lt;==== DIFFERENCE</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;visiting&#39;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">frontier</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">,</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="n">bfs_serial_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
+    <span class="n">frontier</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">bfs_serial_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
+</pre></div>
 
+     </div>
 </div>
+</div>
+</div>
+
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dfs_stack</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">dfs_stack_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frontier</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">visited</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">frontier</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># &lt;======== DIFFERENCE</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;visiting&#39;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">frontier</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">,</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="n">dfs_stack_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>   
+    <span class="n">frontier</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dfs_stack_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14246,10 +14325,10 @@ visiting H
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Depth-First-Search.gif" width=25%/>
 </center>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dfs_recursive</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
@@ -14271,8 +14350,27 @@ visiting H
         <span class="k">return</span> <span class="n">x</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">iterate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
 
-<span class="n">dfs_recursive</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph.jpeg" width=40%/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_recursive</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14293,13 +14391,13 @@ visiting H
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>visiting A
+visiting C
+visiting G
+visiting F
 visiting B
 visiting E
 visiting H
 visiting D
-visiting C
-visiting G
-visiting F
 </pre>
 </div>
 </div>
@@ -14307,7 +14405,7 @@ visiting F
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -14322,16 +14420,10 @@ visiting F
 
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Animated_BFS.gif" width=30%/></p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Cost-of-DFS">Cost of DFS<a class="anchor-link" href="#Cost-of-DFS">&#182;</a></h2><p>As in BFS, we add a node to the visited set exactly once ($|V|$).</p>
+<h2 id="Cost-of-DFS">Cost of DFS<a class="anchor-link" href="#Cost-of-DFS">&#182;</a></h2><p>As in DFS, we add a node to the visited set exactly once ($|V|$).</p>
 <p>For each edge, we do one lookup to see if it exists in the visited set ($|E|$).</p>
 <p>Thus, the total work is equivalent to BFS: $O(|V| + |E|)$.</p>
 
@@ -14339,18 +14431,22 @@ visiting F
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Parallelism-in-DFS?">Parallelism in DFS?<a class="anchor-link" href="#Parallelism-in-DFS?">&#182;</a></h2><p><img src="../figures/dfs_nop.jpg" width="30%"/></p>
-<p>Is there any opportunity for parallelism?</p>
+<h2 id="Parallelism-in-DFS?">Parallelism in DFS?<a class="anchor-link" href="#Parallelism-in-DFS?">&#182;</a></h2><center>
+<img src="../figures/dfs_nop.jpg" width="30%"/>
+</center><p>Is there any opportunity for parallelism?</p>
 <p>One idea is to just run the search for each child in parallel.</p>
 <ul>
-<li>E.g., in this example, search the subtree starting at $a$ in parallel with the subtree starting at $b$</li>
+<li>E.g., in this example, search subtree $a$ and $b$ in parallel</li>
 </ul>
 <p>What potential problems arise?</p>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><center>
+<img src="../figures/dfs_nop.jpg" width="30%"/>
+</center></p>
 <ul>
 <li>We may end up visiting $b$ twice (or $c$, or $f$)</li>
 <li>This isn't in DFS order! We shouldn't be visiting $b$ before $e$.</li>
@@ -14358,7 +14454,7 @@ visiting F
 <p>DFS belongs to a class of problems called <strong>P</strong>-complete: computations that most likely do not admit solutions with <strong>polylogarithmic</strong> span.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Cycle-detection">Cycle detection<a class="anchor-link" href="#Cycle-detection">&#182;</a></h2><p>How can we modify DFS to determine if the graph has a cycle?</p>
@@ -14372,14 +14468,55 @@ visiting F
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>idea</strong>: determine whether a vertex is visited more than once.</p>
-<p>but...the second visit must be from a different source</p>
-<p><img src="../figures/triangle.png"/></p>
+<p><img src="../figures/triangle.png" width="50%"/></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/triangle.png" width="50%"/>
+</center><p>Determine whether a vertex is visited more than once but...the second visit must be from a different source</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dfs_stack_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frontier</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">visited</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">frontier</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;visiting&#39;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">frontier</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">,</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">dfs_stack_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>   
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>e.g., if $a$ is the source, we will see $b$ twice</p>
 <ul>
 <li>once when it is added to <code>visited</code></li>
 <li>once in the base case of the recursive call (<code>if node in visited</code>), with <code>c</code> as the parent</li>
 </ul>
-<p>but we will see $a$ three times:</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/triangle.png" width="50%"/>
+</center><p>We will see $a$ three times:</p>
 <ul>
 <li>once when it is added to <code>visited</code></li>
 <li>twice in the base case of the recursive call (<code>if node in visited</code>)<ul>
@@ -14391,10 +14528,10 @@ visiting F
 <p>So, we need to keep track of the parent of each recursive call, and make sure not to make a recursive call back to the parent.</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dfs_cycle</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
@@ -14406,11 +14543,9 @@ visiting F
 <span class="sd">        so we can use iterate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">visited</span><span class="p">,</span> <span class="n">has_cycle</span> <span class="o">=</span> <span class="n">result</span>
-
         <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;found cycle from </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">node</span><span class="p">))</span>
             <span class="k">return</span> <span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;visiting&#39;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
             <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
@@ -14424,7 +14559,27 @@ visiting F
     
     <span class="k">return</span> <span class="n">dfs_cycle_helper</span><span class="p">((</span><span class="n">visited</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">source</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
     
-<span class="n">dfs_cycle</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph.jpeg" width="40%"/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_cycle</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14445,13 +14600,13 @@ visiting F
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>visiting A
+visiting C
+visiting G
+visiting F
 visiting B
 visiting E
 visiting H
 visiting D
-visiting C
-visiting G
-visiting F
 </pre>
 </div>
 </div>
@@ -14459,7 +14614,7 @@ visiting F
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
@@ -14474,10 +14629,10 @@ visiting F
 
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">graph2</span> <span class="o">=</span> <span class="p">{</span>
@@ -14490,7 +14645,34 @@ visiting F
             <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">},</span>  <span class="c1"># add cycle back to A from G</span>
             <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;E&#39;</span><span class="p">}</span>
         <span class="p">}</span>
-<span class="n">dfs_cycle</span><span class="p">(</span><span class="n">graph2</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph-cycle.jpeg" width="40%"/>
+</center>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/dfs-graph-cycle.jpeg" width="40%"/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_cycle</span><span class="p">(</span><span class="n">graph2</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14511,14 +14693,14 @@ visiting F
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>visiting A
-visiting B
-visiting E
-visiting H
-visiting D
 visiting C
 visiting G
 found cycle from G to A
 visiting F
+visiting B
+visiting E
+visiting H
+visiting D
 </pre>
 </div>
 </div>
@@ -14526,7 +14708,7 @@ visiting F
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 
 
 
@@ -14541,7 +14723,7 @@ visiting F
 
 </div>
 
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 </body>

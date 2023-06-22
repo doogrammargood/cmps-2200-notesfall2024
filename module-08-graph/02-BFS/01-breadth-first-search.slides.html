@@ -14111,32 +14111,54 @@ div.jp-OutputPrompt {
 <li>graph $G$</li>
 <li>source vertex $s$</li>
 </ul>
-<p><br><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Process:</strong></p>
 <ol>
 <li>Visit neighbors of $s$</li>
 <li>Visit neighbors of neighbors of $s$</li>
 <li>Visit neighbors of neighbors of neighbors of $s$ ...</li>
 </ol>
 <p>while ensuring that each node is visited only once.</p>
-<p><br><br></p>
-<ul>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Animated_BFS.gif" width=25%/>
+</center><ul>
 <li>Nodes at level $i$ have a path distance of $i$  from $s$</li>
 <li>BFS proceeds one level at a time, until there are no new neighbors to visit.</li>
 </ul>
-<p><br><br>
-What variables will we need to keep track of?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Building-BFS">Building BFS<a class="anchor-link" href="#Building-BFS">&#182;</a></h2><center>
+<img src="../figures/bfs_1.png" width=30%/>
+</center><p>What variables will we need to keep track of?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-<img src="../figures/bfs_1.png" width=30%/>
-</center><ul>
+<ul>
 <li><code>visited</code> $X$: the nodes already visited, so we don't visit them more than once</li>
 <li><code>frontier</code> $F$: the nodes to visit next.</li>
 </ul>
-<p>At iteration $i$:</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/bfs_1.png" width=30%/>
+</center><p>At iteration $i$:</p>
 <ul>
 <li><code>visited</code> contains all nodes with distance less than $i$ from $s$</li>
 <li><code>frontier</code> contains all nodes with distance exactly $i$ from $s$<ul>
@@ -14144,47 +14166,75 @@ What variables will we need to keep track of?</p>
 </ul>
 </li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>e.g., for $i=1$:</p>
 <ul>
 <li>$X_1 = \{a\}$</li>
 <li>$F_1 = \{b,c\}$</li>
 </ul>
-<p>How do we update <code>visited</code> and <code>frontier</code> at each iteration?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ol>
+<center>
+<img src="../figures/bfs_1.png" width=30%/>
+</center><p>How do we update <code>visited</code> and <code>frontier</code> at each iteration?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>To update <code>visited</code>, we add any new values encountered in the frontier:<ul>
 <li>$X_{i+1} = X_i \cup F_i$</li>
 </ul>
 </li>
-</ol>
-<ol>
+</ul>
+<ul>
 <li>To update <code>frontier</code>, we take the neighborhood of $F_i$ and remove any vertices that have already been visited:<ul>
 <li>$F_{i+1} = N(F_i) \setminus X_{i+1}$</li>
 <li>$N(F_i)$ are the neighbors of the nodes in $F_i$</li>
 </ul>
 </li>
-</ol>
-<p><br></p>
-<p>e.g. for $i=1$:</p>
-<ul>
-<li>$X_1 = \{a\}$</li>
-<li>$F_1 = \{b,c\}$</li>
-<li>update:<ul>
-<li>$X_2 = \{a\} \cup \{b,c\} = \{a,b,c\}$</li>
-<li>$F_2 = \{a, d, e, f, g\} \setminus \{a,b,c\} = \{d,e,f,g\}$</li>
 </ul>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/bfs_1.png" width=30%/>
+</center><p>e.g. for $i=1$:</p>
+<p>$X_1 = \{a\}$</p>
+<p>$F_1 = \{b,c\}$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>update:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><p>$X_2 = \{a\} \cup \{b,c\} = \{a,b,c\}$</p>
+</li>
+<li><p>$F_2 = \{a, d, e, f, g\} \setminus \{a,b,c\} = \{d,e,f,g\}$</p>
 </li>
 </ul>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
@@ -14210,9 +14260,20 @@ What variables will we need to keep track of?</p>
     <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">frontier</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">source</span><span class="p">])</span>        
     <span class="k">return</span> <span class="n">bfs_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
-    
+</pre></div>
 
-<span class="c1"># same as example graph above</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># same as example graph above</span>
 <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">},</span>
             <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">},</span>
@@ -14245,8 +14306,8 @@ What variables will we need to keep track of?</p>
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>visiting {&#39;A&#39;}
-visiting {&#39;C&#39;, &#39;B&#39;}
-visiting {&#39;G&#39;, &#39;F&#39;, &#39;D&#39;, &#39;E&#39;}
+visiting {&#39;B&#39;, &#39;C&#39;}
+visiting {&#39;G&#39;, &#39;E&#39;, &#39;D&#39;, &#39;F&#39;}
 visiting {&#39;H&#39;}
 </pre>
 </div>
@@ -14255,7 +14316,7 @@ visiting {&#39;H&#39;}
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -14270,58 +14331,134 @@ visiting {&#39;H&#39;}
 
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Work-of-BFS">Work of BFS<a class="anchor-link" href="#Work-of-BFS">&#182;</a></h2><ul>
 <li>Since we have no recurrence, we will instead simply add up costs of each level.</li>
 <li>But, work done at each level varies depending on how many nodes it contains.</li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What we do know:</p>
 <ul>
 <li>Every reachable node appears in the frontier exactly <strong>once</strong></li>
 <li>Likewise, each edge is processed exactly <strong>once</strong></li>
 </ul>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How much work is done for each node/edge?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><code>visited_new = visited | frontier</code><ul>
 <li>each node is added to the visited set at most once</li>
 </ul>
 </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li><code>frontier_neighbors = reduce(set.union, [graph[f] for f in frontier])</code><ul>
 <li>each edge is added to <code>frontier_neighbors</code> at most twice (a-&gt;b, b-&gt;a)</li>
 </ul>
 </li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li><code>frontier = frontier_neighbors - visited</code><ul>
 <li>each node is removed from the frontier at most once.</li>
 </ul>
 </li>
 </ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Therefore work is $O(|V| + |E|)$</li>
 </ul>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Parallelism-in-BFS">Parallelism in BFS<a class="anchor-link" href="#Parallelism-in-BFS">&#182;</a></h2><p>There is some limited parallelism possible in BFS. While we must visit each level sequentially, at each level we can parallelize the set operations:</p>
 <p><code>visited_new = visited | frontier</code></p>
 <p><code>frontier_neighbors = reduce(set.union, [graph[f] for f in frontier])</code></p>
 <p><code>frontier = frontier_neighbors - visited</code></p>
-<p>We can represent a set as a binary search tree, which supports $O(\lg n)$ span operations for union, intersection, and difference operations. (See <a href="https://www.diderot.one/courses/137/books/588/chapter/8261">Vol II Ch 17</a> for more details).</p>
-<p>So, the first and third lines have $O(\lg n)$ span, but the second has $O(\lg^2 n)$.</p>
-<ul>
-<li>reduce has $O(\lg n)$ span, but the union call at each step has $O(\lg n)$ span</li>
-</ul>
-<p>If the distance from the source to the most distant node is $d$, then the span is $O(d \lg^2 n)$</p>
-<p>What shape graph results in the worst span?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>A chain:</p>
+<p><br></p>
+<p>We can represent a set as a binary search tree, which supports $O(\lg n)$ span operations for union, intersection, and difference operations. (See <a href="https://www.diderot.one/courses/137/books/588/chapter/8261">Vol II Ch 17</a> for more details).</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><code>visited_new = visited | frontier</code><ul>
+<li>$O(\lg n)$ span</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><code>frontier_neighbors = reduce(set.union, [graph[f] for f in frontier])</code><ul>
+<li>$O(\lg^2 n)$<ul>
+<li>reduce has $O(\lg n)$ span, but the union call at each step has $O(\lg n)$ span</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><code>frontier = frontier_neighbors - visited</code><ul>
+<li>$O(\lg n)$ span</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If the distance from the source to the most distant node is $d$, then the span is $O(d \lg^2 n)$</p>
+<p>What shape graph results in the worst span?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="../figures/chain.png" alt="figures/chain.png"></p>
 <p>Span $O(|V| \lg^2 n)$</p>
 
@@ -14337,7 +14474,7 @@ visiting {&#39;H&#39;}
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
@@ -14387,10 +14524,10 @@ deque([2])
 
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># compare with:</span>
@@ -14426,17 +14563,22 @@ pop returns 1
 
 </div>
 
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>What is running time to remove first element of a dynamic array with $n$ elements (a list in Python)?</strong></p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$O(n)$: Need to shift all elements to the left.</p>
-<p><br><br><br></p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>What is the running time to remove first element of a doubly linked list $n$ elements (a deque in Python)?</strong></p>
 
 </div>
@@ -14448,7 +14590,7 @@ pop returns 1
 <a href="https://wiki.python.org/moin/TimeComplexity">https://wiki.python.org/moin/TimeComplexity</a></p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
@@ -14524,13 +14666,13 @@ visiting H
 
 </div>
 
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Serial-BFS-Work/Span">Serial BFS Work/Span<a class="anchor-link" href="#Serial-BFS-Work/Span">&#182;</a></h3><p>Work and span are $O(|V| + |E|)$, since each vertex and edge are visited once.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="How-can-we-keep-track-of-the-distance-each-node-is-from-the-source?">How can we keep track of the distance each node is from the source?<a class="anchor-link" href="#How-can-we-keep-track-of-the-distance-each-node-is-from-the-source?">&#182;</a></h3>
@@ -14542,7 +14684,6 @@ visiting H
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">bfs_recursive_depths</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
-
     <span class="k">def</span> <span class="nf">bfs_helper_depths</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">,</span> <span class="n">cur_depth</span><span class="p">,</span> <span class="n">depths</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frontier</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">depths</span>
@@ -14559,16 +14700,13 @@ visiting H
             <span class="c1"># F_{i+1} = N(F_i) \ X_{i+1}</span>
             <span class="n">frontier_neighbors</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">,</span> <span class="p">[</span><span class="n">graph</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frontier</span><span class="p">])</span>
             <span class="n">frontier</span> <span class="o">=</span> <span class="n">frontier_neighbors</span> <span class="o">-</span> <span class="n">visited</span>
-
             <span class="k">return</span> <span class="n">bfs_helper_depths</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">,</span> <span class="n">cur_depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">depths</span><span class="p">)</span>    
 
     <span class="n">depths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">frontier</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">source</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">bfs_helper_depths</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">depths</span><span class="p">)</span>
-    
-
-        
+     
 <span class="n">bfs_recursive_depths</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 </pre></div>
 

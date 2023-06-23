@@ -14296,25 +14296,30 @@ visiting G
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Weighted-graphs">Weighted graphs<a class="anchor-link" href="#Weighted-graphs">&#182;</a></h2><p>Up to now we have focused on unweighted graphs.</p>
 <p>For many problems, we need to associate real-valued <strong>weights</strong> to each edge.</p>
-<p>E.g., consider a graph where nodes are cities and edges represent the distance between them.</p>
+<p>E.g., a graph where nodes are cities and edges represent the distance between them.</p>
 <center>
 <img src="../figures/weighted.png" width=60%/>
 </center><p>The <strong>weight of a path</strong> in the graph is the sum of the weights of the edges along that path.</p>
 <p>The <strong>shortest weighted path</strong> (or just <strong>shortest path</strong>) between <strong>s</strong> and <strong>e</strong> is the one with minimal weight.</p>
-<p><strong>What is the shortest path from s to e</strong>?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We saw that we can use BFS to get the distance from the source to each node.</p>
-<p>Can we use BFS to solve the shortest path problem for weighted graphs?</p>
+<p><strong>What is the shortest path from s to e</strong>?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Use-BFS-to-solve-shortest-path-problem?">Use BFS to solve shortest path problem?<a class="anchor-link" href="#Use-BFS-to-solve-shortest-path-problem?">&#182;</a></h2><p>We saw that we can use BFS to get the distance from the source to each node.</p>
+<p>Can we use BFS to solve the shortest path problem for weighted graphs?</p>
 <p><img src="../figures/bfs_fail.png" width=50%/></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>BFS will:</p>
 <ul>
 <li>visit b</li>
@@ -14322,25 +14327,21 @@ visiting G
 <li>but, will not traverse the path from a to b, since it doesn't visit a node more than once</li>
 </ul>
 <p>Thus, BFS will not discover that the shortest path from $s$ to $b$ is $s \rightarrow a \rightarrow b$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How could we modify the graph so we can use BFS to find the shortest path?</p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="../figures/bfs-fix.png" width=50%/></p>
-<p><br><br></p>
-<p>What is work of creating this graph from the original?</p>
 
 </div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>BFS takes $O(|V|+|E|)$ time, but the number of new edges could be equal to the total weight of all edges, say $W$. (Consider a simple chain.)</p>
-<p>The input size  $O(|V| + |E| + \log W)$, but the work is $O(W)$ in the worst case. Thus reducing shortest paths to BFS requires work that is exponential in input size!</p>
-
-</div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Consider another example:</p>
@@ -14348,14 +14349,14 @@ visiting G
 <p>What is the shortest path from $s$ to $e$?</p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p>Infinite loop in the cycle $s \rightarrow a \rightarrow b \rightarrow a$, so shortest path is $-\infty$</p>
 </blockquote>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="SSSP:-Single-Source-Shortest-Path">SSSP: Single-Source Shortest Path<a class="anchor-link" href="#SSSP:-Single-Source-Shortest-Path">&#182;</a></h2><p>Given a weighted graph $G=(V,E,w)$ and a source vertex $s$, the single-source shortest path (SSSP) problem is to find a shortest weighted path from $s$ to every other vertex in $V$.</p>
@@ -14363,15 +14364,16 @@ visiting G
 <p>Is there anything we could reuse to improve the brute-force solution?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Consider this figure:</p>
-<p><img src="../figures/subpaths.png" width="40%"/></p>
-<p>Suppose that an oracle has told us the shortest paths from $s$ to all vertices except for the vertex $v$, shown in red squares. How can we find the shortest path to $v$?</p>
+<center>
+<img src="../figures/subpaths.png" width="60%"/>
+</center><p>Suppose that an oracle has told us the shortest paths from $s$ to all vertices except for the vertex $v$, shown in red squares. How can we find the shortest path to $v$?</p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Let $\delta_G(i,j)$ be the weight of shortest path from $i$ to $j$ in graph $G$. Then:</p>
@@ -14381,22 +14383,53 @@ $$
 &amp;\delta_G(s,b)+6,\\
 &amp;\delta_G(s,c)+5 )
 \end{align}
-$$<h3 id="sub-paths-property">sub-paths property<a class="anchor-link" href="#sub-paths-property">&#182;</a></h3><blockquote><p>any sub-path of a shortest path is itself a shortest path.</p>
+$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="sub-paths-property">sub-paths property<a class="anchor-link" href="#sub-paths-property">&#182;</a></h3><blockquote><p>any sub-path of a shortest path is itself a shortest path.</p>
 </blockquote>
 <p>The sub-paths property makes it possible to construct shortest paths from smaller shortest paths.</p>
 <blockquote><p>If a shortest path from New Orleans to Boston goes through Atlanta, then that path is built from shortest path from New Orleans to Atlanta, and from Atlanta to Boston.</p>
 </blockquote>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Dijkstra's-property">Dijkstra's property<a class="anchor-link" href="#Dijkstra's-property">&#182;</a></h2><p>Suppose we have a set of vertices $X$ whose shortest paths are known. Can we efficiently determine the shortest path to any of the vertices in its frontier?</p>
 <p>Let $p(v)$ be the weight of the shortest path to $v$ in the frontier.</p>
-<p>For any partitioning of vertices $V$ into $X$ and $Y = V \setminus X$ with $s \in X$:</p>
-$$p(v) = \min_{x \in X} (\delta_G(s,x) + w(x,v))$$<p>Consider the vertex $v$ with the overall shortest path length:</p>
-$$p(v) = \min_{y \in Y} p(y) = \min_{y \in Y} \delta_G(s, y)$$<blockquote><p>No other vertex in $Y$ can be closer to the source than $v$. $p(v)$ is the length of the shortest path to $v$. There is no other path through other vertices in $Y$ which can be shorter.</p>
+<p>For any partitioning of vertices $V$ into</p>
+<ul>
+<li>$X$<ul>
+<li>The set of vertices we know the shortest paths to</li>
+</ul>
+</li>
+<li>$Y = V \setminus X$<ul>
+<li>everything else</li>
+</ul>
+</li>
+</ul>
+<p>Given a source vertex $s \in X$, by the sub-paths property:</p>
+$$p(v) = \min_{x \in X} (\delta_G(s,x) + w(x,v))$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>$p(v)$ is the length of the shortest path to $v$. There is no other path through other vertices in $Y$ which can be shorter.</p>
 </blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We can use this property to iteratively add vertices to our set of "known vertices"</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
 <img src="../figures/dijkstra_example.jpg" width=50%/>
 </center>
@@ -14404,21 +14437,57 @@ $$p(v) = \min_{y \in Y} p(y) = \min_{y \in Y} \delta_G(s, y)$$<blockquote><p>No 
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This property suggest that we can continue to expand the set of vertices which known shortest paths by identifing and adding the node from the frontier with the shortest path from $s$.</p>
+<p>Which vertex will be added to $X$ next?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>By going through vertex $d$, a path exists to get to $u$ with a cost of $9$.</p>
+<p>$~~~~~\delta_G(s,u) = \delta_G(s,d) + w(d,u) = 5 + 4 = 9$</p>
+<p>The shortest path to vertex $v$ is through $b$ with a cost of 10.</p>
+<p>$~~~~~\delta_G(s,v) = \delta_G(s,b) + w(b,v) = 4 + 6 = 10$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Full-details">Full details<a class="anchor-link" href="#Full-details">&#182;</a></h3><center>
+<img src="../figures/dijkstra_example.jpg" width=45%/>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$
+\begin{align}
+\delta_G(s,v) = \min(&amp;\delta_G(s,a) + w(a,v) = 8 + 3 = 11,\\
+&amp;\pmb{\delta_G(s,b) + w(b,v) = 4 + 6 = 10}, \\
+&amp;\delta_G(s,c) + w(c,v) = 7 + 5 = 12 \\
+\end{align}
+$$$$
+\begin{align}
+\delta_G(s,u) = 
+\min(&amp;\delta_G(s,c) + w(c,u) = 7 + 3 = 10, \\
+&amp;\pmb{\delta_G(s,d) + w(d,u) = 5 + 4 = 9}
+)
+\end{align}
+$$<p>$\texttt{Vertex } \pmb{u}$ will be added to the known set of vertices next.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Iteratively-expanding-our-known-vertices">Iteratively expanding our known vertices<a class="anchor-link" href="#Iteratively-expanding-our-known-vertices">&#182;</a></h2><p>The sub-paths property suggests that we can continue to expand the set of our "known" vertices by identifing and adding the the frontier vertex the shortest distance from $s$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This will ensure that we visit nodes in an order to identify actual shortest paths.</p>
 <center>
 <img src="../figures/bfs_fail.png" width=50%/>
-</center><p>If we visit $b$ before $a$, we will still not discover that the shortest path from $s$ to $b$ is $s \rightarrow a \rightarrow b$.</p>
-<p>Instead, we must visit nodes in increasing distance from the source.</p>
-<p>In the following figure, assume we know the shortest paths to $\{a,b,c,e\}$. We can then use these to determine whether $u$ or $v$ is closer to $s$.</p>
-<center>
-<img src="../figures/distance.png" width=50%/>
-</center><p>The idea of Dijkstra's algorithm is:</p>
-<ul>
-<li>Maintain a visited set of vertices whose distances have already been computed correctly.</li>
-<li>Calculate distances to each node in the frontier.</li>
-<li>Extend the frontier by visiting the closest vertex.</li>
-</ul>
+</center><p>By visiting nodes in order of increasing distance from the source, we will find the shortest path from $a \rightarrow c$.</p>
 
 </div>
 </div></div></section></section><section><section>
@@ -14428,78 +14497,78 @@ $$p(v) = \min_{y \in Y} p(y) = \min_{y \in Y} \delta_G(s, y)$$<blockquote><p>No 
 <ol>
 <li>Initialize frontier to $(s, 0)$</li>
 <li>While frontier not empty:<ul>
-<li>pop from the frontier the minimum node $v$ with distance $d$ from the source.</li>
-<li>set $result(v) = d$ to be the weight of the shortest path from $s$ to $v$</li>
-<li>For each neighbor $x$ of $v$ with edge weight $w$, add $x$ to frontier with distance $d + w$</li>
+<li>pop from the frontier the minimum node $\pmb{v}$ with distance $\pmb{d}$ from the source.</li>
+<li>set $\texttt{result}(v) = d$<ul>
+<li>this is the weight of the shortest path from $\pmb{s}$ to $\pmb{v}$</li>
 </ul>
 </li>
-<li>return $result$</li>
+<li>For each neighbor $\pmb{n}$ of $\pmb{v}$ with edge weight $\pmb{w}$, add $\pmb{n}$ to frontier with distance $\pmb{d} + \pmb{w}$</li>
+</ul>
+</li>
+<li>return $\texttt{result}$</li>
 </ol>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Heaps in Python</span>
-<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span> 
-  
-<span class="c1"># Creating empty heap </span>
-<span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span> 
-  
-<span class="c1"># Adding items to the heap using heappush function </span>
-<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">))</span> 
-<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span> 
-<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">))</span> 
-<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">))</span> 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Head value of heap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Head value of heap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Head value of heap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Head value of heap : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Head value of heap : (10, &#39;a&#39;)
-Head value of heap : (20, &#39;c&#39;)
-Head value of heap : (30, &#39;b&#39;)
-Head value of heap : (400, &#39;d&#39;)
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
+<h2 id="Example-by-hand">Example by hand<a class="anchor-link" href="#Example-by-hand">&#182;</a></h2><center>
     <img src="../figures/dijkstra-0.jpg" width=50%/>
 </center>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-1.jpg" width=50%/>
+</center>
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-2.jpg" width=50%/>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-3.jpg" width=50%/>
+</center>
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-4.jpg" width=50%/>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-5.jpg" width=50%/>
+</center>
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-6.jpg" width=50%/>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-7.jpg" width=50%/>
+</center>
+</div>
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
@@ -14529,16 +14598,56 @@ Head value of heap : (400, &#39;d&#39;)
     <span class="n">heappush</span><span class="p">(</span><span class="n">frontier</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="p">))</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># store the final shortest paths for each node.</span>
     <span class="k">return</span> <span class="n">dijkstra_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-0.jpg" width=50%/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)},</span>
-            <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span> <span class="c1"># &#39;a&#39;: {&#39;b&#39;},</span>
+            <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
             <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)},</span> 
-            <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
+            <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
             <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">{},</span>
             <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)}</span>
         <span class="p">}</span>
-<span class="n">dijkstra</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
+        
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-7.jpg" width=50%/>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dijkstra</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14567,6 +14676,7 @@ visiting b
 visiting c
 ...distance= 4
 visiting c
+visiting a
 visiting d
 ...distance= 7
 visiting d
@@ -14577,7 +14687,7 @@ visiting d
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -14592,63 +14702,7 @@ visiting d
 
 </div>
 
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-0.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-1.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-2.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-3.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-4.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-5.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-6.jpg" width=50%/>
-</center>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src="../figures/dijkstra-7.jpg" width=50%/>
-</center>
-</div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Correctness-of-Dijkstra's-Algorithm">Correctness of Dijkstra's Algorithm<a class="anchor-link" href="#Correctness-of-Dijkstra's-Algorithm">&#182;</a></h3><p>The algorithm maintains an invariant that each visited element $x \in X$ contains the shortest path from $s$ to $x$.</p>
@@ -14671,6 +14725,7 @@ visiting d
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
     <span class="n">heappush</span><span class="p">(</span><span class="n">frontier</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span> <span class="o">+</span> <span class="n">weight</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">))</span>
 </pre></div>
+<p><br></p>
 <p>What is work and span of <code>heappop</code> and <code>heappush</code>?</p>
 
 </div>
@@ -14678,9 +14733,37 @@ visiting d
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$O(\lg n)$ work and span for each, for a heap of size $n$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>How many times will we call these functions?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Once per edge, since a node may be added to the heap multiple times for each edge.</p>
-<p>Thus, the total work and span is $O(|E| \log |E|)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Total work?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$O(|E| \log |E|)$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Note that we assume constant time <code>dict</code> operations:</p>
 <ul>
 <li><code>visited[node] = distance</code></li>
@@ -14690,15 +14773,55 @@ visiting d
 <p>Because this is a serial algorithm, the span is also $O(|E| \log |E|)$</p>
 
 </div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Potential-Optimization">Potential Optimization<a class="anchor-link" href="#Potential-Optimization">&#182;</a></h3>
+</div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>What is the shortest way to travel from Rotterdam to Groningen, in general: from given city to given city. It is the algorithm for the shortest path, which I designed in about twenty minutes. One morning I was shopping in Amsterdam with my young fiancée, and tired, we sat down on the café terrace to drink a cup of coffee and I was just thinking about whether I could do this, and I then designed the algorithm for the shortest path. As I said, it was a twenty-minute invention. In fact, it was published in '59, three years later. The publication is still readable, it is, in fact, quite nice. One of the reasons that it is so nice was that I designed it without pencil and paper. I learned later that one of the advantages of designing without pencil and paper is that you are almost forced to avoid all avoidable complexities. Eventually, that algorithm became to my great amazement, one of the cornerstones of my fame.</p>
+<center>
+    <img src="../figures/dijkstra-2.jpg" width=40%/>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/dijkstra-3.jpg" width=40%/>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>When we visit vertex $b$, we add $c$ to the queue a second time.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Alternatively, we could update the existing value and reheap up or down as necessary.</p>
+<p>This would ensure that our heap were never larger than $|V|$, giving us $O(\log |V|)$ <code>heappush</code> and <code>heappop</code> operations rather than $O(\log |E|)$ ones.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>With this optimization, we can get a runtime for Dijkstra's of:</p>
+<p>$O(|E| \log |V|)$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>What is the shortest way to travel from Rotterdam to Groningen, in general: from given city to given city. It is the algorithm for the shortest path, which I designed in about twenty minutes. One morning I was shopping in Amsterdam with my young fiancée, and tired, we sat down on the café terrace to drink a cup of coffee and I was just thinking about whether I could do this, and I then designed the algorithm for the shortest path.</p>
+<p>As I said, it was a twenty-minute invention. In fact, it was published in '59, three years later. The publication is still readable, it is, in fact, quite nice. One of the reasons that it is so nice was that I designed it without pencil and paper. I learned later that one of the advantages of designing without pencil and paper is that you are almost forced to avoid all avoidable complexities. Eventually, that algorithm became to my great amazement, one of the cornerstones of my fame.</p>
 </blockquote>
 <p>— Edsger Dijkstra, in an interview with Philip L. Frana, Communications of the ACM, 2001</p>
 
 </div>
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 </body>

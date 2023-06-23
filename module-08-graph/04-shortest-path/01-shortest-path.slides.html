@@ -14399,7 +14399,6 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Dijkstra's-property">Dijkstra's property<a class="anchor-link" href="#Dijkstra's-property">&#182;</a></h2><p>Suppose we have a set of vertices $X$ whose shortest paths are known. Can we efficiently determine the shortest path to any of the vertices in its frontier?</p>
-<p>Let $p(v)$ be the weight of the shortest path to $v$ in the frontier.</p>
 <p>For any partitioning of vertices $V$ into</p>
 <ul>
 <li>$X$<ul>
@@ -14412,12 +14411,14 @@ $$
 </li>
 </ul>
 <p>Given a source vertex $s \in X$, by the sub-paths property:</p>
-$$p(v) = \min_{x \in X} (\delta_G(s,x) + w(x,v))$$
+$$p(v,x) = \min_{x \in X} (\delta_G(s,x) + w(x,v))$$<blockquote><p>This is the shortest path to frontier vertex $v$ through $x$.</p>
+</blockquote>
+
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>$p(v)$ is the length of the shortest path to $v$. There is no other path through other vertices in $Y$ which can be shorter.</p>
+$$p(y) = \min_{y \in Y} p(y) = \min_{y \in Y} \delta_G(s, y)$$<blockquote><p>$y$ is the frontier vertex closest to the source $s$. This is the shortest path distance to $y$ from $s$.</p>
 </blockquote>
 
 </div>

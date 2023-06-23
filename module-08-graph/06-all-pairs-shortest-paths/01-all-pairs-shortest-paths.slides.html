@@ -14106,35 +14106,41 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="All-pairs-shortest-path--(APSP)">All pairs shortest path  (APSP)<a class="anchor-link" href="#All-pairs-shortest-path--(APSP)">&#182;</a></h2><p>Up to now, we've consider the shortest paths from a fixed source node $s$.</p>
 <p>We've solved the single source shortest paths problem with <em>positive</em> weights using <strong>Dijkstra's Algorithm</strong>.</p>
-<ul>
-<li><strong>Work</strong> $=O(|E|\log |E|)$</li>
-<li><strong>Span</strong> $=O(|E|\log |E|)$</li>
-</ul>
+<p>$~~~$ <strong>Work</strong> $=O(|E|\log |E|)$</p>
+<p>$~~~$ <strong>Span</strong> $=O(|E|\log |E|)$</p>
 <p>And the single source shortest paths problem with <em>negative</em> weights using <strong>Bellman-Ford</strong>.</p>
-<ul>
-<li><strong>Work:</strong> $O(|V| \cdot |E|)$</li>
-<li><strong>Span:</strong> $O(|V| \lg |V|)$</li>
-</ul>
+<p>$~~~$ <strong>Work:</strong> $O(|V| \cdot |E|)$</p>
+<p>$~~~$ <strong>Span:</strong> $O(|V| \lg |V|)$</p>
 <p>Of course, what if we want to know the shortest path from <strong>all</strong> nodes in the graph?</p>
 <p>How can we use algorithms we have seen to do this?</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="All-pairs-shortest-paths-using-Bellman-Ford">All pairs shortest paths using Bellman-Ford<a class="anchor-link" href="#All-pairs-shortest-paths-using-Bellman-Ford">&#182;</a></h3><p>Just run Bellman-Ford $|V|$ times, once per vertex.</p>
+<p>Since one run of Bellman-Ford has $O(|V| \cdot |E|)$ work, the total work is $O(|V|^2 \cdot |E|)$</p>
+<p>Can we do better?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Graph-transformations">Graph transformations<a class="anchor-link" href="#Graph-transformations">&#182;</a></h2><p>It would be great if we could instead just run Dijkstra's algorithm $|V|$ times, resulting in $O(|V|\cdot|E| \log |V|)~$ $&lt;&lt;~O(|V|^2 \cdot |E|)$</p>
+<p>But, we can't run Dijkstra if the graph has negative edge weights.</p>
+<p><br></p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Just run Bellman-Ford $|V|$ times, once per vertex.</p>
-<p>Since one run of Bellman-Ford has $O(|V| \cdot |E|)$ work, the total work is $O(|V|^2 \cdot |E|)$</p>
-<p>Can we do better?</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Graph-transformations">Graph transformations<a class="anchor-link" href="#Graph-transformations">&#182;</a></h2><p>It would be great if we could instead just run Dijkstra's algorithm $|V|$ times, resulting in $O(|V|\cdot|E| \log |E|)~~~~$ $&lt;&lt;O(|V|^2 \cdot |E|)$</p>
-<p>But, we can't run Dijkstra if the graph has negative edge weights.</p>
-<p><br></p>
 <p><strong>Key idea:</strong> Let's find a transformation from $G=(V,E)$ to $G'=(V,E')$, where all the edges in $E'$ are non-negative.</p>
 <p>We'll keep the nodes and edges the same, but just change the weights somehow...</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This transformation must have the following two properties:</p>
 <ol>
 <li><strong>shortest paths:</strong> The shortest path connecting $u$ to $v$ in $G$ should be the same in $G'$.</li>
@@ -14142,34 +14148,20 @@ div.jp-OutputPrompt {
 </ol>
 
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="naive-transformation">naive transformation<a class="anchor-link" href="#naive-transformation">&#182;</a></h3><p>What if we just find the smallest weight and add its absolute value to all weights?</p>
+<h3 id="Naive-transformation">Naive transformation<a class="anchor-link" href="#Naive-transformation">&#182;</a></h3><p>What if we just find the smallest weight and add its absolute value to all weights?</p>
 <p>Unfortunately, this won't work because it adds more weight to longer paths (in the sense of number of hops) than shorter ones.</p>
 <p>For example:</p>
-<p><img src="../figures/naive-1.jpeg" width=50%/></p>
+<p><img src="../figures/naive-transformation.jpeg" width=100%/></p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The shortest path from $A \rightarrow C$ is</p>
-<p>$A \rightarrow B \rightarrow C$ for a cost of $0$.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Applying the naive transformation:</p>
-<p><img src="../figures/naive-2.jpeg" width=50%/></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The shortest path from $A \rightarrow C$ is</p>
-<p>$A \rightarrow C$ for a cost of $3$.</p>
+<p>The shortest path $\delta_G(A,C)$ in origin graph is $A \rightarrow B \rightarrow C$.</p>
+<p>It is $A \rightarrow C$ after the transformation</p>
 
 </div>
 </div>
@@ -14181,38 +14173,85 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="preserving-shortest-paths">preserving shortest paths<a class="anchor-link" href="#preserving-shortest-paths">&#182;</a></h3><p>Consider some path from $v_0$ to $v_k$ in $G$: $p=\langle v_0, v_1, \ldots v_k \rangle$</p>
+<h2 id="Preserving-shortest-paths">Preserving shortest paths<a class="anchor-link" href="#Preserving-shortest-paths">&#182;</a></h2><p>Consider some path from $v_0$ to $v_k$ in $G$:</p>
+<p>$p=\langle v_0, v_1, \ldots v_k \rangle$</p>
 <ul>
+<li>Original Graph<ul>
 <li>let $w(p)$ be the sum of the edge weights in $p$ in the original graph $G$</li>
-<li>let $\delta(v_0, v_k)$ be the weight of the shortest path from $v_0$ to v_k in the original graph $G$</li>
+<li>let $\delta(v_0, v_k)$ be the weight of the shortest path from $v_0$ to $v_k$ in the original graph $G$</li>
+</ul>
+</li>
+<li>Transformed Graph<ul>
 <li>let $\hat{w}(p)$ be the sum of the edge weights in $p$ in the transformed graph $G'$</li>
-<li>let $\hat{\delta}(v_0, v_k)$ be the weight of the shortest path from $v_0$ to v_k in the transformed graph $G'$</li>
+<li>let $\hat{\delta}(v_0, v_k)$ be the weight of the shortest path from $v_0$ to $v_k$ in the transformed graph $G'$</li>
+</ul>
+</li>
 </ul>
 <p>Then, we want a transformation such that:
 $w(p) = \delta(v_0, v_k) \leftrightarrow \hat{w}(p) = \hat{\delta}(v_0, v_k)$</p>
 <ul>
 <li>that is, $p$ is a shortest path from $v_0$ to $v_k$ with weights $w$ if and only if $p$ is also a shortest path with weights $w'$</li>
 </ul>
-<p><br><br>
-let $f: V \mapsto \mathbb{R}$ be any function mapping vertices to real numbers.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Tranformation">Tranformation<a class="anchor-link" href="#Tranformation">&#182;</a></h3><p>let $f: V \mapsto \mathbb{R}$ be any function mapping vertices to real numbers.</p>
 <p><strong>claim:</strong> Weight transformations of the following form preserve shortest paths:</p>
-$$\hat{w}(u,v) = w(u,v) + f(u) - f(v)$$<p><img src="../figures/johnson_map.png" width=70%/></p>
-<p><br></p>
-<p><strong>proof:</strong> First, show that $\hat{w}(p) = w(p) + f(v_0) - f(v_k)$</p>
+$$\hat{w}(u,v) = w(u,v) + f(u) - f(v)$$
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/johnson_map.png" width=100%/></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>claim:</strong> Weight transformations of the following form preserve shortest paths:</p>
+$$\hat{w}(u,v) = w(u,v) + f(u) - f(v)$$<p><strong>proof:</strong></p>
+<p>First, show that $\hat{w}(p) = w(p) + f(v_0) - f(v_k)$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$
 \begin{align}
 \hat{w}(p) &amp; = \sum_{i=1}^k \hat{w}(v_{i-1}, v_i) &amp; \hbox{by definition}\\
 &amp; = \sum_{i=1}^k \Big( w(v_{i-1}, v_i) + f(v_{i-1}) - f(v_i) \Big)&amp; \hbox{by definition}\\
-&amp; = (w(v_0, v_1) + f(v_0) - f(v_1)) + (w(v_1, v_2) + f(v_1) - f(v_2)) + \ldots + (w(v_{k-1}, v_k) + f(v_{k-1}) - f(v_k))&amp; \hbox{expanding}\\
+&amp; = (w(v_0, v_1) + f(v_0) - \pmb{f(v_1))} + (w(v_1, v_2) + \pmb{f(v_1)} - \pmb{f(v_2)}) + \ldots + (w(v_{k-1}, v_k) + \pmb{f(v_{k-1})} - f(v_k))&amp; \hbox{expanding}\\
 &amp; = w(p) + f(v_0) - f(v_k) &amp; \hbox{cancelling terms}
 \end{align}
 $</p>
-<p><br><br><br>
-Now, consider comparing the weights of two paths $p_i$ and $p_j$ from $v_0$ to $v_k$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now show that if $\hat{w}(p_i) &lt; \hat{w}(p_j)$, then $w(p_i) &lt; w(p_j)$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consider comparing the weights of two paths $p_i$ and $p_j$ from $v_0$ to $v_k$.</p>
 <p>$\hat{w}(p_i) = w(p_i) + f(v_0) - f(v_k)$<br>
 $\hat{w}(p_j) = w(p_j) + f(v_0) - f(v_k)$</p>
-<p>Because the start and end nodes are the same, we have that<br>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Because the start and end nodes are the same, we can show that<br>
 $w(p_i) &lt; w(p_j) \leftrightarrow \hat{w}(p_i) &lt; \hat{w}(p_j)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$
 \begin{align}
 \hat{w}(p_i) &amp;&lt; \hat{w}(p_j)\\
@@ -14222,70 +14261,117 @@ w(p_i) &amp;&lt; w(p_j)
 $</p>
 
 </div>
-</div></section></section><section><section>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="ensuring-positive-edge-weights">ensuring positive edge weights<a class="anchor-link" href="#ensuring-positive-edge-weights">&#182;</a></h3><p>Not all transformations $\hat{w}(u,v) = w(u,v) + f(u) - f(v)$ will result in positive edge weights.</p>
+<p>Therefore, transformations of the form $\hat{w}(u,v) = w(u,v) + f(u) - f(v)$ preserve shortest paths $\blacksquare$.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Ensuring-positive-edge-weights">Ensuring positive edge weights<a class="anchor-link" href="#Ensuring-positive-edge-weights">&#182;</a></h2><p>Not all transformations $\hat{w}(u,v) = w(u,v) + f(u) - f(v)$ will result in positive edge weights.</p>
 <p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We do know this about shortest paths:</p>
 <p><strong>triangle inequality</strong>:</p>
 <p>$
 \begin{align}
-\delta(u,v) &amp; \le \delta(u,x) + w(x,v)\\
-0 &amp; \le w(x,v) + \delta(u,x) - \delta(u,v)
+\delta(s,v) &amp; \le \delta(s,x) + w(x,v)\\
+0 &amp; \le w(x,v) + \delta(s,x) - \delta(s,v)
 \end{align}
 $</p>
 <p>which looks a lot like $w(u,v) + f(u) - f(v)$</p>
-<p>So, if we can use shortest path as our function $f(v)$, we can ensure that weights are non-negative.</p>
-<p>But, what is the source of this shortest path?</p>
-<p><br>
-We can't just pick a random node, as not all other nodes may be reachable from it.</p>
-<ul>
-<li>e.g., $a$ is not reachable from $b$ in our previous example</li>
-</ul>
-<p><br><br></p>
-<p>Instead, we'll create a "dummy" source node, and connect it with 0 weight to all nodes. This ensures all nodes get a shortest path less than $\infty$.</p>
-<p><br></p>
-<center>
-<img src="../figures/johnson_path.png" width=80%/>
-</center><p>The new weights are</p>
-<p>$\hat{w}(x,v) =  w(x,v) + \delta(s,x) - \delta(s,v)$</p>
 
 </div>
-</div>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Putting-it-all-together:-Johnson's-Algorithm">Putting it all together: Johnson's Algorithm<a class="anchor-link" href="#Putting-it-all-together:-Johnson's-Algorithm">&#182;</a></h3><p><br></p>
-<p>First, add source $s$ and edges from it to all other vertices with 0 cost:</p>
+<p>So, if we can use shortest path as our function $f(v)$, we can ensure that weights are non-negative.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Ensuring-positive-edge-weights">Ensuring positive edge weights<a class="anchor-link" href="#Ensuring-positive-edge-weights">&#182;</a></h3><p>$\hat{w}(x,v) = w(x,v) + \delta(s,x) - \delta(s,v)$</p>
+<p>But, what is the source of this shortest path?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br>
+We can't just pick a random node, as not all other nodes may be reachable from it.</p>
+<p>Instead, we'll create a "dummy" source node, and connect it with 0 weight to all nodes. This ensures all nodes get a shortest path less than $\infty$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/johnson_path.png" width=100%/>
+</center>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Putting-it-all-together:-Johnson's-Algorithm">Putting it all together: Johnson's Algorithm<a class="anchor-link" href="#Putting-it-all-together:-Johnson's-Algorithm">&#182;</a></h3><p>First, add source $s$ and edges from it to all other vertices with 0 cost:</p>
 <center>
 <img src="../figures/johnson1.jpg"/>
-</center><p>Next, run Bellman-Ford on this graph, resulting in distances $D[v]$, indicating the distance from $s$ to each $v$:</p>
+</center>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Next, run Bellman-Ford on this graph, resulting in distances $D[v]$, indicating the distance from $s$ to each $v$:</p>
 <center>
 <img src="../figures/johnson2.jpg"/>
 </center>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Next, we update the graph using weights $w'(u,v) = w(u,v) + D[u] - D[v].~~~~$ E.g.</p>
+<p>and update the graph using weights $w'(u,v) = w(u,v) + D[u] - D[v].~~~~$ E.g.</p>
 $$
 \begin{align}
 w'(b,d) &amp; = w(b,d) + D[b] - D[d]\\
-&amp; = -1 + (-3) - (-4) \\
-&amp; = 0
+&amp; = -1 + (-3) - (-4) = 0
 \end{align}
 $$<p></p>
-<p>Let's call this final, modified graph $G'$.
-<br></p>
-<p>Next, we run Dijkstra's algorithm for each vertex in $G'$.</p>
+<p>We now have a final, modified graph: $G'$.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Finally, we can run Dijkstra's algorithm for each vertex in $G'$.</p>
 <ul>
-<li>we can use Dijkstra since we've removed negative edges from the graph</li>
 <li>we can do this in parallel</li>
-<li>Let $\delta_{G'}(u,v)$ be the weight of the shortest path from $u$ to $v$ in $G'$, as computed by Dijkstra.</li>
+<li>We get $\delta_{G'}(u,v)$, the weight of the shortest path from $u$ to $v$ in $G'$, for all vertex pairs $(u,v) \in G$.</li>
 </ul>
 <p><br></p>
-<p>Finally, we can compute the $\delta_{G}(u,v)$, the shortest path in the original graph $G$, as follows:</p>
-$$ \delta_{G}(u,v) = \delta_{G'}(u,v) - D[u] + D[v]$$<p>E.g.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>To compute $\delta_{G}(u,v)$, the shortest path distance in the original graph $G$:</p>
+$$ \delta_{G}(u,v) = \delta_{G'}(u,v) - D[u] + D[v]$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="E.g,-The-shortest-path-from-$a-%5Crightarrow-c$">E.g, The shortest path from $a \rightarrow c$<a class="anchor-link" href="#E.g,-The-shortest-path-from-$a-%5Crightarrow-c$">&#182;</a></h3><center>
+<img src="../figures/johnson2.jpg"/>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$
 \begin{align}
 \delta_{G}(a,c) &amp; = \delta_{G'}(a,c) - D[a] + D[c]\\
@@ -14294,16 +14380,13 @@ $$
 \end{align}
 $$
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-
-<span class="k">def</span> <span class="nf">johnson</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">johnson</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
     <span class="c1"># add &quot;dummy&quot; node that links to all nodes with 0 cost.</span>
     <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">in_neighbors</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">in_neighbors</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
@@ -14311,8 +14394,7 @@ $$
     
     <span class="c1"># call bellmanford with new graph</span>
     <span class="n">distances</span> <span class="o">=</span> <span class="n">bellmanford</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;bellman ford distances&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;bellman ford distances</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">distances</span><span class="p">)</span>
     
     <span class="c1"># create new graph with adjusted weights.</span>
     <span class="c1"># b/c we&#39;ll be using Dijkstra, we&#39;ll use our original representation</span>
@@ -14339,8 +14421,20 @@ $$
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">adjusted shortest paths&#39;</span><span class="p">)</span>
     <span class="n">pprint</span><span class="p">(</span><span class="n">apsp</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">apsp</span>
+</pre></div>
 
-<span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
             <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)},</span>
             <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span> 
@@ -14371,8 +14465,8 @@ $$
 {&#39;a&#39;: 0, &#39;b&#39;: -3, &#39;c&#39;: -1, &#39;d&#39;: -4, &#39;s&#39;: 0}
 
 new graph
-{&#39;a&#39;: {(&#39;b&#39;, 0), (&#39;c&#39;, 2)},
- &#39;b&#39;: {(&#39;d&#39;, 0), (&#39;c&#39;, 1)},
+{&#39;a&#39;: {(&#39;c&#39;, 2), (&#39;b&#39;, 0)},
+ &#39;b&#39;: {(&#39;c&#39;, 1), (&#39;d&#39;, 0)},
  &#39;c&#39;: {(&#39;a&#39;, 1)},
  &#39;d&#39;: {(&#39;c&#39;, 0)},
  &#39;s&#39;: {(&#39;d&#39;, 4), (&#39;c&#39;, 1), (&#39;b&#39;, 3), (&#39;a&#39;, 0)}}
@@ -14380,8 +14474,8 @@ new graph
 unadjusted shortest paths
 c {&#39;c&#39;: 0, &#39;a&#39;: 1, &#39;b&#39;: 1, &#39;d&#39;: 1}
 a {&#39;a&#39;: 0, &#39;b&#39;: 0, &#39;d&#39;: 0, &#39;c&#39;: 0}
-b {&#39;b&#39;: 0, &#39;d&#39;: 0, &#39;c&#39;: 0, &#39;a&#39;: 1}
 d {&#39;d&#39;: 0, &#39;c&#39;: 0, &#39;a&#39;: 1, &#39;b&#39;: 1}
+b {&#39;b&#39;: 0, &#39;d&#39;: 0, &#39;c&#39;: 0, &#39;a&#39;: 1}
 
 adjusted shortest paths
 {&#39;a&#39;: {&#39;a&#39;: 0, &#39;b&#39;: -3, &#39;c&#39;: -1, &#39;d&#39;: -4},
@@ -14399,7 +14493,7 @@ adjusted shortest paths
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is an example of a <strong>reduction</strong>! How?</p>
+<h2 id="Reduction">Reduction<a class="anchor-link" href="#Reduction">&#182;</a></h2><p>This is an example of a <strong>reduction</strong>! How?</p>
 
 </div>
 </div><div class="fragment">
@@ -14408,58 +14502,120 @@ adjusted shortest paths
 <p>We reduced the APSP problem with negative edge weights, to the APSP problem with positive edge weights.</p>
 <ul>
 <li>The cost of the reduction was $O(|V| \cdot |E|)$, the time to run Bellman-Ford</li>
-<li>The cost to solve the new version of the problem is $O(|V|\cdot|E| \log |E|)$</li>
-<li>Since the cost of the latter is less than the former, this is an <em>efficient</em> reduction.</li>
+<li>The cost to solve the new version of the problem is $O(|V|\cdot|E| \log |V|)$</li>
+<li>Since the cost of the reduction is less than the transformed problem solution, this is an <em>efficient</em> reduction.</li>
 </ul>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Cost-of-Johnson's-Algorithm">Cost of Johnson's Algorithm<a class="anchor-link" href="#Cost-of-Johnson's-Algorithm">&#182;</a></h2><ol>
+<h2 id="Cost-of-Johnson's-Algorithm">Cost of Johnson's Algorithm<a class="anchor-link" href="#Cost-of-Johnson's-Algorithm">&#182;</a></h2><ul>
 <li>Add edges from $s$:</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">in_neighbors</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">in_neighbors</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
-<p>$O(|V|)$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$~~~~~~~O(|V|)$</p>
 <p><br></p>
-<ol>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>Run Bellman-Ford</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">bellmanford</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
-<p>$O(|V|\cdot |E|)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$~~~~~~~O(|V|\cdot |E|)$</p>
 <p><br></p>
-<ol>
-<li>Adjust weights $\hat{w}(x,v) =  w(x,v) + \delta(s,x) - \delta(s,v)$</li>
-</ol>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Adjust weights </li>
+</ul>
+<p>$~~~~~~~~\hat{w}(x,v) =  w(x,v) + \delta(s,x) - \delta(s,v)$</p>
 <div class="highlight"><pre><span></span><span class="n">new_graph</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">in_neighbors</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">in_neighbor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">in_neighbors</span><span class="p">:</span>
             <span class="n">new_graph</span><span class="p">[</span><span class="n">in_neighbor</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">weight</span> <span class="o">+</span> <span class="n">distances</span><span class="p">[</span><span class="n">in_neighbor</span><span class="p">]</span> <span class="o">-</span> <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]))</span>
 </pre></div>
-<p>$O(|E|)$
-<br></p>
-<ol>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$~~~~~~~O(|E|)$</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>Run Dijkstra $|V|$ times:</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">new_graph</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
             <span class="n">distances_from_v</span> <span class="o">=</span> <span class="n">dijkstra</span><span class="p">(</span><span class="n">new_graph</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 </pre></div>
-<p>$O(|V|\cdot|E| \log |E|)$</p>
-<ol>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$~~~~~~~O(|V|\cdot|E| \log |E|)$</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>Adjust final path weights</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">distances_from_v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">distances_from_v</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span> <span class="o">-</span> <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
 </pre></div>
-<p>$O(|E|)$</p>
-<p><br></p>
-<p>Total work is then dominated by the cost of running Dijkstra's $|V|$ times:</p>
-<p>$\in  O(|V|\cdot|E| \log |E|) $</p>
 
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$~~~~~~~O(|E|)$</p>
+<p><br></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Finally-tally">Finally tally<a class="anchor-link" href="#Finally-tally">&#182;</a></h2><ol>
+<li>Add edges from $s$ <br>
+$~~~~O(|V|)$</li>
+<li>Run Bellman-Ford <br>
+$~~~~O(|V| \cdot |E|)$ </li>
+<li>Adjust weights <br>
+$~~~~O(|E|)$</li>
+<li>Run Dijkstra $|V|$ times <br>
+$~~~~O(|V| \cdot |E| \log |E|)$</li>
+<li>Adjust final path weights <br>
+$~~~~O(|E|)$</li>
+</ol>
+<p>Total work is then dominated by the cost of running Dijkstra's $|V|$ times:</p>
+$$\in  O(|V|\cdot|E| \log |E|) $$
 </div>
 </div></section></section>
 </div>

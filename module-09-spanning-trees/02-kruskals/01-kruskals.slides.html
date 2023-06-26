@@ -14421,10 +14421,24 @@ div.jp-OutputPrompt {
 <li>every node is visited</li>
 <li>no edges are repeated</li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/GLPK_solution_of_a_travelling_salesman_problem.svg/480px-GLPK_solution_of_a_travelling_salesman_problem.svg.png"/>
-</center><p>Often, we assume the graph is <em>complete</em> (fully connected) and edge weights are distance between each city.</p>
-<p><br></p>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Often, we assume the graph is <em>complete</em> (fully connected) and edge weights are distance between each city.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How does this differ from the MST problem?</p>
 
 </div>
@@ -14438,6 +14452,11 @@ div.jp-OutputPrompt {
 <li>Therefore, weight(MST solution) &lt; weight(TSP solution)</li>
 </ul>
 <p>Thus, MST solution provides a lower bound on the TSP solution.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Can we also use MST to find an upper bound?</p>
 
 </div>
@@ -14460,20 +14479,34 @@ div.jp-OutputPrompt {
 <p><br><br></p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We need to determine an order to visit the nodes in the MST solution.</p>
 <p>Let's try depth-first search:</p>
 <center>
     <img src="../figures/tsp2.jpg"/>
-</center><p>This is called the <strong>Euler tour</strong> of the tree:</p>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is called the <strong>Euler tour</strong> of the tree:</p>
 <ul>
-<li>a cycle in a graph that visits every edge exactly once.</li>
+<li>a cycle in a graph that visits every edge exactly once.<ul>
+<li>We view each undirected edge as two directed edges, one for each direction</li>
+</ul>
+</li>
 <li>Since $T$ spans the graph, the Euler tour will visit every vertex at least once, but possibly multiple times.</li>
 </ul>
-<p><br></p>
-<p>This is close to a TSP solution, but:</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/tsp2.jpg"/>
+</center><p>This is close to a TSP solution, but:</p>
 <ul>
 <li><p>it visits each edge twice</p>
 </li>
@@ -14482,10 +14515,15 @@ div.jp-OutputPrompt {
 <li><p>The weight of the Euler tour is equal to twice the MST weight (since we visit each edge twice).</p>
 </li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How can we convert this to a proper solution to TSP?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>idea</strong>:</p>
@@ -14495,26 +14533,33 @@ div.jp-OutputPrompt {
 </center><p>The red edges above are called <em>shortcut edges</em>.</p>
 <p>Because of triangle inequality, we know that the shortcut edges are no longer than the paths they replace</p>
 <p>$w(f,c) \le w(\langle f,e,b,a,c \rangle)$</p>
-<p><br></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Since we know:</p>
 <ul>
-<li><p>$weight(MST) &lt; weight(TSP)$ , and</p>
+<li><p>$weight(MST) &lt; weight(TSP)$</p>
 </li>
 <li><p>$weight(Euler) = 2 \cdot weight(MST)$</p>
 </li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>then we know</p>
 <ul>
 <li>$weight(MST) \le weight(TSP) \le 2 \cdot weight(MST)$</li>
 </ul>
-<h3 id="Thus,-we-now-have-a-polynomial-time-algortithm-to-solve-TSP-that-is-no-worse-than-2-times-the-optimal-solution!">Thus, we now have a polynomial-time algortithm to solve TSP that is no worse than 2 times the optimal solution!<a class="anchor-link" href="#Thus,-we-now-have-a-polynomial-time-algortithm-to-solve-TSP-that-is-no-worse-than-2-times-the-optimal-solution!">&#182;</a></h3><p><br></p>
-<p>How does this type of approximation algorithm differ from the type we saw in assignment-04?</p>
-<blockquote><p>$\mathcal{A}(\mathcal{I})$ has a probability of $\epsilon$ of being
-correct and a failure probability of $1-\epsilon$.</p>
-</blockquote>
-<p><br></p>
-<p>For such NP-hard problems), approximations are often the best we can do.</p>
 
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Thus,-we-now-have-a-polynomial-time-algortithm-to-solve-TSP-that-is-no-worse-than-2-times-the-optimal-solution!">Thus, we now have a polynomial-time algortithm to solve TSP that is no worse than 2 times the optimal solution!<a class="anchor-link" href="#Thus,-we-now-have-a-polynomial-time-algortithm-to-solve-TSP-that-is-no-worse-than-2-times-the-optimal-solution!">&#182;</a></h3>
 </div>
 </div></div></section></section>
 </div>

@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Prim's algorithm does a graph search while computing the MST.</p>
+<h2 id="An-alternate-MST-algorithm">An alternate MST algorithm<a class="anchor-link" href="#An-alternate-MST-algorithm">&#182;</a></h2><p>Prim's algorithm does a graph search while computing the MST.</p>
 <p>Can we just greedily add edges in increasing order of weight?</p>
 
 </div>
@@ -14113,12 +14113,21 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Almost</strong>: need to avoid cycles and ensure we "span" the graph</p>
 <p><img src="../figures/greedy-fail.png" alt="figures/greedy-fail.png"></p>
-<p><br></p>
-<h3 id="Kruskal's-Algorithm">Kruskal's Algorithm<a class="anchor-link" href="#Kruskal's-Algorithm">&#182;</a></h3><p>“Perform the following step as many times as possible: Among the edges of $G$ not yet chosen, choose the shortest edge which does not form any loops with those edges already chosen.” [Kruskal, 1956]</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Kruskal's-Algorithm">Kruskal's Algorithm<a class="anchor-link" href="#Kruskal's-Algorithm">&#182;</a></h2><p>“Perform the following step as many times as possible: Among the edges of $G$ not yet chosen, choose the shortest edge which does not form any loops with those edges already chosen.” [Kruskal, 1956]</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Why is this correct?</strong></p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Recall the <strong>Light-edge property</strong></p>
@@ -14126,17 +14135,32 @@ div.jp-OutputPrompt {
 <p>For any cut of $G$, the minimum weight edge that crosses the cut is contained in the minimum spanning tree of $G$.</p>
 <center>
     <img src="../figures/cut.jpg"/>
-</center><p>At each step, Kruskal picks a <strong>light edge</strong> to connect to components of the graph $U$ and $V$ (i.e., picks an edge $e$ where $w(e) &lt; w(e')$).</p>
-<p><br>
-How do we know the tree spans all the nodes?</p>
-<p><br><br>
-The only edges we've skipped are those that create a cycle, so the remaining edges must form a tree.</p>
+</center>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>At each step, Kruskal picks a <strong>light edge</strong> to connect components of the graph $U$ and $V$ (i.e., picks an edge $e$ where $w(e) &lt; w(e')$).</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>How do we know the tree spans all the nodes?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>The only edges we've skipped are those that create a cycle, so the remaining edges must form a tree.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="implementing-Kruskal's-algorithm">implementing Kruskal's algorithm<a class="anchor-link" href="#implementing-Kruskal's-algorithm">&#182;</a></h3><p>"choose the shortest edge which does not form any loops with those edges already chosen"</p>
+<h2 id="Implementing-Kruskal's-algorithm">Implementing Kruskal's algorithm<a class="anchor-link" href="#Implementing-Kruskal's-algorithm">&#182;</a></h2><p>"choose the shortest edge which does not form any loops with those edges already chosen"</p>
 <p>How do we implement this?</p>
 
 </div>
@@ -14144,14 +14168,17 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For an edge $(u,v)$, we must check if $u$ and $v$ are in the same connected component, based on the edges added so far.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How can we do this?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We can run BFS or DFS starting at $u$ or $v$, but this would be expensive: $O(|V| + |E|)$ work at each iteration.</p>
-<p><br></p>
 <p>If we think of each connected component as a set of nodes, we need an efficient way of:</p>
 <ul>
 <li>checking which set $u$ and $v$ are in</li>
@@ -14160,14 +14187,19 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>To make checking set equality fast, we will assign a <strong>representative</strong> node in each set.</p>
+<h2 id="Using-sets-to-implement-Kruskal's">Using sets to implement Kruskal's<a class="anchor-link" href="#Using-sets-to-implement-Kruskal's">&#182;</a></h2><p>To make checking set equality fast, we will assign a <strong>representative</strong> node in each set.</p>
 <p>E.g., suppose we have two sets $\mathbf{S} = \{S_1, S_2\}$ where:</p>
 <p>$S_1 = \{\mathbf{a},b,c\}~~~~ S_2 = \{\mathbf{s}, d, e\}$</p>
 <p>We can (arbitrarily) assign the representative of $S_1$ to be $a$, and the representative of $S_2$ to be $s$.</p>
 <p>$r(S_1) = a ~~~ r(S_2) = s$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>If $S_u$ is the set containing $u$ and $S_v$ is the set containing $v$, then we can check if $u$ and $v$ are in the same set by checking if $r(S_u) == r(S_v)$</p>
 
@@ -14191,7 +14223,7 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 <p>What data structures can we use to represent each set?</p>
 
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Disjoint-set-with-double-linked-lists">Disjoint-set with double linked lists<a class="anchor-link" href="#Disjoint-set-with-double-linked-lists">&#182;</a></h3><center>
@@ -14213,7 +14245,7 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 </ol>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br><br></p>
@@ -14221,21 +14253,26 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 <li><code>make_set(u)</code>: create a singleton list in $O(1)$ time. $u$ is the representative.</li>
 </ol>
 <ol>
-<li><code>find_set(u)</code>: walk left from $u$ until the first element is found. $O(n)$</li>
+<li><code>find_set(u)</code>: walk left from $u$ until the first element is found: $O(n)$</li>
 </ol>
 <ol>
-<li><code>union(u,v)</code>: Walk to the tail of $S_u$ and connect it to the head of $S_v$. $O(n)$</li>
+<li><code>union(u,v)</code>: Connect the tail $S_u$ to the head of $S_v$: $O(1)$</li>
 </ol>
 <p><br><br></p>
 <p>That's a lot of needless walking. Can I just store the representative directly at each node?</p>
 
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
     <img src="../figures/delist2.png"/>
-</center><p>This would make <code>find_set(u)</code> in $O(1)$, but union is still $O(n)$. Why?</p>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This would make <code>find_set(u)</code> in $O(1)$, but now union becomes $O(n)$. Why?</p>
 
 </div>
 </div></div></section></section><section><section>
@@ -14250,7 +14287,13 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>$O(\log n)$, assuming a balanced tree, to walk from a node to its root.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>How about <code>union(u,v)</code>?</p>
 <center>
     <img src="../figures/merge.png" width=50%/>
@@ -14259,26 +14302,45 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 <li>find representative of $v ~~~~ O(\log n)$</li>
 <li>link root of one tree to the root of another</li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>But, how do we ensure tree stays balanced to keep $O(\log n)$ work for <code>find_set(u)</code>?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Recall <a href="https://nbviewer.jupyter.org/github/tulane-cmps2200/slides/blob/master/module-06-greedy/greedy-02.ipynb?flush_cache=True">Leftist Heaps</a> from Greedy module!</p>
+<p>Recall <a href="https://cmps-2200.github.io/cmps-2200-notes/module-06-greedy/02-priority-queues/01-priority-queues.slides.html#/">Leftist Heaps</a> from Greedy module!</p>
 <center>
     <img src="../figures/meld_schematic.jpg" width="70%">
-</center><p>similar idea here:</p>
+</center>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>similar idea here:</p>
 <center>
     <img src="../figures/rank.png" width="70%">
 </center><p>Add "shorter" tree to the "taller" tree.</p>
 <ul>
 <li>store the "rank" of each tree as its depth</li>
 </ul>
-<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Thus, if $height(S_v) &lt; height(S_u)$, then the height the union of $S_u \cup S_v$ is</p>
 <p>$\max \{ height(S_u), height(S_v)+1\}$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>Using similar arguments as in leftist heaps, we can ensure that height of any tree is $O(\log n)$</p>
 
@@ -14287,19 +14349,14 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Kruskal's-Algorithm">Kruskal's Algorithm<a class="anchor-link" href="#Kruskal's-Algorithm">&#182;</a></h3><ol>
-<li>Initialize tree $T \leftarrow \emptyset$  </li>
-</ol>
-<p><br></p>
-<ol>
-<li>For each $v \in V$, run <code>make_set(v)</code></li>
-</ol>
-<p><br></p>
-<ol>
-<li>Sort edges in increasing order of weight</li>
-</ol>
-<p><br></p>
-<ol>
-<li>For each edge $e=(u,v)$ in sorted set:<ul>
+<li><p>Initialize tree $T \leftarrow \emptyset$</p>
+</li>
+<li><p>For each $v \in V$, run <code>make_set(v)</code></p>
+</li>
+<li><p>Sort edges in increasing order of weight</p>
+</li>
+<li><p>For each edge $e=(u,v)$ in sorted set:</p>
+<ul>
 <li>if <code>find_set(u)</code> $\ne$ <code>find_set(v)</code>:<ul>
 <li>$T \leftarrow T \cup \{(u,v)\}$</li>
 <li><code>union(u,v)</code></li>
@@ -14314,30 +14371,48 @@ The only edges we've skipped are those that create a cycle, so the remaining edg
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Kruskal's-Algorithm---work">Kruskal's Algorithm - work<a class="anchor-link" href="#Kruskal's-Algorithm---work">&#182;</a></h3><ol>
-<li>Initialize tree $T \leftarrow \emptyset~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~O(1)$</li>
-</ol>
-<ol>
-<li>For each $v \in V$, run <code>make_set(v)</code> $~~~~~O(|V|)$</li>
-</ol>
-<ol>
-<li>Sort edges in increasing order of weight $~~O(|E|\lg |E|)$</li>
-</ol>
-<ol>
-<li>For each edge $e=(u,v)$ in sorted set: $~~O(|E|\lg |V|)$<ul>
-<li>if <code>find_set(u)</code> $\ne$ <code>find_set(v)</code>: $~~O(\lg |V|)$<ul>
+<li><p>Initialize tree $T \leftarrow \emptyset$</p>
+<ul>
+<li>$O(1)$</li>
+</ul>
+</li>
+<li><p>For each $v \in V$, run <code>make_set(v)</code></p>
+<ul>
+<li>$O(|V|)$</li>
+</ul>
+</li>
+<li><p>Sort edges in increasing order of weight</p>
+<ul>
+<li>$O(|E|\lg |E|)$</li>
+</ul>
+</li>
+<li><p>For each edge $e=(u,v)$ in sorted set: $O(|E|)$</p>
+<ul>
+<li>if <code>find_set(u)</code> $\ne$ <code>find_set(v)</code>: $O(\lg |V|)$<ul>
 <li>$T \leftarrow T \cup \{(u,v)\}$</li>
 <li><code>union(u,v)</code></li>
 </ul>
 </li>
+<li>Together: $O(|E|\lg |V|)$</li>
 </ul>
 </li>
 </ol>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Thus, total work is $O(|E|\lg |E|)$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Since we have $E \in O(|V|^2)$, this is equivalent to:</p>
 <p>$O(|E|\lg |V|^2) \equiv O(2|E| \log |V|) \equiv O(|E| \log |V|)$</p>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Traveling-Salesperson-Problem">Traveling Salesperson Problem<a class="anchor-link" href="#Traveling-Salesperson-Problem">&#182;</a></h2><p>Consider a slight variant of the MST problem:</p>

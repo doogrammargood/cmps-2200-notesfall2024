@@ -14113,61 +14113,92 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Recall breadth-first search. What order will it visit nodes in this graph?</p>
+<p>Recall breadth-first search. Starting from vertex $s$, what order will the vertices be visited in this graph?</p>
 <center>
 <img src="../figures/st0.png"/>
 </center>
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
 <img src="../figures/st1.png"/>
-</center><p><br><br></p>
+</center>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Because we avoid revisiting nodes, we can view the edges we visit as a tree.</p>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
     <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
         <span class="n">frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 <center>
-<img src="../figures/st2.png"/>
+<img src="../figures/st2.png"  width="50%"/>
 </center><p><br></p>
-<p>Because this tree includes all vertices, we call this a <strong>spanning tree</strong>.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This tree includes all vertices. We call this a <strong>spanning tree</strong>.</p>
 <blockquote><p>For a connected undirected graph $G = (V,E)$, a <strong>spanning tree</strong> is a tree $T = (V,E')$ with $E' \subseteq E$</p>
 </blockquote>
-<p><br><br></p>
-<p>What are some algorithms we can use to find a spanning tree of a graph?</p>
 
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Finding-spanning-trees">Finding spanning trees<a class="anchor-link" href="#Finding-spanning-trees">&#182;</a></h2><p>What are some algorithms we can use to find a spanning tree of a graph?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>BFS and DFS can both be used.</p>
+<p>They have the work, though BFS can have better span: $O(d \lg^2 n)$, where $d$ is the <strong>diameter</strong> of the graph.</p>
+<blockquote><p>The <strong>diameter</strong> of a graph is the length of the shortest path between the most distant vertices.</p>
+</blockquote>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Weighted-spanning-trees">Weighted spanning trees<a class="anchor-link" href="#Weighted-spanning-trees">&#182;</a></h2><p>Now, suppose we have a weighted graph:</p>
+<center>
+<img src="../figures/st3.png" width="50%"/>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We refer to the <strong>weight</strong> of a tree $T$ with edges $E(T)$ as:</p>
+$$w(T) = \sum_{e \in E(T)} w(e)$$
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>BFS and DFS can both be used. Same work, though BFS can have better span: $O(d \lg^2 n)$, where $d$ is the <strong>diameter</strong> of the graph.</p>
-<ul>
-<li>What is diameter of graph above?</li>
-</ul>
-<p><br><br><br><br></p>
-<p>Now, suppose we have a weighted graph:</p>
-<center>
-<img src="../figures/st3.png"/>
-</center><p>We refer to the <strong>weight</strong> of a tree $T$ with edges $E(T)$ as:</p>
-$$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
+<p>Is there a smaller tree in this graph?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
 <img src="../figures/st4.png"/>
 </center><p>This is called the <strong>minimum spanning tree (MST)</strong>  of the graph.</p>
-<p><br><br></p>
-<p>What are some applications where we might want to find the MST?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="applications-of-MST">applications of MST<a class="anchor-link" href="#applications-of-MST">&#182;</a></h3><ul>
+<h2 id="Applications-of-MSTs">Applications of MSTs<a class="anchor-link" href="#Applications-of-MSTs">&#182;</a></h2><p>What are some applications where we might want to find the MST?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>Power grid<ul>
 <li>minimize cost</li>
 </ul>
@@ -14178,48 +14209,77 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 </ul>
 </li>
 <li>Computer networks<ul>
-<li>Local network routing</li>
+<li>Cycle free routing</li>
 </ul>
 </li>
-</ul>
-<p><br></p>
-<p>Otakar Borůvka first identified and solved this problem in 1926 to build an efficient electricity network in (present day) Czech Republic.</p>
-<p>"Soon after the end of World War I, at the beginning of the 1920s, the Electric Power Company of Western Moravia, Brno, was engaged in rural electrification of Southern Moravia. In the framework of my friendly relations with some of their employees, I was asked to solve, from a mathematical standpoint, the question of the most economical construction of an electric power network. I succeeded in finding a construction -- as it would be expressed today -- of a maximal connected subgraph of minimum length, which I published in 1926 (i.e., at a time when the theory of graphs did not exist)."</p>
-<ul>
-<li><a href="https://ieeexplore.ieee.org/document/4392963">On the History of the Minimum Spanning Tree Problem</a></li>
 </ul>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>What is the brute-force approach to find the MST?</p>
+<h2 id="History-of-MSTs">History of MSTs<a class="anchor-link" href="#History-of-MSTs">&#182;</a></h2><p>Otakar Borůvka first identified and solved this problem in 1926 to build an efficient electricity network in (present day) Czech Republic.</p>
+<blockquote><p>"Soon after the end of World War I, at the beginning of the 1920s, the Electric Power Company of Western Moravia, Brno, was engaged in rural electrification of Southern Moravia. In the framework of my friendly relations with some of their employees, I was asked to solve, from a mathematical standpoint, the question of the most economical construction of an electric power network. I succeeded in finding a construction -- as it would be expressed today -- of a maximal connected subgraph of minimum length, which I published in 1926 (i.e., at a time when the theory of graphs did not exist)."</p>
+<ul>
+<li><a href="https://ieeexplore.ieee.org/document/4392963">On the History of the Minimum Spanning Tree Problem</a></li>
+</ul>
+</blockquote>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Considering-the-MST-problem">Considering the MST problem<a class="anchor-link" href="#Considering-the-MST-problem">&#182;</a></h2><p>What is the brute-force approach to find the MST?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As usual, we'll have an exponential number of possible spanning trees to consider.</p>
-<p><br><br></p>
-<p>What about a greedy approach?</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Can we just select edges in increasing order of weight?</p>
+<p><br></p>
+<p>As usual, we have an exponential search space.</p>
+<p>There are an exponential number of possible spanning trees to consider.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Greedy-approach?">Greedy approach?<a class="anchor-link" href="#Greedy-approach?">&#182;</a></h2><p>What about a greedy approach?</p>
+<center>
+<img src="figures/mst0.jpeg" width="75%"/>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Can we just select edges in increasing order of weight?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Edge-replacement-lemma">Edge replacement lemma<a class="anchor-link" href="#Edge-replacement-lemma">&#182;</a></h3><p>Let's think about how we can modify one spanning tree to get another one. Maybe we can iteratively refine a tree to reduce its weight...</p>
 <center>
 <img src="../figures/st3.png"/>
-</center><p>Replacing $(s,b)$ with $(a,b)$ reduces the cost:</p>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Replacing $(s,b)$ with $(a,b)$ reduces the cost:</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
 <img src="../figures/st4.png"/>
-</center><ul>
+</center>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Edge Replacement</strong></p>
+<ul>
 <li>Consider a spanning tree $T$ containing an edge $e=(a,b)$ on the path from $u$ to $v$. </li>
 <li>Consider another edge $e'=(u,v)$ that is not in $T$.</li>
 <li>What happens if we remove $e$ from $T$ and insert $e'$<ul>
@@ -14229,20 +14289,21 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 </ul>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Yes:</p>
+<center>
+<img src="../figures/st4.png"/>
+</center><p>Yes:</p>
 <ul>
 <li>We can re-route the path from $u$ to $v$ to use $e'$ instead of $e$.</li>
 <li>Thus, the new tree remains connected and acyclic.</li>
 </ul>
-<p>In the example above:</p>
-<ul>
-<li>We re-route the path from $a$ to $b$ to go through $(a,b)$ instead of $(s,b)$.</li>
-<li>Same number of edges and nodes.</li>
-<li>Still a tree.</li>
-</ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We will combine this idea with shortest path algorithms to explore several algorithms to find the MST.</p>
 <ul>
 <li>As in shortest path algorithms, we need a $visited$ and $frontier$ sets.</li>
@@ -14250,13 +14311,30 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 </ul>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Graph-cut">Graph cut<a class="anchor-link" href="#Graph-cut">&#182;</a></h3><p>We can view the $visited$ and $frontier$ sets as defining a <strong>graph cut</strong>.</p>
 <p>A <strong>graph cut</strong> of a graph $(G,V)$ is a partitioning of vertices $V_1 \subset V$, $V_2 = V - V_1$.</p>
 <p>Each vertex set $V_i \subset V$ defines a <strong>vertex-induced subgraph</strong> consisting of edges where both endpoints are in $V_i$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For example:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/cut1.jpg"/>
+</center>
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
     <img src="../figures/cut1.jpg"/>
 </center><p>In this partition, we have:</p>
@@ -14264,32 +14342,50 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 <li>$G_1 = (V_1, E_1)~~~~V_1=\{a,b,c,d\}, E_1 = \{(a,b), (a,c), (c,d), (b,d)\}$</li>
 <li>$G_2 = (V_2, E_2)~~~~V_2=\{e,f\}, E_2 = \{(e,f)\}$</li>
 </ul>
-<p>The <strong>cut edges</strong> are those that join the two subgraphs, e.g., $\{(b,e), (d,f)\}$.</p>
-<p>We want to know if the lightest edge between the $visited$ and $frontier$ sets will be in the MST.</p>
 
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The <strong>cut edges</strong> are those that join the two subgraphs, e.g., $\{(b,e), (d,f)\}$.</p>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Light-edge-property">Light-edge property<a class="anchor-link" href="#Light-edge-property">&#182;</a></h3><p>Let $G = (V,E,w)$ be a connected undirected, weighted graph with distinct edge weights.</p>
 <p>For any cut of $G$, the minimum weight edge that crosses the cut is contained in the minimum spanning tree of $G$.</p>
 <center>
     <img src="../figures/cut.jpg"/>
-</center><p><br></p>
-<p><strong>Proof by Contradiction</strong>:</p>
-<ul>
-<li>Assume that the lightest edge $e = \{u,v\}$ is not in the MST.</li>
-<li>Then, there must be some other path connecting $u$ to $v$ that goes through some other edge $e'$.</li>
-<li>By assumption, $e'$ must be heavier that $e$.</li>
-<li>But, by the Edge Replacement Lemma, we know that we can swap $e'$ for $e$ and still having a spanning tree, one that will be lighter. This is a contradiction. $\square$</li>
-</ul>
-<p><br></p>
-<h3 id="How-can-we-use-the-light-edge-property-to-find-the-MST-using-priority-search?">How can we use the light-edge property to find the MST using priority search?<a class="anchor-link" href="#How-can-we-use-the-light-edge-property-to-find-the-MST-using-priority-search?">&#182;</a></h3>
+</center>
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Prim's-Algorithm">Prim's Algorithm<a class="anchor-link" href="#Prim's-Algorithm">&#182;</a></h2><p>Perform <strong>priority-first search</strong> on $G$ starting from an arbitrary vertex $s$.</p>
+<center>
+    <img src="../figures/cut.jpg"/>
+</center><p><strong>Theorem:</strong> For any cut of $G$, the minimum weight edge that crosses the cut is contained in the minimum spanning tree of $G$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Proof by Contradiction</strong>: Assume that the lightest edge $e = \{u,v\}$ is not in the MST.</p>
+<p>Then, there must be some other path connecting $u$ to $v$ that goes through some other edge $e'$.</p>
+<p>By assumption, $e'$ must be heavier that $e$.</p>
+<p>But, by the Edge Replacement Lemma, we know that we can swap $e'$ for $e$ and still having a spanning tree, one that will be lighter. This is a contradiction. $\blacksquare$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>How can we use the light-edge property to find the MST using priority search?</strong></p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Prim's-Algorithm">Prim's Algorithm<a class="anchor-link" href="#Prim's-Algorithm">&#182;</a></h2><p>Iteratively build a MST by performing <strong>priority-first search</strong> on $G$ starting from an arbitrary vertex $s$.</p>
 <p>To select the next edge to expand the frontier $X$, use priority:</p>
 <ul>
 <li>$p(v) = \min_{x \in X, v \in Y} w(x,v)$</li>
@@ -14302,26 +14398,31 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
     <img src="../figures/prim.jpg" width=40%/>
-</center><ul>
+</center>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>Edge $(c, f)$ has minimum weight across the cut $(X,Y)$.</li>
 <li>So, we visit $f$ by adding $(c, f)$ to the tree and all of $f$'s neighbors to the frontier</li>
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This sounds very similar to Dijkstra's algorithm. What's the difference?</p>
 
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
 <img src="../figures/st4.png"/>
 </center>
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14348,15 +14449,6 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
     <span class="n">heappush</span><span class="p">(</span><span class="n">frontier</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="p">))</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># store the final shortest paths for each node.</span>
     <span class="k">return</span> <span class="n">dijkstra_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">)</span>
-
-<span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)},</span>
-            <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)},</span>
-            <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span> 
-            <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
-            <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
-        <span class="p">}</span>
-<span class="n">dijkstra</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14364,7 +14456,7 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14398,8 +14490,6 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
     <span class="n">tree</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">prim_helper</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">frontier</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">tree</span>
-
-<span class="n">prim</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14407,29 +14497,39 @@ $$w(T) = \sum_{e \in E(T)} w(e)$$<p>Is there a smaller tree in this graph?</p>
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Work-of-Prim's-Algorithm">Work of Prim's Algorithm<a class="anchor-link" href="#Work-of-Prim's-Algorithm">&#182;</a></h2><p>This does identical work to Dijkstra, so $O(|E| \log |E|)$</p>
 
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Can we just pick an arbitrary source node? Why or why not?</p>
 
 </div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Directed-Graphs?">Directed Graphs?<a class="anchor-link" href="#Directed-Graphs?">&#182;</a></h3><p>What about directed graphs? Will this work?</p>
+
+</div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>What about directed graphs? Will this work?</p>
+<p>No - if source node is not connected to all other nodes.</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>No - if source node is not connected to all other nodes.</p>
 <p>Even if it is, we may have a suboptimal solution:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="../figures/prim-fail.png" alt="figures/prim-fail.png"></p>
 
 </div>

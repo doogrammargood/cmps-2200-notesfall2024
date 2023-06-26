@@ -14106,8 +14106,8 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="All-pairs-shortest-path--(APSP)">All pairs shortest path  (APSP)<a class="anchor-link" href="#All-pairs-shortest-path--(APSP)">&#182;</a></h2><p>Up to now, we've consider the shortest paths from a fixed source node $s$.</p>
 <p>We've solved the single source shortest paths problem with <em>positive</em> weights using <strong>Dijkstra's Algorithm</strong>.</p>
-<p>$~~~$ <strong>Work</strong> $=O(|E|\log |E|)$</p>
-<p>$~~~$ <strong>Span</strong> $=O(|E|\log |E|)$</p>
+<p>$~~~$ <strong>Work</strong> $=O(|E|\log |V|)$</p>
+<p>$~~~$ <strong>Span</strong> $=O(|E|\log |V|)$</p>
 <p>And the single source shortest paths problem with <em>negative</em> weights using <strong>Bellman-Ford</strong>.</p>
 <p>$~~~$ <strong>Work:</strong> $O(|V| \cdot |E|)$</p>
 <p>$~~~$ <strong>Span:</strong> $O(|V| \lg |V|)$</p>
@@ -14375,8 +14375,8 @@ $$ \delta_{G}(u,v) = \delta_{G'}(u,v) - D[u] + D[v]$$
 $$
 \begin{align}
 \delta_{G}(a,c) &amp; = \delta_{G'}(a,c) - D[a] + D[c]\\
-&amp; = 1 - 0 + (-1)\\
-&amp; = 0
+&amp; = 0 - 0 + (-1)\\
+&amp; = -1
 \end{align}
 $$
 </div>
@@ -14578,7 +14578,7 @@ adjusted shortest paths
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$~~~~~~~O(|V|\cdot|E| \log |E|)$</p>
+<p>$~~~~~~~O(|V|\cdot|E| \log |V|)$</p>
 
 </div>
 </div></div></section><section>
@@ -14610,12 +14610,12 @@ $~~~~O(|V| \cdot |E|)$ </li>
 <li>Adjust weights <br>
 $~~~~O(|E|)$</li>
 <li>Run Dijkstra $|V|$ times <br>
-$~~~~O(|V| \cdot |E| \log |E|)$</li>
+$~~~~O(|V| \cdot |E| \log |V|)$</li>
 <li>Adjust final path weights <br>
 $~~~~O(|E|)$</li>
 </ol>
 <p>Total work is then dominated by the cost of running Dijkstra's $|V|$ times:</p>
-$$\in  O(|V|\cdot|E| \log |E|) $$
+$$\in  O(|V|\cdot|E| \log |V|) $$
 </div>
 </div></section></section>
 </div>

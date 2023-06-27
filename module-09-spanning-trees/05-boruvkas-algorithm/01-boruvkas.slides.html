@@ -14114,7 +14114,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We know that lowest weight edge from a vertex must be in MST. Call these the <strong>vertex-bridges</strong> of the graph.</p>
@@ -14124,19 +14124,41 @@ div.jp-OutputPrompt {
 </center><p>Are we done?</p>
 
 </div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/bridges.jpg" width=50%/>
+</center><p>We haven't necessarily selected $n-1$ edges, which we need to have a MST.</p>
+<p>The problem is some edges are selected by multiple vertices -- e.g., $a$ and $b$ both pick edge $(a,b)$.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So, we need to repeat this somehow, efficiently.</p>
+
+</div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We haven't necessarily selected $n-1$ edges, which we need to have a MST.</p>
-<p>The problem is some edges are selected by multiple vertices -- e.g., $a$ and $b$ both pick edge $(a,b)$.</p>
-<p>So, we need to repeat this somehow, efficiently.</p>
 <p>If we could collapse together the vertices connected by the selected edges, then we could solve a smaller version of this problem.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This is exactly what contraction is for!</p>
 <center>
     <img src="../figures/borukva1.jpg" width=40%/>
     <img src="../figures/borukva2.jpg" width=10%/>    
 </center><p><br><br></p>
-<p>Due to light edge property, we know we should select $(e,f)$ which has minimum weight of $4$.</p>
+<p>Due to light edge property, we know we should select $(e,f)$ which has minimum weight of $4.$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>Notice that by collapsing vertices, we are ignore internal edges -- e.g., if there were an edge from $c$ to $f$, we would ignore it when collapsing $c,d,f$. Why is this okay?</p>
 
@@ -14153,6 +14175,11 @@ div.jp-OutputPrompt {
 <li><p>add all selected edges to the MST.</p>
 </li>
 </ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>We need to:</p>
 <ul>
@@ -14161,10 +14188,10 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>How many vertices will we contract at each iteration? Consider the example again:</p>
+<h2 id="Bounds-on-contraction">Bounds on contraction<a class="anchor-link" href="#Bounds-on-contraction">&#182;</a></h2><p>How many vertices will we contract at each iteration? Consider the example again:</p>
 <center>
     <img src="../figures/borukva1.jpg" width=40%/>
 </center><p>If a partition has $k$ edges, how many vertices will be removed?</p>
@@ -14174,20 +14201,35 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$k$</p>
-<p>So, if the graph has $n$ vertices, and we pick one edge per vertex, what is the best and worst case on the number of vertices we can remove at each round?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So, if the graph has $n$ vertices, and we pick one edge per vertex, what is the best and worst case on the number of vertices we can remove at each round?</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Best-case</strong>: contract away $n-1$ vertices. We found the MST in one iteration!</p>
 <center>
     <img src="../figures/borukva3.jpg" width=40%/>
-</center><p><strong>Worst-case</strong>: contract away $\frac{n}{2}$ vertices. Each edge removes a single vertex.</p>
+</center>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Worst-case</strong>: contract away $\frac{n}{2}$ vertices. Each edge removes a single vertex.</p>
 <center>
     <img src="../figures/borukva4.png" width=40%/>
 </center><p><br></p>
-<p>So, we're guaranteed to remove $n/2$ vertices at each iteration.</p>
+<p>So, we're guaranteed to remove atleast $n/2$ vertices at each iteration.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Total number of contraction iterations is $O(\lg n)$</p>
 
 </div>
@@ -14198,6 +14240,11 @@ div.jp-OutputPrompt {
 <center>
     <img src="../figures/borukva1.jpg" width=40%/>
 </center><p>In the above example, each partition happens to be a star graph, but it won't always be so:</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
     <img src="../figures/borukva3.jpg" width=40%/>
 </center><p><br></p>
@@ -14210,11 +14257,21 @@ div.jp-OutputPrompt {
 <h2 id="Star-partitioning-in-Bor%C5%AFvka">Star partitioning in Bor&#367;vka<a class="anchor-link" href="#Star-partitioning-in-Bor%C5%AFvka">&#182;</a></h2><p>The only difference is that we only contract edges that are vertex bridges:</p>
 <center>
     <img src="../figures/borukva5.jpg" width=40%/>
+</center>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/borukva5.jpg" width=40%/>
 </center><center>
     <img src="../figures/borukva6.png" width=20%/>
-</center><p><br></p>
-<p>E.g., we don't contract $(b,d)$ because it is not a vertex bridge.</p>
-<p><br></p>
+</center><p>E.g., we didn't contract $(b,d)$ because it is not a vertex bridge.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$
 \begin{array}{ll}  
 1  ~~ \mathit{bridgeStarPartition}~(G=(V,E), i) =  
@@ -14234,8 +14291,9 @@ div.jp-OutputPrompt {
 8   ~~  ~~~~\texttt{end}  
 \end{array}
 $</p>
-<p><br><br></p>
-<p>As in the original star contraction lecture, the expected number of vertices removed at each step is $\frac{n}{4}$. This is is not as good as $\frac{n}{2}$, but still good enough to ensure a logarithmic number of contraction iterations.</p>
+<p><br></p>
+<p>As in the star contraction lecture, the expected number of vertices removed at each step is $\frac{n}{4}.$</p>
+<p>This is is not as good as $\frac{n}{2}$, but still good enough to ensure a logarithmic number of contraction iterations.</p>
 
 </div>
 </div></section></section><section><section>
@@ -14260,11 +14318,14 @@ $</p>
 </ul>
 </li>
 </ul>
-<p><br></p>
-<p>$S(|V|) = S(\frac{3|V|}{4}) + \lg |V| \in O(\lg^2 |V|)$</p>
 
 </div>
-</div></section></section>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$S(|V|) = S(\frac{3|V|}{4}) + \lg |V| \in O(\lg^2 |V|)$$
+</div>
+</div></div></section></section>
 </div>
 </div>
 </body>

@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>A <strong>star graph</strong> $G = (V,E)$ is an undirected graph with</p>
+<h2 id="Star-Graph">Star Graph<a class="anchor-link" href="#Star-Graph">&#182;</a></h2><p>A <strong>star graph</strong> $G = (V,E)$ is an undirected graph with</p>
 <ul>
 <li>a <strong>center</strong> vertex $v \in V$, and</li>
 <li>a set of edges $E$ that attach $v$ directly to the rest of the vertices, called <strong>satellites</strong> , i.e., $E = \left\{ \left\{ v,u \right\} : u  \in V \setminus \left\{ v \right\} \right\}$.</li>
@@ -14118,14 +14118,18 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>at most 1 per round, so $n$ iterations</p>
-<ul>
-<li>we need $O(\log n)$ iterations to reduce span </li>
-</ul>
+<blockquote><p>we need $O(\log n)$ iterations to reduce span</p>
+</blockquote>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Edge contraction generally doesn't work well for graphs with many high degree vertices.</p>
 <p>We instead need a way to identify and contract star patterns all at once.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Star-Partition">Star Partition<a class="anchor-link" href="#Star-Partition">&#182;</a></h2><p>A <strong>star partition</strong> of a graph $G$ is a partition of $G$ where each block is vertex-induced subgraph with respect to a <strong>star graph</strong>.</p>
@@ -14133,7 +14137,7 @@ div.jp-OutputPrompt {
 <p>How can we identify such stars?</p>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>To construct a star partition:</p>
@@ -14143,14 +14147,19 @@ div.jp-OutputPrompt {
 <li>Remove $v$ and its satellites from the graph.</li>
 </ol>
 <p><br></p>
-<p>But, this is sequential. Let's do it in parallel now.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>But, this is sequential. We want to do it in parallel.</p>
 <p>We'll use randomness similar to how we did with edge partitioning.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="parallel-star-partitioning">parallel star partitioning<a class="anchor-link" href="#parallel-star-partitioning">&#182;</a></h3><ul>
+<h3 id="Parallel-star-partitioning">Parallel star partitioning<a class="anchor-link" href="#Parallel-star-partitioning">&#182;</a></h3><ul>
 <li>Flip a coin for each vertex.</li>
 <li>If a vertex flips heads, then it becomes the center of a star.</li>
 <li>If a vertex flips tails, then there are two cases.<ul>
@@ -14159,16 +14168,15 @@ div.jp-OutputPrompt {
 </ul>
 </li>
 </ul>
-<p><img src="../figures/star_parallel.jpg" width=150%/></p>
-<p>Three blocks:</p>
-<ul>
-<li>the star with center $a$ (with no satellites)</li>
-<li>the star with center $b$ (with two satellites)</li>
-<li>the singleton star $d$ </li>
-</ul>
 
 </div>
 </div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/star_parallel.jpg" width=150%/></p>
+
+</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$
@@ -14200,38 +14208,45 @@ div.jp-OutputPrompt {
 13 ~~ ~~~~\texttt{end}  
 \end{array}
 $</p>
-<ul>
-<li>Flip a coin for each vertex and select the edges that point from tails to heads<ul>
-<li>this gives the set of edges TH. </li>
-</ul>
-</li>
-<li><p>In this set of edges, there can be multiple edges from the same non-center.</p>
-</li>
-<li><p>Since we want to choose one center for each satellite, we remove duplicates in Line 6, by creating a set of singleton tables and merging them, which selects one center per satellite.</p>
-</li>
-<li><p>Next, the algorithm determines the set of centers as all the non-satellite vertices.</p>
-</li>
-<li><p>To complete the process, the algorithm maps each center to itself (Line 10). These operations effectively promote unmatched non-centers to centers, forming singleton stars, and matches all centers with themselves.</p>
-</li>
-<li><p>Finally, the algorithm constructs the partition map by uniting the mapping for the satellites and the centers.</p>
-</li>
-</ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/star_parallel.jpg" width=150%/></p>
+<p>$V = \{a, b, c, d, e\}$</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The star-partition algorithm first computes $\mathit{TH} =  
+\left\{ (\texttt{c},\texttt{a}),(\texttt{c},\texttt{b}),(\texttt{e},\texttt{b}) \right\},$ as the edges from satellites to centers.</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>revisiting our example:</p>
-<p><img src="../figures/star_parallel.jpg" width=150%/></p>
-<p><br></p>
-<p>The star-partition algorithm proceeds on this example as follows. First, it computes $\mathit{TH} =  
-\left\{ (\texttt{c},\texttt{a}),(\texttt{c},\texttt{b}),(\texttt{e},\texttt{b}) \right\},$ as the edges from satellites to centers.</p>
-<p>Now, it converts each edge into a singleton table, and merges all the tables into one table, which is going to become a part of the partition map: $P_s = \left\{ \texttt{c} \mapsto \texttt{b},\texttt{e} \mapsto \texttt{b} \right\}.$ Note that the edge $(\texttt{c},\texttt{a})$ has been removed since when uniting the tables, we select only one element for each key in the domain.</p>
+<p>Now, it maps each $\texttt{T}$ vertex to its $\texttt{H}$, and merges these maps into a set (no duplicate keys): $P_s = \left\{ \texttt{c} \mapsto \texttt{b},\texttt{e} \mapsto \texttt{b} \right\}.$</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Now for all remaining vertices $V_c = V \setminus \mathit{domain}(P) = \left\{ \texttt{a},\texttt{b},\texttt{d} \right\}$ we map them to themselves, giving: $P_c = \left\{ \texttt{a} \mapsto \texttt{a}, \texttt{b} \mapsto \texttt{b},  
   \texttt{d} \mapsto \texttt{d} \right\}.$ The vertices in $P_c$ are the centers.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Finally we merge $P_s$ and $P_c$ to obtain the partition map $P_s \cup P_c = \left\{ \texttt{a} \mapsto \texttt{a}, \texttt{b} \mapsto \texttt{b}, \texttt{c} \mapsto \texttt{b}, \texttt{d} \mapsto  
     \texttt{d}, \texttt{e} \mapsto \texttt{b} \right\}.$</p>
-<p><br><br></p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$\begin{array}{ll} 
 \mathit{starPartition}~(G = (V, E)) =\\
 ~~~~\texttt{let}\\
@@ -14241,9 +14256,11 @@ $$\begin{array}{ll}
 ~~~~~~~~~V_C = \left\langle\, j \in P ~\mid~P[j] = j \,\right\rangle  \\
 ~~~~\texttt{in}~(V_C, P)~\texttt{end}  \\
 \end{array}
-$$<p><br><br></p>
-<p>Star-partitioning has $O(|V| + |E|)$ work and $O(\lg |V|)$ span. Why?</p>
-<p><br><br></p>
+$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>$V'$ maps each vertex to itself</li>
 <li>to compute $TH$, <code>filter</code> over edges $\Rightarrow O(\lg |E|) \in O(\lg |V|)$</li>
@@ -14251,22 +14268,42 @@ $$<p><br><br></p>
 </ul>
 
 </div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Star-partitioning has $O(|V| + |E|)$ work and $O(\lg |V|)$ span.</p>
+
+</div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$P_s$ determines the number of vertices removed at each iteration.</p>
+<h2 id="What-is-our-contraction-fraction?">What is our contraction fraction?<a class="anchor-link" href="#What-is-our-contraction-fraction?">&#182;</a></h2><p>$P_s$ determines the number of vertices removed at each iteration.</p>
 <p>Since we want to ensure we are geoemtrically decreasing, we need to know how big $P_s$ will be in expectation.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Consider a vertex $v$ with neighbor $u$. For $v$ to be removed we must:</p>
 <ul>
 <li>flip a tails for $v$</li>
 <li>flip a heads for $u$</li>
 </ul>
-<p>So, $\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$ is the probability a vertex is removed.</p>
-<p>$\Rightarrow |V| \cdot \frac{1}{4}$ vertices removed at each iteration, in expectation.</p>
-<p>This ensures that we will have $O(\log |V|)$ iterations when using start partitioning to do contraction.</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So, $\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$ is the probability a vertex is removed.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\Rightarrow \frac{1}{4} \cdot |V|$ vertices removed at each iteration, in expectation.</p>
+
+</div>
+</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14287,7 +14324,7 @@ $$<p><br><br></p>
                           <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">vertex_map</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="n">vertex_map</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
         <span class="k">return</span> <span class="n">contract_graph</span><span class="p">(</span><span class="n">new_vertices</span><span class="p">,</span> <span class="n">new_edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">)</span>
 
-    
+ 
 <span class="n">vertices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">])</span>
 <span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">),</span> 
              <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span>
@@ -14301,12 +14338,21 @@ $$<p><br><br></p>
 </div>
 </div>
 
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Span-of-star-contraction">Span of star contraction<a class="anchor-link" href="#Span-of-star-contraction">&#182;</a></h2><p>Since we remove $\Rightarrow \frac{1}{4} \cdot |V|$ in expectation each iteration:</p>
+$$S(|V|) = S(3|V|/4) + \lg |V|$$
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$S(|V|) \in O(\lg^2 |V|)$$
+</div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So, the span for star contraction:</p>
-<p>$S(|V|) = S(3|V|/4) + S(\lg |V|) \in O(\lg^2 |V|)$</p>
-<p><br><br></p>
+<p><br></p>
 <p>Next time, we'll see a MST algorithm that uses contraction to have logarithmic span.</p>
 
 </div>

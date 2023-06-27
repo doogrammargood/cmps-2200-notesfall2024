@@ -14104,7 +14104,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So far, we have seen pretty limited parallelism in our graph algorithms:</p>
+<h2 id="Graph-Algorithm-Parallelism">Graph Algorithm Parallelism<a class="anchor-link" href="#Graph-Algorithm-Parallelism">&#182;</a></h2><p>So far, we have seen pretty limited parallelism in our graph algorithms:</p>
 <ul>
 <li>BFS: Span=$O(d \lg^2 n)$, where $d$ is the <strong>diameter</strong> of graph<ul>
 <li>So, serial in the worst case.</li>
@@ -14112,12 +14112,20 @@ div.jp-OutputPrompt {
 </li>
 <li>DFS, Dijkstra, Prim, Kruskal: serial</li>
 <li>Bellman-Ford: Update shortest paths to each node in parallel, span = $O(|V| \lg |V|)$</li>
-<li>Johnson: can run Dijkstra in parallel for each source, span=$O(|E| \lg |E|)$ </li>
+<li>Johnson: can run Dijkstra in parallel for each source, span=$O(|E| \lg |V|)$ </li>
 </ul>
-<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Is there any way to expose more parellelism?</p>
-<p><br></p>
-<p>What would a divide and conquer algorithm look like for graphs?</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Divide-and-conquer-on-graphs">Divide and conquer on graphs<a class="anchor-link" href="#Divide-and-conquer-on-graphs">&#182;</a></h2><p>What would a divide and conquer algorithm look like for graphs?</p>
 
 </div>
 </div><div class="fragment">
@@ -14127,6 +14135,11 @@ div.jp-OutputPrompt {
 <center>
     <img src="../figures/partition.jpg"/>
 </center><p><br> <br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p>Want nearly equal-sized partitions -- this is hard to compute!</p>
 </li>
@@ -14138,25 +14151,33 @@ div.jp-OutputPrompt {
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Recall <strong>contraction</strong>, which we used to implement <code>scan</code>:</p>
+<h2 id="Contraction">Contraction<a class="anchor-link" href="#Contraction">&#182;</a></h2><p>Recall <strong>contraction</strong>, which we used to implement <code>scan</code>:</p>
 <p><img src="../figures/scan.png" width=70%/></p>
 <ol>
 <li>Reduce problem size by a constant factor (e.g., half as large). (<strong>contraction</strong>)</li>
 <li>Solve this smaller problem.</li>
 <li>Expand solution to solve the larger problem. (<strong>expansion</strong>)</li>
 </ol>
-<p>In the next few lectures, we'll develop contraction algorithms to achieve better parallelism in graph algorithms.</p>
 
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We'll develop contraction algorithms to achieve better parallelism in graph algorithms.</p>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Graph-partitions">Graph partitions<a class="anchor-link" href="#Graph-partitions">&#182;</a></h2><p>How can we partition a graph?</p>
-<p>How do we represent the partitions?</p>
-<p><br><br></p>
-<p>Recall the notion of <strong>graph cut</strong> we introduced to describe the light-edge property of the MST problem:</p>
+<p>Recall the notion of <strong>graph cut</strong>:</p>
 <p>A <strong>graph cut</strong> of a graph $(G,V)$ is a partitioning of vertices $V_1 \subset V$, $V_2 = V - V_1$.</p>
 <p>Each vertex set $V_i \subset V$ defines a <strong>vertex-induced subgraph</strong> consisting of edges where both endpoints are in $V_i$.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For example:</p>
 <center>
     <img src="../figures/cut1.jpg"/>
@@ -14166,8 +14187,12 @@ div.jp-OutputPrompt {
 <li>$G_2 = (V_2, E_2)~~~~V_2=\{e,f\}, E_2 = \{(e,f)\}$</li>
 </ul>
 <p>The <strong>cut edges</strong> are those that join the two subgraphs, e.g., $\{(b,e), (d,f)\}$.</p>
-<p><br><br></p>
-<h3 id="graph-partition">graph partition<a class="anchor-link" href="#graph-partition">&#182;</a></h3><p>a collection of graphs $\{G_1 = (V_1, E_1), \ldots, G_{k} = (V_{k}, E_{k})\}$ such that</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Graph-partition">Graph partition<a class="anchor-link" href="#Graph-partition">&#182;</a></h3><p>a collection of graphs $\{G_1 = (V_1, E_1), \ldots, G_{k} = (V_{k}, E_{k})\}$ such that</p>
 <ul>
 <li>$\{V_1, \ldots, V_{k}\}$ is a set partition of $V$.</li>
 <li>$\{G_1, \ldots, G_{k}\}$ are vertex-induced subgraphs of $G$ with respect to $\{V_1, \ldots, V_{k}\}$.</li>
@@ -14184,6 +14209,12 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Graph-Contraction:-Intuition">Graph Contraction: Intuition<a class="anchor-link" href="#Graph-Contraction:-Intuition">&#182;</a></h2><p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
 <p><strong>contract step</strong>:</p>
 <ul>
 <li>partition $G$ into subgraphs $\{G_1 \ldots G_k\}$</li>
@@ -14197,23 +14228,35 @@ div.jp-OutputPrompt {
 </ul>
 </li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
 <p><strong>recursive step</strong>:</p>
 <ul>
 <li>Solve problem for each subgraph in the partition</li>
 <li>base case: stop when no more edges in the graph</li>
 </ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
 <p><strong>expansion step</strong>:</p>
 <ul>
 <li>combine solutions to subgraphs to compute result for original input graph</li>
 </ul>
 
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Which-partitions-should-we-choose?">Which partitions should we choose?<a class="anchor-link" href="#Which-partitions-should-we-choose?">&#182;</a></h3>
+<h3 id="How-should-we-choose-partitions?">How should we choose partitions?<a class="anchor-link" href="#How-should-we-choose-partitions?">&#182;</a></h3>
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We want partitions that:</p>
@@ -14232,7 +14275,12 @@ div.jp-OutputPrompt {
 <p>We'll look at different ways of partitioning in a moment. For now, let's look at an example of how contraction works to solve a specific problem without worrying too much about the details of the partitioning.</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="General-contraction">General contraction<a class="anchor-link" href="#General-contraction">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
@@ -14254,7 +14302,6 @@ div.jp-OutputPrompt {
                           <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">vertex_map</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="n">vertex_map</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
         <span class="k">return</span> <span class="n">contract_graph</span><span class="p">(</span><span class="n">new_vertices</span><span class="p">,</span> <span class="n">new_edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">)</span>
 
-    
 <span class="n">vertices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">])</span>
 <span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">),</span> 
              <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span>
@@ -14268,7 +14315,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Contraction-example:-Number-of-connected-components">Contraction example: Number of connected components<a class="anchor-link" href="#Contraction-example:-Number-of-connected-components">&#182;</a></h2><p>Recall in recitation, we have computed the number of connected components in a graph.</p>
@@ -14277,39 +14324,48 @@ div.jp-OutputPrompt {
 </center><p>How did we do this? What was the worst-case span of our approach?</p>
 
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now let's think how we might do this with graph contraction.</p>
+<h2 id="Connected-components-via-contraction">Connected components via contraction<a class="anchor-link" href="#Connected-components-via-contraction">&#182;</a></h2><p>Now let's think how we might do this with graph contraction.</p>
 <p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
 <p>What does the connectivity in the contracted graph tell us about the connectivity in the original graph?</p>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
 <ul>
-<li>Since $a$, $b$, $c$ are placed in the same partition, we know they are connected.</li>
+<li><p>Since $a$, $b$, $c$ are placed in the same partition, we know they are connected.</p>
+</li>
+<li><p>Since $a$ and $g$ are connected in the second graph, then every node in the $g$ partition is reachable from every node in 
+the $a$ partition.</p>
+</li>
+<li><p>Similarly, since $d$ is not connected to $a$ or $g$, then we know that no node in the $d$ partition is reachable from any node in either the $a$ or $g$ partition.</p>
+</li>
 </ul>
-<ul>
-<li>Since $a$ and $g$ are connected in the second graph, then every node in the $g$ partition is reachable from every node in 
-the $a$ partition.</li>
-</ul>
-<ul>
-<li>Similarly, since $d$ is not connected to $a$ or $g$, then we know that no node in the $d$ partition is reachable from any node in either the $a$ or $g$ partition.</li>
-</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
 <p>What does the final contracted graph tell us about the number of connected components?</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Num-components,-contraction-style">Num components, contraction style<a class="anchor-link" href="#Num-components,-contraction-style">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># graph contraction</span>
-<span class="c1"># we still need to specify partition_graph_f!</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># we still need to specify partition_graph_f!</span>
 
 <span class="k">def</span> <span class="nf">num_components</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -14322,13 +14378,37 @@ the $a$ partition.</li>
         <span class="n">new_edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
                           <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
         <span class="k">return</span> <span class="n">num_components</span><span class="p">(</span><span class="n">new_vertices</span><span class="p">,</span> <span class="n">new_edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">vertices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">])</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vertices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">])</span>
 <span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">),</span> 
              <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span>
              <span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)])</span>
+</pre></div>
 
-<span class="n">num_components</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">)</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_components</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14339,29 +14419,52 @@ the $a$ partition.</li>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>While we have not yet specified <code>partition_graph_f</code>, let's assume it</p>
 <ul>
 <li>returns a graph of size $|V|/2$</li>
 <li>has $O(\lg |V|)$ span.</li>
 </ul>
-<p>What is the recurrence for the full algorithm to compute <code>num_components</code>?</p>
 
 </div>
 </div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the recurrence for the full algorithm to compute <code>num_components</code>?</p>
+
+</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$S(|V|) = S\left(\frac{|V|}{2}\right) + \lg (|V|)$</p>
 <p>which evaluates to?</p>
 
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$O(\lg^2 |V|)$</p>
-<p><br><br></p>
-<p>which is much better than the span for our BFS/DFS implementations of <code>num_components</code>, $O(|V| + |E|)$</p>
 <p><br></p>
-<p>So, to get this level of parallelism, we need some way of partitioning a graph that has low span and reduces the number of vertices by a contant (geometric) factor each round.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is much better than the span for our BFS/DFS implementations of <code>num_components</code>.</p>
+<p>$O(|V| + |E|)$</p>
+<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Take-aways?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>To get this level of parallelism, we need a way of partitioning a graph that has low span and reduces the number of vertices by a contant (geometric) factor each round.</p>
 <ul>
 <li>the low span requirement means we can't do anything that requires a graph search</li>
 </ul>
@@ -14373,67 +14476,243 @@ the $a$ partition.</li>
 <h2 id="Edge-contraction">Edge contraction<a class="anchor-link" href="#Edge-contraction">&#182;</a></h2><p>Consider a partition where each edge becomes its own block:</p>
 <center>
    <img src="../figures/edge1.png" width=40%/>
-</center><p>This is nice because:</p>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is nice because:</p>
 <ul>
 <li>We reduce |V| in half (at least in this example)</li>
 <li>It maintains the connectivity of the original graph</li>
 <li>It seems somewhat easy to compute.</li>
 </ul>
-<p><br></p>
 <p>Here's a simple way to find an edge partition: <strong>Randomly pick half the edges in the graph</strong></p>
-<p>What can go wrong with this approach?</p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We can't have the same node in two partitions.</p>
-<center>
-   <img src="../figures/edge2.png" width=40%/>
-</center><p>What is a greedy algorithm to avoid this case?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Initialize an empty edge set $M$</p>
-<p>Iterate over each edge $e$ in the graph:</p>
-<ul>
-<li>If the vertices in $e$ don't appear in $M$, add it to $M$</li>
-</ul>
-<p><br></p>
+<p>What can go wrong with this approach?</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We don't want to have the same node in two partitions.</p>
+<center>
+   <img src="../figures/edge2.png" width=40%/>
+</center>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is a greedy algorithm to avoid this case?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+
+<pre><code>Initialize an empty edge set M
+
+Iterate over each edge e in the graph:
+    If the vertices in e don't appear in M, add it to M</code></pre>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>What is the span of this algorithm?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$O(|E|)$ -- it is sequential</p>
+<p>$O(|E|)$ -- it is sequential, every choice depends on previous choices.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Can we come up with a parallel version of this idea? Hint: use randomness</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Parallel-Edge-Partition">Parallel Edge Partition<a class="anchor-link" href="#Parallel-Edge-Partition">&#182;</a></h2><ul>
-<li><p>Flip a coin for each edge, in parallel, assigning $H$ or $T$ to each edge</p>
-</li>
-<li><p>Run a <code>filter</code> on all the results, selecting those edges $e$ where:</p>
+<h2 id="Parallel-Edge-Partition">Parallel Edge Partition<a class="anchor-link" href="#Parallel-Edge-Partition">&#182;</a></h2><p>We can randomly select edges, contigent on certain conditions.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
+<li>Flip a coin for each edge, in parallel, assigning $H$ or $T$ to each edge</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Run a <code>filter</code> on all the results, selecting those edges $e$ where:<ul>
 <li>$e$ has $H$</li>
 <li>all edges incident on $e$ are $T$</li>
 </ul>
 </li>
 </ul>
-<p><center>
-    <img src="../figures/edge3.png" width=40%/></p>
-<center>
 
-<p>Here, we make partitions for two edges: $\{a,c\}, \{g,h\}$</p>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/edge3.png" width=40%/>
+</center>
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src="../figures/edge3.png" width=40%/>
+</center><p>Here, we make partitions for two edges: $\{a,c\}, \{g,h\}$</p>
 <p>The rest are put in their own singleton partitions:  $\{b\}, \{d\}, \{e\}, \{f\}, \{i\}$</p>
-<p><br></p>
-<p>By construction, we know that this will be a valid partitioning.<br>
-But, will it make the graph small enough fast enough?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">edge_contract</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+    <span class="c1"># sample each edge with 50% chance</span>
+    <span class="n">sampled_edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])]</span>
+    <span class="c1">#print(&#39;%d/%d sampled edges&#39; % (len(sampled_edges), len(edges)))</span>
+    <span class="c1">#print(sorted(sampled_edges))</span>
+    <span class="c1"># count how often each vertex appears in the sampled edges.</span>
+    <span class="c1"># could do this in parallel (map-reduce) in O(log |V|) span</span>
+    <span class="n">vertex_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sampled_edges</span><span class="p">:</span>
+        <span class="n">vertex_counts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="c1">#print(&#39;\nvertex counts in sampled edges:&#39;, vertex_counts.items())        </span>
+
+    <span class="c1"># now, do a filter to get those edges where both vertices</span>
+    <span class="c1"># appear only once in sampled_edges</span>
+    <span class="n">valid_edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">sampled_edges</span> <span class="k">if</span> <span class="n">vertex_counts</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">vertex_counts</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1">#print(&#39;\nkeeping these valid edges:&#39;, valid_edges)</span>
+    
+    <span class="c1"># make partitions</span>
+    <span class="n">vertex_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">valid_edges</span><span class="p">:</span>
+        <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># put all the rest in a singleton partition</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vertex_map</span><span class="p">:</span>
+            <span class="n">vertex_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">vertex_map</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">vertex_map</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">num_components</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># base case: return the number of super vertices in the final partition</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_vertices</span><span class="p">,</span> <span class="n">vertex_map</span> <span class="o">=</span> <span class="n">partition_graph_f</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+        <span class="c1"># keep only cut eges</span>
+        <span class="c1"># can use filter here to do in parallel: O(log|E|) span</span>
+        <span class="n">new_edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                          <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">vertex_map</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
+        <span class="k">return</span> <span class="n">num_components</span><span class="p">(</span><span class="n">new_vertices</span><span class="p">,</span> <span class="n">new_edges</span><span class="p">,</span> <span class="n">partition_graph_f</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="../figures/partition2.png" alt="figures/contract.png"></p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[49]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vertices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">])</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">),</span> 
+             <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span>
+             <span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[50]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_components</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">edge_contract</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[50]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>2</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>By construction, we know that this will be a valid partitioning.</p>
+<p>But, will it make the graph small enough fast enough?</p>
 
 </div>
 </div><div class="fragment">
@@ -14442,26 +14721,67 @@ But, will it make the graph small enough fast enough?</p>
 <p>Consider a <strong>cycle graph</strong>, where each vertex has exactly two neighbors:</p>
 <center>
    <img src="../figures/edge1.png" width=40%/>
-</center><p>What is the probability that given edge $e$ will be selected for a partition?</p>
-<p>Probability that: it is $H$, it's two neighboring edges are $T$</p>
+</center>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What is the probability that a given edge $e$ will be selected for a partition?</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$\frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}$</p>
-<p><br></p>
-<p>So, if there are $|E|$ edges, and each has probability of $\frac{1}{8}$ of being selected, then what is the expected number of edges selected at each round? $|E|\frac{1}{8}$</p>
-<p>Since $|V| = |E|$ in a cycle graph: $|V|\frac{1}{8}$</p>
-<p><br></p>
-<p>Since we remove 1 vertex for each edge partition we select, we will reduce the number of vertices by $\frac{1}{8}$ at each round, in expectation.</p>
-<p>Thus, the recurrence will be:</p>
-<p>$S(|V|) = S(\frac{7}{8}|V|) + \lg(|V|) \in S(\lg^2 |V|)$</p>
-<p><br><br></p>
-<p>But, we have assumed a cycle graph. What would be a graph structure where edge contraction performs poorly? (i.e., doesn't remove enough edges)?</p>
+<p>This is the probability that: it is $H$, and it's two neighboring edges are $T$</p>
 
 </div>
 </div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}$$
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Will-we-contract-at-a-constant-fraction-of-the-graph-size?">Will we contract at a constant fraction of the graph size?<a class="anchor-link" href="#Will-we-contract-at-a-constant-fraction-of-the-graph-size?">&#182;</a></h2><p>So, if there are $|E|$ edges, and each has probability of $\frac{1}{8}$ of being selected, then what is the expected number of edges selected at each round?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\frac{1}{8}|E|$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Since $|V| = |E|$ in a cycle graph, and since we remove 1 vertex for each edge partition we select, we will reduce the number of vertices by $\frac{1}{8}$ at each round, in expectation.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Thus, the recurrence:</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$S(|V|) = S(\frac{7}{8}|V|) + \lg(|V|)$$
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$S(|V|) \in S(\lg^2 |V|)$$<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>But, we have assumed a cycle graph. What would be a graph structure where edge contraction performs poorly? (i.e., doesn't remove enough edges)?</p>
+
+</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
@@ -14469,7 +14789,7 @@ But, will it make the graph small enough fast enough?</p>
 </center><p>Next time: Star Graphs!</p>
 
 </div>
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 </body>

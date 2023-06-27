@@ -14104,43 +14104,83 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Going back to our discussions of asymptotic complexity, we said that we were interested in algorithms for computational problems that:</p>
+<h2 id="Computational-Complexity">Computational Complexity<a class="anchor-link" href="#Computational-Complexity">&#182;</a></h2><p>All semester, we've been interested in algorithms for computational problems that:</p>
 <ul>
 <li><p>Did polynomial work in the input size</p>
 </li>
 <li><p>Leveraged concurrency to achieve span (i.e., parallel speedup)</p>
 </li>
 </ul>
-<p>We have studied different algorithmic paradigms to try and achieve these two goals.</p>
-<p>But, when is this actually possible?</p>
-<p>What problems are solvable with polynomial work? Of those, which allow us to achieve a good parallel speedup?</p>
-<p>Conversely, which problems <strong>aren't</strong> solvable with polynomial work?</p>
-<p>Perhaps we could just avoid or approximate these, instead of trying to find efficient algorithms.</p>
+<p>We've studied different algorithmic paradigms to try and achieve these two goals.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Why-study-Computational-Complexity?">Why study Computational Complexity?<a class="anchor-link" href="#Why-study-Computational-Complexity?">&#182;</a></h2><p>Why would we care about characterizing the difficulty of problems? Why not just do the best we can?</p>
-<p>Given a problem $\mathcal{X}$ that we want to solve efficiently, we might not be able come up with a polynomial-work algorithm.</p>
-<p><a href="https://www.ac.tuwien.ac.at/people/szeider/cartoon/"><img src ="../figures/npc_cartoon1.png" width=70%></a></p>
-<p><a href="https://www.ac.tuwien.ac.at/people/szeider/cartoon/"><img src ="../figures/npc_cartoon2.png" width=70%></a></p>
+<p>But, when is this actually possible?</p>
+<p>What problems are solvable with polynomial work? Of those, which allow us to achieve a good parallel speedup?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Conversely, which problems <strong>aren't</strong> solvable with polynomial work?</p>
+<p>Perhaps we could just avoid or approximate these, instead of trying to find efficient algorithms.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Computational-Complexity">Computational Complexity<a class="anchor-link" href="#Computational-Complexity">&#182;</a></h2><p>The field of <strong>computational complexity</strong> tries to characterize problems by resource complexity (e.g., work, span, space).</p>
-<p>For example, we can say that the sorting problem is in the class of problems that can be solved in polynomial work. This class is refered to as class $\mathcal{P}$.</p>
-<p>We'll define some basic complexity classes and look at how much progress has been made in the last 50 years or so.</p>
-<h3 id="Decision-Problems">Decision Problems<a class="anchor-link" href="#Decision-Problems">&#182;</a></h3><p>In our discussion, we will look at <strong>decision problems</strong>, i.e., computational problems with YES/NO answers.</p>
-<p>This is not a big restriction, because if we can solve a decision problem we can solve the optimization version using binary search.</p>
-<p><strong>Example</strong>: Suppose we only have a decision version of MST: DECISION-MST</p>
-<p>DECISION-MST outputs only <code>True</code> or <code>False</code>, <code>True</code> if the cost of the MST is $&lt;= k$ and <code>False</code> otherwise.</p>
-<p>Then we can find the $k$ that is the cost of the MST by performing a binary search on $k$. How do we choose a starting value for $k$? This requires times polynomial in the input. Why?</p>
+<h2 id="Why-study-Computational-Complexity?">Why study Computational Complexity?<a class="anchor-link" href="#Why-study-Computational-Complexity?">&#182;</a></h2><p>Why would we care about characterizing the difficulty of problems? Why not just do the best we can?</p>
+<p>Given a problem $\mathcal{X}$ that we want to solve efficiently, we might not be able come up with a polynomial-work algorithm.</p>
+<center>
+<a href="https://www.ac.tuwien.ac.at/people/szeider/cartoon/"><img src ="../figures/npc_cartoon1.png" width=80%></a>
+</center><p>It would be better to say...</p>
 
 </div>
 </div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<a href="https://www.ac.tuwien.ac.at/people/szeider/cartoon/"><img src ="../figures/npc_cartoon2.png" width=80%></a>
+</center>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Computational-Complexity">Computational Complexity<a class="anchor-link" href="#Computational-Complexity">&#182;</a></h2><p>The field of <strong>computational complexity</strong> tries to characterize problems by resource complexity (e.g., work, span, space).</p>
+<p>For example, we can say that the sorting problem is in the class of problems that can be solved in polynomial work. This class is refered to as class $\mathcal{P}$.</p>
+<p>We'll define some basic complexity classes and look at how much progress has been made in the last 50 years or so.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Decision-Problems">Decision Problems<a class="anchor-link" href="#Decision-Problems">&#182;</a></h3><p>In our discussion, we will look at <strong>decision problems</strong>, i.e., computational problems with YES/NO answers.</p>
+<blockquote><p>This is not a big restriction, because if we can solve a decision problem we can solve the optimization version using binary search.</p>
+</blockquote>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Example</strong>: Suppose we only have a decision version of MST: <code>DECISION-MST</code></p>
+<p><code>DECISION-MST</code> outputs only <code>True</code> or <code>False</code>, <code>True</code> if the cost of the MST is $&lt;= k$ and <code>False</code> otherwise.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Then we can find the $k$ that is the cost of the MST by performing a binary search on $k$. How do we choose a starting value for $k$?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This requires time polynomial in the input. Why?</p>
+
+</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>For MST, we gave several very efficient algorithms (with work nearly linear in the input size).</p>
@@ -14148,57 +14188,95 @@ div.jp-OutputPrompt {
 <p>Loosely, an efficient solution is one whose work is polynomial or better.</p>
 
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Inefficient-Algorithms">Inefficient Algorithms<a class="anchor-link" href="#Inefficient-Algorithms">&#182;</a></h3><p>Are there any problems for which we haven't seen efficient algorithms?</p>
 <p>Yes - <strong>TSP</strong> and <strong>Knapsack</strong>.</p>
 <p>Are there more efficient algorithms possible than what we've seen? Slightly, but the best we can do is essentially some kind of inefficient/exhaustive search over the solution space.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>To justify such inefficient approaches, we'd like to give a superpolynomial lower bounds for TSP or Knapsack (or any problem for which we can't find an efficient algorithm).</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p>Given our lack of ability to find efficient algorithms for these problems, it would be nice to be able to say that a polynomial solution is impossible.</p>
 <p>Although, setting our egos aside, it would be even better to produce an efficient algorithm!</p>
 </blockquote>
-<p>There are a number of very common/useful problems for which we can't seem to</p>
-<p><strong>A)</strong> come up with good algorithms, or</p>
-<p><strong>B)</strong> prove that no good algorithms exist.</p>
-<p>Two more examples:</p>
-<ul>
-<li><p>Satisfiability ($\mathcal{3SAT}$): Given a logical formula $F(x_1, \ldots, x_n)$ that is written as a 3CNF ("CNF" stands for <em>conjunctive normal form</em>), is there an assignment of $x_1, \ldots, x_n$ such that $F$ yields evaluates to True?</p>
-</li>
-<li><p>Independent Set ($\mathcal{IS}$): Given a graph $G=(V, E)$, is there a set $X\subseteq V$ of size at least $k$ such that no vertices $x, y\in X$ share an edge?</p>
-</li>
-</ul>
-<p><img src="../figures/IS.png" width = 50%></p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Checking-versus-Solving">Checking versus Solving<a class="anchor-link" href="#Checking-versus-Solving">&#182;</a></h3><p>There is an interesting fact about many of these problems that we can't seem to efficiently solve.</p>
+<h2 id="Complexity-Classes">Complexity Classes<a class="anchor-link" href="#Complexity-Classes">&#182;</a></h2><p>There are a number of very common/useful problems for which we can't seem to</p>
+<p><strong>A)</strong> come up with good algorithms, or</p>
+<p><strong>B)</strong> prove that no good algorithms exist.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Two-more-examples:">Two more examples:<a class="anchor-link" href="#Two-more-examples:">&#182;</a></h3><p><strong>Satisfiability</strong> ($\mathcal{3SAT}$):</p>
+<p>Given a logical formula $F(x_1, \ldots, x_n)$ that is written as a 3CNF ("CNF" stands for <em>conjunctive normal form</em>), is there an assignment of $x_1, \ldots, x_n$ such that $F$ yields evaluates to True?</p>
+$$(x_1 \vee x_2 \vee \neg{x_3}) \wedge (x_2 \vee x_3 \vee \neg{x_4})\wedge (x_1 \vee \neg{x_2} \vee x_4)$$
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Independent Set</strong> ($\mathcal{IS}$):</p>
+<p>Given a graph $G=(V, E)$, is there a set $X\subseteq V$ of size at least $k$ such that no vertices $x, y\in X$ share an edge?</p>
+<center>
+<img src="../figures/IS.png" width = 50%>
+</center>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Checking-versus-Solving">Checking versus Solving<a class="anchor-link" href="#Checking-versus-Solving">&#182;</a></h2><p>There is an interesting fact about many of these problems that we can't seem to efficiently solve.</p>
 <p>Given a solution, we can actually check whether or not the solution is correct very quickly. We just don't know how to produce a "YES" instance efficiently.</p>
-<p>For example:</p>
-<p><br></p>
-<ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Examples">Examples<a class="anchor-link" href="#Examples">&#182;</a></h3><ul>
 <li>$\mathcal{3SAT}$: Is there a truth assignment for which this boolean expression evaluates to <code>True</code>?<ul>
 <li>Given a truth assignment for a formula $F$, we can easily plug it in and check it. </li>
 </ul>
 </li>
 </ul>
-<p><br></p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>$\mathcal{TSP}$: Is there a cycle that covers the graph with cost less than $k$?<ul>
 <li>Given a proposed cycle, verify that is cycle, check if sum of weights is less than k.</li>
 </ul>
 </li>
 </ul>
-<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>$\mathcal{Knapsack}$: Can a value of atleast $V$ be achieved without exceeeding the weight $W$?<ul>
 <li>Given a set of items, sum up weight and value of all items.</li>
 </ul>
 </li>
 </ul>
-<p><br></p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>$\mathcal{Independent Set}$: Does the graph contain an independent set of size $k$? <ul>
 <li>Given a proposed independent set $IS$, verify none of the vertices are neighbors. Return <code>True</code> if $|IS| &gt;= k$</li>
@@ -14207,22 +14285,84 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Class-$%5Cmathcal%7BNP%7D$">Class $\mathcal{NP}$<a class="anchor-link" href="#Class-$%5Cmathcal%7BNP%7D$">&#182;</a></h3><p>The class of problems for which we can <strong>check</strong>, given a candidate solution, whether the input produces a YES answer is known as $\mathcal{NP}$.</p>
-<p>$\mathcal{NP}$ stands for <strong>Nondeterministic Polynomial Time</strong>. It means that if we are given a nondeterministic computer, we could solve the problem in polynomial time.</p>
-<p>Nondeterminism is a wonky idea from computer theory.</p>
-<p><strong>Deterministic Computers</strong></p>
-<p>Classical computers are deterministic. Every step is determined exactly by all preceding steps.</p>
-<p><strong>Nondeterministic Computers</strong></p>
-<p>In a nondeterministic computer, the next step can be determined by information outside of the computer. In “theory land”, this means that if a nondeterministic algorithm is presented with a choice, it can automatically choose the optimal choice, whether or not it has enough information to actually know that choice is optimal.</p>
-<p>This is somewhat akin to if god played chess. God would know automatically the optimal move for every move of the game.</p>
-<p>How does this all relate back to the class NP?</p>
-<p>Since all problems in NP are verifiable in polynomial time, one potential algorithm for solving any of these problems is to attempt to verify all possible solutions – a brute force approach. A nondeterministic algorithm granted the magical power of optimal choice can simply choose the correct answer to verify rather than searching for it, and following the polynomial verification, will be done. “Theory land”, strange.</p>
+<h3 id="Class-$%5Cmathcal%7BNP%7D$">Class $\mathcal{NP}$<a class="anchor-link" href="#Class-$%5Cmathcal%7BNP%7D$">&#182;</a></h3><p>Class $\mathcal{NP}$ is the class of problems for which we can efficiently <strong>check</strong>, given a candidate solution, whether that solution produces a YES answer.</p>
 
 </div>
 </div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>By efficiently, we mean in <strong>polynomial time</strong>.</p>
+</blockquote>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>What does $\mathcal{NP}$ stand for?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$\mathcal{NP}$ stands for <strong>Nondeterministic Polynomial Time</strong>.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>It means that if we are given a nondeterministic computer, we could solve the problem in polynomial time.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Nondeterminism">Nondeterminism<a class="anchor-link" href="#Nondeterminism">&#182;</a></h3><p>Nondeterminism is a wonky idea from computer theory.</p>
+<p><strong>Deterministic Computers</strong></p>
+<p>Classical computers are deterministic. Every step is determined exactly by all preceding steps.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Nondeterministic Computers</strong></p>
+<p>In a nondeterministic computer, the next step can be determined by information outside of the computer.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>When a nondeterministic algorithm is presented with a choice, it can automatically choose the optimal choice, whether or not it has enough information to actually know that choice is optimal.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This is somewhat akin to if god played chess. God would know automatically the optimal move for every move of the game.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>How does this all relate back to the class NP?</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Since all problems in NP are verifiable in polynomial time, one potential algorithm for solving any of these problems is to attempt to verify all possible solutions – a brute force approach.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>A nondeterministic algorithm granted the magical power of optimal choice can simply choose the correct answer to verify rather than searching for it, and following the polynomial verification, will be done.</p>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Class-$%5Cmathcal%7BNP%7D$">Class $\mathcal{NP}$<a class="anchor-link" href="#Class-$%5Cmathcal%7BNP%7D$">&#182;</a></h3><p>$\mathcal{P}$ is the class of problems for which we can compute solutions directly with polynomial work.</p>
@@ -14239,15 +14379,57 @@ div.jp-OutputPrompt {
 <blockquote><p>1) an input transformation from $\mathcal{X}$ to $\mathcal{Y}$ and</p>
 <p>2) an output transformation from $\mathcal{Y}$ to $\mathcal{X}$ with polynomial work.</p>
 </blockquote>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We can then solve $\mathcal{X}$ by reducing it to $\mathcal{Y}$, solving $\mathcal{Y}$, then transforming the output back to a solution for $\mathcal{X}$.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <p>This shows that $\mathcal{X}$ "no harder than" $\mathcal{Y}$, because  we wouldn't be able to solve $\mathcal{X}$ using $\mathcal{Y}$ if $\mathcal{X}$ were a harder problem than $\mathcal{Y}$.</p>
-<p>For example, if $\mathcal{X}$ were <strong>MIN</strong> and $\mathcal{Y}$ were <strong>SORTING</strong>.</p>
-<p><strong>MIN</strong> is no harder than sorting since we can reduce from <strong>MIN</strong> to <strong>SORTING</strong>.</p>
-<h3 id="Example:-$%5Cmathit%7B3SAT%7D-%5Cleq-%5Cmathit%7BIS%7D$">Example: $\mathit{3SAT} \leq \mathit{IS}$<a class="anchor-link" href="#Example:-$%5Cmathit%7B3SAT%7D-%5Cleq-%5Cmathit%7BIS%7D$">&#182;</a></h3><p>Any logical formula can be written in 3CNF, which has clauses AND'ed together with each clause OR'ing 3 literals. For example: $$ F(x_1, x_2, x_3, x_4) = (x_1 \vee x_2 \vee \neg{x_3}) \wedge (x_2 \vee x_3 \vee \neg{x_4})\wedge (x_1 \vee \neg{x_2} \vee x_4).$$ If $F$ is an input instance to $\mathit{3SAT}$, then we want to know if there is any assignment of $x_1, x_2, x_3, x_4$ that evaluates to <code>TRUE</code>.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>Example, we can reduce <strong>MIN</strong> to <strong>SORTING</strong>.</p>
+<p>Thus <strong>MIN</strong> is no harder than sorting.</p>
+</blockquote>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Example:-$%5Cmathit%7B3SAT%7D-%5Cleq-%5Cmathit%7BIS%7D$">Example: $\mathit{3SAT} \leq \mathit{IS}$<a class="anchor-link" href="#Example:-$%5Cmathit%7B3SAT%7D-%5Cleq-%5Cmathit%7BIS%7D$">&#182;</a></h3><p>Any logical formula can be written in 3CNF, which has clauses AND'ed together with each clause OR'ing 3 literals.</p>
+<p>For example:</p>
+$$ F(x_1, x_2, x_3, x_4) = (x_1 \vee x_2 \vee \neg{x_3}) \wedge (x_2 \vee x_3 \vee \neg{x_4})\wedge (x_1 \vee \neg{x_2} \vee x_4).$$<p></p>
+<p>If $F$ is an input instance to $\mathit{3SAT}$, then we want to know if there is any assignment of $x_1, x_2, x_3, x_4$ that evaluates to <code>TRUE</code>.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>To show that $\mathit{3SAT} \leq \mathit{IS}$, we need to show that we can reduce from 3SAT to Independent Set and solve Independent Set to get a solution for 3SAT.</p>
-<p>So given a logical formula $F$, how do we create a graph in which an independent set tells us about the satisfiability of clauses in $F$?</p>
-<p>For a formula $F$ with $n$ variables and $k$ clauses, we construct the Independent Set problem as follows:</p>
-<ol>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Reduce-$%5Cmathit%7B3SAT%7D$-to-$%5Cmathit%7BIS%7D$">Reduce $\mathit{3SAT}$ to $\mathit{IS}$<a class="anchor-link" href="#Reduce-$%5Cmathit%7B3SAT%7D$-to-$%5Cmathit%7BIS%7D$">&#182;</a></h2><p>Given a logical formula $F$, how do we create a graph in which an independent set tells us about the satisfiability of clauses in $F$?</p>
+<p>For a formula $F$ with $n$ variables and $k$ clauses, we construct a graph representing $F$ as follows:</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+<img src="../figures/3SAT_IS.png" width = 75%>
+</center><ol>
 <li>Create a Graph $G_F$ containing a vertex for every literal.</li>
 <li>Connect all 3 literals in each clause by edges between them<ul>
 <li>This ensures that only one literal per clause will chosen, corresponding to the literal to be set to <code>True</code>. (we only need one literal per clause to be <code>True</code> for the clause to be <code>True</code>.)</li>
@@ -14262,59 +14444,130 @@ div.jp-OutputPrompt {
 </ul>
 </li>
 </ol>
-<p>Why is this an efficient input transformation?</p>
-<p><img src="../figures/3SAT_IS.png" width = 75%></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>An independent set $X$ in $G_F$ corresponds to a set of literals in $F$.</p>
+<center>
+<img src="../figures/3SAT_IS.png" width = 75%>
+</center><ul>
+<li><p>We've set the size of the satisfying independent set in $G_F$ is $k$, corresponding to at most one literal per clause.</p>
+</li>
+<li><p>We can never choose a pair of vertices in the independent set with opposite literals since they are connected by an edge.</p>
+</li>
+<li><p>Thus if we set all literals corresponding to the vertices in $X$ to <code>TRUE</code>, we will satisfy $|X|$ clauses.</p>
+</li>
+</ul>
+<p>So, $F$ is satisfiable if and only if there is an independent set of size $k$ in $G_F$.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>So what's the big deal if one problem in $\mathcal{NP}$ reduces to another?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="$%5Cmathcal%7BP%7D-=-%5Cmathcal%7BNP%7D$-and-NP-Completeness">$\mathcal{P} = \mathcal{NP}$ and NP-Completeness<a class="anchor-link" href="#$%5Cmathcal%7BP%7D-=-%5Cmathcal%7BNP%7D$-and-NP-Completeness">&#182;</a></h3><p>Leonid Levin and Steve Cook showed in the early 1970s that for any problem $\mathcal{X} \in \mathcal{NP}$, $\mathcal{X} \leq \mathit{SAT}$.</p>
+<p>So, $\mathit{3SAT}$ is <strong>$\mathcal{NP}$-complete</strong>.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>An independent set $X$ in $G_F$ corresponds to a set of literals in $F$.</p>
-<p>Notice that the size of a satisfying independent set in $G_F$ is $k$, corresponding to at most one literal per clause.</p>
-<p>Moreover, we will never choose a pair of vertices in the independent set with opposite literals since they are connected by an edge. Thus if we set all literals corresponding to the vertices in $X$ to <code>TRUE</code>, we will satisfy $|X|$ clauses. So, $F$ is satisfiable if and only if there is an independent set of size $k$ in $G_F$.</p>
-<p><img src="../figures/3SAT_IS.png" width = 75%></p>
-<p>So what's the big deal if one problem in $\mathcal{NP}$ reduces to another?</p>
+<p>In other words, for any problem $\mathcal{X} \in \mathcal{NP}$, $\mathcal{X}$ can be reduced to $\mathit{3SAT}$.</p>
 
 </div>
-</div></div></section></section><section><section>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="$%5Cmathcal%7BP%7D-=-%5Cmathcal%7BNP%7D$-and-NP-Completeness">$\mathcal{P} = \mathcal{NP}$ and NP-Completeness<a class="anchor-link" href="#$%5Cmathcal%7BP%7D-=-%5Cmathcal%7BNP%7D$-and-NP-Completeness">&#182;</a></h3><p>Leonid Levin and Steve Cook showed in the early 1970s that for any problem $\mathcal{X} \in \mathcal{NP}$, $\mathcal{X} \leq \mathit{SAT}$. So, $\mathit{3SAT}$ is <strong>$\mathcal{NP}$-complete</strong>.</p>
-<p>In other words, for any problem $\mathcal{X} \in \mathcal{NP}$, $\mathcal{X}$ can be reduced to $\mathit{SAT}$. Since $\mathcal{X}$ is no harder than $\mathcal{SAT}$, if an efficient solution were found for $\mathcal{SAT}$, then we could efficiently solve $\mathcal{X}$.</p>
-<p>If we could demonstrate a lower bound that $\mathit{3SAT}$ requires super-polynomial work, then we would prove that $\mathcal{P} \neq \mathcal{NP}$. If we came up with a polynomial work algorithm for $\mathit{3SAT}$, then we would prove that $\mathcal{P} = \mathcal{NP}$.</p>
+<p>Since $\mathcal{X}$ is no harder than $\mathcal{3SAT}$, if an efficient solution were found for $\mathcal{3SAT}$, then we could efficiently solve $\mathcal{X}$.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Consequences</strong></p>
+<p>If we could demonstrate a lower bound that $\mathit{3SAT}$ requires super-polynomial work, then we would prove that $\mathcal{P} \neq \mathcal{NP}$.</p>
+<p>If we came up with a polynomial work algorithm for $\mathit{3SAT}$, then we would prove that $\mathcal{P} = \mathcal{NP}$.</p>
 <p>But we haven't been able to do either of these things, so far.</p>
-<p>Does our reduction from $\mathit{3SAT}$ to $\mathit{IS}$ tell us anything interesting?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Implications-of-reduction">Implications of reduction<a class="anchor-link" href="#Implications-of-reduction">&#182;</a></h2><p>Does our reduction from $\mathit{3SAT}$ to $\mathit{IS}$ tell us anything interesting?</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>That Independent Set is $\mathcal{NP}$-complete!</p>
-<p>Since we can reduce from 3SAT to Independent Set, if an efficient solution were found for Independent Set, we would have an efficient solution for 3SAT, and for all problems in $\mathcal{NP}$ by extension!</p>
-<p>What does this have to do with TSP or Knapsack?</p>
-<p>After Levin and Cook showed the satisfiability problem was $\mathcal{NP}-complete$, Richard Karp used reductions to show 21 different problems were all $\mathcal{NP}$-complete.</p>
-<p><a href="http://cgi.di.uoa.gr/~sgk/teaching/grad/handouts/karp.pdf"><img src ="../figures/karp_21_problems.jpg" width=70%></a></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>There is some fundamental similarity between all problems in the set $\mathcal{NP}$-complete since an efficient solution to any leads to an efficient solution to all (and all problems in $\mathcal{NP}$ as well)!!</p>
-<p>Which means there is something fundamental here about the complexity of these problems and the nature of problem solving in general. Is it substantially more difficult to solve a problem than to verify a solution? Or, if it is easy to verify a solution, does that imply that there is some efficient way of generating that solution in the first place?</p>
+<p>Since we can reduce from $\mathit{3SAT}$ to $\mathit{IS}$, if an efficient solution were found for $\mathit{IS}$, we would have an efficient solution for $\mathit{3SAT}$, and for all problems in $\mathcal{NP}$ by extension!</p>
 
 </div>
 </div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="The-$%5Cmathcal%7BNP%7D%5Ctexttt%7B-complete%7D$-family">The $\mathcal{NP}\texttt{-complete}$ family<a class="anchor-link" href="#The-$%5Cmathcal%7BNP%7D%5Ctexttt%7B-complete%7D$-family">&#182;</a></h2><p>What does this have to do with TSP or Knapsack?</p>
+<p>After Levin and Cook showed the satisfiability problem was $\mathcal{NP}\texttt{-complete}$, Richard Karp used reductions to show 21 different problems were all $\mathcal{NP}\texttt{-complete}$.</p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a href="http://cgi.di.uoa.gr/~sgk/teaching/grad/handouts/karp.pdf"><img src ="../figures/karp_21_problems.jpg" width=100%></a></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Implications">Implications<a class="anchor-link" href="#Implications">&#182;</a></h2><p>There is some inherent similarity between all problems in the set $\mathcal{NP}$-complete since an efficient solution to any leads to an efficient solution to all.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>This means there is something fundamental here about the complexity of these problems and the nature of problem solving in general.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>Is it substantially more difficult to solve a problem than to verify a solution?</p>
+<p>Or, if it is easy to verify a solution, does that imply that there is some efficient way of generating that solution in the first place?</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>For example, it (... a practical algorithm for solving an NP-complete problem (showing P=NP)) would transform mathematics by allowing a computer to find a formal proof of any theorem which has a proof of a reasonable length, since formal proofs can easily be recognized in polynomial time. Example problems may well include all of the <a href="https://en.wikipedia.org/wiki/Clay_Math_Institute#Millennium_Prize_Problems">CMI prize problems</a>.</p>
+<p>-- Stephen Cook <a href="http://www.claymath.org/sites/default/files/pvsnp.pdf">Official P vs NP problem statement</a></p>
+</blockquote>
+
+</div>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>$\mathcal{NP}$-completeness doesn't provide us with concrete answers but it does help us understand the relative difficulty of problems. We currently have <a href="http://www.csc.kth.se/~viggo/problemlist/compendium.html">many thousands</a> of such problems!</p>
 <p><a href="https://www.ac.tuwien.ac.at/people/szeider/cartoon/"><img src ="../figures/npc_cartoon3.png" width=70%></a></p>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="P-vs.-NP-as-explained-by-an-AI">P vs. NP as explained by an AI<a class="anchor-link" href="#P-vs.-NP-as-explained-by-an-AI">&#182;</a></h2><p><strong>ChatGPT Prompt:</strong> Explain the P vs NP problem as a poem.</p>
-<p><strong>ChatGPT output:</strong></p>
+<h2 id="P-vs.-NP-as-explained-by-AI">P vs. NP as explained by AI<a class="anchor-link" href="#P-vs.-NP-as-explained-by-AI">&#182;</a></h2><p><strong>ChatGPT Prompt:</strong> Explain the P vs NP problem as a poem.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>P and NP, oh what a mystery,
 Two classes of problems, oh so perplexing to see,
@@ -14335,47 +14588,55 @@ So let us all ponder, and let our minds roam,
 To find the solution, to this question that's still unknown.</code></pre>
 
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>For example, it (... a practical algorithm for solving an NP-complete problem (showing P=NP)) would transform mathematics by allowing a computer to find a formal proof of any theorem which has a proof of a reasonable length, since formal proofs can easily be recognized in polynomial time. Example problems may well include all of the <a href="https://en.wikipedia.org/wiki/Clay_Math_Institute#Millennium_Prize_Problems">CMI prize problems</a>.</p>
-<p>-- Stephen Cook <a href="http://www.claymath.org/sites/default/files/pvsnp.pdf">Official P vs NP problem statement</a></p>
-</blockquote>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Parallelism?">Parallelism?<a class="anchor-link" href="#Parallelism?">&#182;</a></h3><p>Can we parallelize and solve $\mathcal{NP}$-complete problems?</p>
+<h2 id="Parallelism?">Parallelism?<a class="anchor-link" href="#Parallelism?">&#182;</a></h2><p>Can we parallelize and solve $\mathcal{NP}$-complete problems?</p>
 <p>Since the definition of span doesn't really care about the number of processors, we can solve problems in $\mathcal{NP}$ using brute force with polynomial span. This is because the definition of $\mathcal{NP}$ ensures that we can efficiently check candidate solutions.</p>
-<p>However if we were able to achieve polynomial work, we'd immediately have shown $\mathcal{P}=\mathcal{NP}$ since we could just do all the work on a single processor.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>A more interesting question is whether we can effectively parallelize problems in $\mathcal{P}$. That is, for any problem $\mathcal{X}$ that is solvable in polynomial work, does it also have low span?</p>
-<p>Let $\mathcal{NC}$ denote the set of all problems with span $O(\log^c n)$ for some constant $c$ using a polynomial number of processors.</p>
-<p>We know that $\mathcal{NC}\subseteq \mathcal{P}$, but is $\mathcal{P}\subseteq\mathcal{NC}$?</p>
-<p>What does this statement imply?</p>
-
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>It implies that <strong>every</strong> problem in $\mathcal{P}$ is parallelizable.</p>
-<p>As with $\mathcal{NP}$, it's possible to define $\mathcal{P}$-complete problems.</p>
-<p>The Circuit Value Problem ($\mathit{CVP}$) asks, for a given circuit on AND, OR, and NOT gates along with inputs, does the circuit produce an output of 1?</p>
-<p>$\mathit{CVP}$ is $\mathcal{P}$-complete.</p>
-<p>As with $\mathcal{NP}$, we have <a href="https://en.wikipedia.org/wiki/P-complete#P-complete_problems">a long list of $\mathcal{P}$-complete problems</a>. We cannot find polylogarithmic span algorithms for any of them, nor can we prove that it is not possible to come up with such algorithms.</p>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We have just looked at two complexity classes, but this <a href="https://complexityzoo.uwaterloo.ca/Complexity_Zoo">area</a> is quite deep.</p>
-<p><a href = "https://jeremykun.com/2012/02/29/other-complexity-classes/"><img src="../figures/complexity_venn_diagram.jpg" width=40%></a></p>
+<h2 id="Class-$%5Cmathcal%7BNC%7D$">Class $\mathcal{NC}$<a class="anchor-link" href="#Class-$%5Cmathcal%7BNC%7D$">&#182;</a></h2><p>Let $\mathcal{NC}$ denote the set of all problems with span $O(\log^c n)$ for some constant $c$ using a polynomial number of processors.</p>
+<p>We know that $\mathcal{NC}\subseteq \mathcal{P}$, but is $\mathcal{P}\subseteq\mathcal{NC}$?</p>
+<p>What does this statement imply?</p>
 
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If $\mathcal{P}\subseteq\mathcal{NC}$, then <strong>every</strong> problem in $\mathcal{P}$ is parallelizable.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="$%5Cmathcal%7BP%7D$-complete">$\mathcal{P}$-complete<a class="anchor-link" href="#$%5Cmathcal%7BP%7D$-complete">&#182;</a></h2><p>As with $\mathcal{NP}$, it's possible to define $\mathcal{P}$-complete problems.</p>
+<p>The Circuit Value Problem ($\mathit{CVP}$) asks, for a given circuit on AND, OR, and NOT gates along with inputs, does the circuit produce an output of 1?</p>
+<p>$\mathit{CVP}$ is $\mathcal{P}$-complete.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<p>As with $\mathcal{NP}$, we have <a href="https://en.wikipedia.org/wiki/P-complete#P-complete_problems">a long list of $\mathcal{P}$-complete problems</a>. We cannot find polylogarithmic span algorithms for any of them, nor can we prove that it is not possible to come up with such algorithms.</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We have just looked at two complexity classes, but this <a href="https://complexityzoo.uwaterloo.ca/Complexity_Zoo">area</a> is quite deep.</p>
+<p><center>
+<a href = "https://jeremykun.com/2012/02/29/other-complexity-classes/"><img src="../figures/complexity_venn_diagram.jpg" width=60%></a></p>
+<center>
 </div>
 </div></section></section>
 </div>
